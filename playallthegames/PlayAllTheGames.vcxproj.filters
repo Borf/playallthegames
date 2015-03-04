@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="menus">
+      <UniqueIdentifier>{2d74a845-a69c-4f8f-aa76-568c9232ed6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="menus\items">
+      <UniqueIdentifier>{134811fb-59b1-4d8e-94d3-d66c3969e538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{800ec0a5-d1b1-4254-ac92-c36424a53ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\shaders">
+      <UniqueIdentifier>{105ae47f-8f9c-4de2-b004-4c59552ae1df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayAllTheGames.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AliveGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Participant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugGameSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShuffleGameSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\MainMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\items\MenuItem.cpp">
+      <Filter>menus\items</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\items\OptionMenuItem.cpp">
+      <Filter>menus\items</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\items\ToggleMenuItem.cpp">
+      <Filter>menus\items</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\SettingsMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\GameCreateMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderedGameSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\GameCreateParticipantSelectMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\GameCreateGameSelectMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionStats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\UsersMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\UsersEditMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\items\KeyboardMenuItem.cpp">
+      <Filter>menus\items</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\items\ColorCycleMenuItem.cpp">
+      <Filter>menus\items</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsDb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\StatsMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayAllTheGames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AliveGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlivePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Participant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugGameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractiveGameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShuffleGameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutomaticGameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\MainMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\items\MenuItem.h">
+      <Filter>menus\items</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\items\OptionMenuItem.h">
+      <Filter>menus\items</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\items\ToggleMenuItem.h">
+      <Filter>menus\items</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\SettingsMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\GameCreateMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderedGameSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\GameCreateParticipantSelectMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\GameCreateGameSelectMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="ScorePlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\UsersMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\UsersEditMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\items\KeyboardMenuItem.h">
+      <Filter>menus\items</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\items\ColorCycleMenuItem.h">
+      <Filter>menus\items</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsDb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus\StatsMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PlayAllTheGames.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="assets\shaders\transition4.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition5.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition5.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition6.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition6.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition7.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition7.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition8.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition8.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition1.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition1.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition2.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition2.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition3.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition3.vert">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\transition4.frag">
+      <Filter>assets\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

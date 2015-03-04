@@ -1,0 +1,129 @@
+{
+	"texture" : "butterfly_orange.png",
+	"base" :
+	{
+		"root" :
+		{
+			"pos" : [ 0.0, 0.0 ],
+			"angle" : 0.0,
+			"size" : 1,
+			"frame" : 0
+		}
+	},
+	"animations" :
+	{
+		"fly" :
+		{
+			"length" : 0.4,
+			"keyframes" :
+			[
+				{
+					"time" : 0,
+					"root" : { "frame" : 0 }
+				},
+				{
+					"time" : 0.1,
+					"root" : { "frame" : 1 }
+				},
+				{
+					"time" : 0.2,
+					"root" : { "frame" : 2 }
+				},
+				{
+					"time" : 0.3,
+					"root" : { "frame" : 3 }
+				}
+			]
+		},
+		"idle" :
+		{
+			"length" : 0.8,
+			"keyframes" :
+			[
+				{
+					"time" : 0,
+					"root" : { "frame" : 4 }
+				},
+				{
+					"time" : 0.1,
+					"root" : { "frame" : 5}
+				},
+				{
+					"time" : 0.2,
+					"root" : { "frame" : 6 }
+				},
+				{
+					"time" : 0.3,
+					"root" : { "frame" : 7 }
+				},
+				{
+					"time" : 0.4,
+					"root" : { "frame" : 8 }
+				},
+				{
+					"time" : 0.5,
+					"root" : { "frame" : 9 }
+				},
+				{
+					"time" : 0.6,
+					"root" : { "frame" : 10 }
+				},
+				{
+					"time" : 0.7,
+					"root" : { "frame" : 11 }
+				}
+			]
+		}
+	},
+	"frames" :
+	[
+		{ //0
+			"pos" : [ 0, 0],
+			"size" : [ 64, 64]
+		},
+		{ //1
+			"pos" : [ 64, 0],
+			"size" : [ 64, 64]
+		},
+		{ //2
+			"pos" : [ 128, 0],
+			"size" : [ 64, 64]
+		},
+		{ //3
+			"pos" : [ 192, 0],
+			"size" : [ 64, 64]
+		},
+		{ //4 , first frame of sitting frame
+			"pos" : [ 0, 64],
+			"size" : [ 64, 64]
+		},
+		{ //5
+			"pos" : [ 64, 64],
+			"size" : [ 64, 64]
+		},
+		{ //6
+			"pos" : [ 128, 64],
+			"size" : [ 64, 64]
+		},
+		{ //7
+			"pos" : [ 192, 64],
+			"size" : [ 64, 64]
+		},
+		{ //8
+			"pos" : [ 256, 64],
+			"size" : [ 64, 64]
+		},
+		{ //9
+			"pos" : [ 320, 64],
+			"size" : [ 64, 64]
+		},
+		{ //10
+			"pos" : [ 384, 64],
+			"size" : [ 64, 64]
+		},
+		{ //11
+			"pos" : [ 448, 64],
+			"size" : [ 64, 64]
+		}
+	]
+}

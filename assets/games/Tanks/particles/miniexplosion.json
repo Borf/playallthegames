@@ -1,0 +1,28 @@
+{
+	"particletype" : "fading",				/* fading */
+	"texture" : [ "dirty.png"  ],
+	"textureorder" : "random",				/* random, orderer */
+	"blendmode" : "add",					/* alpha, add */
+	"shape" : "point",						/* point, line, circle */
+	"gravity" :	[ 0, 0 ],					/* no gravity */
+	"particlecount" : [ 300, 400 ],			/* 100 - 200 particles per second */
+	"collision" : false, 
+	"particle" :
+	{
+		"direction" : [ 0, 360 ],			/* initial direction */ 
+		"speed" : [ 0, 2.0 ],				/* initial speed */
+		"rotation" : [ -10, 10 ],			/* initial rotation speed */
+		"friction" : 0.01,					/* friction */
+		"rotationfriction" : 0,				/* rotational friction */
+		"fadespeed" : [ 1, 2 ],				/* 4 to 5 seconds to fade away */
+		"size" : [ 100, 200],				/* size runs from 10 to 100 */
+		"sizeexp" : 1,
+		"colors" :
+		[
+			[ 1,0.1,0,1 ],
+			[ 1,0.1,0,0 ]
+		],
+		"colorexp" : 1
+	}
+
+}

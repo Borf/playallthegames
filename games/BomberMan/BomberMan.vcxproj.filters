@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="blocks">
+      <UniqueIdentifier>{f9613ce2-c009-460c-bb29-a67b84ef1f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\powerups">
+      <UniqueIdentifier>{7322725b-f957-4a66-886a-603b9a9b10b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BomberMan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BombermanPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionParticle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\EmptyBlock.cpp">
+      <Filter>blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\PowerUp.cpp">
+      <Filter>blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\WallBlock.cpp">
+      <Filter>blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\Block.cpp">
+      <Filter>blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\DestructableBlock.cpp">
+      <Filter>blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\powerups\BombPowerUp.cpp">
+      <Filter>blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\powerups\FlamePowerUp.cpp">
+      <Filter>blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\powerups\PushPowerUp.cpp">
+      <Filter>blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="blocks\powerups\SpeedPowerUp.cpp">
+      <Filter>blocks\powerups</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BomberMan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BombermanPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionParticle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\DestructableBlock.h">
+      <Filter>blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\EmptyBlock.h">
+      <Filter>blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\PowerUp.h">
+      <Filter>blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\WallBlock.h">
+      <Filter>blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\Block.h">
+      <Filter>blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\powerups\BombPowerUp.h">
+      <Filter>blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\powerups\FlamePowerUp.h">
+      <Filter>blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\powerups\PushPowerUp.h">
+      <Filter>blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="blocks\powerups\SpeedPowerUp.h">
+      <Filter>blocks\powerups</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

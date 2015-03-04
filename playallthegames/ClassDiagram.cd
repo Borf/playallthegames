@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AliveGame&lt;PlayerClass&gt;" Collapsed="true">
+    <Position X="17.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AliveGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlivePlayer" Collapsed="true">
+    <Position X="22.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>AlivePlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomaticGameSelector" Collapsed="true">
+    <Position X="23.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AutomaticGameSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Db&lt;T, V&gt;" Collapsed="true">
+    <Position X="32.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAgAAAAAAAAAEAQAAAAAAA=</HashCode>
+      <FileName>Db.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DebugGameSelector" Collapsed="true">
+    <Position X="23.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAABAAAAA=</HashCode>
+      <FileName>DebugGameSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FixedPlayerSelector" Collapsed="true">
+    <Position X="23.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game&lt;PlayerClass&gt;" Collapsed="true">
+    <Position X="18.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameBase">
+    <Position X="21.5" Y="8" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="GameBase::ControllerButton" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Game.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAACAEAAAACAAAAgCAIAAgAAARCYAAgAACAkAAAEgAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCreateGameSelectMenu" Collapsed="true">
+    <Position X="7.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>menus\GameCreateGameSelectMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCreateMenu" Collapsed="true">
+    <Position X="12" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAEgAAAAAAAgAAABAAIAAAAAgCAAIAAAAEAAAAA=</HashCode>
+      <FileName>menus\GameCreateMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCreateParticipantSelectMenu" Collapsed="true">
+    <Position X="14.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAACAAA=</HashCode>
+      <FileName>menus\GameCreateParticipantSelectMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSelector" Collapsed="true">
+    <Position X="21.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>GameSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyboardMenuItem" Collapsed="true">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABIQAQAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>menus\items\KeyboardMenuItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu" Collapsed="true">
+    <Position X="3" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAgAAAAAAAQAAIAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>menus\MainMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuItem" Collapsed="true">
+    <Position X="2.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAAABAAABIAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>menus\items\MenuItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuScreen">
+    <Position X="7.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYIAAAAAQAAAAAAASAoAIQAAAgAAAgAAAAABAAAQACA=</HashCode>
+      <FileName>MenuScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OptionMenuItem" Collapsed="true">
+    <Position X="5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAQAAAIAAAAAAAAAAAAAAAAAACAAAAQ=</HashCode>
+      <FileName>menus\items\OptionMenuItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrderedGameSelector" Collapsed="true">
+    <Position X="25.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFIACAA=</HashCode>
+      <FileName>OrderedGameSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Participant">
+    <Position X="27.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAIAAAACAACAAAAAAAQA=</HashCode>
+      <FileName>Participant.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="user" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayAllTheGames">
+    <Position X="14.75" Y="2.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="PlayAllTheGames::State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PlayAllTheGames.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAkABAABJMECAIABACAAAIAAAAFAFAECAk=</HashCode>
+      <FileName>PlayAllTheGames.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="activeGame" />
+      <Field Name="settings" />
+      <Field Name="session" />
+      <Field Name="activeMenu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Player">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAAAAQABAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="participant" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerSelector" Collapsed="true">
+    <Position X="21.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScoreGame&lt;PlayerType&gt;" Collapsed="true">
+    <Position X="19.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAABAQACAAAAAAAAAAACA=</HashCode>
+      <FileName>ScoreGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScorePlayer" Collapsed="true">
+    <Position X="22.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScorePlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Session">
+    <Position X="19" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAwAAAAAQAgAAABAAACAAAAIAAABBACAFAAAAA=</HashCode>
+      <FileName>Session.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="playerSelector" />
+      <Field Name="gameSelector" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Settings" Collapsed="true">
+    <Position X="17.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAACAAA4ABIAAAAACACAAAAAAgAACAAACAAQ=</HashCode>
+      <FileName>Settings.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SettingsMenu" Collapsed="true">
+    <Position X="9.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAACAAAAAAAAAAEAACAAACAAQ=</HashCode>
+      <FileName>menus\SettingsMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToggleMenuItem" Collapsed="true">
+    <Position X="2.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAQAAAABAA=</HashCode>
+      <FileName>menus\items\ToggleMenuItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="User">
+    <Position X="29.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAAAAAAAAAAAAAAAAAAAQAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>User.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UserDb">
+    <Position X="32.25" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Db&lt;T, V&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="33" Y="2.941" />
+        <Point X="33" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>UserDb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UsersEditMenu" Collapsed="true">
+    <Position X="0.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>menus\UsersEditMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UsersMenu" Collapsed="true">
+    <Position X="5.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAEAAAAAAABAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>menus\UsersMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

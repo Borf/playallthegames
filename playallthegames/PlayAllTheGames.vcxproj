@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{36B06A08-848A-4F5D-ADB0-8BAD89CBF39E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PlayAllTheGames</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\blib.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\blib.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>blib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>blib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AliveGame.cpp" />
+    <ClCompile Include="Db.cpp" />
+    <ClCompile Include="DebugGameSelector.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="menus\GameCreateGameSelectMenu.cpp" />
+    <ClCompile Include="menus\GameCreateMenu.cpp" />
+    <ClCompile Include="menus\GameCreateParticipantSelectMenu.cpp" />
+    <ClCompile Include="menus\items\ColorCycleMenuItem.cpp" />
+    <ClCompile Include="menus\items\KeyboardMenuItem.cpp" />
+    <ClCompile Include="menus\items\MenuItem.cpp" />
+    <ClCompile Include="menus\items\OptionMenuItem.cpp" />
+    <ClCompile Include="menus\items\ToggleMenuItem.cpp" />
+    <ClCompile Include="menus\MainMenu.cpp" />
+    <ClCompile Include="menus\SettingsMenu.cpp" />
+    <ClCompile Include="menus\StatsMenu.cpp" />
+    <ClCompile Include="menus\UsersEditMenu.cpp" />
+    <ClCompile Include="menus\UsersMenu.cpp" />
+    <ClCompile Include="OrderedGameSelector.cpp" />
+    <ClCompile Include="Participant.cpp" />
+    <ClCompile Include="PlayAllTheGames.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerSelector.cpp" />
+    <ClCompile Include="Session.cpp" />
+    <ClCompile Include="SessionStats.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="ShuffleGameSelector.cpp" />
+    <ClCompile Include="StatsDb.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="UserDb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AliveGame.h" />
+    <ClInclude Include="AlivePlayer.h" />
+    <ClInclude Include="AutomaticGameSelector.h" />
+    <ClInclude Include="Db.h" />
+    <ClInclude Include="DebugGameSelector.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSelector.h" />
+    <ClInclude Include="InteractiveGameSelector.h" />
+    <ClInclude Include="MenuScreen.h" />
+    <ClInclude Include="menus\GameCreateGameSelectMenu.h" />
+    <ClInclude Include="menus\GameCreateMenu.h" />
+    <ClInclude Include="menus\GameCreateParticipantSelectMenu.h" />
+    <ClInclude Include="menus\items\ColorCycleMenuItem.h" />
+    <ClInclude Include="menus\items\KeyboardMenuItem.h" />
+    <ClInclude Include="menus\items\MenuItem.h" />
+    <ClInclude Include="menus\items\OptionMenuItem.h" />
+    <ClInclude Include="menus\items\ToggleMenuItem.h" />
+    <ClInclude Include="menus\MainMenu.h" />
+    <ClInclude Include="menus\SettingsMenu.h" />
+    <ClInclude Include="menus\StatsMenu.h" />
+    <ClInclude Include="menus\UsersEditMenu.h" />
+    <ClInclude Include="menus\UsersMenu.h" />
+    <ClInclude Include="OrderedGameSelector.h" />
+    <ClInclude Include="Participant.h" />
+    <ClInclude Include="PlayAllTheGames.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerSelector.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ScoreGame.h" />
+    <ClInclude Include="ScorePlayer.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="SessionStats.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="ShuffleGameSelector.h" />
+    <ClInclude Include="StatsDb.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="UserDb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PlayAllTheGames.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\transition1.frag" />
+    <None Include="assets\shaders\transition1.vert" />
+    <None Include="assets\shaders\transition2.frag" />
+    <None Include="assets\shaders\transition2.vert" />
+    <None Include="assets\shaders\transition3.frag" />
+    <None Include="assets\shaders\transition3.vert" />
+    <None Include="assets\shaders\transition4.frag" />
+    <None Include="assets\shaders\transition4.vert" />
+    <None Include="assets\shaders\transition5.frag" />
+    <None Include="assets\shaders\transition5.vert" />
+    <None Include="assets\shaders\transition6.frag" />
+    <None Include="assets\shaders\transition6.vert" />
+    <None Include="assets\shaders\transition7.frag" />
+    <None Include="assets\shaders\transition7.vert" />
+    <None Include="assets\shaders\transition8.frag" />
+    <None Include="assets\shaders\transition8.vert" />
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
