@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TanksPlayer.h"
-#include "../../AliveGame.h"
+#include "../../PlayAllTheGames/AliveGame.h"
 
 
 namespace blib {

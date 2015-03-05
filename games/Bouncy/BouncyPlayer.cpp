@@ -1,6 +1,6 @@
 #include "BouncyPlayer.h"
 
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

@@ -6,8 +6,8 @@
 #include <blib/SpriteBatch.h>
 #include <blib/Math.h>
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #include "blocks/Block.h"
 #include "blocks/WallBlock.h"

@@ -1,7 +1,7 @@
 #include "Chicken.h"
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #include <blib/Texture.h>
 #include <blib/SpriteBatch.h>

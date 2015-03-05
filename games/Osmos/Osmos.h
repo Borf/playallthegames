@@ -2,7 +2,7 @@
 
 #include "OsmosPlayer.h"
 #include "Sphere.h"
-#include "../../Game.h"
+#include "../../PlayAllTheGames/Game.h"
 
 class Osmos : public Game<OsmosPlayer>
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BugSwatPlayer.h"
-#include "../../ScoreGame.h"
+#include "../../PlayAllTheGames/ScoreGame.h"
 
 class Splat;
 class Enemy;

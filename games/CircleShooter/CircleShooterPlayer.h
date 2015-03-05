@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../AlivePlayer.h"
+#include "../../PlayAllTheGames/AlivePlayer.h"
 #include <blib/math.h>
 
 class CircleShooterPlayer : public AlivePlayer

@@ -8,8 +8,8 @@
 #include <blib/Font.h>
 #include <blib/Color.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 #include "BasicBattleLevel.h"
 #include "BattleEnemy.h"

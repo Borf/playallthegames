@@ -1,4 +1,4 @@
-#include "../../AliveGame.h"
+#include "../../PlayAllTheGames/AliveGame.h"
 
 #include "BouncyPlayer.h"
 #include "BouncyObject.h"

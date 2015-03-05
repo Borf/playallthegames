@@ -1,5 +1,5 @@
 #include "MemoryPlayer.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 
 MemoryPlayer::MemoryPlayer( int index ) : ScorePlayer(index)

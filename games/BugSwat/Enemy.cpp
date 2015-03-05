@@ -1,5 +1,5 @@
 #include "Enemy.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Settings.h"
 #include <blib/Util.h>
 
 #include <glm/gtc/matrix_transform.hpp>

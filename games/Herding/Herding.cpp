@@ -1,8 +1,8 @@
 #include "Herding.h"
 #include "Sheep.h"
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #include <blib/ResourceManager.h>
 #include <blib/SpriteBatch.h>

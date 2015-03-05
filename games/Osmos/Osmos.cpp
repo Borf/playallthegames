@@ -1,8 +1,8 @@
 #include "Osmos.h"
 #include "OsmosPlayer.h"
 #include "Sphere.h"
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #include <blib/SpriteBatch.h>
 #include <blib/ResourceManager.h>

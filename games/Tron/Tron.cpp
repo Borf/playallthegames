@@ -1,7 +1,7 @@
 #include "Tron.h"
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 #include <blib/FBO.h>
 #include <blib/ResourceManager.h>

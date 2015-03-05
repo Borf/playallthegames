@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PoolPlayer.h"
-#include "../../ScoreGame.h"
+#include "../../PlayAllTheGames/ScoreGame.h"
 #include <vector>
 
 #include <Box2D/Box2D.h>

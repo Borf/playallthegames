@@ -13,8 +13,8 @@
 #include <clipper/clipper.hpp>
 
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 

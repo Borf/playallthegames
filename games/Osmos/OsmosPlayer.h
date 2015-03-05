@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Player.h"
+#include "../../PlayAllTheGames/Player.h"
 
 #include "Sphere.h"
 #include <vector>

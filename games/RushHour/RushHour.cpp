@@ -12,8 +12,8 @@
 #include <blib/util/Profiler.h>
 #include <blib/ParticleSystem.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 RushHour::RushHour()
 {

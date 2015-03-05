@@ -11,8 +11,8 @@
 #include <blib/util/Log.h>
 #include <blib/Util.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 #include "PacManLevel.h"
 #include "DefaultLevel.h"

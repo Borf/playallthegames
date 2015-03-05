@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <Box2D/Box2D.h>
 
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 TanksPlayer::TanksPlayer( int index ) : AlivePlayer(index)
 {

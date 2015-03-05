@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../AliveGame.h"
+#include "../../PlayAllTheGames/AliveGame.h"
 
 #include "BombermanPlayer.h"
 

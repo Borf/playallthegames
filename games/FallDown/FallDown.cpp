@@ -6,8 +6,8 @@
 #include <blib/util/Profiler.h>
 #include <blib/Math.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

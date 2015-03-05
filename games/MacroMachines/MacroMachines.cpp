@@ -1,9 +1,9 @@
 #include "MacroMachines.h"
 #include "Wheel.h"
 
-#include "../../Settings.h"
-#include "../../Participant.h"
-#include "../../User.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/User.h"
 
 #include <blib/json.h>
 

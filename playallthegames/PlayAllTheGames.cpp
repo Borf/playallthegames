@@ -32,6 +32,7 @@
 
 #include <Windows.h>
 
+#include <direct.h>
 #include <set>
 #include <glm/gtc/matrix_transform.hpp>
 #define _USE_MATH_DEFINES
@@ -85,13 +86,16 @@ void PlayAllTheGames::init()
 {
 	loadDlls("games");
 #ifdef _DEBUG
-	loadDlls("../debug");
+	loadDlls("../vs2013/debug");
 #else
-	loadDlls("../release");
+	loadDlls("../vs2013/release");
 #endif
 	if(games.empty())
 	{
 		Log::out<<"No games found :(. Have you configured correctly?"<<Log::newline;
+		char buf[1024];
+		_getcwd(buf, 1024);
+		Log::out << "Current directory: " << buf << Log::newline;
 		getchar();
 		exit(0);
 	}

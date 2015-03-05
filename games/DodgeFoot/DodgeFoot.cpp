@@ -6,8 +6,8 @@
 #include <blib/Math.h>
 #include <blib/Util.h>
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 GameBase* getGame()
 {

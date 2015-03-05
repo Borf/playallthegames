@@ -1,0 +1,7 @@
+games/*/Debug/
+games/*/Release/
+vs2013/Debug/
+vs2013/Release/
+playallthegames/Debug/
+playallthegames/Release/
+*.sdf

@@ -1,6 +1,6 @@
 #include "BugSwat.h"
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 #include "Splat.h"
 #include "Enemy.h"
 #include "SwirlEnemy.h"

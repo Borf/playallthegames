@@ -7,8 +7,8 @@
 #include <blib/Color.h>
 #include <blib/Util.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 PokerSteps::PokerSteps()
 {

@@ -11,8 +11,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 GameBase* getGame()
 {

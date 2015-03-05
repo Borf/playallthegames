@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../ScoreGame.h"
+#include "../../PlayAllTheGames/ScoreGame.h"
 #include "PokerStepsPlayer.h"
 
 namespace blib { class Texture; class Font; }

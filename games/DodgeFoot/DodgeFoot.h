@@ -2,7 +2,7 @@
 
 #include "DodgeFootPlayer.h"
 
-#include "../../AliveGame.h"
+#include "../../PlayAllTheGames/AliveGame.h"
 namespace blib { class Texture; };
 
 class DodgeFoot : public AliveGame<DodgeFootPlayer>

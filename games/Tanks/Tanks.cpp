@@ -14,8 +14,8 @@
 #include <Box2D/Box2D.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 GameBase* getGame()
 {

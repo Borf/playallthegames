@@ -7,8 +7,8 @@
 #include <blib/Math.h>
 #include <blib/Color.h>
 
-#include "../../Participant.h"
-#include "../../Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "../../ScorePlayer.h"
+#include "../../PlayAllTheGames/ScorePlayer.h"
 #include "BattleCharacter.h"
 
 

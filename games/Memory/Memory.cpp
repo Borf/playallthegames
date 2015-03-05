@@ -9,8 +9,8 @@
 #include <blib/Color.h>
 #include <blib/util/Profiler.h>
 
-#include "../../Settings.h"
-#include "../../Participant.h"
+#include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 #include "Tile.h"
 #include "RotatingCard.h"

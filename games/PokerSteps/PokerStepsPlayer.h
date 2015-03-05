@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../ScorePlayer.h"
+#include "../../PlayAllTheGames/ScorePlayer.h"
 
 class PokerStepsPlayer : public ScorePlayer
 {

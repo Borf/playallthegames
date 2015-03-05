@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../ScoreGame.h"
+#include "../../PlayAllTheGames/ScoreGame.h"
 
 #include "PongPlayer.h"
 
