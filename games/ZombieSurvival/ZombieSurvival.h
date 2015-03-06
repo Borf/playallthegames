@@ -1,15 +1,21 @@
 #pragma once
 
 #include "../../PlayAllTheGames/AliveGame.h"
+#include <blib/math/Polygon.h>
 
 #include "ZombieSurvivalPlayer.h"
 
-namespace blib { class Texture; class Font;  }
+namespace blib { class Texture; class Font; class Animation;  }
 
 class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
 {
 public:
 	blib::Texture* backSprite;
+
+	std::vector<blib::math::Polygon> objects;
+
+
+
 
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();

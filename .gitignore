@@ -5,3 +5,4 @@ vs2013/Release/
 playallthegames/Debug/
 playallthegames/Release/
 *.sdf
+*.opensdf
