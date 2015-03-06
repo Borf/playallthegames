@@ -51,7 +51,7 @@ void ZombieSurvival::start(Difficulty difficulty)
 
 	objects.clear();
 
-	//objects.push_back(blib::math::Polygon({ glm::vec2(0, 0), glm::vec2(1920, 0), glm::vec2(1920, 1080), glm::vec2(0, 1080) }));
+	objects.push_back(blib::math::Polygon({ glm::vec2(0, 0), glm::vec2(1920, 0), glm::vec2(1920, 1080), glm::vec2(0, 1080) }));
 
 
 	for (int x = 4; x < 5; x++)
@@ -115,6 +115,8 @@ void ZombieSurvival::draw()
 
 	glm::vec2 lightPoint(players[0]->position);
 
+	std::vector<glm::vec2> hitPoints;
+
 	for (auto o : objects)
 	{
 		for (auto v : o)
@@ -136,11 +138,26 @@ void ZombieSurvival::draw()
 					}
 				}
 			}
-
-			lineBatch->draw(ray);
-
+			hitPoints.push_back(ray.p2);
 		}
 	}
+
+	std::sort(hitPoints.begin(), hitPoints.end(), [&lightPoint](glm::vec2 a, glm::vec2 b)
+	{
+		a -= lightPoint;
+		b -= lightPoint;
+		float diff = atan2(a.y, a.x) - atan2(b.y, b.x);
+		if (diff < blib::math::pif)
+			diff += 2 * blib::math::pif;
+		if (diff > blib::math::pif)
+			diff -= 2 * blib::math::pif;
+		return diff < 0;
+	});
+
+
+	for (int i = 0; i < hitPoints.size(); i++)
+		lineBatch->draw(lightPoint, hitPoints[i], glm::vec4(0, 1, 0, 1));
+
 
 
 
