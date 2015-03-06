@@ -10,6 +10,8 @@
 #include <blib/math/Line.h>
 #include <blib/Renderer.h>
 #include <blib/RenderState.h>
+#include <blib/VBO.h>
+#include <blib/FBO.h>
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
@@ -37,6 +39,9 @@ std::string ZombieSurvival::getInstructions()
 void ZombieSurvival::loadResources()
 {
 	backSprite = resourceManager->getResource<blib::Texture>("assets/games/ZombieSurvival/back.png");
+
+	visionFbo = resourceManager->getResource<blib::FBO>(settings->resX, settings->resY);
+	visionFbo->depth = false;
 }
 
 void ZombieSurvival::start(Difficulty difficulty)
@@ -56,10 +61,10 @@ void ZombieSurvival::start(Difficulty difficulty)
 	objects.push_back(blib::math::Polygon({ glm::vec2(0, 0), glm::vec2(1920, 0), glm::vec2(1920, 1080), glm::vec2(0, 1080) }));
 
 
-	for (int x = 4; x < 5; x++)
-		for (int y = 3; y < 4; y++)
+	for (int x = 0; x < 10; x++)
+		for (int y = 0; y < 6; y++)
 		{
-			glm::vec2 pos(150 * x+50, 150 * y+50);
+			glm::vec2 pos(200 * x+50, 200 * y+50);
 			objects.push_back(blib::math::Polygon({ pos + glm::vec2(0, 0), pos + glm::vec2(0, 100), pos + glm::vec2(100, 100), pos + glm::vec2(100, 0) }));
 		}
 
@@ -127,9 +132,9 @@ void ZombieSurvival::draw()
 		for (int i = 0; i < o.size()+1; i++)
 		{
 			const glm::vec2& v = o[i%o.size()];
-			blib::math::Line ray(v, v + 10.0f * (v - lightPoint));
+			blib::math::Line ray(v, v + 50.0f * (v - lightPoint));
 			
-			for (auto oo : objects)
+		/*	for (auto oo : objects)
 			{
 				std::vector<std::pair<glm::vec2, blib::math::Line> > collisions;
 				if (oo.intersects(ray, &collisions))
@@ -141,17 +146,17 @@ void ZombieSurvival::draw()
 						ray.p2 = c.first;
 					}
 				}
-			}
+			}*/
 
 			if (!first)
 			{
-				verts.push_back(blib::VertexP2C4(ray.p1, glm::vec4(1, 1, 1, 0.9f)));
-				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(1, 1, 1, 0.9f)));
-				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(ray.p1, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(0, 0, 0, 0.9f)));
 
-				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(1, 1, 1, 0.9f)));
-				verts.push_back(blib::VertexP2C4(prevRay.p2, glm::vec4(1, 1, 1, 0.9f)));
-				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(prevRay.p2, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(0, 0, 0, 0.9f)));
 			}
 
 			prevRay = ray;

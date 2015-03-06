@@ -5,7 +5,7 @@
 
 #include "ZombieSurvivalPlayer.h"
 
-namespace blib { class Texture; class Font; class Animation;  }
+namespace blib { class Texture; class Font; class Animation;  class VBO; class FBO; }
 
 class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
 {
@@ -13,6 +13,8 @@ public:
 	blib::Texture* backSprite;
 
 	std::vector<blib::math::Polygon> objects;
+
+	blib::FBO* visionFbo;
 
 
 
