@@ -8,6 +8,8 @@
 #include <blib/Animation.h>
 #include <blib/math/Polygon.h>
 #include <blib/math/Line.h>
+#include <blib/Renderer.h>
+#include <blib/RenderState.h>
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
@@ -115,13 +117,17 @@ void ZombieSurvival::draw()
 
 	glm::vec2 lightPoint(players[0]->position);
 
-	std::vector<glm::vec2> hitPoints;
+	std::vector<blib::VertexP2C4> verts;
+
 
 	for (auto o : objects)
 	{
-		for (auto v : o)
+		blib::math::Line prevRay;
+		bool first = true;
+		for (int i = 0; i < o.size()+1; i++)
 		{
-			blib::math::Line ray(lightPoint, lightPoint + 10.0f * (v - lightPoint));
+			const glm::vec2& v = o[i%o.size()];
+			blib::math::Line ray(v, v + 10.0f * (v - lightPoint));
 			
 			for (auto oo : objects)
 			{
@@ -130,41 +136,39 @@ void ZombieSurvival::draw()
 				{
 					for (auto c : collisions)
 					{
-						if (glm::distance(v, c.first) < 0.1f)
+						if (glm::distance(c.first, v) < 0.1f)
 							continue;
-						if (glm::distance(lightPoint, c.first) < ray.length())
-							ray.p2 = c.first;
-
+						ray.p2 = c.first;
 					}
 				}
 			}
-			hitPoints.push_back(ray.p2);
+
+			if (!first)
+			{
+				verts.push_back(blib::VertexP2C4(ray.p1, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(1, 1, 1, 0.9f)));
+
+				verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(prevRay.p2, glm::vec4(1, 1, 1, 0.9f)));
+				verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(1, 1, 1, 0.9f)));
+			}
+
+			prevRay = ray;
+			first = false;
+			lineBatch->draw(ray, glm::vec4(0, 1, 0, 1));
 		}
 	}
 
-	std::sort(hitPoints.begin(), hitPoints.end(), [&lightPoint](glm::vec2 a, glm::vec2 b)
-	{
-		a -= lightPoint;
-		b -= lightPoint;
-		float diff = atan2(a.y, a.x) - atan2(b.y, b.x);
-		if (diff < blib::math::pif)
-			diff += 2 * blib::math::pif;
-		if (diff > blib::math::pif)
-			diff -= 2 * blib::math::pif;
-		return diff < 0;
-	});
-
-
-	for (int i = 0; i < hitPoints.size(); i++)
-		lineBatch->draw(lightPoint, hitPoints[i], glm::vec4(0, 1, 0, 1));
-
-
-
-
-
-
+	
 	spriteBatch->end();
 	lineBatch->end();
+
+	blib::RenderState state = lineBatch->renderState;
+	state.activeVbo = NULL;
+	renderer->drawTriangles(verts, state);
+
+
 }
 
 blib::Texture* ZombieSurvival::getTitleImage()
