@@ -79,10 +79,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieSurvival.cpp" />
     <ClCompile Include="ZombieSurvivalPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieSurvival.h" />
     <ClInclude Include="ZombieSurvivalPlayer.h" />
   </ItemGroup>

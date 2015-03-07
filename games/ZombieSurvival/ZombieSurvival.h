@@ -4,6 +4,7 @@
 #include <blib/math/Polygon.h>
 
 #include "ZombieSurvivalPlayer.h"
+#include "Zombie.h"
 
 namespace blib { class Texture; class Font; class Animation;  class VBO; class FBO; }
 
@@ -16,6 +17,11 @@ public:
 
 	blib::FBO* visionFbo;
 
+
+
+	std::vector<Zombie*> zombies;
+
+	void spawnZombie();
 
 
 
