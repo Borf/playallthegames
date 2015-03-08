@@ -8,4 +8,5 @@ Zombie::Zombie()
 
 Zombie::~Zombie()
 {
+	delete zombieSprite;
 }
