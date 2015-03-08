@@ -2,6 +2,7 @@
 
 #include "../../PlayAllTheGames/AliveGame.h"
 #include <blib/math/Polygon.h>
+#include <blib/SpriteBatch.h>
 
 #include "ZombieSurvivalPlayer.h"
 #include "Zombie.h"
@@ -12,11 +13,13 @@ class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
 {
 public:
 	blib::Texture* backSprite;
+	blib::Texture* wallSprites;
 
 	std::vector<blib::math::Polygon> objects;
+	std::vector<blib::math::Polygon> collisionObjects;
 
 	blib::FBO* visionFbo;
-
+	blib::SpriteBatch::Cache* levelCache;
 
 
 	std::vector<Zombie*> zombies;

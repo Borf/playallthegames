@@ -8,10 +8,13 @@
 #include <blib/Animation.h>
 #include <blib/math/Polygon.h>
 #include <blib/math/Line.h>
+#include <blib/math/Rectangle.h>
 #include <blib/Renderer.h>
 #include <blib/RenderState.h>
 #include <blib/VBO.h>
 #include <blib/FBO.h>
+#include <clipper/clipper.hpp>
+
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
@@ -39,6 +42,7 @@ std::string ZombieSurvival::getInstructions()
 void ZombieSurvival::loadResources()
 {
 	backSprite = resourceManager->getResource<blib::Texture>("assets/games/ZombieSurvival/back.png");
+	wallSprites = resourceManager->getResource<blib::Texture>("assets/games/ZombieSurvival/walls2.png");
 
 	visionFbo = resourceManager->getResource<blib::FBO>();
 	visionFbo->setSize(settings->resX, settings->resY);
@@ -52,7 +56,7 @@ void ZombieSurvival::start(Difficulty difficulty)
 {
 	for (auto p : players)
 	{
-		p->position = glm::vec2(1920 / 2, 1080 / 2) + 150.0f * blib::util::fromAngle(p->index / (float)players.size() * 2 * blib::math::pif);
+		p->position = glm::vec2(1920 / 2, 1080 / 2+100) + 25.0f * blib::util::fromAngle(p->index / (float)players.size() * 2 * blib::math::pif);
 		p->rotation = p->index / (float)players.size() * 360.0f;
 		p->playerAnimation = new blib::Animation("assets/games/ZombieSurvival/player.png.json", resourceManager);
 		p->playerAnimation->setState("idle");
@@ -60,23 +64,182 @@ void ZombieSurvival::start(Difficulty difficulty)
 	}
 
 
+	static int level[32][60] = {
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 0, 0, 1, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 4, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 1, 1, 1, 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+	};
+
+	spriteBatch->begin();
+	spriteBatch->startCache();
+	for (int x = 0; x < 60; x++)
+	{
+		for (int y = 0; y < 32; y++)
+		{
+			if (level[y][x] == 1)
+			{
+				int id = 0;
+				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
+					id |= 1;
+				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
+					id |= 2;
+				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
+					id |= 4;
+				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
+					id |= 8;
+				//						0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+				static int lookup[] = { 2, 0, 0, 0, 1, 6, 7, 10, 1, 5, 4, 8, 1, 9, 11, 2 };
+
+				id = lookup[id];
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 2)
+			{
+				int id = 0;
+				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
+					id = 13;
+				else
+					id = 14;
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 4)
+			{
+				int id = 0;
+				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
+					id = 3;
+				else
+					id = 15;
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 3)
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((12 % 4)*0.25f, (12 / 4)*0.25f), 0.25f, 0.25f));
+
+		}
+	}
+	levelCache = spriteBatch->getCache();
+	spriteBatch->end();
+
 	objects.clear();
 
-	objects.push_back(blib::math::Polygon({ glm::vec2(0, 0), glm::vec2(1920, 0), glm::vec2(1920, 1080), glm::vec2(0, 1080) }));
 
-
-	for (int x = 0; x < 10; x++)
-		for (int y = 0; y < 6; y++)
+	ClipperLib::Clipper clipper;
+	ClipperLib::Polygons subject;
+	ClipperLib::Polygons solution;
+	for (int y = 0; y < 32; y++)
+	{
+		for (int x = 0; x < 60; x++)
 		{
-			glm::vec2 pos(200 * x+50, 200 * y+50);
-			objects.push_back(blib::math::Polygon({ pos + glm::vec2(0, 0), pos + glm::vec2(0, 100), pos + glm::vec2(100, 100), pos + glm::vec2(100, 0) }));
+		/*	if (level[y][x] == 1 || level[y][x] == 3 || level[y][x] == 4)
+				subject.push_back(blib::math::Polygon({ 
+					glm::vec2(x * 32 - 1, y * 32 - 1), 
+					glm::vec2(x * 32 + 33, y * 32 - 1), 
+					glm::vec2(x * 32 + 33 + 32, y * 32 + 32),
+					glm::vec2(x * 32 + 33 + 32, y * 32 + 65),
+					glm::vec2(x * 32 - 1 + 32, y * 32 + 65),
+					glm::vec2(x * 32 - 1, y * 32 + 65) }).toClipperPolygon());*/
+			if (level[y][x] == 1 || level[y][x] == 2)
+			{
+				subject.push_back(blib::math::Polygon({
+					glm::vec2(x * 32 + 8, y * 32 + 8),
+					glm::vec2(x * 32 +24, y * 32 + 8),
+					glm::vec2(x * 32 +24, y * 32 +24),
+					glm::vec2(x * 32 + 8, y * 32 +24) }).toClipperPolygon());
+					
+				int id = 0;
+				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
+					subject.push_back(blib::math::Polygon({
+						glm::vec2(x * 32 + 0, y * 32 + 8),
+						glm::vec2(x * 32 + 9, y * 32 + 8),
+						glm::vec2(x * 32 + 9, y * 32 + 24),
+						glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
+				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
+					subject.push_back(blib::math::Polygon({
+						glm::vec2(x * 32 + 23, y * 32 + 8),
+						glm::vec2(x * 32 + 33, y * 32 + 8),
+						glm::vec2(x * 32 + 33, y * 32 + 24),
+						glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
+				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
+					subject.push_back(blib::math::Polygon({
+						glm::vec2(x * 32 + 8, y * 32 + 0),
+						glm::vec2(x * 32 + 24, y * 32 + 0),
+						glm::vec2(x * 32 + 24, y * 32 + 9),
+						glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
+				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
+					subject.push_back(blib::math::Polygon({
+					glm::vec2(x * 32 + 8, y * 32 + 23),
+					glm::vec2(x * 32 + 24, y * 32 + 23),
+					glm::vec2(x * 32 + 24, y * 32 + 33),
+					glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
+			}
 		}
+	}
+	clipper.AddPolygons(subject, ClipperLib::ptClip);
+	clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+	objects.clear();
+	for (size_t i = 0; i < solution.size(); i++)
+		objects.push_back(blib::math::Polygon(solution[i]));
+
+
+	subject.clear();
+
+	for (int y = 0; y < 32; y++)
+	{
+		for (int x = 0; x < 60; x++)
+		{
+			if (level[y][x] == 1 || level[y][x] == 3 || level[y][x] == 4)
+				subject.push_back(blib::math::Polygon({
+				glm::vec2(x * 32 - 1, y * 32 - 1),
+				glm::vec2(x * 32 + 33, y * 32 - 1),
+				glm::vec2(x * 32 + 33 + 32, y * 32 + 32),
+				glm::vec2(x * 32 + 33 + 32, y * 32 + 65),
+				glm::vec2(x * 32 - 1 + 32, y * 32 + 65),
+				glm::vec2(x * 32 - 1, y * 32 + 65) }).toClipperPolygon());
+	
+		}
+	}
+
+
+	solution.clear();
+	ClipperLib::OffsetPolygons(subject, solution, 7500);
+	collisionObjects.clear();
+	for (size_t i = 0; i < solution.size(); i++)
+		collisionObjects.push_back(blib::math::Polygon(solution[i]));
+
 
 	blib::linq::deleteall(zombies);
-	for (int i = 0; i < 50; i++)
+/*	for (int i = 0; i < 50; i++)
 	{
 		spawnZombie();
-	}
+	}*/
 
 }
 
@@ -86,6 +249,8 @@ void ZombieSurvival::spawnZombie()
 	Zombie* z = new Zombie();
 	z->zombieSprite = new blib::Animation("assets/games/ZombieSurvival/zombie.json", resourceManager);
 
+
+	std::vector<std::pair<glm::vec2, blib::math::Line> > collisions;
 	bool ok = false;
 	while (!ok)
 	{
@@ -95,10 +260,13 @@ void ZombieSurvival::spawnZombie()
 			blib::math::Line ray(p->position, z->position);
 			ok = false;
 			for (auto o : objects)
-				if (o.intersects(ray))
+				if (o.intersects(ray, &collisions))
 				{
-					ok = true;
-					break;
+					if (collisions.size() % 2 == 0)
+					{
+						ok = true;
+						break;
+					}
 				}
 			if (!ok)
 				break;
@@ -129,17 +297,31 @@ void ZombieSurvival::update(float elapsedTime)
 		if (!p->alive)
 			continue;
 		glm::vec2 oldPos = p->position;
-		p->position += p->joystick.leftStick * elapsedTime * 200.0f;
-		blib::math::Line ray(p->position, oldPos);
+		if (glm::length(p->joystick.leftStick) > 0.1f && glm::length(p->joystick.leftStick) < 2)
+			p->position += p->joystick.leftStick * elapsedTime * 200.0f;
+		blib::math::Line ray(oldPos, p->position);
 		glm::vec2 point;
 		blib::math::Line hitLine;
-		for (auto o : objects)
-			if (o.intersects(ray, point, hitLine))
-			{
-				float overShoot = glm::length(p->position - point);
-				p->position += overShoot * -hitLine.normal();
-				break;
-			}
+		std::vector<std::pair<glm::vec2, blib::math::Line> > collisions;
+
+		bool collided = true;
+		while (collided)
+		{
+			collided = false;
+			for (auto o : collisionObjects)
+				if (o.intersects(ray, &collisions))
+				{
+					for (size_t ii = 0; ii < collisions.size(); ii++)
+					{
+						glm::vec2 newPos = collisions[ii].second.project(p->position);
+						p->position = newPos + collisions[ii].second.normal();
+						ray.p2 = p->position;
+						collided = true;
+					}
+					break;
+
+				}
+		}
 
 
 		if (glm::length(p->joystick.leftStick) > 0.1f)
@@ -164,11 +346,12 @@ void ZombieSurvival::update(float elapsedTime)
 		blib::math::Line ray(z->position, oldPos);
 		glm::vec2 point;
 		blib::math::Line hitLine;
-		for (auto o : objects)
+		for (auto o : collisionObjects)
 			if (o.intersects(ray, point, hitLine))
 			{
-				float overShoot = glm::length(z->position - point);
-				z->position += overShoot * -hitLine.normal();
+				//float overShoot = glm::length(z->position - point);
+				//z->position += overShoot * hitLine.normal();
+				z->position = oldPos;
 				break;
 			}
 
@@ -206,29 +389,33 @@ void ZombieSurvival::draw()
 	renderer->clear(glm::vec4(0, 0, 0, 1.0), blib::Renderer::Color | blib::Renderer::Stencil, state);
 	for (auto p : players)
 	{
+		if (!p->alive)
+			continue;
 		glm::vec2 lightPoint(p->position);
 
 		std::vector<blib::VertexP2C4> verts;
-		for (auto o : objects)
+		for (const blib::math::Polygon& o : objects)
 		{
-			blib::math::Line prevRay;
-			bool first = true;
-			for (int i = 0; i < o.size() + 1; i++)
+			for (int i = 0; i < o.size(); i++)
 			{
-				const glm::vec2& v = o[i%o.size()];
-				blib::math::Line ray(v, v + 50.0f * (v - lightPoint));
-				if (!first)
-				{
-					verts.push_back(blib::VertexP2C4(ray.p1, glm::vec4(0, 0, 0, 0.9f)));
-					verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(0, 0, 0, 0.9f)));
-					verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(0, 0, 0, 0.9f)));
+				const glm::vec2& v1 = o[i];
+				const glm::vec2& v2 = o[(i + 1) % o.size()];
 
-					verts.push_back(blib::VertexP2C4(prevRay.p1, glm::vec4(0, 0, 0, 0.9f)));
-					verts.push_back(blib::VertexP2C4(prevRay.p2, glm::vec4(0, 0, 0, 0.9f)));
-					verts.push_back(blib::VertexP2C4(ray.p2, glm::vec4(0, 0, 0, 0.9f)));
-				}
-				prevRay = ray;
-				first = false;
+				blib::math::Line l(v1, v2);
+				if (l.side(lightPoint))
+					continue;
+
+
+				const glm::vec2& v3 = v1 + 50.0f * (v1 - lightPoint);
+				const glm::vec2& v4 = v2 + 50.0f * (v2 - lightPoint);;
+
+				verts.push_back(blib::VertexP2C4(v1, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(v2, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(v3, glm::vec4(0, 0, 0, 0.9f)));
+
+				verts.push_back(blib::VertexP2C4(v3, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(v4, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(v2, glm::vec4(0, 0, 0, 0.9f)));
 			}
 		}
 
@@ -272,17 +459,22 @@ void ZombieSurvival::draw()
 		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation + p->accuracy)));
 		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation - p->accuracy)));
 	}
+	
+
+	spriteBatch->drawCache(levelCache);
+	
+	
+
+
+	/*for (auto p : objects)
+		lineBatch->draw(p, glm::vec4(0, 0, 1, 1));
+	for (auto p : collisionObjects)
+		lineBatch->draw(p, glm::vec4(0, 1, 1, 1));*/
+
+
+
 	spriteBatch->end();
 	lineBatch->end();
-
-
-	for (auto p : objects)
-	{
-	//	lineBatch->draw(p, glm::vec4(0, 0, 1, 1));
-	}
-
-
-
 
 
 

@@ -152,7 +152,7 @@ void PlayAllTheGames::init()
 	audioManager->init();
 
 
-
+	Log::out << "Loading transition shaders" << Log::newline;
 	for (int i = 1; i < 9; i++)
 	{
 		blib::Shader* shader = resourceManager->getResource<blib::Shader>("transition" + blib::util::toString(i));
@@ -172,7 +172,10 @@ void PlayAllTheGames::update( double elapsedTime )
 {
 	stateTime += glm::min(1/60.0, elapsedTime);
 	if (keyState.isPressed(blib::Key::ESC))
+	{
 		running = false;
+		return;
+	}
 
 
 	static blib::Key keys[] = { blib::Key::LEFT, blib::Key::RIGHT, blib::Key::UP, blib::Key::DOWN, blib::Key::ENTER, blib::Key::Z, blib::Key::X, blib::Key::A, blib::Key::S, blib::Key::Q, blib::Key::W, blib::Key::_1, blib::Key::_2, blib::Key::D, blib::Key::F, blib::Key::G, blib::Key::R };
