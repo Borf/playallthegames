@@ -169,36 +169,36 @@ void ZombieSurvival::start(Difficulty difficulty)
 			if (level[y][x] == 1 || level[y][x] == 2)
 			{
 				subject.push_back(blib::math::Polygon({
-					glm::vec2(x * 32 + 8, y * 32 + 8),
-					glm::vec2(x * 32 +24, y * 32 + 8),
-					glm::vec2(x * 32 +24, y * 32 +24),
-					glm::vec2(x * 32 + 8, y * 32 +24) }).toClipperPolygon());
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 24),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 24) }).toClipperPolygon());
 					
 				int id = 0;
 				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
 					subject.push_back(blib::math::Polygon({
-						glm::vec2(x * 32 + 0, y * 32 + 8),
-						glm::vec2(x * 32 + 9, y * 32 + 8),
-						glm::vec2(x * 32 + 9, y * 32 + 24),
-						glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 0, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 9, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 9, y * 32 + 24),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
 				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
 					subject.push_back(blib::math::Polygon({
-						glm::vec2(x * 32 + 23, y * 32 + 8),
-						glm::vec2(x * 32 + 33, y * 32 + 8),
-						glm::vec2(x * 32 + 33, y * 32 + 24),
-						glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 23, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 33, y * 32 + 8),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 33, y * 32 + 24),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
 				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
 					subject.push_back(blib::math::Polygon({
-						glm::vec2(x * 32 + 8, y * 32 + 0),
-						glm::vec2(x * 32 + 24, y * 32 + 0),
-						glm::vec2(x * 32 + 24, y * 32 + 9),
-						glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 0),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 0),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 9),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
 				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
 					subject.push_back(blib::math::Polygon({
-					glm::vec2(x * 32 + 8, y * 32 + 23),
-					glm::vec2(x * 32 + 24, y * 32 + 23),
-					glm::vec2(x * 32 + 24, y * 32 + 33),
-					glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 23),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 23),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 33),
+					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
 			}
 		}
 	}
@@ -207,8 +207,7 @@ void ZombieSurvival::start(Difficulty difficulty)
 	objects.clear();
 	for (size_t i = 0; i < solution.size(); i++)
 		objects.push_back(blib::math::Polygon(solution[i]));
-
-
+	/*
 	subject.clear();
 
 	for (int y = 0; y < 32; y++)
@@ -228,7 +227,8 @@ void ZombieSurvival::start(Difficulty difficulty)
 	}
 
 
-	solution.clear();
+	solution.clear();*/
+	subject = solution;
 	ClipperLib::OffsetPolygons(subject, solution, 7500);
 	collisionObjects.clear();
 	for (size_t i = 0; i < solution.size(); i++)

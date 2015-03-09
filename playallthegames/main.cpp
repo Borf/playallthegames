@@ -3,7 +3,7 @@
 #include <blib/Util.h>
 #include "PlayAllTheGames.h"
 
-int main()
+__declspec(dllexport) int main()
 {
 	blib::util::fixConsole();
 	blib::util::FileSystem::registerHandler(new blib::util::PhysicalFileSystemHandler(""));
