@@ -7,13 +7,22 @@
 #include "ZombieSurvivalPlayer.h"
 #include "Zombie.h"
 
-namespace blib { class Texture; class Font; class Animation;  class VBO; class FBO; }
+namespace blib { class Texture; class Font; class Animation;  class VBO; class FBO; class Shader; }
 
 class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
 {
 public:
 	blib::Texture* backSprite;
 	blib::Texture* wallSprites;
+	blib::Shader* combineShader;
+	enum ShaderAttributes
+	{
+		ProjectionMatrix,
+		Matrix,
+		s_texture,
+		s_visionTexture,
+		zombieFactor,
+	};
 
 	std::vector<blib::math::Polygon> objects;
 	std::vector<blib::math::Polygon> collisionObjects;

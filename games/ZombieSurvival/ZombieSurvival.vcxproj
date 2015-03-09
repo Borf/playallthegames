@@ -88,6 +88,10 @@
     <ClInclude Include="ZombieSurvival.h" />
     <ClInclude Include="ZombieSurvivalPlayer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\assets\shaders\gl\ZombieSurvival.frag" />
+    <None Include="..\..\assets\shaders\gl\ZombieSurvival.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

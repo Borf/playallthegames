@@ -36,4 +36,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\assets\shaders\gl\ZombieSurvival.frag" />
+    <None Include="..\..\assets\shaders\gl\ZombieSurvival.vert" />
+  </ItemGroup>
 </Project>

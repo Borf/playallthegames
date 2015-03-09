@@ -13,6 +13,7 @@
 #include <blib/RenderState.h>
 #include <blib/VBO.h>
 #include <blib/FBO.h>
+#include <blib/Shader.h>
 #include <clipper/clipper.hpp>
 
 
@@ -49,6 +50,23 @@ void ZombieSurvival::loadResources()
 	visionFbo->stencil = true;
 	visionFbo->depth = false;
 	visionFbo->textureCount = 1;
+
+	combineShader = resourceManager->getResource<blib::Shader>("ZombieSurvival");
+	combineShader->bindAttributeLocation("a_position", 0);
+	combineShader->bindAttributeLocation("a_texture", 1);
+	combineShader->bindAttributeLocation("a_color", 2);
+	combineShader->setUniformName(ProjectionMatrix, "projectionmatrix", blib::Shader::Mat4);
+	combineShader->setUniformName(Matrix, "matrix", blib::Shader::Mat4);
+	combineShader->setUniformName(s_texture, "s_texture", blib::Shader::Int);
+	combineShader->setUniformName(s_visionTexture, "s_visionTexture", blib::Shader::Int);
+	combineShader->setUniformName(zombieFactor, "zombieFactor", blib::Shader::Float);
+	combineShader->finishUniformSetup();
+
+	combineShader->setUniform(s_texture, 0);
+	combineShader->setUniform(s_visionTexture, 1);
+	combineShader->setUniform(ProjectionMatrix, glm::ortho(0.0f, (float)settings->resX, (float)settings->resY, 0.0f, -1000.0f, 1.0f));
+	combineShader->setUniform(Matrix, glm::mat4());
+
 
 }
 int level[32][60];
@@ -425,16 +443,11 @@ void ZombieSurvival::update(float elapsedTime)
 
 void ZombieSurvival::draw()
 {
-	spriteBatch->begin();
-	lineBatch->begin();
-	spriteBatch->draw(backSprite, glm::mat4());
-
-
 	blib::RenderState state = lineBatch->renderState;
 	state.activeVbo = NULL;
 	state.activeFbo = visionFbo;
 	state.stencilTestEnabled = true;
-	renderer->clear(glm::vec4(0, 0, 0, 1.0), blib::Renderer::Color | blib::Renderer::Stencil, state);
+	renderer->clear(glm::vec4(0.25f, 0.25f, 0.25f, 1), blib::Renderer::Color | blib::Renderer::Stencil, state);
 	for (auto p : players)
 	{
 		if (!p->alive)
@@ -457,13 +470,14 @@ void ZombieSurvival::draw()
 				const glm::vec2& v3 = v1 + 50.0f * (v1 - lightPoint);
 				const glm::vec2& v4 = v2 + 50.0f * (v2 - lightPoint);;
 
-				verts.push_back(blib::VertexP2C4(v1, glm::vec4(0, 0, 0, 0.9f)));
-				verts.push_back(blib::VertexP2C4(v2, glm::vec4(0, 0, 0, 0.9f)));
-				verts.push_back(blib::VertexP2C4(v3, glm::vec4(0, 0, 0, 0.9f)));
+				glm::vec4 c(0.25f, 0.25f, 0.25f, 1.0f);
+				verts.push_back(blib::VertexP2C4(v1, c));
+				verts.push_back(blib::VertexP2C4(v2, c));
+				verts.push_back(blib::VertexP2C4(v3, c));
 
-				verts.push_back(blib::VertexP2C4(v3, glm::vec4(0, 0, 0, 0.9f)));
-				verts.push_back(blib::VertexP2C4(v4, glm::vec4(0, 0, 0, 0.9f)));
-				verts.push_back(blib::VertexP2C4(v2, glm::vec4(0, 0, 0, 0.9f)));
+				verts.push_back(blib::VertexP2C4(v3, c));
+				verts.push_back(blib::VertexP2C4(v4, c));
+				verts.push_back(blib::VertexP2C4(v2, c));
 			}
 		}
 
@@ -474,25 +488,40 @@ void ZombieSurvival::draw()
 		state.stencilWrite = false;
 		state.blendEnabled = false;
 		
+		glm::vec4 c(1.0f, 1.0f, 1.0f, 1.0f);
+
 		//for more difficulty, use cone here instead of full screen
 		std::vector<blib::VertexP2C4> verts2{
-			blib::VertexP2C4(glm::vec2(0, 0), glm::vec4(1, 1, 1, 0.0)),
-			blib::VertexP2C4(glm::vec2(1920, 0), glm::vec4(1, 1, 1, 0.0)),
-			blib::VertexP2C4(glm::vec2(0, 1080), glm::vec4(1, 1, 1, 0.0)),
+			blib::VertexP2C4(glm::vec2(0, 0), c),
+			blib::VertexP2C4(glm::vec2(1920, 0), c),
+			blib::VertexP2C4(glm::vec2(0, 1080), c),
 
-			blib::VertexP2C4(glm::vec2(1920, 1080), glm::vec4(1, 1, 1, 0.0)),
-			blib::VertexP2C4(glm::vec2(1920, 0), glm::vec4(1, 1, 1, 0.0)),
-			blib::VertexP2C4(glm::vec2(0, 1080), glm::vec4(1, 1, 1, 0.0))
+			blib::VertexP2C4(glm::vec2(1920, 1080), c),
+			blib::VertexP2C4(glm::vec2(1920, 0), c),
+			blib::VertexP2C4(glm::vec2(0, 1080), c)
 		};
 
 		renderer->drawTriangles(verts2, state);
 	}
 
+	blib::Shader* s = spriteBatch->renderState.activeShader;
+	spriteBatch->renderState.activeShader = combineShader;
+	spriteBatch->renderState.activeTexture[1] = visionFbo;
 
+	spriteBatch->begin();
+	lineBatch->begin();
+	spriteBatch->draw(backSprite, glm::mat4());
+
+	spriteBatch->end();
+	combineShader->setUniform(zombieFactor, 1.0f);
+	spriteBatch->begin();
 	for (auto z : zombies)
 		z->zombieSprite->draw(*spriteBatch, blib::math::easyMatrix(z->position, z->direction-90, 0.5f));
+	spriteBatch->end();
+	combineShader->setUniform(zombieFactor, 0.0f);
+	spriteBatch->begin();
 
-	spriteBatch->draw(visionFbo, blib::math::easyMatrix(glm::vec2(0,1080), 0, glm::vec2(1,-1)));
+	//spriteBatch->draw(visionFbo, blib::math::easyMatrix(glm::vec2(0,1080), 0, glm::vec2(1,-1)));
 
 	for (auto p : players)
 	{
@@ -514,6 +543,8 @@ void ZombieSurvival::draw()
 	lineBatch->end();
 
 
+	spriteBatch->renderState.activeShader = s;
+	spriteBatch->renderState.activeTexture[1] = NULL;
 
 
 
