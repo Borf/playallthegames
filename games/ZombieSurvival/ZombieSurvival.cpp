@@ -51,7 +51,7 @@ void ZombieSurvival::loadResources()
 	visionFbo->textureCount = 1;
 
 }
-
+int level[32][60];
 void ZombieSurvival::start(Difficulty difficulty)
 {
 	for (auto p : players)
@@ -64,7 +64,7 @@ void ZombieSurvival::start(Difficulty difficulty)
 	}
 
 
-	static int level[32][60] = {
+	static int newLevel[32][60] = {
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 0, 0, 1, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -84,10 +84,10 @@ void ZombieSurvival::start(Difficulty difficulty)
 		{ 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1 },
 		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 4, 4, 4, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 1, 2, 1, 4, 4, 1, 1, 1, 1, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 4, 4, 4, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 1, 2, 1, 4, 4, 4, 4, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -98,55 +98,17 @@ void ZombieSurvival::start(Difficulty difficulty)
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	};
+	memcpy(level, newLevel, sizeof(newLevel));
 
-	spriteBatch->begin();
-	spriteBatch->startCache();
+
+	doors.clear();
 	for (int x = 0; x < 60; x++)
-	{
 		for (int y = 0; y < 32; y++)
-		{
-			if (level[y][x] == 1)
-			{
-				int id = 0;
-				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
-					id |= 1;
-				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
-					id |= 2;
-				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
-					id |= 4;
-				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
-					id |= 8;
-				//						0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
-				static int lookup[] = { 2, 0, 0, 0, 1, 6, 7, 10, 1, 5, 4, 8, 1, 9, 11, 2 };
+			if (level[y][x] == 2)
+				doors.push_back(glm::ivec2(x,y));
 
-				id = lookup[id];
-				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
-			}
-			else if (level[y][x] == 2)
-			{
-				int id = 0;
-				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
-					id = 13;
-				else
-					id = 14;
-				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
-			}
-			else if (level[y][x] == 4)
-			{
-				int id = 0;
-				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
-					id = 3;
-				else
-					id = 15;
-				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
-			}
-			else if (level[y][x] == 3)
-				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((12 % 4)*0.25f, (12 / 4)*0.25f), 0.25f, 0.25f));
+			buildLevelCache();
 
-		}
-	}
-	levelCache = spriteBatch->getCache();
-	spriteBatch->end();
 
 	objects.clear();
 
@@ -169,36 +131,36 @@ void ZombieSurvival::start(Difficulty difficulty)
 			if (level[y][x] == 1 || level[y][x] == 2)
 			{
 				subject.push_back(blib::math::Polygon({
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 24),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 24) }).toClipperPolygon());
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 24) }).toClipperPolygon());
 					
 				int id = 0;
 				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
 					subject.push_back(blib::math::Polygon({
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 0, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 9, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 9, y * 32 + 24),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 0, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 9, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 9, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
 				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
 					subject.push_back(blib::math::Polygon({
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 23, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 33, y * 32 + 8),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 33, y * 32 + 24),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 23, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 33, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 33, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
 				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
 					subject.push_back(blib::math::Polygon({
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 0),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 0),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 9),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 0),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 0),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 9),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
 				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
 					subject.push_back(blib::math::Polygon({
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 23),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 23),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 24, y * 32 + 33),
-					glm::vec2(32, 32) + glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 23),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 23),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 33),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
 			}
 		}
 	}
@@ -207,10 +169,10 @@ void ZombieSurvival::start(Difficulty difficulty)
 	objects.clear();
 	for (size_t i = 0; i < solution.size(); i++)
 		objects.push_back(blib::math::Polygon(solution[i]));
-	/*
+	
 	subject.clear();
 
-	for (int y = 0; y < 32; y++)
+	/*for (int y = 0; y < 32; y++)
 	{
 		for (int x = 0; x < 60; x++)
 		{
@@ -224,11 +186,53 @@ void ZombieSurvival::start(Difficulty difficulty)
 				glm::vec2(x * 32 - 1, y * 32 + 65) }).toClipperPolygon());
 	
 		}
+	}*/
+
+
+	for (int y = 0; y < 32; y++)
+	{
+		for (int x = 0; x < 60; x++)
+		{
+
+			if (level[y][x] == 1 || level[y][x] == 4)
+			{
+				subject.push_back(blib::math::Polygon({
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 24) }).toClipperPolygon());
+					
+				int id = 0;
+				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
+					subject.push_back(blib::math::Polygon({
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 0, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 9, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 9, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 0, y * 32 + 24) }).toClipperPolygon());
+				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
+					subject.push_back(blib::math::Polygon({
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 23, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 33, y * 32 + 8),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 33, y * 32 + 24),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 23, y * 32 + 24) }).toClipperPolygon());
+				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
+					subject.push_back(blib::math::Polygon({
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 0),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 0),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 9),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 9) }).toClipperPolygon());
+				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
+					subject.push_back(blib::math::Polygon({
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 23),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 23),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 24, y * 32 + 33),
+					glm::vec2(16, 32) + glm::vec2(x * 32 + 8, y * 32 + 33) }).toClipperPolygon());
+			}
+		}
 	}
 
 
-	solution.clear();*/
-	subject = solution;
+	solution.clear();
 	ClipperLib::OffsetPolygons(subject, solution, 7500);
 	collisionObjects.clear();
 	for (size_t i = 0; i < solution.size(); i++)
@@ -315,13 +319,34 @@ void ZombieSurvival::update(float elapsedTime)
 					for (size_t ii = 0; ii < collisions.size(); ii++)
 					{
 						glm::vec2 newPos = collisions[ii].second.project(p->position);
-						p->position = newPos + collisions[ii].second.normal();
+						p->position = newPos + 1.0001f * collisions[ii].second.normal();
 						ray.p2 = p->position;
 						collided = true;
 					}
 					break;
-
 				}
+				if (!collided)
+					for (size_t i = 0; i < doors.size(); i++)
+					{
+						if (glm::distance(p->position, glm::vec2(32 * doors[i]) + glm::vec2(16, 32)) < 32)
+						{
+							glm::ivec2 d = doors[i] * 32 * 1000;
+
+							ClipperLib::Clipper clipper;
+							ClipperLib::Polygons solution;
+
+							clipper.AddPolygons(blib::linq::select<ClipperLib::Polygons>(objects, [](const blib::math::Polygon& p) { return p.toClipperPolygon(); }), ClipperLib::ptSubject);
+							clipper.AddPolygon({ ClipperLib::IntPoint(d.x+16000, d.y), ClipperLib::IntPoint(d.x+48000, d.y), ClipperLib::IntPoint(d.x+48000, d.y+64000), ClipperLib::IntPoint(d.x+16000, d.y+64000)}, ClipperLib::ptClip);
+							clipper.Execute(ClipperLib::ctDifference, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+							objects.clear();
+							for (size_t ii = 0; ii < solution.size(); ii++)
+								objects.push_back(blib::math::Polygon(solution[ii]));
+							level[doors[i].y][doors[i].x] = 0;
+							buildLevelCache();
+							doors.erase(doors.begin() + i);
+							break;
+						}
+					}
 		}
 
 
@@ -350,7 +375,7 @@ void ZombieSurvival::update(float elapsedTime)
 		blib::math::Line hitLine;
 		bool collided = true;
 		int iterations = 0;
-		while (collided && iterations < 10)
+		while (collided && iterations < 4)
 		{
 			iterations++;
 			collided = false;
@@ -360,12 +385,21 @@ void ZombieSurvival::update(float elapsedTime)
 					for (size_t ii = 0; ii < collisions.size(); ii++)
 					{
 						glm::vec2 newPos = collisions[ii].second.project(z->position);
-						z->position = newPos + collisions[ii].second.normal();
+						z->position = newPos + 1.0001f * collisions[ii].second.normal();
 						ray.p2 = z->position;
 						collided = true;
 					}
 					break;
-
+				}
+			if (!collided)
+				for (auto d : doors)
+				{
+					if (glm::distance(z->position, glm::vec2(32 * d)+glm::vec2(16,32)) < 32)
+					{
+						z->position = glm::vec2(32 * d) + glm::vec2(16, 32) + 32.01f * glm::normalize(z->position - (glm::vec2(32 * d) + glm::vec2(16, 32)));
+						ray.p2 = z->position;
+						collided = true;
+					}
 				}
 		}
 
@@ -415,9 +449,9 @@ void ZombieSurvival::draw()
 				const glm::vec2& v1 = o[i];
 				const glm::vec2& v2 = o[(i + 1) % o.size()];
 
-	//			blib::math::Line l(v1, v2);
-	//			if (l.side(lightPoint))
-	//				continue;
+				blib::math::Line l(v1, v2);
+				if (l.side(lightPoint))
+					continue;
 
 
 				const glm::vec2& v3 = v1 + 50.0f * (v1 - lightPoint);
@@ -458,12 +492,7 @@ void ZombieSurvival::draw()
 	for (auto z : zombies)
 		z->zombieSprite->draw(*spriteBatch, blib::math::easyMatrix(z->position, z->direction-90, 0.5f));
 
-
-
-
 	spriteBatch->draw(visionFbo, blib::math::easyMatrix(glm::vec2(0,1080), 0, glm::vec2(1,-1)));
-
-
 
 	for (auto p : players)
 	{
@@ -474,18 +503,12 @@ void ZombieSurvival::draw()
 		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation - p->accuracy)));
 	}
 	
-
 	spriteBatch->drawCache(levelCache);
 	
-	
-
-
 	/*for (auto p : objects)
 		lineBatch->draw(p, glm::vec4(0, 0, 1, 1));
 	for (auto p : collisionObjects)
 		lineBatch->draw(p, glm::vec4(0, 1, 1, 1));*/
-
-
 
 	spriteBatch->end();
 	lineBatch->end();
@@ -499,4 +522,56 @@ void ZombieSurvival::draw()
 blib::Texture* ZombieSurvival::getTitleImage()
 {
 	return NULL;
+}
+
+void ZombieSurvival::buildLevelCache()
+{
+	spriteBatch->begin();
+	spriteBatch->startCache();
+	for (int x = 0; x < 60; x++)
+	{
+		for (int y = 0; y < 32; y++)
+		{
+			if (level[y][x] == 1)
+			{
+				int id = 0;
+				if (x > 0 && (level[y][x - 1] == 1 || level[y][x - 1] == 2 || level[y][x - 1] == 4))
+					id |= 1;
+				if (x < 59 && (level[y][x + 1] == 1 || level[y][x + 1] == 2 || level[y][x + 1] == 4))
+					id |= 2;
+				if (y > 0 && (level[y - 1][x] == 1 || level[y - 1][x] == 2 || level[y - 1][x] == 4))
+					id |= 4;
+				if (y < 31 && (level[y + 1][x] == 1 || level[y + 1][x] == 2 || level[y + 1][x] == 4))
+					id |= 8;
+				//						0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+				static int lookup[] = { 2, 0, 0, 0, 1, 6, 7, 10, 1, 5, 4, 8, 1, 9, 11, 2 };
+
+				id = lookup[id];
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 2)
+			{
+				int id = 0;
+				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
+					id = 13;
+				else
+					id = 14;
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 4)
+			{
+				int id = 0;
+				if (level[y - 1][x] == 0 && level[y + 1][x] == 0)
+					id = 3;
+				else
+					id = 15;
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((id % 4)*0.25f, (id / 4)*0.25f), 0.25f, 0.25f));
+			}
+			else if (level[y][x] == 3)
+				spriteBatch->draw(wallSprites, blib::math::easyMatrix(glm::vec2(32 * x, 32 * y)), glm::vec2(0, 0), blib::math::Rectangle(glm::vec2((12 % 4)*0.25f, (12 / 4)*0.25f), 0.25f, 0.25f));
+
+		}
+	}
+	levelCache = spriteBatch->getCache();
+	spriteBatch->end();
 }

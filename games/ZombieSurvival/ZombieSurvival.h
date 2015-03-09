@@ -17,6 +17,8 @@ public:
 
 	std::vector<blib::math::Polygon> objects;
 	std::vector<blib::math::Polygon> collisionObjects;
+	std::vector<glm::ivec2> doors;
+	
 
 	blib::FBO* visionFbo;
 	blib::SpriteBatch::Cache* levelCache;
@@ -33,9 +35,18 @@ public:
 	virtual std::string getInstructions();
 	virtual void loadResources();
 	virtual void start(Difficulty difficulty);
-	virtual void update( float elapsedTime );
+
+	void buildLevelCache();
+
+	virtual void update(float elapsedTime);
 	virtual void draw();
 	virtual blib::Texture* getTitleImage();
+
+/*	virtual bool hasWinner() override
+	{
+		return false; 
+	}*/
+
 };
 
 
