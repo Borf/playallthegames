@@ -11,7 +11,9 @@ public:
 	blib::Animation* zombieSprite;
 	glm::vec2 position;
 	float direction;
-	
+	float rotation;
+
+	float timer;
 	ZombieSurvivalPlayer* target;
 
 

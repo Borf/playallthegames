@@ -14,6 +14,7 @@ class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
 public:
 	blib::Texture* backSprite;
 	blib::Texture* wallSprites;
+	blib::Texture* finishSprite;
 	blib::Shader* combineShader;
 	enum ShaderAttributes
 	{
@@ -26,6 +27,7 @@ public:
 
 	std::vector<blib::math::Polygon> objects;
 	std::vector<blib::math::Polygon> collisionObjects;
+	std::vector<blib::math::Rectangle> collisionAabb;
 	std::vector<glm::ivec2> doors;
 	
 

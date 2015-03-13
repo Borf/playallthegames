@@ -3,6 +3,8 @@
 
 Zombie::Zombie()
 {
+	rotation = 0;
+	timer = 0;
 }
 
 
