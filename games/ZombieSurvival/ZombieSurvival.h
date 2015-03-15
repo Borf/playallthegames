@@ -9,7 +9,7 @@
 
 namespace blib { class Texture; class Font; class Animation;  class VBO; class FBO; class Shader; }
 
-class ZombieSurvival : public AliveGame<ZombieSurvivalPlayer>
+class ZombieSurvival : public Game<ZombieSurvivalPlayer>
 {
 public:
 	blib::Texture* backSprite;
@@ -29,6 +29,7 @@ public:
 	std::vector<blib::math::Polygon> collisionObjects;
 	std::vector<blib::math::Rectangle> collisionAabb;
 	std::vector<glm::ivec2> doors;
+	std::vector<std::pair<blib::math::Line, float> > shootLines;
 	
 
 	blib::FBO* visionFbo;
@@ -39,6 +40,8 @@ public:
 
 	void spawnZombie();
 
+
+	
 
 
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
@@ -53,10 +56,8 @@ public:
 	virtual void draw();
 	virtual blib::Texture* getTitleImage();
 
-/*	virtual bool hasWinner() override
-	{
-		return false; 
-	}*/
+	virtual bool hasWinner();
+	virtual std::list<Player*> getWinners();
 
 };
 

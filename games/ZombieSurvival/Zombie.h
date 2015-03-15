@@ -13,6 +13,7 @@ public:
 	float direction;
 	float rotation;
 
+	int hp = 2;
 	float timer;
 	ZombieSurvivalPlayer* target;
 

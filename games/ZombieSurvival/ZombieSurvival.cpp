@@ -276,6 +276,7 @@ void ZombieSurvival::spawnZombie()
 {
 	Zombie* z = new Zombie();
 	z->zombieSprite = new blib::Animation("assets/games/ZombieSurvival/zombie.json", resourceManager);
+	z->zombieSprite->setState("idle");
 	z->zombieSprite->update(blib::math::randomDouble(0, 10));
 	z->direction = (float)(rand() % 360);
 
@@ -393,10 +394,43 @@ void ZombieSurvival::update(float elapsedTime)
 			p->playerAnimation->setState("idle");
 			p->accuracy *= glm::pow(0.25f, elapsedTime);
 		}
+
+		if (p->joystick.a == 1 && p->prevJoystick.a == 0)
+		{
+			blib::math::Line shootRay(p->position, p->position + 1000.0f * blib::util::fromAngle(glm::radians(p->rotation + blib::math::randomFloat(-p->accuracy, p->accuracy))));
+			std::vector<std::pair<glm::vec2, blib::math::Line> > collisions;
+			for (auto o : objects)
+				if (o.intersects(shootRay, &collisions))
+					for (auto c : collisions)
+						if (glm::distance(p->position, c.first) < shootRay.length())
+							shootRay.p2 = c.first;
+			for (Zombie* z : zombies)
+				if (z->hp > 0 && glm::distance(shootRay.project(z->position), z->position) < 30)
+					shootRay.p2 = shootRay.project(z->position);
+
+
+			for (auto z : zombies)
+				if (glm::distance(z->position, shootRay.project(z->position)) < 25 && z->hp > 0)
+				{
+					z->hp--;
+					if (z->hp <= 0)
+					{
+						z->zombieSprite->setState("dead");
+						z->zombieSprite->update(elapsedTime * 0.1f);
+					}
+				}
+
+			shootLines.push_back(std::pair<blib::math::Line, float>(shootRay, 1.0f));
+		}
+
+
 	}
 
 	for (auto z : zombies)
 	{
+		if (z->hp <= 0)
+			continue;
+
 		glm::vec2 oldPos = z->position;
 		z->position += blib::util::fromAngle(glm::radians(z->direction)) * (z->target == NULL ? 50.0f : 150)* elapsedTime;
 		blib::math::Line ray(oldPos, z->position);
@@ -427,7 +461,7 @@ void ZombieSurvival::update(float elapsedTime)
 			if (!collided)
 				for (auto d : doors)
 				{
-					if (glm::distance(z->position, glm::vec2(32 * d)+glm::vec2(16,32)) < 32)
+					if (glm::distance(z->position, glm::vec2(32 * d) + glm::vec2(16, 32)) < 32)
 					{
 						z->position = glm::vec2(32 * d) + glm::vec2(16, 32) + 32.01f * glm::normalize(z->position - (glm::vec2(32 * d) + glm::vec2(16, 32)));
 						ray.p2 = z->position;
@@ -481,12 +515,23 @@ void ZombieSurvival::update(float elapsedTime)
 		}
 
 
-
-		z->zombieSprite->setState("walk");
+		if (z->hp > 0)
+			z->zombieSprite->setState("walk");
 		if(z->target)
 			z->zombieSprite->update(elapsedTime * 1.5f);
 		else
 			z->zombieSprite->update(elapsedTime * 0.1f);
+	}
+
+
+	for (int i = 0; i < (int)shootLines.size(); i++)
+	{
+		shootLines[i].second -= elapsedTime * 2;
+		if (shootLines[i].second < 0)
+		{
+			shootLines.erase(shootLines.begin() + i);
+			i--;
+		}
 	}
 
 
@@ -586,9 +631,12 @@ void ZombieSurvival::draw()
 	
 	spriteBatch->drawCache(levelCache);
 
-	spriteBatch->draw(finishSprite, blib::math::easyMatrix(glm::vec2(128, 200)));
+	spriteBatch->draw(finishSprite, blib::math::easyMatrix(glm::vec2(100, 250)), finishSprite->center);
 
 	
+	for (const std::pair<blib::math::Line, float>& l : shootLines)
+		lineBatch->draw(l.first, glm::vec4(1, 1, 1, l.second));
+
 	/*for (auto p : objects)
 		lineBatch->draw(p, glm::vec4(0, 0, 1, 1));
 	for (auto p : collisionObjects)
@@ -660,4 +708,18 @@ void ZombieSurvival::buildLevelCache()
 	}
 	levelCache = spriteBatch->getCache();
 	spriteBatch->end();
+}
+
+bool ZombieSurvival::hasWinner()
+{
+	if (!blib::linq::any(players, [](ZombieSurvivalPlayer* p) { return p->alive; }))
+		return true;
+	if (blib::linq::any(players, [](ZombieSurvivalPlayer* p) { return p->alive && glm::distance(p->position, glm::vec2(100, 250)) < 50; }))
+		return true;
+	return false;
+}
+
+std::list<Player*> ZombieSurvival::getWinners()
+{
+	return blib::linq::where<std::list<Player*>>(players, [](ZombieSurvivalPlayer* p) { return p->alive && glm::distance(p->position, glm::vec2(100, 250)) < 50; });
 }
