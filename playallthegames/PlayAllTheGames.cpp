@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "ZombieSurvival"
+#define DEBUGGAME "TowerTopple"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0
@@ -119,8 +119,10 @@ void PlayAllTheGames::init()
 
 	gameFBO[0] = resourceManager->getResource<blib::FBO>();
 	gameFBO[0]->setSize(settings->resX, settings->resY);
+	gameFBO[0]->depth = true;
 	gameFBO[1] = resourceManager->getResource<blib::FBO>();
 	gameFBO[1]->setSize(settings->resX, settings->resY);
+	gameFBO[1]->depth = true;
 	lastKeyState = keyState;
 
 	typingMode = false;
@@ -483,7 +485,7 @@ void PlayAllTheGames::draw()
 		lineBatch->renderState.activeFbo = gameFBO[activeGameFbo];
 		if(activeGame)
 		{
-			renderer->clear(activeGame->backgroundColor, blib::Renderer::Color);
+			renderer->clear(activeGame->backgroundColor, blib::Renderer::Color | blib::Renderer::Depth);
 			activeGame->draw();
 		}
 		lineBatch->renderState.activeFbo = NULL;
