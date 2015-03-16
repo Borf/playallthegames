@@ -5,6 +5,7 @@
 #include <blib/Util.h>
 #include <blib/Math.h>
 #include <blib/Renderer.h>
+#include <blib/math/Ray.h>
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
@@ -174,8 +175,20 @@ void TowerTopple::update( float elapsedTime )
 		world->addRigidBody(floorBody);
 		floorBody->setFriction(1.0);
 		floorBody->applyCentralImpulse(btVector3(0,0,-500));
+	}
 
-
+	for (auto p : players)
+	{
+		if (p->joystick.a == 1)
+		{
+			glm::vec4 mouse3d;
+			glm::mat4 projectionMatrix = glm::perspective(90.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
+			glm::mat4 cameraMatrix;
+			cameraMatrix = glm::rotate(cameraMatrix, -10.0f, glm::vec3(1, 0, 0));
+			cameraMatrix = glm::translate(cameraMatrix, glm::vec3(0, 0, -camDist));
+			cameraMatrix = glm::rotate(cameraMatrix, camAngle, glm::vec3(1, 0, 0));
+			renderer->unproject(settings->center, &mouse3d, &p->shootRay, cameraMatrix, projectionMatrix);
+		}
 	}
 
 
@@ -268,6 +281,22 @@ void TowerTopple::draw()
 
 
 	}
+
+
+	
+	blib::RenderState r = debugDraw->renderstate;
+	r.activeShader->setUniform(DebugDraw::Uniforms::ProjectionMatrix, projectionMatrix);
+	r.activeShader->setUniform(DebugDraw::Uniforms::CameraMatrix, cameraMatrix);
+	std::vector<blib::VertexP3C4> vertices;
+
+	for (auto p : players)
+	{
+		vertices.push_back(blib::VertexP3C4(p->shootRay.origin, glm::vec4(1, 0, 0, 1)));
+		vertices.push_back(blib::VertexP3C4(p->shootRay.origin + 100.0f * p->shootRay.dir, glm::vec4(1, 0, 0, 1)));
+	}
+
+	renderer->drawLines(vertices, r);
+
 
 
 
