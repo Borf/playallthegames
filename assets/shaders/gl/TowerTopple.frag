@@ -1,4 +1,5 @@
 uniform sampler2D s_texture;
+uniform vec4 color;
 
 varying vec3 normal;
 varying vec2 texCoord;
@@ -6,8 +7,10 @@ varying vec2 texCoord;
 
 void main()
 {
-	float c = 0.75 + clamp(0, 0.25, 0.25 * dot(normalize(vec3(1,1,1)), normalize(normal)));
+	const float fac = 0.5;
+
+	float c = (1 - fac) + clamp(fac * abs(dot(normalize(vec3(1,1,-1)), normalize(normal))), 0, fac);
 
 
-	gl_FragColor = texture2D(s_texture, texCoord) * vec4(c,c,c,1);
+	gl_FragColor = color * texture2D(s_texture, texCoord) * vec4(c,c,c,1);
 }

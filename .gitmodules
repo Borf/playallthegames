@@ -1,3 +1,7 @@
 [submodule "blib"]
 	path = blib
 	url = https://github.com/Borf/blib.git
+[submodule "modelconvert"]
+	path = modelconvert
+	url = https://github.com/Borf/modelconvert.git
+	branch = release

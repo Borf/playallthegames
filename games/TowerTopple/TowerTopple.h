@@ -9,7 +9,7 @@
 #include <blib/RenderState.h>
 #include <blib/gl/Vertex.h>
 
-namespace blib { class Texture; class Font;  }
+namespace blib { class Texture; class Font;  class StaticModel;  }
 
 class DebugDraw : public btIDebugDraw
 {
@@ -47,6 +47,7 @@ class Box
 public:
 	btRigidBody* body;
 	btVector3 extends;
+	TowerTopplePlayer* player = NULL;
 };
 
 class TowerTopple : public ScoreGame<TowerTopplePlayer>
@@ -59,20 +60,26 @@ public:
 	btDiscreteDynamicsWorld*                world;
 	DebugDraw* debugDraw;
 
+	blib::StaticModel* ballModel;
+
 	blib::RenderState renderState;
 	enum class Uniforms
 	{
 		ProjectionMatrix,
 		CameraMatrix,
 		ModelMatrix,
-		s_texture
+		s_texture,
+		color
 	};
 	blib::Texture* testTexture;
 	blib::Texture* outlineTexture;
+	blib::Texture* cursorSprite;
 	std::vector<Box*> boxes;
 
-	float camAngle = 50;
-	float camDist = 10;
+	btRigidBody* groundBody;
+	float camAngle = 30;
+	float camDist = 25;
+	float camRot = 0;
 
 	void addBox(const btVector3& pos, const btVector3& extends);
 
