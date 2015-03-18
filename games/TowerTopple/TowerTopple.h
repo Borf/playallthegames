@@ -74,6 +74,7 @@ public:
 	blib::Texture* testTexture;
 	blib::Texture* outlineTexture;
 	blib::Texture* cursorSprite;
+	blib::Font* font;
 	std::vector<Box*> boxes;
 
 	btRigidBody* groundBody;
@@ -91,6 +92,9 @@ public:
 	virtual void update( float elapsedTime );
 	virtual void draw();
 	virtual blib::Texture* getTitleImage();
+
+	virtual bool hasWinner();
+
 };
 
 

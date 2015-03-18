@@ -63,6 +63,8 @@ void TowerTopple::loadResources()
 
 	cursorSprite = resourceManager->getResource<blib::Texture>("assets/cursor.png");
 
+	font = resourceManager->getResource<blib::Font>("lindsey");
+
 
 	ballModel = new blib::StaticModel("assets/games/TowerTopple/ball.3ds.json", resourceManager, renderer);
 }
@@ -82,7 +84,7 @@ void TowerTopple::start(Difficulty difficulty)
 	world->setDebugDrawer(debugDraw);
 
 	{
-		btBoxShape* groundShape = new btBoxShape(btVector3(10, 1, 10));
+		btBoxShape* groundShape = new btBoxShape(btVector3(6.5f, 1, 6.5f));
 		btTransform groundTransform;
 		groundTransform.setIdentity();
 		groundTransform.setOrigin(btVector3(0, -1, 0));
@@ -217,14 +219,14 @@ void TowerTopple::addBox(const btVector3& pos, const btVector3& extends)
 
 void TowerTopple::update( float elapsedTime )
 {
-	world->stepSimulation((float)elapsedTime, 100);
+	world->stepSimulation((float)elapsedTime, 4);
 
 
 //	camDist += players[0]->joystick.leftStick.y * elapsedTime * 5;
 //	camAngle += players[0]->joystick.leftStick.x * elapsedTime * 90;
 
 
-	camRot = 0;
+	camRot += elapsedTime*5;
 
 
 
@@ -320,6 +322,20 @@ void TowerTopple::update( float elapsedTime )
 		}
 	}
 
+
+	for (auto b : boxes)
+	{
+		if (b->body->isInWorld())
+		{
+			if (b->body->getWorldTransform().getOrigin().y() < 0)
+			{
+				world->removeRigidBody(b->body);
+				if (b->player)
+					b->player->score += (b->extends.x() * 2) * (b->extends.y() * 2) * (b->extends.z() * 2);
+			}
+		}
+	}
+
 }
 
 void TowerTopple::draw()
@@ -381,13 +397,13 @@ void TowerTopple::draw()
 
 	float h = 0;
 	std::vector<blib::VertexP3T2N3> verts;
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(-10, h, -10), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(10, h, 10), glm::vec2(10, 10), glm::vec3(0, 1, 0)));
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(10, h, -10), glm::vec2(10, 0), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(-7, h, -7), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(7, h, 7), glm::vec2(10, 10), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(7, h, -7), glm::vec2(10, 0), glm::vec3(0, 1, 0)));
 
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(-10, h, -10), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(10, h, 10), glm::vec2(10, 10), glm::vec3(0, 1, 0)));
-	verts.push_back(blib::VertexP3T2N3(glm::vec3(-10, h, 10), glm::vec2(0, 10), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(-7, h, -7), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(7, h, 7), glm::vec2(10, 10), glm::vec3(0, 1, 0)));
+	verts.push_back(blib::VertexP3T2N3(glm::vec3(-7, h, 7), glm::vec2(0, 10), glm::vec3(0, 1, 0)));
 
 	renderState.activeShader->setUniform(Uniforms::CameraMatrix, cameraMatrix);
 	renderState.activeShader->setUniform(Uniforms::ProjectionMatrix, projectionMatrix);
@@ -404,7 +420,8 @@ void TowerTopple::draw()
 	renderState.activeTexture[0] = outlineTexture;
 	for (auto b : boxes)
 	{
-		
+		if (!b->body->isInWorld())
+			continue;
 		btScalar m[16];
 		b->body->getWorldTransform().getOpenGLMatrix(m);
 		renderState.activeShader->setUniform(Uniforms::ModelMatrix, glm::scale(glm::make_mat4(m), glm::vec3(b->extends.x() * 2, b->extends.y() * 2, b->extends.z() * 2)));
@@ -449,6 +466,7 @@ void TowerTopple::draw()
 	for (auto p : players)
 	{
 		spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->cursor), p->participant->color);
+		spriteBatch->draw(font, std::to_string(p->score), blib::math::easyMatrix(glm::vec2(20, 50 * p->index + 50)), p->participant->color);
 	}
 	spriteBatch->end();
 
@@ -463,6 +481,13 @@ void TowerTopple::draw()
 blib::Texture* TowerTopple::getTitleImage()
 {
 	return NULL;
+}
+
+bool TowerTopple::hasWinner()
+{
+	return !blib::linq::any(boxes, [](Box* b) { return b->body->isInWorld(); });
+
+
 }
 
 
