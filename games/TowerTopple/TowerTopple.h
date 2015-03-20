@@ -74,6 +74,7 @@ public:
 	blib::Texture* testTexture;
 	blib::Texture* outlineTexture;
 	blib::Texture* cursorSprite;
+	blib::Texture* ballsTexture;
 	blib::Font* font;
 	std::vector<Box*> boxes;
 

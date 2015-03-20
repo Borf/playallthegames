@@ -61,6 +61,7 @@ void TowerTopple::loadResources()
 	outlineTexture = resourceManager->getResource<blib::Texture>("assets/games/TowerTopple/outline.png");
 	outlineTexture->nearest = true;
 
+	ballsTexture = resourceManager->getResource<blib::Texture>("assets/games/TowerTopple/balls.png");
 	cursorSprite = resourceManager->getResource<blib::Texture>("assets/cursor.png");
 
 	font = resourceManager->getResource<blib::Font>("lindsey");
@@ -234,6 +235,7 @@ void TowerTopple::update( float elapsedTime )
 
 	for (auto p : players)
 	{
+		p->ballTImer = glm::min(p->ballTImer + (float)elapsedTime, 5.0f);
 		p->cursor += elapsedTime * p->joystick.leftStick * 750.0f;
 
 		//if (!p->bla)
@@ -253,9 +255,9 @@ void TowerTopple::update( float elapsedTime )
 			renderer->unproject(cursor, NULL, &p->shootRay, cameraMatrix, projectionMatrix);
 			p->bla = true;
 		}
-		if (p->joystick.a == 1 && p->prevJoystick.a == 0)
+		if (p->joystick.a == 1 && p->prevJoystick.a == 0 && p->ballTImer > 1)
 		{
-
+			p->ballTImer--;
 			btSphereShape* groundShape = new btSphereShape(0.5f);
 			btTransform groundTransform;
 			groundTransform.setIdentity();
@@ -466,7 +468,10 @@ void TowerTopple::draw()
 	for (auto p : players)
 	{
 		spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->cursor), p->participant->color);
-		spriteBatch->draw(font, std::to_string(p->score), blib::math::easyMatrix(glm::vec2(20, 50 * p->index + 50)), p->participant->color);
+		spriteBatch->draw(font, std::to_string(p->score), blib::math::easyMatrix(glm::vec2(20, 50 * p->index + 30)), p->participant->color);
+		spriteBatch->draw(ballsTexture, blib::math::easyMatrix(glm::vec2(100, 50 * p->index + 50)));
+		spriteBatch->draw(ballsTexture, blib::math::easyMatrix(glm::vec2(100, 50 * p->index + 50)), glm::vec2(0,0), blib::math::Rectangle(glm::vec2(0,0), p->ballTImer / 5.0f,1.0f), p->participant->color);
+
 	}
 	spriteBatch->end();
 

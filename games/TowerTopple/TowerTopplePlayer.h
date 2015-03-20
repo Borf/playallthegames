@@ -17,6 +17,8 @@ public:
 
 	bool bla = false;
 
+	float ballTImer;
+
 
 	std::vector<btRigidBody*> balls;
 
