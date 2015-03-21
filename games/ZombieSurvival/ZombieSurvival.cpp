@@ -624,7 +624,7 @@ void ZombieSurvival::draw()
 	{
 		if (!p->alive)
 			continue;
-		p->playerAnimation->draw(*spriteBatch, blib::math::easyMatrix(p->position, p->rotation - 90, 0.5f));
+		p->playerAnimation->draw(*spriteBatch, blib::math::easyMatrix(p->position, p->rotation - 90, 0.5f), p->participant->color);
 		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation + p->accuracy)));
 		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation - p->accuracy)));
 	}
