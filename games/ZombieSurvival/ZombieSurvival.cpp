@@ -317,7 +317,7 @@ void ZombieSurvival::update(float elapsedTime)
 	spawnTimer += elapsedTime;
 	while (spawnTimer > 0.25f)
 	{
-		if (zombies.size() < 40)
+		if (blib::linq::count(zombies, [](Zombie* z) { return z->hp > 0; }) < 40)
 			spawnZombie();
 		spawnTimer -= 0.25f;
 	}
@@ -386,7 +386,7 @@ void ZombieSurvival::update(float elapsedTime)
 			p->rotation = glm::degrees(atan2(p->joystick.leftStick.y, p->joystick.leftStick.x));
 			p->accuracy = glm::max(1.0f, p->accuracy);
 			p->accuracy /= glm::length(p->joystick.leftStick) * glm::pow(0.01f, elapsedTime);
-			p->accuracy = glm::min(30.0f, p->accuracy);
+			p->accuracy = glm::min(10.0f, p->accuracy);
 			p->playerAnimation->setState("walk");
 		}
 		else
@@ -610,7 +610,7 @@ void ZombieSurvival::draw()
 	spriteBatch->draw(backSprite, glm::mat4());
 
 	spriteBatch->end();
-	//combineShader->setUniform(zombieFactor, 1.0f);
+	combineShader->setUniform(zombieFactor, 1.0f);
 	spriteBatch->begin();
 	for (auto z : zombies)
 		z->zombieSprite->draw(*spriteBatch, blib::math::easyMatrix(z->position, z->direction-90, 0.5f));
@@ -625,8 +625,8 @@ void ZombieSurvival::draw()
 		if (!p->alive)
 			continue;
 		p->playerAnimation->draw(*spriteBatch, blib::math::easyMatrix(p->position, p->rotation - 90, 0.5f), p->participant->color);
-		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation + p->accuracy)));
-		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation - p->accuracy)));
+		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation + p->accuracy)), p->participant->color);
+		lineBatch->draw(p->position, p->position + 200.0f * blib::util::fromAngle(glm::radians(p->rotation - p->accuracy)), p->participant->color);
 	}
 	
 	spriteBatch->drawCache(levelCache);
