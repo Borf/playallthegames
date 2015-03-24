@@ -385,7 +385,7 @@ void ZombieSurvival::update(float elapsedTime)
 		{
 			p->rotation = glm::degrees(atan2(p->joystick.leftStick.y, p->joystick.leftStick.x));
 			p->accuracy = glm::max(1.0f, p->accuracy);
-			p->accuracy /= glm::length(p->joystick.leftStick) * glm::pow(0.01f, elapsedTime);
+			p->accuracy /= glm::pow(0.01f * glm::length(p->joystick.leftStick), elapsedTime);
 			p->accuracy = glm::min(10.0f, p->accuracy);
 			p->playerAnimation->setState("walk");
 		}
