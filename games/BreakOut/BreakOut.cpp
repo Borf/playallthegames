@@ -12,10 +12,6 @@
 
 #include "BreakOutBall.h"
 
-GameBase* getGame()
-{
-	return new BreakOut();
-}
 
 std::string BreakOut::getName()
 {

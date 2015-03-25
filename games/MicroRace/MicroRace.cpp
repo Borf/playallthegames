@@ -14,11 +14,6 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/Settings.h"
 
-GameBase* getGame()
-{
-	return new MicroRace();
-}
-
 std::string MicroRace::getName()
 {
 	return "MicroRace";

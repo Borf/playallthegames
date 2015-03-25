@@ -3,20 +3,22 @@
 #include <glm/glm.hpp>
 
 class Settings;
-
-class Enemy
+namespace bugswat
 {
-public:
-	glm::vec2 position;
-	float rotation;
-	float speed;
-	bool alive;
+	class Enemy
+	{
+	public:
+		glm::vec2 position;
+		float rotation;
+		float speed;
+		bool alive;
 
-	Enemy();
+		Enemy();
 
 
-	virtual void update(float elapsedTime);
+		virtual void update(float elapsedTime);
 
-	glm::mat4 getMatrix();
-	bool onScreen(Settings* settings);
-};
+		glm::mat4 getMatrix();
+		bool onScreen(Settings* settings);
+	};
+}

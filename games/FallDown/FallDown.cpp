@@ -11,11 +11,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-GameBase* getGame()
-{
-	return new FallDown();
-}
-
 std::string FallDown::getName()
 {
 	return "FallDown";

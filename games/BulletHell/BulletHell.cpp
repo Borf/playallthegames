@@ -17,13 +17,6 @@
 #include "Bullet.h"
 
 
-GameBase* getGame()
-{
-	return new BulletHell();
-}
-
-
-
 BulletHell::BulletHell( )
 {
 

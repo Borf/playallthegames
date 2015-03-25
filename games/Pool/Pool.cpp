@@ -19,12 +19,6 @@
 #include <math.h>
 
 
-
-GameBase* getGame()
-{
-	return new Pool();
-}
-
 Pool::Pool()
 {
 	this->totalScore = 10;

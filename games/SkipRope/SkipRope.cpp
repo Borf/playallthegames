@@ -14,11 +14,6 @@
 #include <math.h>
 
 
-GameBase* getGame()
-{
-	return new SkipRope();
-}
-
 std::string SkipRope::getName()
 {
 	return "SkipRope";

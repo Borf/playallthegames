@@ -19,11 +19,6 @@
 #include <math.h>
 
 
-GameBase* getGame()
-{
-	return new CurveFever();
-}
-
 CurveFever::CurveFever()
 {
 

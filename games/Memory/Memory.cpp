@@ -15,11 +15,6 @@
 #include "Tile.h"
 #include "RotatingCard.h"
 
-GameBase* getGame()
-{
-	return new Memory();
-}
-
 std::string Memory::getName()
 {
 	return "Memory";

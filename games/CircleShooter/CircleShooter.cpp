@@ -9,12 +9,6 @@
 #include <blib/Math.h>
 #include <blib/Util.h>
 
-
-GameBase* getGame()
-{
-	return new CircleShooter();
-}
-
 std::string CircleShooter::getName()
 {
 	return "CircleShooter";

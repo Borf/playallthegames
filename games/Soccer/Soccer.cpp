@@ -12,10 +12,6 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/Settings.h"
 
-GameBase* getGame()
-{
-	return new Soccer();
-}
 
 std::string Soccer::getName()
 {

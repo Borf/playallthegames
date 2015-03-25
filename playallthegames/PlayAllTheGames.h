@@ -68,8 +68,6 @@ public:
 	~PlayAllTheGames();
 
 	virtual void init();
-	virtual void loadDlls(const std::string &path);
-
 
 	GameBase* getGame(std::string name);
 
@@ -77,6 +75,6 @@ public:
 	virtual void draw();
 	void switchState( State newState );
 	void quit();
-
+	void loadGames();
 	bool typingMode;
 };

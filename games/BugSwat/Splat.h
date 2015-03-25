@@ -2,13 +2,16 @@
 
 #include <glm/glm.hpp>
 
-class Splat
+namespace bugswat
 {
-public:
-	Splat(glm::vec2 pos, float rot);
+	class Splat
+	{
+	public:
+		Splat(glm::vec2 pos, float rot);
 
-	glm::vec2 pos;
-	float rot;
+		glm::vec2 pos;
+		float rot;
 
-	glm::mat4 getMatrix();
-};
+		glm::mat4 getMatrix();
+	};
+}

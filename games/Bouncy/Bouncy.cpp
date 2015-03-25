@@ -12,12 +12,6 @@
 #include <blib/Math.h>
 #include <blib/LineBatch.h>
 
-GameBase* getGame()
-{
-	return new Bouncy();
-}
-
-
 
 Bouncy::Bouncy()
 {

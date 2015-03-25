@@ -25,11 +25,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-GameBase* getGame()
-{
-	return new ZombieSurvival();
-}
-
 std::string ZombieSurvival::getName()
 {
 	return "ZombieSurvival";

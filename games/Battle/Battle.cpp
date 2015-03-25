@@ -16,12 +16,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-
-GameBase* getGame()
-{
-	return new Battle();
-}
-
 std::string Battle::getName()
 {
 	return "Battle";

@@ -3,6 +3,7 @@
 #include "../../PlayAllTheGames/AliveGame.h"
 #include <blib/math/Polygon.h>
 #include <blib/SpriteBatch.h>
+#include <blib/math/Line.h>
 
 #include "ZombieSurvivalPlayer.h"
 #include "Zombie.h"
@@ -62,11 +63,3 @@ public:
 };
 
 
-
-
-
-
-
-extern "C" {
-	__declspec( dllexport ) GameBase* getGame();
-}

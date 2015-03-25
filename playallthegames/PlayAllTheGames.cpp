@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "TowerTopple"
+#define DEBUGGAME "ZombieSurvival"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0
@@ -50,8 +50,6 @@ using blib::util::Log;
 #define PREGAMETIME 4
 #define POSTGAMETIME 4
 #endif
-
-
 
 PlayAllTheGames::PlayAllTheGames()
 {
@@ -78,18 +76,11 @@ PlayAllTheGames::~PlayAllTheGames()
 {
 	blib::linq::deleteall(games);
 	delete settings;
-
-	
 }
 
 void PlayAllTheGames::init()
 {
-	loadDlls("games");
-#ifdef _DEBUG
-	loadDlls("../vs2013/debug");
-#else
-	loadDlls("../vs2013/release");
-#endif
+	loadGames();
 	if(games.empty())
 	{
 		Log::out<<"No games found :(. Have you configured correctly?"<<Log::newline;
@@ -99,6 +90,9 @@ void PlayAllTheGames::init()
 		getchar();
 		exit(0);
 	}
+	for (auto g : games)
+		g->setAttributes(spriteBatch, lineBatch, renderer, resourceManager, settings);
+
 
 	session = NULL;
 
@@ -579,35 +573,6 @@ void PlayAllTheGames::draw()
 
 }
 
-void PlayAllTheGames::loadDlls( const std::string &path )
-{
-	std::vector<std::string> gameDlls = blib::util::FileSystem::getFileList(path);
-	gameDlls = blib::linq::unique(gameDlls);
-	for(size_t i = 0; i < gameDlls.size(); i++)
-	{
-		if(gameDlls[i].length() < 4)
-			continue;
-		if(gameDlls[i].substr(gameDlls[i].size()-4) == ".dll")
-		{
-			HMODULE module = LoadLibrary((path + "/" + gameDlls[i]).c_str());
-			if(!module)
-				continue;
-			typedef GameBase* (CALLBACK* LPFNDLLFUNC1)();
-			LPFNDLLFUNC1 getGame = (LPFNDLLFUNC1)GetProcAddress(module, "getGame");
-			if(!getGame)
-			{
-				FreeLibrary(module);
-				continue;
-			}
-			GameBase* game = getGame();
-			Log::out<<"Found game "<<game->getName()<<" in "<<path<<Log::newline;
-
-			game->setAttributes(spriteBatch, lineBatch, renderer, resourceManager, settings, blib::util::FileSystem::getHandlers());
-//			game->loadResources();
-			games.push_back(game);
-		}
-	}
-}
 
 void PlayAllTheGames::switchState( State newState )
 {
@@ -630,3 +595,4 @@ GameBase* PlayAllTheGames::getGame( std::string name )
 			return game;
 	return NULL;
 }
+

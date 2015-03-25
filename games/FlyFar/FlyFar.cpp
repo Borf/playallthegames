@@ -21,12 +21,6 @@
 
 using blib::util::Log;
 
-GameBase* getGame()
-{
-	return new FlyFar();
-}
-
-
 
 FlyFar::FlyFar()
 {

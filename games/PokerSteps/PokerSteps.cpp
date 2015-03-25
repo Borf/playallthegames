@@ -15,10 +15,6 @@ PokerSteps::PokerSteps()
 	maxPlayerScore = 15;
 }
 
-GameBase* getGame()
-{
-	return new PokerSteps();
-}
 
 std::string PokerSteps::getName()
 {

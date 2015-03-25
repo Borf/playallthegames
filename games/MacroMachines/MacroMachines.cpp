@@ -34,11 +34,6 @@
 using blib::util::Log;
 
 
-GameBase* getGame()
-{
-	return new MacroMachines();
-}
-
 MacroMachines::MacroMachines()
 {
 	world = NULL;

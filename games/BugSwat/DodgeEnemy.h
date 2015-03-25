@@ -2,12 +2,15 @@
 
 #include "Enemy.h"
 
-class BugSwat;
-
-class DodgeEnemy : public Enemy
+namespace bugswat
 {
-	BugSwat* bugSwat;
-public:
-	DodgeEnemy(BugSwat* bugSwat);
-	void update(float elapsedTime);
-};
+	class BugSwat;
+
+	class DodgeEnemy : public Enemy
+	{
+		BugSwat* bugSwat;
+	public:
+		DodgeEnemy(BugSwat* bugSwat);
+		void update(float elapsedTime);
+	};
+}

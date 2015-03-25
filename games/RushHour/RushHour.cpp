@@ -19,10 +19,6 @@ RushHour::RushHour()
 {
 }
 
-GameBase* getGame()
-{
-	return new RushHour();
-}
 
 std::string RushHour::getName()
 {

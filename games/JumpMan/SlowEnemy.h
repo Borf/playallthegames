@@ -2,9 +2,12 @@
 
 #include "Enemy.h"
 
-class SlowEnemy : public Enemy
+namespace jumpman
 {
-public:
-	virtual void update( float speed );
+	class SlowEnemy : public Enemy
+	{
+	public:
+		virtual void update(float speed);
 
-};
+	};
+}

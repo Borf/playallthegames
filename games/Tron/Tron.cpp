@@ -14,11 +14,6 @@
 #include <fstream>
 
 
-GameBase* getGame()
-{
-	return new Tron();
-}
-
 Tron::Tron()
 {
 

@@ -13,11 +13,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-GameBase* getGame()
-{
-	return new VacuumSucker();
-}
-
 std::string VacuumSucker::getName()
 {
 	return "VacuumSucker";

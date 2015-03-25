@@ -25,6 +25,111 @@
     <Filter Include="assets\shaders">
       <UniqueIdentifier>{105ae47f-8f9c-4de2-b004-4c59552ae1df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games">
+      <UniqueIdentifier>{c8f53f31-2294-4e60-a07b-2811313bb012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Battle">
+      <UniqueIdentifier>{c7a4a8b6-82f8-491f-bdcb-b11bee5879df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BomberMan">
+      <UniqueIdentifier>{3f2bdc5f-d7bb-481a-bd2e-ff8fba7ab60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BomberMan\blocks">
+      <UniqueIdentifier>{1e0de945-f55c-4cff-bf4e-63e5e2e00b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BomberMan\blocks\powerups">
+      <UniqueIdentifier>{80d2cf1e-77e9-4957-a491-4a0a495ead68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Bouncy">
+      <UniqueIdentifier>{9b92e892-88cb-4410-b9ed-7f38ba821ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BreakOut">
+      <UniqueIdentifier>{67cfb82f-3462-42d3-8187-b89c7007f6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BugSwat">
+      <UniqueIdentifier>{a57984df-257f-40fa-8dd0-2dcabc69efdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BulletHell">
+      <UniqueIdentifier>{9660e557-b05a-426e-8f59-91663fb3b39e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Chicken">
+      <UniqueIdentifier>{e6348eb4-4e0a-4125-ad02-64b7a98d4a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\CircleShooter">
+      <UniqueIdentifier>{a78cc377-ea2e-4e24-b5b1-f18d599640dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\CurveFever">
+      <UniqueIdentifier>{874085e5-9406-4703-8d0c-c3d2ab352c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\DodgeFoot">
+      <UniqueIdentifier>{155d3d08-18e3-4642-9bc2-53eef0c531c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\FallDown">
+      <UniqueIdentifier>{7f099ae6-fa54-4848-b1bd-c7e1a12624db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\FlyFar">
+      <UniqueIdentifier>{a1af72cb-bc4d-4508-bd81-5dc9f84967a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Herding">
+      <UniqueIdentifier>{6c0f69ef-7743-426a-9c7d-c140d2dd54a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\JumpMan">
+      <UniqueIdentifier>{95071107-b7f5-4741-8a54-6706de620181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\MacroMachines">
+      <UniqueIdentifier>{de4cd54f-c401-45f8-a343-5cb3522204f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Memory">
+      <UniqueIdentifier>{dc3314d2-616d-4d99-8ca0-d141149f4c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\MicroRace">
+      <UniqueIdentifier>{074e4b69-effa-482d-bc70-13b0c401903d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Osmos">
+      <UniqueIdentifier>{f3242e83-b730-4cd5-8a23-4773e9a56197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\PacMan">
+      <UniqueIdentifier>{2a7206a7-1a61-4519-8919-f42a249f191f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\PewPew">
+      <UniqueIdentifier>{4edec73e-00ed-4d16-bbd5-b79e74386c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\PokerSteps">
+      <UniqueIdentifier>{81846e74-ddaf-4ac8-b18a-2bddd29b78d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Pong">
+      <UniqueIdentifier>{4b131225-75a0-43d8-b79c-b80d1789a1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Pool">
+      <UniqueIdentifier>{0455b237-19b3-4e5a-a879-05009110cd57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\PushOut">
+      <UniqueIdentifier>{63bf38dd-a2cc-4eda-b26c-948f8a04bb01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\RushHour">
+      <UniqueIdentifier>{83365523-10ad-4ad3-9669-a7471f324ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\SkipRope">
+      <UniqueIdentifier>{30270238-7708-4e77-88c4-9436d3cd2689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Soccer">
+      <UniqueIdentifier>{ad60a893-2195-482a-b789-859a83b51116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Tanks">
+      <UniqueIdentifier>{6817c84b-0863-481c-9faf-483c05804f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\TowerTopple">
+      <UniqueIdentifier>{5f58ce78-032d-40d2-8c04-9208c99b07ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Tron">
+      <UniqueIdentifier>{8d3fb230-d64a-444a-b37d-699b4f73ec31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\VacuumSucker">
+      <UniqueIdentifier>{a2a28efb-391f-4639-bb25-afbb67f4e311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\ZombieSurvival">
+      <UniqueIdentifier>{d8dd42c9-f8d3-4323-adf3-39855bdc314b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +223,345 @@
       <Filter>menus</Filter>
     </ClCompile>
     <ClCompile Include="Session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\BasicBattleLevel.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\Battle.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\BattleCharacter.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\BattleEnemy.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\BattleLevel.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Battle\BattlePlayer.cpp">
+      <Filter>games\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\FlamePowerUp.cpp">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\PushPowerUp.cpp">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\SpeedPowerUp.cpp">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\BombPowerUp.cpp">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\DestructableBlock.cpp">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\EmptyBlock.cpp">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\PowerUp.cpp">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\WallBlock.cpp">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\blocks\Block.cpp">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\Bomb.cpp">
+      <Filter>games\BomberMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\BomberMan.cpp">
+      <Filter>games\BomberMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\BombermanPlayer.cpp">
+      <Filter>games\BomberMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BomberMan\ExplosionParticle.cpp">
+      <Filter>games\BomberMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Bouncy\BouncyObject.cpp">
+      <Filter>games\Bouncy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Bouncy\BouncyPlayer.cpp">
+      <Filter>games\Bouncy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Bouncy\Bouncy.cpp">
+      <Filter>games\Bouncy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BreakOut\BreakOut.cpp">
+      <Filter>games\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BreakOut\BreakOutBall.cpp">
+      <Filter>games\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BreakOut\BreakOutPlayer.cpp">
+      <Filter>games\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\DodgeEnemy.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\Enemy.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\Splat.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\SwirlEnemy.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\BugSwat.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BugSwat\BugSwatPlayer.cpp">
+      <Filter>games\BugSwat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BulletHell\BulletHellPlayer.cpp">
+      <Filter>games\BulletHell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BulletHell\RotatingBulletGenerator.cpp">
+      <Filter>games\BulletHell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BulletHell\Bullet.cpp">
+      <Filter>games\BulletHell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BulletHell\BulletGenerator.cpp">
+      <Filter>games\BulletHell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BulletHell\BulletHell.cpp">
+      <Filter>games\BulletHell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Chicken\ChickenPlayer.cpp">
+      <Filter>games\Chicken</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Chicken\Chicken.cpp">
+      <Filter>games\Chicken</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\CircleShooter\CircleShooterPlayer.cpp">
+      <Filter>games\CircleShooter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\CircleShooter\CircleShooter.cpp">
+      <Filter>games\CircleShooter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\CurveFever\CurveFeverPlayer.cpp">
+      <Filter>games\CurveFever</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\CurveFever\CurveFever.cpp">
+      <Filter>games\CurveFever</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\DodgeFoot\DodgeFootPlayer.cpp">
+      <Filter>games\DodgeFoot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\DodgeFoot\DodgeFoot.cpp">
+      <Filter>games\DodgeFoot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\FallDown\FallDown.cpp">
+      <Filter>games\FallDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\FallDown\FallDownPlayer.cpp">
+      <Filter>games\FallDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\FlyFar\FlyFarPlayer.cpp">
+      <Filter>games\FlyFar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\FlyFar\FlyFar.cpp">
+      <Filter>games\FlyFar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Herding\Herding.cpp">
+      <Filter>games\Herding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Herding\HerdingPlayer.cpp">
+      <Filter>games\Herding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Herding\Sheep.cpp">
+      <Filter>games\Herding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\BasicEnemy.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\Enemy.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\JumpEnemy.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\JumpMan.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\JumpManPlayer.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\JumpMan\SlowEnemy.cpp">
+      <Filter>games\JumpMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MacroMachines\MacroMachines.cpp">
+      <Filter>games\MacroMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MacroMachines\MacroMachinesPlayer.cpp">
+      <Filter>games\MacroMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MacroMachines\Wheel.cpp">
+      <Filter>games\MacroMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Memory\Memory.cpp">
+      <Filter>games\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Memory\MemoryPlayer.cpp">
+      <Filter>games\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Memory\RotatingCard.cpp">
+      <Filter>games\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Memory\Tile.cpp">
+      <Filter>games\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MicroRace\Car.cpp">
+      <Filter>games\MicroRace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MicroRace\Foot.cpp">
+      <Filter>games\MicroRace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MicroRace\MicroRace.cpp">
+      <Filter>games\MicroRace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\MicroRace\MicroRacePlayer.cpp">
+      <Filter>games\MicroRace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Osmos\Osmos.cpp">
+      <Filter>games\Osmos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Osmos\OsmosPlayer.cpp">
+      <Filter>games\Osmos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Osmos\Sphere.cpp">
+      <Filter>games\Osmos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\DefaultLevel.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\Enemy.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\FollowGhost.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\PacMan.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\PacManLevel.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\PacManPlayer.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PacMan\SimpleLevel.cpp">
+      <Filter>games\PacMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\butterfly.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\carni.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\chargerbird.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\enemy.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\gameobject.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\level.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\levelobject.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\PewPew.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PewPew\PewPewPlayer.cpp">
+      <Filter>games\PewPew</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PokerSteps\PokerSteps.cpp">
+      <Filter>games\PokerSteps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PokerSteps\PokerStepsPlayer.cpp">
+      <Filter>games\PokerSteps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pong\Pong.cpp">
+      <Filter>games\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pong\PongPlayer.cpp">
+      <Filter>games\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pool\Pool.cpp">
+      <Filter>games\Pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pool\PoolPlayer.cpp">
+      <Filter>games\Pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PushOut\PushOut.cpp">
+      <Filter>games\PushOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PushOut\PushOutPlayer.cpp">
+      <Filter>games\PushOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\RushHour\RushHour.cpp">
+      <Filter>games\RushHour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\RushHour\RushHourPlayer.cpp">
+      <Filter>games\RushHour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\SkipRope\SkipRope.cpp">
+      <Filter>games\SkipRope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\SkipRope\SkipRopePlayer.cpp">
+      <Filter>games\SkipRope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Soccer\Soccer.cpp">
+      <Filter>games\Soccer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Soccer\SoccerPlayer.cpp">
+      <Filter>games\Soccer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Tanks\Tanks.cpp">
+      <Filter>games\Tanks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Tanks\TanksPlayer.cpp">
+      <Filter>games\Tanks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\TowerTopple\TowerTopple.cpp">
+      <Filter>games\TowerTopple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\TowerTopple\TowerTopplePlayer.cpp">
+      <Filter>games\TowerTopple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Tron\Tron.cpp">
+      <Filter>games\Tron</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Tron\TronPlayer.cpp">
+      <Filter>games\Tron</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\VacuumSucker\VacuumSucker.cpp">
+      <Filter>games\VacuumSucker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\VacuumSucker\VacuumSuckerPlayer.cpp">
+      <Filter>games\VacuumSucker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\ZombieSurvival\Zombie.cpp">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\ZombieSurvival\ZombieSurvival.cpp">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.cpp">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,16 +677,353 @@
     <ClInclude Include="menus\StatsMenu.h">
       <Filter>menus</Filter>
     </ClInclude>
+    <ClInclude Include="..\games\Battle\BasicBattleLevel.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Battle\Battle.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Battle\BattleCharacter.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Battle\BattleEnemy.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Battle\BattleLevel.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Battle\BattlePlayer.h">
+      <Filter>games\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\FlamePowerUp.h">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\PushPowerUp.h">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\SpeedPowerUp.h">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\BombPowerUp.h">
+      <Filter>games\BomberMan\blocks\powerups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\Block.h">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\DestructableBlock.h">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\EmptyBlock.h">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\PowerUp.h">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\blocks\WallBlock.h">
+      <Filter>games\BomberMan\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\Bomb.h">
+      <Filter>games\BomberMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\BomberMan.h">
+      <Filter>games\BomberMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\BombermanPlayer.h">
+      <Filter>games\BomberMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BomberMan\ExplosionParticle.h">
+      <Filter>games\BomberMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Bouncy\BouncyObject.h">
+      <Filter>games\Bouncy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Bouncy\BouncyPlayer.h">
+      <Filter>games\Bouncy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Bouncy\Bouncy.h">
+      <Filter>games\Bouncy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BreakOut\BreakOut.h">
+      <Filter>games\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BreakOut\BreakOutBall.h">
+      <Filter>games\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BreakOut\BreakOutPlayer.h">
+      <Filter>games\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\BugSwatPlayer.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\DodgeEnemy.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\Enemy.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\Splat.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\SwirlEnemy.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BugSwat\BugSwat.h">
+      <Filter>games\BugSwat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BulletHell\BulletHell.h">
+      <Filter>games\BulletHell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BulletHell\BulletHellPlayer.h">
+      <Filter>games\BulletHell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BulletHell\RotatingBulletGenerator.h">
+      <Filter>games\BulletHell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BulletHell\Bullet.h">
+      <Filter>games\BulletHell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BulletHell\BulletGenerator.h">
+      <Filter>games\BulletHell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Chicken\Chicken.h">
+      <Filter>games\Chicken</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Chicken\ChickenPlayer.h">
+      <Filter>games\Chicken</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\CircleShooter\CircleShooter.h">
+      <Filter>games\CircleShooter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\CircleShooter\CircleShooterPlayer.h">
+      <Filter>games\CircleShooter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\CurveFever\CurveFever.h">
+      <Filter>games\CurveFever</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\CurveFever\CurveFeverPlayer.h">
+      <Filter>games\CurveFever</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\DodgeFoot\DodgeFoot.h">
+      <Filter>games\DodgeFoot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\DodgeFoot\DodgeFootPlayer.h">
+      <Filter>games\DodgeFoot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\FallDown\FallDownPlayer.h">
+      <Filter>games\FallDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\FallDown\FallDown.h">
+      <Filter>games\FallDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\FlyFar\FlyFar.h">
+      <Filter>games\FlyFar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\FlyFar\FlyFarPlayer.h">
+      <Filter>games\FlyFar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Herding\Herding.h">
+      <Filter>games\Herding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Herding\HerdingPlayer.h">
+      <Filter>games\Herding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Herding\Sheep.h">
+      <Filter>games\Herding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\BasicEnemy.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\Enemy.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\JumpEnemy.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\JumpMan.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\JumpManPlayer.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\JumpMan\SlowEnemy.h">
+      <Filter>games\JumpMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MacroMachines\MacroMachines.h">
+      <Filter>games\MacroMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MacroMachines\MacroMachinesPlayer.h">
+      <Filter>games\MacroMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MacroMachines\Wheel.h">
+      <Filter>games\MacroMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Memory\Memory.h">
+      <Filter>games\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Memory\MemoryPlayer.h">
+      <Filter>games\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Memory\RotatingCard.h">
+      <Filter>games\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Memory\Tile.h">
+      <Filter>games\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MicroRace\Car.h">
+      <Filter>games\MicroRace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MicroRace\Foot.h">
+      <Filter>games\MicroRace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MicroRace\MicroRace.h">
+      <Filter>games\MicroRace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\MicroRace\MicroRacePlayer.h">
+      <Filter>games\MicroRace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Osmos\Osmos.h">
+      <Filter>games\Osmos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Osmos\OsmosPlayer.h">
+      <Filter>games\Osmos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Osmos\Sphere.h">
+      <Filter>games\Osmos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\DefaultLevel.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\Enemy.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\FollowGhost.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\PacMan.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\PacManLevel.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\PacManPlayer.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PacMan\SimpleLevel.h">
+      <Filter>games\PacMan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\butterfly.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\carni.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\chargerbird.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\collisionlayers.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\CollisionProps.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\enemy.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\gameobject.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\level.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\levelobject.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\PewPew.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PewPew\PewPewPlayer.h">
+      <Filter>games\PewPew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PokerSteps\PokerSteps.h">
+      <Filter>games\PokerSteps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PokerSteps\PokerStepsPlayer.h">
+      <Filter>games\PokerSteps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pong\Pong.h">
+      <Filter>games\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pong\PongPlayer.h">
+      <Filter>games\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pool\Pool.h">
+      <Filter>games\Pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pool\PoolPlayer.h">
+      <Filter>games\Pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PushOut\PushOut.h">
+      <Filter>games\PushOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PushOut\PushOutPlayer.h">
+      <Filter>games\PushOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\RushHour\RushHour.h">
+      <Filter>games\RushHour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\RushHour\RushHourPlayer.h">
+      <Filter>games\RushHour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\SkipRope\SkipRope.h">
+      <Filter>games\SkipRope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\SkipRope\SkipRopePlayer.h">
+      <Filter>games\SkipRope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Soccer\Soccer.h">
+      <Filter>games\Soccer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Soccer\SoccerPlayer.h">
+      <Filter>games\Soccer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Tanks\Tanks.h">
+      <Filter>games\Tanks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Tanks\TanksPlayer.h">
+      <Filter>games\Tanks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\TowerTopple\TowerTopple.h">
+      <Filter>games\TowerTopple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\TowerTopple\TowerTopplePlayer.h">
+      <Filter>games\TowerTopple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Tron\Tron.h">
+      <Filter>games\Tron</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Tron\TronPlayer.h">
+      <Filter>games\Tron</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\VacuumSucker\VacuumSucker.h">
+      <Filter>games\VacuumSucker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\VacuumSucker\VacuumSuckerPlayer.h">
+      <Filter>games\VacuumSucker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\ZombieSurvival\Zombie.h">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\ZombieSurvival\ZombieSurvival.h">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.h">
+      <Filter>games\ZombieSurvival</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlayAllTheGames.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\icon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

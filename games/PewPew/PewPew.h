@@ -39,7 +39,3 @@ public:
 
 };
 
-
-extern "C" {
-	__declspec(dllexport) GameBase* getGame();
-}

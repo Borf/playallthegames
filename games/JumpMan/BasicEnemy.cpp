@@ -1,8 +1,10 @@
 #include "BasicEnemy.h"
 
-
-void BasicEnemy::update( float speed )
+namespace jumpman
 {
-	position.x -= 13*speed;
-}
+	void BasicEnemy::update(float speed)
+	{
+		position.x -= 13 * speed;
+	}
 
+}

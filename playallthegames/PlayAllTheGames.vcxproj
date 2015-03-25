@@ -54,6 +54,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ObjectFileName>$(IntDir)\%(RelativeDir)\%(Filename).obj</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -71,6 +73,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ObjectFileName>$(IntDir)\%(RelativeDir)\%(Filename).obj</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,10 +85,123 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\games\Battle\BasicBattleLevel.cpp" />
+    <ClCompile Include="..\games\Battle\Battle.cpp" />
+    <ClCompile Include="..\games\Battle\BattleCharacter.cpp" />
+    <ClCompile Include="..\games\Battle\BattleEnemy.cpp" />
+    <ClCompile Include="..\games\Battle\BattleLevel.cpp" />
+    <ClCompile Include="..\games\Battle\BattlePlayer.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\Block.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\DestructableBlock.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\EmptyBlock.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\PowerUp.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\BombPowerUp.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\FlamePowerUp.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\PushPowerUp.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\powerups\SpeedPowerUp.cpp" />
+    <ClCompile Include="..\games\BomberMan\blocks\WallBlock.cpp" />
+    <ClCompile Include="..\games\BomberMan\Bomb.cpp" />
+    <ClCompile Include="..\games\BomberMan\BomberMan.cpp" />
+    <ClCompile Include="..\games\BomberMan\BombermanPlayer.cpp" />
+    <ClCompile Include="..\games\BomberMan\ExplosionParticle.cpp" />
+    <ClCompile Include="..\games\Bouncy\Bouncy.cpp" />
+    <ClCompile Include="..\games\Bouncy\BouncyObject.cpp" />
+    <ClCompile Include="..\games\Bouncy\BouncyPlayer.cpp" />
+    <ClCompile Include="..\games\BreakOut\BreakOut.cpp" />
+    <ClCompile Include="..\games\BreakOut\BreakOutBall.cpp" />
+    <ClCompile Include="..\games\BreakOut\BreakOutPlayer.cpp" />
+    <ClCompile Include="..\games\BugSwat\BugSwat.cpp" />
+    <ClCompile Include="..\games\BugSwat\BugSwatPlayer.cpp" />
+    <ClCompile Include="..\games\BugSwat\DodgeEnemy.cpp" />
+    <ClCompile Include="..\games\BugSwat\Enemy.cpp" />
+    <ClCompile Include="..\games\BugSwat\Splat.cpp" />
+    <ClCompile Include="..\games\BugSwat\SwirlEnemy.cpp" />
+    <ClCompile Include="..\games\BulletHell\Bullet.cpp" />
+    <ClCompile Include="..\games\BulletHell\BulletGenerator.cpp" />
+    <ClCompile Include="..\games\BulletHell\BulletHell.cpp" />
+    <ClCompile Include="..\games\BulletHell\BulletHellPlayer.cpp" />
+    <ClCompile Include="..\games\BulletHell\RotatingBulletGenerator.cpp" />
+    <ClCompile Include="..\games\Chicken\Chicken.cpp" />
+    <ClCompile Include="..\games\Chicken\ChickenPlayer.cpp" />
+    <ClCompile Include="..\games\CircleShooter\CircleShooter.cpp" />
+    <ClCompile Include="..\games\CircleShooter\CircleShooterPlayer.cpp" />
+    <ClCompile Include="..\games\CurveFever\CurveFever.cpp" />
+    <ClCompile Include="..\games\CurveFever\CurveFeverPlayer.cpp" />
+    <ClCompile Include="..\games\DodgeFoot\DodgeFoot.cpp" />
+    <ClCompile Include="..\games\DodgeFoot\DodgeFootPlayer.cpp" />
+    <ClCompile Include="..\games\FallDown\FallDown.cpp" />
+    <ClCompile Include="..\games\FallDown\FallDownPlayer.cpp" />
+    <ClCompile Include="..\games\FlyFar\FlyFar.cpp" />
+    <ClCompile Include="..\games\FlyFar\FlyFarPlayer.cpp" />
+    <ClCompile Include="..\games\Herding\Herding.cpp" />
+    <ClCompile Include="..\games\Herding\HerdingPlayer.cpp" />
+    <ClCompile Include="..\games\Herding\Sheep.cpp" />
+    <ClCompile Include="..\games\JumpMan\BasicEnemy.cpp" />
+    <ClCompile Include="..\games\JumpMan\Enemy.cpp" />
+    <ClCompile Include="..\games\JumpMan\JumpEnemy.cpp" />
+    <ClCompile Include="..\games\JumpMan\JumpMan.cpp" />
+    <ClCompile Include="..\games\JumpMan\JumpManPlayer.cpp" />
+    <ClCompile Include="..\games\JumpMan\SlowEnemy.cpp" />
+    <ClCompile Include="..\games\MacroMachines\MacroMachines.cpp" />
+    <ClCompile Include="..\games\MacroMachines\MacroMachinesPlayer.cpp" />
+    <ClCompile Include="..\games\MacroMachines\Wheel.cpp" />
+    <ClCompile Include="..\games\Memory\Memory.cpp" />
+    <ClCompile Include="..\games\Memory\MemoryPlayer.cpp" />
+    <ClCompile Include="..\games\Memory\RotatingCard.cpp" />
+    <ClCompile Include="..\games\Memory\Tile.cpp" />
+    <ClCompile Include="..\games\MicroRace\Car.cpp" />
+    <ClCompile Include="..\games\MicroRace\Foot.cpp" />
+    <ClCompile Include="..\games\MicroRace\MicroRace.cpp" />
+    <ClCompile Include="..\games\MicroRace\MicroRacePlayer.cpp" />
+    <ClCompile Include="..\games\Osmos\Osmos.cpp" />
+    <ClCompile Include="..\games\Osmos\OsmosPlayer.cpp" />
+    <ClCompile Include="..\games\Osmos\Sphere.cpp" />
+    <ClCompile Include="..\games\PacMan\DefaultLevel.cpp" />
+    <ClCompile Include="..\games\PacMan\Enemy.cpp" />
+    <ClCompile Include="..\games\PacMan\FollowGhost.cpp" />
+    <ClCompile Include="..\games\PacMan\PacMan.cpp" />
+    <ClCompile Include="..\games\PacMan\PacManLevel.cpp" />
+    <ClCompile Include="..\games\PacMan\PacManPlayer.cpp" />
+    <ClCompile Include="..\games\PacMan\SimpleLevel.cpp" />
+    <ClCompile Include="..\games\PewPew\butterfly.cpp" />
+    <ClCompile Include="..\games\PewPew\carni.cpp" />
+    <ClCompile Include="..\games\PewPew\chargerbird.cpp" />
+    <ClCompile Include="..\games\PewPew\enemy.cpp" />
+    <ClCompile Include="..\games\PewPew\gameobject.cpp" />
+    <ClCompile Include="..\games\PewPew\level.cpp" />
+    <ClCompile Include="..\games\PewPew\levelobject.cpp" />
+    <ClCompile Include="..\games\PewPew\PewPew.cpp" />
+    <ClCompile Include="..\games\PewPew\PewPewPlayer.cpp" />
+    <ClCompile Include="..\games\PokerSteps\PokerSteps.cpp" />
+    <ClCompile Include="..\games\PokerSteps\PokerStepsPlayer.cpp" />
+    <ClCompile Include="..\games\Pong\Pong.cpp" />
+    <ClCompile Include="..\games\Pong\PongPlayer.cpp" />
+    <ClCompile Include="..\games\Pool\Pool.cpp" />
+    <ClCompile Include="..\games\Pool\PoolPlayer.cpp" />
+    <ClCompile Include="..\games\PushOut\PushOut.cpp" />
+    <ClCompile Include="..\games\PushOut\PushOutPlayer.cpp" />
+    <ClCompile Include="..\games\RushHour\RushHour.cpp" />
+    <ClCompile Include="..\games\RushHour\RushHourPlayer.cpp" />
+    <ClCompile Include="..\games\SkipRope\SkipRope.cpp" />
+    <ClCompile Include="..\games\SkipRope\SkipRopePlayer.cpp" />
+    <ClCompile Include="..\games\Soccer\Soccer.cpp" />
+    <ClCompile Include="..\games\Soccer\SoccerPlayer.cpp" />
+    <ClCompile Include="..\games\Tanks\Tanks.cpp" />
+    <ClCompile Include="..\games\Tanks\TanksPlayer.cpp" />
+    <ClCompile Include="..\games\TowerTopple\TowerTopple.cpp" />
+    <ClCompile Include="..\games\TowerTopple\TowerTopplePlayer.cpp" />
+    <ClCompile Include="..\games\Tron\Tron.cpp" />
+    <ClCompile Include="..\games\Tron\TronPlayer.cpp" />
+    <ClCompile Include="..\games\VacuumSucker\VacuumSucker.cpp" />
+    <ClCompile Include="..\games\VacuumSucker\VacuumSuckerPlayer.cpp" />
+    <ClCompile Include="..\games\ZombieSurvival\Zombie.cpp" />
+    <ClCompile Include="..\games\ZombieSurvival\ZombieSurvival.cpp" />
+    <ClCompile Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.cpp" />
     <ClCompile Include="AliveGame.cpp" />
     <ClCompile Include="Db.cpp" />
     <ClCompile Include="DebugGameSelector.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="menus\GameCreateGameSelectMenu.cpp" />
@@ -114,6 +231,120 @@
     <ClCompile Include="UserDb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\games\Battle\BasicBattleLevel.h" />
+    <ClInclude Include="..\games\Battle\Battle.h" />
+    <ClInclude Include="..\games\Battle\BattleCharacter.h" />
+    <ClInclude Include="..\games\Battle\BattleEnemy.h" />
+    <ClInclude Include="..\games\Battle\BattleLevel.h" />
+    <ClInclude Include="..\games\Battle\BattlePlayer.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\Block.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\DestructableBlock.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\EmptyBlock.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\PowerUp.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\BombPowerUp.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\FlamePowerUp.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\PushPowerUp.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\powerups\SpeedPowerUp.h" />
+    <ClInclude Include="..\games\BomberMan\blocks\WallBlock.h" />
+    <ClInclude Include="..\games\BomberMan\Bomb.h" />
+    <ClInclude Include="..\games\BomberMan\BomberMan.h" />
+    <ClInclude Include="..\games\BomberMan\BombermanPlayer.h" />
+    <ClInclude Include="..\games\BomberMan\ExplosionParticle.h" />
+    <ClInclude Include="..\games\Bouncy\Bouncy.h" />
+    <ClInclude Include="..\games\Bouncy\BouncyObject.h" />
+    <ClInclude Include="..\games\Bouncy\BouncyPlayer.h" />
+    <ClInclude Include="..\games\BreakOut\BreakOut.h" />
+    <ClInclude Include="..\games\BreakOut\BreakOutBall.h" />
+    <ClInclude Include="..\games\BreakOut\BreakOutPlayer.h" />
+    <ClInclude Include="..\games\BugSwat\BugSwat.h" />
+    <ClInclude Include="..\games\BugSwat\BugSwatPlayer.h" />
+    <ClInclude Include="..\games\BugSwat\DodgeEnemy.h" />
+    <ClInclude Include="..\games\BugSwat\Enemy.h" />
+    <ClInclude Include="..\games\BugSwat\Splat.h" />
+    <ClInclude Include="..\games\BugSwat\SwirlEnemy.h" />
+    <ClInclude Include="..\games\BulletHell\Bullet.h" />
+    <ClInclude Include="..\games\BulletHell\BulletGenerator.h" />
+    <ClInclude Include="..\games\BulletHell\BulletHell.h" />
+    <ClInclude Include="..\games\BulletHell\BulletHellPlayer.h" />
+    <ClInclude Include="..\games\BulletHell\RotatingBulletGenerator.h" />
+    <ClInclude Include="..\games\Chicken\Chicken.h" />
+    <ClInclude Include="..\games\Chicken\ChickenPlayer.h" />
+    <ClInclude Include="..\games\CircleShooter\CircleShooter.h" />
+    <ClInclude Include="..\games\CircleShooter\CircleShooterPlayer.h" />
+    <ClInclude Include="..\games\CurveFever\CurveFever.h" />
+    <ClInclude Include="..\games\CurveFever\CurveFeverPlayer.h" />
+    <ClInclude Include="..\games\DodgeFoot\DodgeFoot.h" />
+    <ClInclude Include="..\games\DodgeFoot\DodgeFootPlayer.h" />
+    <ClInclude Include="..\games\FallDown\FallDown.h" />
+    <ClInclude Include="..\games\FallDown\FallDownPlayer.h" />
+    <ClInclude Include="..\games\FlyFar\FlyFar.h" />
+    <ClInclude Include="..\games\FlyFar\FlyFarPlayer.h" />
+    <ClInclude Include="..\games\Herding\Herding.h" />
+    <ClInclude Include="..\games\Herding\HerdingPlayer.h" />
+    <ClInclude Include="..\games\Herding\Sheep.h" />
+    <ClInclude Include="..\games\JumpMan\BasicEnemy.h" />
+    <ClInclude Include="..\games\JumpMan\Enemy.h" />
+    <ClInclude Include="..\games\JumpMan\JumpEnemy.h" />
+    <ClInclude Include="..\games\JumpMan\JumpMan.h" />
+    <ClInclude Include="..\games\JumpMan\JumpManPlayer.h" />
+    <ClInclude Include="..\games\JumpMan\SlowEnemy.h" />
+    <ClInclude Include="..\games\MacroMachines\MacroMachines.h" />
+    <ClInclude Include="..\games\MacroMachines\MacroMachinesPlayer.h" />
+    <ClInclude Include="..\games\MacroMachines\Wheel.h" />
+    <ClInclude Include="..\games\Memory\Memory.h" />
+    <ClInclude Include="..\games\Memory\MemoryPlayer.h" />
+    <ClInclude Include="..\games\Memory\RotatingCard.h" />
+    <ClInclude Include="..\games\Memory\Tile.h" />
+    <ClInclude Include="..\games\MicroRace\Car.h" />
+    <ClInclude Include="..\games\MicroRace\Foot.h" />
+    <ClInclude Include="..\games\MicroRace\MicroRace.h" />
+    <ClInclude Include="..\games\MicroRace\MicroRacePlayer.h" />
+    <ClInclude Include="..\games\Osmos\Osmos.h" />
+    <ClInclude Include="..\games\Osmos\OsmosPlayer.h" />
+    <ClInclude Include="..\games\Osmos\Sphere.h" />
+    <ClInclude Include="..\games\PacMan\DefaultLevel.h" />
+    <ClInclude Include="..\games\PacMan\Enemy.h" />
+    <ClInclude Include="..\games\PacMan\FollowGhost.h" />
+    <ClInclude Include="..\games\PacMan\PacMan.h" />
+    <ClInclude Include="..\games\PacMan\PacManLevel.h" />
+    <ClInclude Include="..\games\PacMan\PacManPlayer.h" />
+    <ClInclude Include="..\games\PacMan\SimpleLevel.h" />
+    <ClInclude Include="..\games\PewPew\butterfly.h" />
+    <ClInclude Include="..\games\PewPew\carni.h" />
+    <ClInclude Include="..\games\PewPew\chargerbird.h" />
+    <ClInclude Include="..\games\PewPew\collisionlayers.h" />
+    <ClInclude Include="..\games\PewPew\CollisionProps.h" />
+    <ClInclude Include="..\games\PewPew\enemy.h" />
+    <ClInclude Include="..\games\PewPew\gameobject.h" />
+    <ClInclude Include="..\games\PewPew\level.h" />
+    <ClInclude Include="..\games\PewPew\levelobject.h" />
+    <ClInclude Include="..\games\PewPew\PewPew.h" />
+    <ClInclude Include="..\games\PewPew\PewPewPlayer.h" />
+    <ClInclude Include="..\games\PokerSteps\PokerSteps.h" />
+    <ClInclude Include="..\games\PokerSteps\PokerStepsPlayer.h" />
+    <ClInclude Include="..\games\Pong\Pong.h" />
+    <ClInclude Include="..\games\Pong\PongPlayer.h" />
+    <ClInclude Include="..\games\Pool\Pool.h" />
+    <ClInclude Include="..\games\Pool\PoolPlayer.h" />
+    <ClInclude Include="..\games\PushOut\PushOut.h" />
+    <ClInclude Include="..\games\PushOut\PushOutPlayer.h" />
+    <ClInclude Include="..\games\RushHour\RushHour.h" />
+    <ClInclude Include="..\games\RushHour\RushHourPlayer.h" />
+    <ClInclude Include="..\games\SkipRope\SkipRope.h" />
+    <ClInclude Include="..\games\SkipRope\SkipRopePlayer.h" />
+    <ClInclude Include="..\games\Soccer\Soccer.h" />
+    <ClInclude Include="..\games\Soccer\SoccerPlayer.h" />
+    <ClInclude Include="..\games\Tanks\Tanks.h" />
+    <ClInclude Include="..\games\Tanks\TanksPlayer.h" />
+    <ClInclude Include="..\games\TowerTopple\TowerTopple.h" />
+    <ClInclude Include="..\games\TowerTopple\TowerTopplePlayer.h" />
+    <ClInclude Include="..\games\Tron\Tron.h" />
+    <ClInclude Include="..\games\Tron\TronPlayer.h" />
+    <ClInclude Include="..\games\VacuumSucker\VacuumSucker.h" />
+    <ClInclude Include="..\games\VacuumSucker\VacuumSuckerPlayer.h" />
+    <ClInclude Include="..\games\ZombieSurvival\Zombie.h" />
+    <ClInclude Include="..\games\ZombieSurvival\ZombieSurvival.h" />
+    <ClInclude Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.h" />
     <ClInclude Include="AliveGame.h" />
     <ClInclude Include="AlivePlayer.h" />
     <ClInclude Include="AutomaticGameSelector.h" />
@@ -154,9 +385,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlayAllTheGames.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\transition1.frag" />

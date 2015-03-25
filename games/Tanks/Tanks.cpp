@@ -17,11 +17,6 @@
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
 
-GameBase* getGame()
-{
-	return new Tanks();
-}
-
 Tanks::Tanks()
 {
 	world = NULL;

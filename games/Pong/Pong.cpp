@@ -13,11 +13,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-GameBase* getGame()
-{
-	return new Pong();
-}
-
 std::string Pong::getName()
 {
 	return "Pong";

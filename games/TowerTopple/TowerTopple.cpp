@@ -23,11 +23,6 @@ using blib::util::Log;
 #define BALL 2
 #define BOX 3
 
-GameBase* getGame()
-{
-	return new TowerTopple();
-}
-
 std::string TowerTopple::getName()
 {
 	return "TowerTopple";

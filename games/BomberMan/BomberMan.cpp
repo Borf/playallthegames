@@ -21,13 +21,6 @@
 #include "Bomb.h"
 
 
-GameBase* getGame()
-{
-	return new BomberMan();
-}
-
-
-
 BomberMan::BomberMan()
 {
 	levelHeight = 13;

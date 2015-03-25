@@ -9,11 +9,6 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/Settings.h"
 
-GameBase* getGame()
-{
-	return new DodgeFoot();
-}
-
 std::string DodgeFoot::getName()
 {
 	return "DodgeFoot";

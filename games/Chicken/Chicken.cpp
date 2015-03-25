@@ -10,11 +10,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-GameBase* getGame()
-{
-	return new Chicken();
-}
-
 Chicken::Chicken()
 {
 

@@ -16,11 +16,6 @@
 
 using blib::util::Log;
 
-GameBase* getGame()
-{
-	return new PushOut();
-}
-
 std::string PushOut::getName()
 {
 	return "PushOut";

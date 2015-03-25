@@ -25,8 +25,6 @@ enum class Difficulty
 	Wtf
 };
 
-
-
 class GameBase
 {
 protected:
@@ -44,23 +42,8 @@ public:
 	};
 
 
-	GameBase()
-	{
-		resourcesLoaded = false;
-		backgroundColor = glm::vec4(0.6f, 0.6f, 0.8f, 1.0f);
-	}
-	virtual void setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings, const std::list<blib::util::FileSystemHandler*> &fshandlers)
-	{
-		this->spriteBatch = spriteBatch;
-		this->lineBatch = lineBatch;
-		this->renderer = renderer;
-		this->resourceManager = resourceManager;
-		this->settings = settings;
-
-
-		for (auto handler : fshandlers)
-			blib::util::FileSystem::registerHandler(handler);
-	}
+	GameBase();
+	virtual void setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings);
 
 	virtual std::string getName() = 0;
 	virtual std::string getInstructions() = 0;

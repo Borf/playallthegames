@@ -14,11 +14,6 @@
 #include <math.h>
 
 
-GameBase* getGame()
-{
-	return new Osmos();
-}
-
 std::string Osmos::getName()
 {
 	return "Osmos";

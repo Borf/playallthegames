@@ -23,12 +23,6 @@
 #include "levelobject.h"
 
 
-
-GameBase* getGame()
-{
-	return new PewPew();
-}
-
 PewPew::PewPew()
 {
 	world = NULL;

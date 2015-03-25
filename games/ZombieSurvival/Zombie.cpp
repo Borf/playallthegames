@@ -1,5 +1,5 @@
 #include "Zombie.h"
-
+#include <blib/Animation.h>
 
 Zombie::Zombie()
 {

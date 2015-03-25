@@ -1,11 +1,14 @@
 #include "PacManPlayer.h"
 
-
-PacManPlayer::PacManPlayer( int index ) : AlivePlayer(index)
+namespace pacman
 {
-	direction = glm::vec2(0,0);
-	newDirection = glm::vec2(0,0);
-	score = 0;
-	offset = 0;
-}
+	PacManPlayer::PacManPlayer(int index) : AlivePlayer(index)
+	{
+		direction = glm::vec2(0, 0);
+		newDirection = glm::vec2(0, 0);
+		score = 0;
+		offset = 0;
+	}
 
+
+}

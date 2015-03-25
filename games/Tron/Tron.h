@@ -27,7 +27,3 @@ public:
 	virtual blib::Texture* getTitleImage();
 };
 
-
-extern "C" {
-	__declspec( dllexport ) GameBase* getGame();
-}
