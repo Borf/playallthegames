@@ -184,6 +184,8 @@
     <ClCompile Include="..\games\PushOut\PushOutPlayer.cpp" />
     <ClCompile Include="..\games\RushHour\RushHour.cpp" />
     <ClCompile Include="..\games\RushHour\RushHourPlayer.cpp" />
+    <ClCompile Include="..\games\ShowDown\ShowDown.cpp" />
+    <ClCompile Include="..\games\ShowDown\ShowDownPlayer.cpp" />
     <ClCompile Include="..\games\SkipRope\SkipRope.cpp" />
     <ClCompile Include="..\games\SkipRope\SkipRopePlayer.cpp" />
     <ClCompile Include="..\games\Soccer\Soccer.cpp" />
@@ -332,6 +334,8 @@
     <ClInclude Include="..\games\PushOut\PushOutPlayer.h" />
     <ClInclude Include="..\games\RushHour\RushHour.h" />
     <ClInclude Include="..\games\RushHour\RushHourPlayer.h" />
+    <ClInclude Include="..\games\ShowDown\ShowDown.h" />
+    <ClInclude Include="..\games\ShowDown\ShowDownPlayer.h" />
     <ClInclude Include="..\games\SkipRope\SkipRope.h" />
     <ClInclude Include="..\games\SkipRope\SkipRopePlayer.h" />
     <ClInclude Include="..\games\Soccer\Soccer.h" />

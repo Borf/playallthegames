@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "ZombieSurvival"
+#define DEBUGGAME "ShowDown"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0

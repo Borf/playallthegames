@@ -130,6 +130,9 @@
     <Filter Include="games\ZombieSurvival">
       <UniqueIdentifier>{d8dd42c9-f8d3-4323-adf3-39855bdc314b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\ShowDown">
+      <UniqueIdentifier>{1f2a00f3-c514-4973-b7de-f48a31b4cd8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
