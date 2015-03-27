@@ -20,13 +20,14 @@ std::string ShowDown::getName()
 
 std::string ShowDown::getInstructions()
 {
-	return "Suck up all the papers";
+	return "Shoot other players";
 }
 
 void ShowDown::loadResources()
 {
 	backSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/back.png");
 	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/player.png");
+	playerNormalSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/player.normals.png");
 	font = resourceManager->getResource<blib::Font>("menu");
 
 }
@@ -37,7 +38,7 @@ void ShowDown::start(Difficulty difficulty)
 	for(auto p : players)
 	{
 		p->position = glm::vec2(1920/2, 1080/2) + 400.0f * blib::util::fromAngle(p->index/(float) players.size()*2*(float)M_PI);
-		p->rotation = 0;
+		p->rotation = p->index / (float)players.size() * 2 * (float)M_PI;
 	}
 
 
@@ -48,44 +49,33 @@ void ShowDown::update( float elapsedTime )
 	blib::math::Rectangle screenRect(0,0,1920, 1080);
 	for(auto p : players)
 	{
-		if(p->joystick.a == 1)
-		{
-			glm::vec2 oldPosition = p->position;
-			p->position += 5.0f * blib::util::fromAngle(p->rotation) * 60.0f*elapsedTime;
-			bool collision = false;
-			for(auto pp : players)
-			{
-				if(p == pp)
-					continue;
-				if(glm::length(pp->position - p->position) < 100)
-				{
-					collision = true;
-					pp->rotation += (float)M_PI;
-				}
-			}
-			if (!screenRect.contains(p->position))
-				collision = true;
+		glm::vec2 oldPosition = p->position;
+		p->position += 5.0f * p->joystick.leftStick * 60.0f*elapsedTime;
 
-			if(collision)
+		if (glm::length(p->joystick.leftStick) > 0.1f)
+		{
+			p->rotation = atan2(p->joystick.leftStick.y, p->joystick.leftStick.x);
+		}
+
+		for(auto pp : players)
+		{
+			if(p == pp)
+				continue;
+			glm::vec2 diff = pp->position - p->position;
+			float len = glm::length(diff);
+			if(len < 100)
 			{
-				p->position = oldPosition;
-				p->rotation += (float) M_PI;
+				diff /= len;
+				pp->position -= 0.5f * (len-100) * diff;
+				p->position += 0.5f * (len-100) * diff;
 			}
 		}
-		else
-		{
-			p->rotation += 0.04f*turningFactor * 60 * elapsedTime;
-		}
+		if (!screenRect.contains(p->position))
+			p->position = oldPosition;
+
 
 
 		glm::vec2 suckPos = p->position + 50.0f*blib::util::fromAngle(p->rotation);
-	}
-
-	while ((int)trash.size() < trashCount)
-	{
-		glm::vec2 v(0,0);
-		while (!blib::linq::any(players, [this, &v] (ShowDownPlayer* p) { return glm::length(p->position - (v = glm::vec2(blib::math::randomFloat(100.0f, 1920 - 200.0f), blib::math::randomFloat(100.0f, 1080 - 200.0f)))) > 600.0f; })) {}
-		trash.push_back(v);
 	}
 }
 
