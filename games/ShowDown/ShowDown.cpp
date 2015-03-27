@@ -26,8 +26,7 @@ std::string ShowDown::getInstructions()
 void ShowDown::loadResources()
 {
 	backSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/back.png");
-	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/vacuum.png");
-	trashSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/trash.png");
+	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/ShowDown/player.png");
 	font = resourceManager->getResource<blib::Font>("menu");
 
 }
