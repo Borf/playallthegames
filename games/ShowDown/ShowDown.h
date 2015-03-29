@@ -11,7 +11,9 @@ class ShowDown : public AliveGame<ShowDownPlayer>
 	blib::Texture* backSprite;
 	blib::Texture* trashSprite;
 	blib::Texture* playerSprite;
+	blib::Texture* playerOverlaySprite;
 	blib::Texture* playerNormalSprite;
+	blib::Texture* whitePixel;
 	blib::Font* font;
 
 	int trashCount;

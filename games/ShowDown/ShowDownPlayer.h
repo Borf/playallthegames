@@ -10,6 +10,10 @@ public:
 	glm::vec2 position;
 	float rotation;
 
+
+	float health;
+	float power;
+
 	ShowDownPlayer(int index);
 
 };
