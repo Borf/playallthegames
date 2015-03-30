@@ -16,10 +16,8 @@ class ShowDown : public AliveGame<ShowDownPlayer>
 	blib::Texture* whitePixel;
 	blib::Font* font;
 
-	int trashCount;
-	int turningFactor;
 
-	std::vector<glm::vec2> trash;
+	std::vector<std::pair<glm::vec3, glm::vec4> > gunshots;
 
 public:
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }

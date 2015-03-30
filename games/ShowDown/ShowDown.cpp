@@ -57,14 +57,16 @@ void ShowDown::update( float elapsedTime )
 		if (!p->alive)
 			continue;
 
-		if (p->joystick.a == 0)
+		if (p->joystick.a == 1)
 			p->power += elapsedTime*25;
-		else
-			p->power += elapsedTime*15;
 		if (p->power > 100)
 			p->power = 100;
+
 		glm::vec2 oldPosition = p->position;
-		p->position += 5.0f * p->joystick.leftStick * 60.0f*elapsedTime;
+		if (p->joystick.a == 0)
+			p->position += 5.0f * p->joystick.leftStick * 60.0f*elapsedTime;
+		else
+			p->position += 5.0f * p->joystick.leftStick * 30.0f*elapsedTime;
 
 		if (glm::length(p->joystick.leftStick) > 0.1f)
 		{
@@ -77,29 +79,40 @@ void ShowDown::update( float elapsedTime )
 				continue;
 			glm::vec2 diff = pp->position - p->position;
 			float len = glm::length(diff);
-			if(len < 100)
+			if(len < 50)
 			{
 				diff /= len;
-				pp->position -= 0.5f * (len-100) * diff;
-				p->position += 0.5f * (len-100) * diff;
+				pp->position -= 0.5f * (len-50) * diff;
+				p->position += 0.5f * (len-50) * diff;
 			}
 		}
 		if (!screenRect.contains(p->position))
 			p->position = oldPosition;
 
-		glm::vec2 shootPos = p->position + 50.0f*blib::util::fromAngle(p->rotation);
-		if (p->joystick.a)
+		glm::vec2 shootPos = p->position + 25.0f*blib::util::fromAngle(p->rotation);
+		if (p->joystick.a == 0 && p->prevJoystick.a == 1)
 		{
 			blib::math::Line l(shootPos, shootPos + 2000.0f*blib::util::fromAngle(p->rotation));
+			gunshots.push_back(std::pair<glm::vec3, glm::vec4>(glm::vec3(shootPos, p->rotation), glm::vec4(glm::vec3(p->participant->color), p->power / 100.0f)));
 			for (auto pp : players)
 			{
 				if (pp == p || !pp->alive)
 					continue;
-				if (glm::distance(l.project(pp->position), pp->position) < 100)
+				if (glm::distance(l.project(pp->position), pp->position) < 50)
 					pp->health -= p->power;
 			}
 			p->power = 0;
 		};
+	}
+
+	for (int i = 0; i < (int)gunshots.size(); i++)
+	{
+		gunshots[i].second.a -= (float)elapsedTime;
+		if (gunshots[i].second.a < 0)
+		{
+			gunshots.erase(gunshots.begin() + i);
+			i--;
+		}
 	}
 }
 
@@ -108,27 +121,37 @@ void ShowDown::draw()
 	spriteBatch->begin(settings->scaleMatrix);
 	spriteBatch->draw(backSprite, glm::mat4());
 
-	for(auto t : trash) { spriteBatch->draw(trashSprite, blib::math::easyMatrix(t), trashSprite->center); };
 	for(auto p : players) 
 	{ 
 		if (!p->alive)
 			continue;
-		spriteBatch->draw(playerSprite, glm::rotate(glm::translate(glm::mat4(), glm::vec3(p->position, 0)), glm::degrees(p->rotation), glm::vec3(0, 0, 1)), playerSprite->center, blib::math::Rectangle(0, 0, 1, 1));
-		spriteBatch->draw(playerOverlaySprite, glm::rotate(glm::translate(glm::mat4(), glm::vec3(p->position, 0)), glm::degrees(p->rotation), glm::vec3(0, 0, 1)), playerSprite->center, blib::math::Rectangle(0, 0, 1, 1), p->participant->color);
+
+
+		spriteBatch->draw(playerSprite, blib::math::easyMatrix(p->position, glm::degrees(p->rotation), 0.5f), playerSprite->center, blib::math::Rectangle(0, 0, 1, 1));
+		spriteBatch->draw(playerOverlaySprite, blib::math::easyMatrix(p->position, glm::degrees(p->rotation), 0.5f), playerSprite->center, blib::math::Rectangle(0, 0, 1, 1), p->participant->color);
 
 
 		
 		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 50), 0, glm::vec2(200, 10)), glm::vec4(0, 0, 0, 1));
 		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 50), 0, glm::vec2(p->health * 2, 10)), glm::mix(glm::vec4(1, 0, 0, 1), glm::vec4(0, 1, 0, 1), p->health / 100));
 
-		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 40), 0, glm::vec2(200, 10)), glm::vec4(0, 0, 0, 1));
-		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 40), 0, glm::vec2(p->power * 2, 10)), glm::mix(glm::vec4(1, 0, 0, 1), glm::vec4(0, 1, 0, 1), p->power / 100));
 		if (p->joystick.a == 1)
 		{
-			glm::vec2 shootPos = p->position + 50.0f*blib::util::fromAngle(p->rotation);
+			glm::vec2 shootPos = p->position + 25.0f*blib::util::fromAngle(p->rotation);
 			spriteBatch->draw(whitePixel, blib::math::easyMatrix(shootPos, glm::degrees(p->rotation), glm::vec2(20000, 2)), p->participant->color);
+			
+			glm::vec2 offset = p->power / 2.0f * blib::util::fromAngle(p->rotation + blib::math::pif/2);
+			spriteBatch->draw(whitePixel, blib::math::easyMatrix(shootPos - offset, glm::degrees(p->rotation), glm::vec2(20000, p->power)), glm::vec4(glm::vec3(p->participant->color),0.5f));
 		}
 	}
+
+
+	for (std::pair<glm::vec3, glm::vec4>& gunshot : gunshots)
+	{
+		glm::vec2 offset = gunshot.second.a * 100 / 2.0f * blib::util::fromAngle(gunshot.first.b + blib::math::pif / 2);
+		spriteBatch->draw(whitePixel, blib::math::easyMatrix(glm::vec2(gunshot.first) - offset, glm::degrees(gunshot.first.b), glm::vec2(20000, gunshot.second.a*100.0f)), gunshot.second);
+	}
+
 
 	spriteBatch->end();
 }
