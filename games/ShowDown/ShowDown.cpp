@@ -43,7 +43,7 @@ void ShowDown::start(Difficulty difficulty)
 		p->position = glm::vec2(1920/2, 1080/2) + 400.0f * blib::util::fromAngle(p->index/(float) players.size()*2*(float)M_PI);
 		p->rotation = p->index / (float)players.size() * 2 * (float)M_PI;
 	}
-
+	gunshots.clear();
 
 }
 
