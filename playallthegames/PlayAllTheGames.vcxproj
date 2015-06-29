@@ -147,6 +147,8 @@
     <ClCompile Include="..\games\MacroMachines\MacroMachines.cpp" />
     <ClCompile Include="..\games\MacroMachines\MacroMachinesPlayer.cpp" />
     <ClCompile Include="..\games\MacroMachines\Wheel.cpp" />
+    <ClCompile Include="..\games\MazeEscape\MazeEscape.cpp" />
+    <ClCompile Include="..\games\MazeEscape\MazeEscapePlayer.cpp" />
     <ClCompile Include="..\games\Memory\Memory.cpp" />
     <ClCompile Include="..\games\Memory\MemoryPlayer.cpp" />
     <ClCompile Include="..\games\Memory\RotatingCard.cpp" />
@@ -295,6 +297,8 @@
     <ClInclude Include="..\games\MacroMachines\MacroMachines.h" />
     <ClInclude Include="..\games\MacroMachines\MacroMachinesPlayer.h" />
     <ClInclude Include="..\games\MacroMachines\Wheel.h" />
+    <ClInclude Include="..\games\MazeEscape\MazeEscape.h" />
+    <ClInclude Include="..\games\MazeEscape\MazeEscapePlayer.h" />
     <ClInclude Include="..\games\Memory\Memory.h" />
     <ClInclude Include="..\games\Memory\MemoryPlayer.h" />
     <ClInclude Include="..\games\Memory\RotatingCard.h" />
