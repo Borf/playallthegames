@@ -32,7 +32,6 @@ namespace mazeescape
 	{
 		backSprite = resourceManager->getResource<blib::Texture>("assets/games/MazeEscape/back.png");
 		playerSprite = resourceManager->getResource<blib::Texture>("assets/games/MazeEscape/player.png");
-		font = resourceManager->getResource<blib::Font>("menu");
 
 	}
 
@@ -87,7 +86,6 @@ namespace mazeescape
 							maze[i][ii]->neighbours.push_back(std::pair<bool, Cell*>(false, maze[i + 1][iii]));
 
 
-
 		///build maze
 		std::list<Cell*> nodes;
 		maze[15][0]->visited = true;
@@ -115,29 +113,8 @@ namespace mazeescape
 			}
 		}
 
-	}
-
-	void MazeEscape::update(float elapsedTime)
-	{
-		blib::math::Rectangle screenRect(0, 0, 1920, 1080);
-		for (auto p : players)
-		{
-		}
-
-	}
-
-	void MazeEscape::draw()
-	{
-		spriteBatch->begin(settings->scaleMatrix);
-		spriteBatch->draw(backSprite, glm::mat4());
-
-
-
-		spriteBatch->end();
-
-
-		lineBatch->begin(glm::mat4(), 8.0f);
-
+		//build collision
+		lines.clear();
 		double m = blib::math::pi / 32;
 		for (int i = 32; i < 544 - 32; i += 32)
 		{
@@ -157,8 +134,8 @@ namespace mazeescape
 
 
 				if (!maze[row][index]->neighbours[2].first)
-					lineBatch->draw(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
-					glm::vec2(1920 / 2 + i * cos((d + 1)*m), 1080 / 2 + i * sin((d + 1)*m)), blib::Color::black);
+					lines.push_back(blib::math::Line(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
+					glm::vec2(1920 / 2 + i * cos((d + 1)*m), 1080 / 2 + i * sin((d + 1)*m))));
 
 				if (i < 64 && (d / 4) % 2 == 1)
 					continue;
@@ -170,50 +147,69 @@ namespace mazeescape
 					continue;
 
 				if (!maze[row][index]->neighbours[1].first)
-					lineBatch->draw(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
-					glm::vec2(1920 / 2 + (i + 32)*cos(d*m), 1080 / 2 + (i + 32) * sin(d*m)), blib::Color::black);
+					lines.push_back(blib::math::Line(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
+					glm::vec2(1920 / 2 + (i + 32)*cos(d*m), 1080 / 2 + (i + 32) * sin(d*m))));
 			}
 		}
+	}
+
+	void MazeEscape::update(float elapsedTime)
+	{
+		blib::math::Rectangle screenRect(0, 0, 1920, 1080);
+		for (auto p : players)
+		{
+			glm::vec2 newPos = p->position + p->joystick.leftStick * 100.0f * elapsedTime;
+			blib::math::Line l(p->position, newPos);
+			if (l.length() > 0)
+			{
+				bool collides = true;
+				for (int i = 0; i < 10; i++)
+				{
+					collides = false;
+					glm::vec2 collisionPoint;
+					for (blib::math::Line& l2 : lines)
+					{
+						if (l2.intersects(l, collisionPoint))
+						{
+							collides = true;
+							glm::vec2 normal = l2.normal();
+							if (l2.intersects(blib::math::Line(p->position, l.mix(0.5f) + normal)))
+								normal *= -1.0f;
+							l.p2 = collisionPoint + glm::distance(collisionPoint, l.p2) * normal;
+							break;
+						}
+					}
+					if (!collides)
+						break;
+				}
+
+				if (!collides)
+					p->position = l.p2;
+			}
+		}
+
+	}
+
+	void MazeEscape::draw()
+	{
+		spriteBatch->begin(settings->scaleMatrix);
+		spriteBatch->draw(backSprite, glm::mat4());
+		spriteBatch->end();
+
+		lineBatch->begin(glm::mat4(), 8.0f);
+		for (blib::math::Line& l : lines)
+			lineBatch->draw(l, blib::Color::black);
 		lineBatch->end();
 
 		lineBatch->begin(glm::mat4(), 6.0f);
-		for (int i = 32; i < 544-32; i += 32)
-		{
-			for (int d = 0; d < 64; d++)
-			{
-				int row = i / 32;
-				int index = d;
-
-				if (row == 0)
-					index /= 64;
-				else if (row < 2)
-					index /= 8;
-				else if (row < 4)
-					index /= 4;
-				else if (row < 10)
-					index /= 2;
-
-
-				if (!maze[row][index]->neighbours[2].first)
-					lineBatch->draw(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
-									glm::vec2(1920 / 2 + i * cos((d + 1)*m), 1080 / 2 + i * sin((d + 1)*m)), blib::Color::white);
-
-				if (i < 64 && (d / 4) % 2 == 1)
-					continue;
-				if (i < 100 && (d / 2) % 2 == 1)
-					continue;
-				if (i < 300 && d % 2 == 1)
-					continue;
-				if (i >= 544 - 32)
-					continue;
-
-				if (!maze[row][index]->neighbours[1].first)
-					lineBatch->draw(glm::vec2(1920 / 2 + i * cos(d*m), 1080 / 2 + i * sin(d*m)),
-									glm::vec2(1920 / 2 + (i + 32)*cos(d*m), 1080 / 2 + (i + 32) * sin(d*m)), blib::Color::white);
-			}
-		}
+		for (blib::math::Line& l : lines)
+			lineBatch->draw(l, blib::Color::white);
 		lineBatch->end();
 
+		spriteBatch->begin(settings->scaleMatrix);
+		for (auto p : players)
+			spriteBatch->draw(playerSprite, blib::math::easyMatrix(p->position, 0,  0.35f), playerSprite->center, p->participant->color);
+		spriteBatch->end();
 	}
 
 	blib::Texture* MazeEscape::getTitleImage()
@@ -223,12 +219,12 @@ namespace mazeescape
 
 	bool MazeEscape::hasWinner()
 	{
-		return false;
+		return blib::linq::any(players, [](MazeEscapePlayer* p) { return glm::distance(p->position, glm::vec2(1920 / 2, 1080 / 2)) > 485; });
 	}
 
 	std::list<Player*> MazeEscape::getWinners()
 	{
-		return std::list<Player*>();
+		return blib::linq::where<std::list<Player*>>(players, [](MazeEscapePlayer* p) { return glm::distance(p->position, glm::vec2(1920 / 2, 1080 / 2)) > 485; });
 	}
 
 }

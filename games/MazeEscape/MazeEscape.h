@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../PlayAllTheGames/ScoreGame.h"
-
+#include <blib/math/Line.h>
 #include "MazeEscapePlayer.h"
 
 namespace blib { class Texture; class Font;  }
@@ -18,14 +18,8 @@ namespace mazeescape
 	class MazeEscape : public Game<MazeEscapePlayer>
 	{
 		blib::Texture* backSprite;
-		blib::Texture* trashSprite;
 		blib::Texture* playerSprite;
-		blib::Font* font;
 
-		int trashCount;
-		int turningFactor;
-
-		std::vector<glm::vec2> trash;
 
 	public:
 		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
@@ -42,6 +36,7 @@ namespace mazeescape
 
 
 		std::vector<std::vector<Cell*> > maze;
+		std::vector<blib::math::Line> lines;
 
 	};
 
