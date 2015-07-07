@@ -16,6 +16,7 @@
 #include "../games/JumpMan/JumpMan.h"
 #include "../games/MacroMachines/MacroMachines.h"
 #include "../games/MicroRace/MicroRace.h"
+#include "../games/MazeEscape/MazeEscape.h"
 #include "../games/Osmos/Osmos.h"
 #include "../games/PacMan/PacMan.h"
 #include "../games/PewPew/PewPew.h"
@@ -51,6 +52,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new jumpman::JumpMan());
 	games.push_back(new MicroRace());
 	games.push_back(new MacroMachines());
+	games.push_back(new mazeescape::MazeEscape());
 	games.push_back(new Osmos());
 	games.push_back(new pacman::PacMan());
 	games.push_back(new PewPew());

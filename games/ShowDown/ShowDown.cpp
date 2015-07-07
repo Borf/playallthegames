@@ -70,7 +70,21 @@ void ShowDown::update( float elapsedTime )
 
 		if (glm::length(p->joystick.leftStick) > 0.1f)
 		{
-			p->rotation = atan2(p->joystick.leftStick.y, p->joystick.leftStick.x);
+			float rotSpeed = 8;
+			if (p->joystick.a != 0)
+				rotSpeed = 5;
+			float newRot = atan2(p->joystick.leftStick.y, p->joystick.leftStick.x);
+			float diff = p->rotation - newRot;
+			if (diff < -blib::math::pif)
+				diff += 2 * blib::math::pif;
+			if (diff > blib::math::pif)
+				diff -= 2 * blib::math::pif;
+			if (fabs(diff) < rotSpeed * elapsedTime)
+				p->rotation = newRot;
+			else if (diff < 0)
+				p->rotation += rotSpeed * elapsedTime;
+			else
+				p->rotation -= rotSpeed * elapsedTime;
 		}
 
 		for(auto pp : players)
@@ -132,6 +146,7 @@ void ShowDown::draw()
 
 
 		
+		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(101, 51), 0, glm::vec2(202, 12)), glm::vec4(1, 1, 1, 1));
 		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 50), 0, glm::vec2(200, 10)), glm::vec4(0, 0, 0, 1));
 		spriteBatch->draw(whitePixel, blib::math::easyMatrix(p->position - glm::vec2(100, 50), 0, glm::vec2(p->health * 2, 10)), glm::mix(glm::vec4(1, 0, 0, 1), glm::vec4(0, 1, 0, 1), p->health / 100));
 
