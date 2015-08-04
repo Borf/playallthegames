@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "MazeEscape"
+#define DEBUGGAME "TowerTopple"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0

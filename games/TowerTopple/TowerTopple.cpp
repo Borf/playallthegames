@@ -437,9 +437,11 @@ void TowerTopple::draw()
 		{
 			btScalar m[16];
 			ball->getWorldTransform().getOpenGLMatrix(m);
-			renderState.activeShader->setUniform(Uniforms::ModelMatrix, glm::scale(glm::make_mat4(m), glm::vec3(1,1,1)));
+			renderState.activeShader->setUniform(Uniforms::ModelMatrix, glm::scale(glm::make_mat4(m), glm::vec3(50,50,50)));
 
-			ballModel->draw(renderState, renderer, -1);
+			ballModel->draw(renderState, renderer, [](const blib::Material &material)
+			{
+			});
 		}
 	}
 

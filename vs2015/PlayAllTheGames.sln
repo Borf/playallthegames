@@ -1,14 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayAllTheGames", "..\playallthegames\PlayAllTheGames.vcxproj", "{36B06A08-848A-4F5D-ADB0-8BAD89CBF39E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{22D5CA69-1AFF-4025-AC86-A4F056D79B53} = {22D5CA69-1AFF-4025-AC86-A4F056D79B53}
+		{219681E7-2D82-4F6D-9C93-442A2E8C5321} = {219681E7-2D82-4F6D-9C93-442A2E8C5321}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blib", "..\blib\blib.vcxproj", "{22D5CA69-1AFF-4025-AC86-A4F056D79B53}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelConvert", "..\modelconvert\vs2015\ModelConvert.vcxproj", "{219681E7-2D82-4F6D-9C93-442A2E8C5321}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22D5CA69-1AFF-4025-AC86-A4F056D79B53} = {22D5CA69-1AFF-4025-AC86-A4F056D79B53}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +30,10 @@ Global
 		{22D5CA69-1AFF-4025-AC86-A4F056D79B53}.Debug|Win32.Build.0 = Debug|Win32
 		{22D5CA69-1AFF-4025-AC86-A4F056D79B53}.Release|Win32.ActiveCfg = Release|Win32
 		{22D5CA69-1AFF-4025-AC86-A4F056D79B53}.Release|Win32.Build.0 = Release|Win32
+		{219681E7-2D82-4F6D-9C93-442A2E8C5321}.Debug|Win32.ActiveCfg = Debug|Win32
+		{219681E7-2D82-4F6D-9C93-442A2E8C5321}.Debug|Win32.Build.0 = Debug|Win32
+		{219681E7-2D82-4F6D-9C93-442A2E8C5321}.Release|Win32.ActiveCfg = Release|Win32
+		{219681E7-2D82-4F6D-9C93-442A2E8C5321}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

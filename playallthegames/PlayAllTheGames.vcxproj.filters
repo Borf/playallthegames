@@ -1106,4 +1106,9 @@
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\assets\games\TowerTopple\ball.3ds">
+      <Filter>games\TowerTopple</Filter>
+    </CustomBuild>
+  </ItemGroup>
 </Project>
