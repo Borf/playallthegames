@@ -570,17 +570,17 @@
     <ClCompile Include="GameLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\games\ShowDown\ShowDown.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\games\ShowDown\ShowDownPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\games\MazeEscape\MazeEscapePlayer.cpp">
       <Filter>games\MazeEscape</Filter>
     </ClCompile>
     <ClCompile Include="..\games\MazeEscape\MazeEscape.cpp">
       <Filter>games\MazeEscape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\ShowDown\ShowDown.cpp">
+      <Filter>games\ShowDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\ShowDown\ShowDownPlayer.cpp">
+      <Filter>games\ShowDown</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1037,17 +1037,17 @@
     <ClInclude Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.h">
       <Filter>games\ZombieSurvival</Filter>
     </ClInclude>
-    <ClInclude Include="..\games\ShowDown\ShowDown.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\games\ShowDown\ShowDownPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\games\MazeEscape\MazeEscapePlayer.h">
       <Filter>games\MazeEscape</Filter>
     </ClInclude>
     <ClInclude Include="..\games\MazeEscape\MazeEscape.h">
       <Filter>games\MazeEscape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\ShowDown\ShowDown.h">
+      <Filter>games\ShowDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\ShowDown\ShowDownPlayer.h">
+      <Filter>games\ShowDown</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
