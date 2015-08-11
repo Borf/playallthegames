@@ -1,5 +1,6 @@
 #include "PlayAllTheGames.h"
 
+#include "../games/BackAttack/BackAttack.h"
 #include "../games/Battle/Battle.h"
 #include "../games/BomberMan/BomberMan.h"
 #include "../games/Bouncy/Bouncy.h"
@@ -36,6 +37,7 @@
 
 void PlayAllTheGames::loadGames()
 {
+	games.push_back(new backattack::BackAttack());
 	games.push_back(new Battle());
 	games.push_back(new BomberMan());
 	games.push_back(new Bouncy());

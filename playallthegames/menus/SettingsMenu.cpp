@@ -13,6 +13,7 @@ SettingsMenu::SettingsMenu(Settings* settings)
 
 	std::vector<std::string> resolutions;
 	resolutions.push_back("1280x720");
+	resolutions.push_back("1680x955");
 	resolutions.push_back("1920x1079");
 	resolutions.push_back("1920x1080");
 	resolutions.push_back("2560x1440");

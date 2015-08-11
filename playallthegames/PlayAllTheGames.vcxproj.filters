@@ -85,9 +85,6 @@
     <Filter Include="games\MicroRace">
       <UniqueIdentifier>{074e4b69-effa-482d-bc70-13b0c401903d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="games\Osmos">
-      <UniqueIdentifier>{f3242e83-b730-4cd5-8a23-4773e9a56197}</UniqueIdentifier>
-    </Filter>
     <Filter Include="games\PacMan">
       <UniqueIdentifier>{2a7206a7-1a61-4519-8919-f42a249f191f}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,15 @@
     </Filter>
     <Filter Include="games\MazeEscape">
       <UniqueIdentifier>{ef5e7199-def7-4416-ae3b-5166eb49bbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\Osmos">
+      <UniqueIdentifier>{f3242e83-b730-4cd5-8a23-4773e9a56197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BackAttack">
+      <UniqueIdentifier>{af3cd2bb-dc4e-4b93-8770-fa0fe8fb3bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="games\BackAttack\assets">
+      <UniqueIdentifier>{2cf4e9c4-3432-44a2-ab3a-cdb01043f406}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -581,6 +587,15 @@
     </ClCompile>
     <ClCompile Include="..\games\ShowDown\ShowDownPlayer.cpp">
       <Filter>games\ShowDown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BackAttack\BackAttack.cpp">
+      <Filter>games\BackAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BackAttack\Level.cpp">
+      <Filter>games\BackAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\BackAttack\Player.cpp">
+      <Filter>games\BackAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1049,6 +1064,15 @@
     <ClInclude Include="..\games\ShowDown\ShowDownPlayer.h">
       <Filter>games\ShowDown</Filter>
     </ClInclude>
+    <ClInclude Include="..\games\BackAttack\BackAttack.h">
+      <Filter>games\BackAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BackAttack\Level.h">
+      <Filter>games\BackAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\BackAttack\Player.h">
+      <Filter>games\BackAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PlayAllTheGames.rc">
@@ -1104,6 +1128,33 @@
     </None>
     <None Include="assets\shaders\transition4.frag">
       <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="..\assets\shaders\gl\BackAttack.vert">
+      <Filter>games\BackAttack</Filter>
+    </None>
+    <None Include="..\assets\shaders\gl\BackAttack.frag">
+      <Filter>games\BackAttack</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_straight.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_turn.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_split3.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_cross.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_cross2.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_split.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_split2.fbx">
+      <Filter>games\BackAttack\assets</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -87,6 +87,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\games\BackAttack\BackAttack.cpp" />
+    <ClCompile Include="..\games\BackAttack\Level.cpp" />
+    <ClCompile Include="..\games\BackAttack\Player.cpp" />
     <ClCompile Include="..\games\Battle\BasicBattleLevel.cpp" />
     <ClCompile Include="..\games\Battle\Battle.cpp" />
     <ClCompile Include="..\games\Battle\BattleCharacter.cpp" />
@@ -237,6 +240,9 @@
     <ClCompile Include="UserDb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\games\BackAttack\BackAttack.h" />
+    <ClInclude Include="..\games\BackAttack\Level.h" />
+    <ClInclude Include="..\games\BackAttack\Player.h" />
     <ClInclude Include="..\games\Battle\BasicBattleLevel.h" />
     <ClInclude Include="..\games\Battle\Battle.h" />
     <ClInclude Include="..\games\Battle\BattleCharacter.h" />
@@ -404,6 +410,57 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
     </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_straight.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_turn.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_cross.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_cross2.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_split.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_split2.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\rail_split3.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
+    <None Include="..\assets\shaders\gl\BackAttack.frag" />
+    <None Include="..\assets\shaders\gl\BackAttack.vert" />
     <None Include="assets\shaders\transition1.frag" />
     <None Include="assets\shaders\transition1.vert" />
     <None Include="assets\shaders\transition2.frag" />
