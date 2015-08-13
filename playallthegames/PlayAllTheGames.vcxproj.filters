@@ -1156,6 +1156,42 @@
     <None Include="..\assets\games\BackAttack\rail_split2.fbx">
       <Filter>games\BackAttack\assets</Filter>
     </None>
+    <None Include="..\assets\games\BackAttack\rail_split4.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\rail_cross3.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_1.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_2.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_3.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_4.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_5.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_6.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_7.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\house_8.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\mine_cart.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
+    <None Include="..\assets\games\BackAttack\cube.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\assets\games\TowerTopple\ball.3ds">

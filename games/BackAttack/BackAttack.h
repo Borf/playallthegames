@@ -10,6 +10,8 @@ namespace blib
 
 namespace backattack
 {
+	class Level;
+
 	class BackAttack : public AliveGame<Player>
 	{
 	public:
@@ -23,10 +25,13 @@ namespace backattack
 		};
 
 		blib::RenderState renderState;
-		blib::StaticModel* trackStraight;
-		blib::StaticModel* trackTurn;
+		blib::StaticModel* cart;
+		blib::StaticModel* cube;
 
 
+		Level* level;
+
+		BackAttack();
 		virtual std::string getName() override;
 		virtual std::string getInstructions() override;
 		virtual std::pair<int, int> getPlayerCount() override;
