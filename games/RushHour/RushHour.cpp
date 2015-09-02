@@ -173,11 +173,11 @@ void RushHour::update( float elapsedTime )
 void RushHour::draw()
 {
 
-	spriteBatch->begin();
+	spriteBatch->begin(settings->scaleMatrix);
 
 	spriteBatch->draw(backgroundTexture, glm::mat4());
 
-	lineBatch->begin();
+	lineBatch->begin(settings->scaleMatrix);
 
 	for (int i = 0; i < 16; i++)
 	{
@@ -214,7 +214,7 @@ void RushHour::draw()
 	lineBatch->end();
 
 
-	spriteBatch->begin();
+	spriteBatch->begin(settings->scaleMatrix);
 	for (auto p : players)
 		if (!p->alive)
 			spriteBatch->draw(whitePixel, blib::math::easyMatrix(whitePixel, p->screenRect), glm::vec4(0, 0, 0, 0.5f));

@@ -42,7 +42,7 @@ void ZombieSurvival::loadResources()
 	finishSprite = resourceManager->getResource<blib::Texture>("assets/games/ZombieSurvival/finish.png");
 
 	visionFbo = resourceManager->getResource<blib::FBO>();
-	visionFbo->setSize(settings->resX, settings->resY);
+	visionFbo->setSize(1920, 1080);
 	visionFbo->stencil = true;
 	visionFbo->depth = false;
 	visionFbo->textureCount = 1;
@@ -61,7 +61,7 @@ void ZombieSurvival::loadResources()
 	combineShader->setUniform(s_texture, 0);
 	combineShader->setUniform(s_visionTexture, 1);
 	combineShader->setUniform(ProjectionMatrix, glm::ortho(0.0f, (float)settings->resX, (float)settings->resY, 0.0f, -1000.0f, 1.0f));
-	combineShader->setUniform(Matrix, glm::mat4());
+	combineShader->setUniform(Matrix, settings->scaleMatrix);
 
 
 }
@@ -535,6 +535,7 @@ void ZombieSurvival::update(float elapsedTime)
 
 void ZombieSurvival::draw()
 {
+	combineShader->setUniform(Matrix, settings->scaleMatrix);
 	blib::RenderState state = lineBatch->renderState;
 	state.activeVbo = NULL;
 	state.activeFbo = visionFbo;
@@ -600,18 +601,18 @@ void ZombieSurvival::draw()
 	spriteBatch->renderState.activeShader = combineShader;
 	spriteBatch->renderState.activeTexture[1] = visionFbo;
 
-	spriteBatch->begin();
-	lineBatch->begin();
+	spriteBatch->begin(settings->scaleMatrix);
+	lineBatch->begin(settings->scaleMatrix);
 	spriteBatch->draw(backSprite, glm::mat4());
 
 	spriteBatch->end();
 	combineShader->setUniform(zombieFactor, 1.0f);
-	spriteBatch->begin();
+	spriteBatch->begin(settings->scaleMatrix);
 	for (auto z : zombies)
 		z->zombieSprite->draw(*spriteBatch, blib::math::easyMatrix(z->position, z->direction-90, 0.5f));
 	spriteBatch->end();
 	combineShader->setUniform(zombieFactor, 0.0f);
-	spriteBatch->begin();
+	spriteBatch->begin(settings->scaleMatrix);
 
 	//spriteBatch->draw(visionFbo, blib::math::easyMatrix(glm::vec2(0,1080), 0, glm::vec2(1,-1)));
 

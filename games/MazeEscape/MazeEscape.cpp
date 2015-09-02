@@ -158,7 +158,7 @@ namespace mazeescape
 		blib::math::Rectangle screenRect(0, 0, 1920, 1080);
 		for (auto p : players)
 		{
-			glm::vec2 newPos = p->position + p->joystick.leftStick * 100.0f * elapsedTime;
+			glm::vec2 newPos = p->position + p->joystick.leftStick * 100.0f * elapsedTime * settings->scale;
 			blib::math::Line l(p->position, newPos);
 			if (l.length() > 0)
 			{
@@ -196,12 +196,12 @@ namespace mazeescape
 		spriteBatch->draw(backSprite, glm::mat4());
 		spriteBatch->end();
 
-		lineBatch->begin(glm::mat4(), 8.0f);
+		lineBatch->begin(settings->scaleMatrix, 8.0f);
 		for (blib::math::Line& l : lines)
 			lineBatch->draw(l, blib::Color::black);
 		lineBatch->end();
 
-		lineBatch->begin(glm::mat4(), 6.0f);
+		lineBatch->begin(settings->scaleMatrix, 6.0f);
 		for (blib::math::Line& l : lines)
 			lineBatch->draw(l, blib::Color::white);
 		lineBatch->end();
