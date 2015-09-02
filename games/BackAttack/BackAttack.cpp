@@ -86,7 +86,7 @@ namespace backattack
 			if (glm::length(p->joystick.leftStick) > 0.85f)
 			{
 				glm::vec2 dir = glm::normalize(p->joystick.leftStick);
-				p->wishDirection = glm::round(glm::degrees(atan2(dir.y, -dir.x) / 90.0f))*90;
+				p->wishDirection = glm::round(glm::degrees(atan2(-dir.y, dir.x) / 90.0f))*90;
 			}
 
 
@@ -168,12 +168,17 @@ namespace backattack
 				continue;
 
 			glm::mat4 mat;
-			mat = glm::translate(mat, glm::vec3(p->position.x, 0, p->position.y));
+			mat = glm::translate(mat, glm::vec3(p->position.x, -1.5, p->position.y));
+			mat = glm::rotate(mat, 180.0f-p->angle, glm::vec3(0, 1, 0));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
 
 			renderState.activeShader->setUniform(Uniforms::color, p->participant->color);
-			cart->draw(renderState, renderer, [this](const blib::Material& material)
+			cart->draw(renderState, renderer, [p,this](const blib::Material& material)
 			{
+				if(material.texture->fileName.find("bullseye") == std::string::npos)
+					renderState.activeShader->setUniform(Uniforms::color, 0.25f * p->participant->color);
+				else
+					renderState.activeShader->setUniform(Uniforms::color, glm::vec4(0,0,0,0));
 				renderState.activeTexture[0] = material.texture;
 			});
 
