@@ -20,7 +20,7 @@ std::string Soccer::getName()
 
 std::string Soccer::getInstructions()
 {
-	return "Don't let others score";
+	return "Shoot other people's bottle";
 }
 
 std::pair<int, int> Soccer::getPlayerCount()
@@ -183,8 +183,8 @@ void Soccer::update(float elapsedTime)
 
 	for (auto p : players)
 	{
-		p->players[0]->ApplyForceToCenter(20 * p->joystick.leftStick);
-		p->players[1]->ApplyForceToCenter(20 * p->joystick.rightStick);
+		p->players[0]->ApplyForceToCenter(4000.0f * p->joystick.leftStick * (float)elapsedTime);
+		p->players[1]->ApplyForceToCenter(4000.0f * p->joystick.rightStick * (float)elapsedTime);
 
 		if (glm::length(p->joystick.leftStick) > 0.25f)
 			p->players[0]->SetTransform(p->players[0]->GetPosition(), atan2(p->joystick.leftStick.y, p->joystick.leftStick.x));

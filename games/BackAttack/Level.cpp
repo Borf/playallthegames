@@ -33,7 +33,7 @@ namespace backattack
 		tiles[0][tiles[0].size() - 1] = new Tile(models.turn, 90);
 		tiles[tiles.size() - 1][tiles[0].size() - 1] = new Tile(models.turn, 180);
 
-		for (int i = 0; i < 250; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			int side = i % 4;// rand() % 4;
 			int pos = 2+(rand() % (width/2-2))*2;

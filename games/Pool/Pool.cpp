@@ -21,7 +21,7 @@
 
 Pool::Pool()
 {
-	this->totalScore = 10;
+	this->totalScore = 15;
 	world = NULL;
 }
 

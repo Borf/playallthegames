@@ -10,6 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "../../PlayAllTheGames/Settings.h"
+#include "../../PlayAllTheGames/Participant.h"
 
 namespace backattack
 {
@@ -31,7 +32,7 @@ namespace backattack
 
 	std::pair<int, int> BackAttack::getPlayerCount()
 	{
-		return std::pair<int, int>(2, 20);
+		return std::pair<int, int>(20, 20);
 	}
 
 	void BackAttack::loadResources()
@@ -65,9 +66,9 @@ namespace backattack
 		level = new Level();
 
 		players[0]->position = glm::vec2(0, 0);
-		players[1]->position = glm::vec2(0, 9*8);
-		players[2]->position = glm::vec2(9 * 8, 9 * 8);
-		players[3]->position = glm::vec2(9 * 8, 0);
+		players[1]->position = glm::vec2(0, (level->height-1)*8);
+		players[2]->position = glm::vec2((level->width-1) * 8, (level->height-1) * 8);
+		players[3]->position = glm::vec2((level->width-1) * 8, 0);
 
 		for (auto p : players)
 			p->angle = -90.0f * p->index;
@@ -85,7 +86,7 @@ namespace backattack
 			if (glm::length(p->joystick.leftStick) > 0.85f)
 			{
 				glm::vec2 dir = glm::normalize(p->joystick.leftStick);
-				p->wishDirection = glm::round(glm::degrees(atan2(dir.y, -dir.x) / 90.0f))*90;
+				p->wishDirection = glm::round(glm::degrees(atan2(-dir.y, dir.x) / 90.0f))*90;
 			}
 
 
@@ -149,7 +150,7 @@ namespace backattack
 	void BackAttack::draw()
 	{
 		glm::mat4 projectionMatrix = glm::perspective(70.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
-		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -85, level->height * 4-20), glm::vec3(level->width * 4 - 4, -16.5, level->height * 4-10.5), glm::vec3(0, -1, 0));
+		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -60, level->height * 4-20), glm::vec3(level->width * 4 - 4, -16.5, level->height * 4-10.5), glm::vec3(0, -1, 0));
 		renderState.activeShader->setUniform(Uniforms::color, glm::vec4(1, 1, 1, 1));
 
 
@@ -167,11 +168,17 @@ namespace backattack
 				continue;
 
 			glm::mat4 mat;
-			mat = glm::translate(mat, glm::vec3(p->position.x, 0, p->position.y));
+			mat = glm::translate(mat, glm::vec3(p->position.x, -1.5, p->position.y));
+			mat = glm::rotate(mat, 180.0f-p->angle, glm::vec3(0, 1, 0));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
 
-			cart->draw(renderState, renderer, [this](const blib::Material& material)
+			renderState.activeShader->setUniform(Uniforms::color, p->participant->color);
+			cart->draw(renderState, renderer, [p,this](const blib::Material& material)
 			{
+				if(material.texture->fileName.find("bullseye") == std::string::npos)
+					renderState.activeShader->setUniform(Uniforms::color, 0.25f * p->participant->color);
+				else
+					renderState.activeShader->setUniform(Uniforms::color, glm::vec4(0,0,0,0));
 				renderState.activeTexture[0] = material.texture;
 			});
 
@@ -185,7 +192,7 @@ namespace backattack
 
 
 
-			mat = glm::mat4();
+/*			mat = glm::mat4();
 			mat = glm::translate(mat, glm::vec3(tile.x*8, -1, tile.y*8));
 			mat = glm::scale(mat, glm::vec3(8,1,8));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
@@ -203,7 +210,7 @@ namespace backattack
 			{
 				renderState.activeTexture[0] = material.texture;
 			});
-
+*/
 
 			renderState.activeShader->setUniform(Uniforms::color, glm::vec4(0, 0, 0, 0));
 
