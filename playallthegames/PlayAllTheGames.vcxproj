@@ -87,6 +87,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\games\Asteroids\Asteroids.cpp" />
+    <ClCompile Include="..\games\Asteroids\AsteroidsPlayer.cpp" />
     <ClCompile Include="..\games\BackAttack\BackAttack.cpp" />
     <ClCompile Include="..\games\BackAttack\Level.cpp" />
     <ClCompile Include="..\games\BackAttack\Player.cpp" />
@@ -240,6 +242,8 @@
     <ClCompile Include="UserDb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\games\Asteroids\Asteroids.h" />
+    <ClInclude Include="..\games\Asteroids\AsteroidsPlayer.h" />
     <ClInclude Include="..\games\BackAttack\BackAttack.h" />
     <ClInclude Include="..\games\BackAttack\Level.h" />
     <ClInclude Include="..\games\BackAttack\Player.h" />
@@ -398,9 +402,6 @@
     <ClInclude Include="StatsDb.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserDb.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="PlayAllTheGames.rc" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\assets\games\TowerTopple\ball.3ds">
