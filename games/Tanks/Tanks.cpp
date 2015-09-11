@@ -105,6 +105,12 @@ void Tanks::start(Difficulty difficulty)
 		jointDef.enableMotor = true;
 
 		players[i]->turretJoint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+
+
+		players[i]->body->SetTransform(players[i]->body->GetPosition(), glm::radians((i / (float)players.size()) * 360 + 45));
+
+		players[i]->turret->SetTransform(players[i]->body->GetPosition(), glm::radians((i / (float)players.size()) * 360 + 45+90));
+
 	}
 
 

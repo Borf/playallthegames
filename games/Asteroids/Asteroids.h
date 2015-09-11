@@ -13,7 +13,7 @@ namespace asteroids
 		blib::Texture* backgroundTexture;
 		blib::Texture* playerTexture;
 
-		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
+		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(99, 100); }
 		std::string getName();
 		virtual std::string getInstructions();
 		virtual void loadResources();
