@@ -232,7 +232,7 @@ void TowerTopple::update( float elapsedTime )
 	{
 		p->ballTImer = glm::min(p->ballTImer + (float)elapsedTime, 5.0f);
 		p->cursor += elapsedTime * p->joystick.leftStick * 750.0f;
-
+		p->cursor = glm::clamp(p->cursor, glm::vec2(0, 0), glm::vec2(1920, 1080));
 		//if (!p->bla)
 		{
 
@@ -256,7 +256,7 @@ void TowerTopple::update( float elapsedTime )
 			btSphereShape* groundShape = new btSphereShape(0.5f);
 			btTransform groundTransform;
 			groundTransform.setIdentity();
-			groundTransform.setOrigin(btVector3(p->shootRay.origin.x, p->shootRay.origin.y, p->shootRay.origin.z));
+			groundTransform.setOrigin(btVector3(p->shootRay.origin.x, p->shootRay.origin.y + 1.0f , p->shootRay.origin.z));
 
 			float mass = 25;
 			btVector3 fallInertia;
