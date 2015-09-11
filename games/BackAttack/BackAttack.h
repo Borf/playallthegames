@@ -12,6 +12,20 @@ namespace backattack
 {
 	class Level;
 
+	class Bullet
+	{
+	public:
+		glm::vec2 position;
+		glm::vec2 direction;
+		bool alive;
+		Bullet(const glm::vec2& position, const glm::vec2& direction)
+		{
+			this->position = position;
+			this->direction = direction;
+			alive = true;
+		}
+	};
+
 	class BackAttack : public AliveGame<Player>
 	{
 	public:
@@ -27,6 +41,9 @@ namespace backattack
 		blib::RenderState renderState;
 		blib::StaticModel* cart;
 		blib::StaticModel* cube;
+		blib::StaticModel* bullet;
+
+		std::vector<Bullet> bullets;
 
 
 		Level* level;

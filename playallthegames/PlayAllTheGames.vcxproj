@@ -544,6 +544,13 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
     </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\bullet.fbx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).json</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\ModelConvert.exe "%(FullPath)" "%(FullPath).json"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).json</Outputs>
+    </CustomBuild>
     <None Include="..\assets\shaders\gl\BackAttack.frag" />
     <None Include="..\assets\shaders\gl\BackAttack.vert" />
     <None Include="assets\shaders\transition1.frag" />

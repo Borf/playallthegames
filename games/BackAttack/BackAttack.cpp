@@ -32,7 +32,7 @@ namespace backattack
 
 	std::pair<int, int> BackAttack::getPlayerCount()
 	{
-		return std::pair<int, int>(20, 20);
+		return std::pair<int, int>(2, 4);
 	}
 
 	void BackAttack::loadResources()
@@ -57,6 +57,7 @@ namespace backattack
 		Level::loadResources(resourceManager, renderer);
 		cart = new blib::StaticModel("assets/games/BackAttack/mine_cart.fbx.json", resourceManager, renderer);
 		cube = new blib::StaticModel("assets/games/BackAttack/cube.fbx.json", resourceManager, renderer);
+		bullet = new blib::StaticModel("assets/games/BackAttack/bullet.fbx.json", resourceManager, renderer);
 	}
 
 	void BackAttack::start(Difficulty difficulty)
@@ -76,6 +77,8 @@ namespace backattack
 
 	float cameraHeight = 0;
 
+	float playerSpeed = 32.0f;
+
 	void BackAttack::update(float elapsedTime)
 	{
 		for (auto p : players)
@@ -90,7 +93,7 @@ namespace backattack
 			}
 
 
-			glm::vec2 newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * 32.0f;
+			glm::vec2 newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * playerSpeed;
 			bool collided = false;
 			glm::ivec2 tile(round(p->position.x / 8), round(p->position.y / 8));
 
@@ -125,9 +128,31 @@ namespace backattack
 				}
 
 			}
-			newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * 8.0f;
+			newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * playerSpeed;
 			p->position = newPosition;
 
+			for (auto pp : players)
+			{
+				if (pp == p || !pp->alive)
+					continue;
+				if (glm::distance(pp->position, p->position) < 1)
+				{
+					float diff = p->angle - pp->angle;
+					while(diff < -blib::math::pif)
+						diff += blib::math::pif * 2;
+					while (diff > blib::math::pif)
+						diff -= blib::math::pif * 2;
+
+					p->angle += 180;
+					pp->angle += 180;
+
+				}
+			}
+
+			if (p->joystick.a == 1 && p->prevJoystick.a == 0)
+			{
+				bullets.push_back(Bullet(p->position + 2.0f * blib::math::fromAngle(glm::radians(p->angle)), blib::math::fromAngle(glm::radians(p->angle))));
+			}
 
 /*			float oldDist = glm::distance(p->position, 8.0f * glm::vec2(oldTile) + glm::vec2(4, 4));
 			float newDist = glm::distance(newPosition, 8.0f * glm::vec2(oldTile) + glm::vec2(4, 4));
@@ -144,6 +169,24 @@ namespace backattack
 				*/
 
 		}
+
+		for (Bullet& b : bullets)
+		{
+			b.position += b.direction * elapsedTime * (playerSpeed * 2.0f);
+			for (auto p : players)
+			{
+				if (glm::distance(b.position, p->position) < 1)
+				{
+					b.alive = false;
+					if (b.direction == blib::math::fromAngle(glm::radians(p->angle)))
+					{
+						p->alive = false;
+					}
+				}
+			}
+		}
+
+		std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) { return !b.alive; });
 
 	}
 
@@ -184,6 +227,9 @@ namespace backattack
 
 
 
+
+
+
 			bool collided = false;
 			glm::ivec2 tile(round(p->position.x / 8), round(p->position.y / 8));
 			glm::ivec2 nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
@@ -216,6 +262,22 @@ namespace backattack
 
 
 		}
+
+		for (Bullet& b : bullets)
+		{
+			glm::mat4 mat;
+			mat = glm::translate(mat, glm::vec3(b.position.x, -1.5, b.position.y));
+			//mat = glm::rotate(mat, 180.0f - p->angle, glm::vec3(0, 1, 0));
+			//mat = glm::scale(mat, glm::vec3(10, 10, 10));
+			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
+
+			bullet->draw(renderState, renderer, [this](const blib::Material& material)
+			{
+				renderState.activeTexture[0] = material.texture;
+			});
+		}
+
+
 		level->draw(renderState, renderer);
 
 	}

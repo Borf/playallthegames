@@ -16,7 +16,7 @@ namespace backattack
 	{
 	public:
 		const int width = 16;
-		const int height = 10;
+		const int height = 11;
 
 
 		class Tile

@@ -1207,5 +1207,8 @@
     <CustomBuild Include="..\assets\games\BackAttack\rail_turn.fbx">
       <Filter>games\BackAttack\assets</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\bullet.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

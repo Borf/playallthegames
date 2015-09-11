@@ -33,10 +33,23 @@ namespace backattack
 		tiles[0][tiles[0].size() - 1] = new Tile(models.turn, 90);
 		tiles[tiles.size() - 1][tiles[0].size() - 1] = new Tile(models.turn, 180);
 
-		for (int i = 0; i < 20; i++)
+
+		int data[] = { 
+			2, 6, 
+			2, 8,
+			0, 3,
+			0, 6,
+		
+			1, 4,
+			1, 7,
+		};
+
+
+
+		for (int i = 0; i < sizeof(data) / sizeof(int) / 2; i++)
 		{
-			int side = i % 4;// rand() % 4;
-			int pos = 2+(rand() % (width/2-2))*2;
+			int side = data[i*2];// i % 4;// rand() % 4;
+			int pos = data[i*2+1];// 2 + (rand() % (width / 2 - 2)) * 2;
 
 			int dx = side >= 2 ? 0 : -(2*side-1);
 			int dy = side < 2 ? 0 : -(2*(side-2)-1);
@@ -44,7 +57,7 @@ namespace backattack
 			int x = side < 2 ? (side * (width-1)) : pos;
 			int y = side >= 2 ? ((side-2) * (height-1)) : pos;
 
-			if (x >= tiles.size() - 1 || y >= tiles[x].size() - 1)
+			if (x >= tiles.size() || y >= tiles[x].size())
 			{
 //				i--;
 				continue;
