@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "BackAttack"
+#define DEBUGGAME "Shooter"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0

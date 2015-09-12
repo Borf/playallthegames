@@ -1,0 +1,40 @@
+#pragma once
+
+#include "ShooterPlayer.h"
+#include "../../playallthegames/AliveGame.h"
+
+#include <blib/math/Polygon.h>
+#include <blib/math/Rectangle.h>
+#include <blib/gl/Vertex.h>
+
+namespace blib { class VBO; class Texture;  }
+
+namespace shooter
+{
+	class Shooter : public AliveGame<shooter::Player>
+	{
+	public:
+		blib::Texture* backSprite;
+		blib::Texture* stoneSprite;
+		blib::Texture* playerSprite;
+		blib::Texture* rocketSprite;
+
+
+		std::vector<blib::math::Polygon> objects;
+		std::vector<blib::math::Polygon> collisionObjects;
+		std::vector<blib::math::Rectangle> collisionAabb;
+		blib::VBO* backgroundVbo;
+
+		void buildTriangles();
+		void addHole(const glm::vec2& position);
+
+		virtual std::string getName() override;
+		virtual std::string getInstructions() override;
+		virtual std::pair<int, int> getPlayerCount() override;
+		virtual void loadResources() override;
+		virtual void start(Difficulty difficulty) override;
+		virtual void update(float elapsedTime) override;
+		virtual void draw() override;
+		virtual blib::Texture* getTitleImage() override;
+	};
+}

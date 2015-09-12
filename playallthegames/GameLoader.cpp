@@ -27,6 +27,7 @@
 #include "../games/Pool/Pool.h"
 #include "../games/PushOut/PushOut.h"
 #include "../games/RushHour/RushHour.h"
+#include "../games/Shooter/Shooter.h"
 #include "../games/ShowDown/ShowDown.h"
 #include "../games/SkipRope/SkipRope.h"
 #include "../games/Soccer/Soccer.h"
@@ -65,6 +66,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new Pool());
 	games.push_back(new PushOut());
 	games.push_back(new RushHour());
+	games.push_back(new shooter::Shooter());
 	games.push_back(new ShowDown());
 	games.push_back(new SkipRope());
 	games.push_back(new Soccer());
