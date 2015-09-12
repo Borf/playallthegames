@@ -7,7 +7,7 @@
 #include <blib/math/Rectangle.h>
 #include <blib/gl/Vertex.h>
 
-namespace blib { class VBO; class Texture;  }
+namespace blib { class VBO; class Texture; class ParticleSystem; }
 
 namespace shooter
 {
@@ -20,6 +20,7 @@ namespace shooter
 		blib::Texture* rocketSprite;
 		blib::Texture* cursorSprite;
 		blib::Texture* healthBar;
+		blib::ParticleSystem* particleSystem;
 
 
 		std::vector<blib::math::Polygon> objects;

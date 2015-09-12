@@ -229,7 +229,7 @@ void Soccer::update(float elapsedTime)
 		}
 
 
-		if (p->alive && glm::distance(p->bottle->GetPosition().operator glm::vec2(), glm::vec2(15, 9) * blib::util::fromAngle(2 * blib::math::pif / players.size() * p->index)) > 2)
+		if (p->alive && glm::distance(p->bottle->GetPosition().vec2(), glm::vec2(15, 9) * blib::util::fromAngle(2 * blib::math::pif / players.size() * p->index)) > 2)
 		{
 			p->alive = false;
 		}

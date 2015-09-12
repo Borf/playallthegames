@@ -57,7 +57,7 @@ namespace backattack
 			int x = side < 2 ? (side * (width-1)) : pos;
 			int y = side >= 2 ? ((side-2) * (height-1)) : pos;
 
-			if (x >= tiles.size() || y >= tiles[x].size())
+			if (x >= (int)tiles.size() || y >= (int)tiles[x].size())
 			{
 //				i--;
 				continue;
@@ -73,7 +73,7 @@ namespace backattack
 			{
 				bool doBreak = false;
 				blib::StaticModel* model = models.straight;
-				float rotation = dx != 0 ? 90 : 0;
+				float rotation = dx != 0 ? 90.0f : 0.0f;
 				if (tiles[x][y] != NULL)
 				{
 					if (i != 0)
@@ -106,7 +106,7 @@ namespace backattack
 					tiles[x][y]->isTrack = true;
 					continue;
 				}
-				tiles[x][y] = new Tile(models.houses[rand() % 8], (rand() % 4) * 90);
+				tiles[x][y] = new Tile(models.houses[rand() % 8], (rand() % 4) * 90.0f);
 			}
 		}
 
@@ -115,9 +115,9 @@ namespace backattack
 
 	void Level::draw(blib::RenderState& renderState, blib::Renderer* renderer)
 	{
-		for (int x = 0; x < tiles.size(); x++)
+		for (size_t x = 0; x < tiles.size(); x++)
 		{
-			for (int y = 0; y < tiles[x].size(); y++)
+			for (size_t y = 0; y < tiles[x].size(); y++)
 			{
 				Tile* tile = tiles[x][y];
 				if (!tile)

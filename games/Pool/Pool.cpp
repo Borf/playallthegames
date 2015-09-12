@@ -165,7 +165,7 @@ void Pool::update(float elapsedTime)
 	{
 		for (size_t ii = 0; ii < holes.size(); ii++)
 		{
-			if (glm::length(holes[ii] - balls[i].first->GetPosition().operator glm::vec2()) < pocketSize + 0.25f && balls[i].second)
+			if (glm::length(holes[ii] - balls[i].first->GetPosition().vec2()) < pocketSize + 0.25f && balls[i].second)
 			{
 				balls[i].second->score++;
 				world->DestroyBody(balls[i].first);

@@ -62,7 +62,7 @@ namespace mazeescape
 				row.push_back(new Cell());
 
 
-			for (int ii = 0; ii < row.size(); ii++)
+			for (size_t ii = 0; ii < row.size(); ii++)
 			{
 				row[ii]->neighbours.push_back(std::pair<bool, Cell*>(false, row[(ii + 1) % row.size()]));
 				row[ii]->neighbours.push_back(std::pair<bool, Cell*>(false, row[(ii + row.size() - 1) % row.size()]));

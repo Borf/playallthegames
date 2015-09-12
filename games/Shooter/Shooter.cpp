@@ -11,6 +11,7 @@
 #include <blib/math/Line.h>
 #include <blib/util/Profiler.h>
 #include <blib/util/Log.h>
+#include <blib/ParticleSystem.h>
 
 #include <poly2tri/poly2tri.h>
 #include <clipper/clipper.hpp>
@@ -50,6 +51,9 @@ namespace shooter
 		healthBar = resourceManager->getResource<blib::Texture>("assets/games/Shooter/bar.png");
 
 		stoneSprite->setTextureRepeat(true);
+
+		particleSystem = new blib::ParticleSystem(renderer, resourceManager, spriteBatch);
+		particleSystem->setTextureFolder("assets/games/Shooter/particles/");
 
 	}
 
@@ -105,7 +109,7 @@ namespace shooter
 			}
 
 		}
-
+		particleSystem->clear();
 		bullets.clear();
 
 		buildTriangles();
@@ -190,6 +194,7 @@ namespace shooter
 
 	void Shooter::update(float elapsedTime)
 	{
+		particleSystem->update(elapsedTime);
 
 		for (auto p : players)
 		{
@@ -228,7 +233,7 @@ namespace shooter
 			if(glm::length(p->joystick.rightStick) > 0.75f)
 				p->direction = glm::normalize(p->joystick.rightStick);
 
-			if (p->joystick.a == 1 && p->prevJoystick.a == 0 && p->shootTime < 0)
+			if (p->joystick.a == 1 && p->shootTime < 0)
 			{
 				bullets.push_back(std::pair<glm::vec2, glm::vec2>(p->position + 16.0f * p->direction, p->direction + 0.5f * p->joystick.leftStick));
 				p->shootTime = 1.5f;
@@ -272,6 +277,11 @@ namespace shooter
 
 			if (exploded)
 			{
+				blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Shooter/particles/explosion.json");
+				emitter->position = emitter->prevPosition = bullets[i].first;
+				emitter->life = 0.25;
+
+
 				for (auto p : players)
 				{
 					if (!p->alive)
@@ -312,7 +322,7 @@ namespace shooter
 			if (p->alive)
 			{
 				spriteBatch->draw(playerSprite, blib::math::easyMatrix(p->position), playerSprite->center, p->participant->color);
-				spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->position + 32.0f * p->direction, blib::util::Profiler::getAppTime()*180, glm::vec2(0.5f, 0.5f)), cursorSprite->center, p->participant->color * glm::vec4(1,1,1,p->shootTime > 0 ? 0.1f : 1.0f));
+				spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->position + 32.0f * p->direction, (float)blib::util::Profiler::getAppTime()*180, glm::vec2(0.5f, 0.5f)), cursorSprite->center, p->participant->color * glm::vec4(1,1,1,p->shootTime > 0 ? 0.1f : 1.0f));
 				spriteBatch->draw(healthBar, blib::math::easyMatrix(p->position + glm::vec2(0,-20), 0, glm::vec2(0.5f, 10)), healthBar->center, blib::math::Rectangle(glm::vec2(0,0), glm::vec2(p->health/100, 1)));
 			}
 		
@@ -322,6 +332,7 @@ namespace shooter
 		{
 			spriteBatch->draw(rocketSprite, blib::math::easyMatrix(b.first, glm::degrees(atan2(b.second.y, b.second.x))), rocketSprite->center);
 		}
+		particleSystem->draw(glm::mat4());
 		spriteBatch->end();
 
 
