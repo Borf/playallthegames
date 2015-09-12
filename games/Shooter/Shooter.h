@@ -18,12 +18,17 @@ namespace shooter
 		blib::Texture* stoneSprite;
 		blib::Texture* playerSprite;
 		blib::Texture* rocketSprite;
+		blib::Texture* cursorSprite;
+		blib::Texture* healthBar;
 
 
 		std::vector<blib::math::Polygon> objects;
 		std::vector<blib::math::Polygon> collisionObjects;
 		std::vector<blib::math::Rectangle> collisionAabb;
 		blib::VBO* backgroundVbo;
+
+
+		std::vector<std::pair<glm::vec2, glm::vec2>> bullets;
 
 		void buildTriangles();
 		void addHole(const glm::vec2& position);

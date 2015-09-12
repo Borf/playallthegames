@@ -67,9 +67,12 @@ namespace backattack
 		level = new Level();
 
 		players[0]->position = glm::vec2(0, 0);
-		players[1]->position = glm::vec2(0, (level->height-1)*8);
-		players[2]->position = glm::vec2((level->width-1) * 8, (level->height-1) * 8);
-		players[3]->position = glm::vec2((level->width-1) * 8, 0);
+		if(players.size() > 2)
+			players[2]->position = glm::vec2(0, (level->height-1)*8);
+		if (players.size() > 1)
+			players[1]->position = glm::vec2((level->width - 1) * 8, (level->height - 1) * 8);
+		if (players.size() > 3)
+			players[3]->position = glm::vec2((level->width - 1) * 8, 0);
 
 		for (auto p : players)
 			p->angle = -90.0f * p->index;

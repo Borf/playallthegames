@@ -9,10 +9,13 @@
 #include <blib/VBO.h>
 #include <blib/Math.h>
 #include <blib/math/Line.h>
+#include <blib/util/Profiler.h>
+#include <blib/util/Log.h>
 
 #include <poly2tri/poly2tri.h>
 #include <clipper/clipper.hpp>
 
+using blib::util::Log;
 
 namespace shooter
 {
@@ -31,7 +34,7 @@ namespace shooter
 
 	std::pair<int, int> Shooter::getPlayerCount()
 	{
-		return std::pair<int, int>(99, 99);
+		return std::pair<int, int>(2, 99);
 	}
 
 	void Shooter::loadResources()
@@ -42,6 +45,9 @@ namespace shooter
 		backSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/back.png");
 		stoneSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/stone.png");
 		playerSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/player.png");
+		rocketSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/rocketbullet.png");
+		cursorSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/cursor.png");
+		healthBar = resourceManager->getResource<blib::Texture>("assets/games/Shooter/bar.png");
 
 		stoneSprite->setTextureRepeat(true);
 
@@ -49,7 +55,7 @@ namespace shooter
 
 	void Shooter::start(Difficulty difficulty)
 	{
-
+		objects.clear();
 		objects.push_back(blib::math::Polygon({ glm::vec2(1545, 1063), glm::vec2(1423, 987), glm::vec2(1407, 1007), glm::vec2(1291, 966), glm::vec2(1235, 927), glm::vec2(1220, 914), glm::vec2(987, 980), glm::vec2(881, 1018), glm::vec2(729, 958), glm::vec2(715, 937), glm::vec2(537, 920), glm::vec2(405, 980), glm::vec2(293, 910), glm::vec2(306, 716), glm::vec2(210, 716), glm::vec2(204, 571), glm::vec2(54, 572), glm::vec2(51, 226), glm::vec2(167, 232), glm::vec2(166, 205), glm::vec2(104, 158), glm::vec2(54, 96), glm::vec2(107, 38), glm::vec2(300, 57), glm::vec2(301, 109), glm::vec2(398, 105), glm::vec2(400, 82), glm::vec2(542, 34), glm::vec2(640, 49), glm::vec2(682, 158), glm::vec2(635, 185), glm::vec2(674, 265), glm::vec2(825, 195), glm::vec2(823, 171), glm::vec2(880, 168), glm::vec2(908, 149), glm::vec2(920, 124), glm::vec2(995, 82), glm::vec2(1063, 120), glm::vec2(1160, 135), glm::vec2(1163, 187), glm::vec2(1361, 261), glm::vec2(1358, 227), glm::vec2(1697, 121), glm::vec2(1697, 195), glm::vec2(1732, 193), glm::vec2(1763, 124), glm::vec2(1866, 139), glm::vec2(1862, 236), glm::vec2(1878, 235), glm::vec2(1889, 406), glm::vec2(1878, 405), glm::vec2(1874, 463), glm::vec2(1852, 475), glm::vec2(1870, 601), glm::vec2(1863, 602), glm::vec2(1878, 623), glm::vec2(1724, 694), glm::vec2(1726, 672), glm::vec2(1698, 695), glm::vec2(1698, 702), glm::vec2(1761, 724), glm::vec2(1699, 762), glm::vec2(1699, 773), glm::vec2(1767, 812), glm::vec2(1699, 843), glm::vec2(1699, 856), glm::vec2(1765, 895), glm::vec2(1699, 922), glm::vec2(1699, 959), glm::vec2(1650, 933), glm::vec2(1622, 1017), glm::vec2(1600, 1007), glm::vec2(1614, 1046), }));
 		objects.push_back(blib::math::Polygon({ glm::vec2(1546, 969), glm::vec2(1581, 896), glm::vec2(1520, 863), glm::vec2(1453, 948), }));
 		objects.push_back(blib::math::Polygon({ glm::vec2(1380, 946), glm::vec2(1464, 833), glm::vec2(1402, 809), glm::vec2(1394, 777), glm::vec2(1415, 696), glm::vec2(1352, 692), glm::vec2(1353, 605), glm::vec2(1177, 604), glm::vec2(1175, 648), glm::vec2(1202, 652), glm::vec2(1194, 755), glm::vec2(1229, 834), glm::vec2(1312, 906), }));
@@ -100,7 +106,7 @@ namespace shooter
 
 		}
 
-
+		bullets.clear();
 
 		buildTriangles();
 
@@ -157,7 +163,7 @@ namespace shooter
 		ClipperLib::Polygon circle;
 
 		for (float f = 0; f < 2 * blib::math::pif; f += blib::math::pif / 8)
-			circle.push_back(position + 40.0f * blib::math::fromAngle(f));
+			circle.push_back(position + 60.0f * blib::math::fromAngle(f));
 
 
 		clipper.AddPolygon(circle, ClipperLib::ptClip);
@@ -184,10 +190,6 @@ namespace shooter
 
 	void Shooter::update(float elapsedTime)
 	{
-		if (players[0]->joystick.a == 1 && players[0]->prevJoystick.a == 0)
-		{
-			addHole(players[0]->position);
-		}
 
 		for (auto p : players)
 		{
@@ -222,6 +224,72 @@ namespace shooter
 					}
 				}
 			}
+
+			if(glm::length(p->joystick.rightStick) > 0.75f)
+				p->direction = glm::normalize(p->joystick.rightStick);
+
+			if (p->joystick.a == 1 && p->prevJoystick.a == 0 && p->shootTime < 0)
+			{
+				bullets.push_back(std::pair<glm::vec2, glm::vec2>(p->position + 16.0f * p->direction, p->direction + 0.5f * p->joystick.leftStick));
+				p->shootTime = 1.5f;
+			}
+			p->shootTime -= elapsedTime;
+
+		}
+
+		for (int i = 0; i < (int)bullets.size(); i++)
+		{
+			glm::vec2 oldPos = bullets[i].first;
+			bullets[i].first += bullets[i].second * elapsedTime * 300.0f;
+
+			if (bullets[i].first.x < 0 || bullets[i].first.y < 0 || bullets[i].first.x > 1920 || bullets[i].first.y > 1080)
+			{
+				bullets.erase(bullets.begin() + i);
+				i--;
+				continue;
+			}
+
+			bool exploded = false;
+
+			blib::math::Line ray(oldPos, bullets[i].first);
+			for (size_t ii = 0; ii < objects.size(); ii++)
+			{
+				const blib::math::Polygon& o = objects[ii];
+				if (o.intersects(ray))
+				{
+					exploded = true;
+					break;
+				}
+			}
+			for (auto p : players)
+			{
+				if (glm::distance(p->position, bullets[i].first) < 16)
+				{
+					exploded = true;
+					break;
+				}
+			}
+
+			if (exploded)
+			{
+				for (auto p : players)
+				{
+					if (!p->alive)
+						continue;
+					float dmg = 120 - 2 * glm::distance(p->position, bullets[i].first);
+					if (dmg > 0)
+						p->health -= dmg;
+					if (p->health < 0)
+						p->alive = false;
+				}
+				addHole(bullets[i].first);
+				bullets.erase(bullets.begin() + i);
+				i--;
+
+			}
+
+			
+
 		}
 
 
@@ -241,20 +309,31 @@ namespace shooter
 		spriteBatch->begin();
 
 		for (auto p : players)
-			if(p->alive)
+			if (p->alive)
+			{
 				spriteBatch->draw(playerSprite, blib::math::easyMatrix(p->position), playerSprite->center, p->participant->color);
+				spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->position + 32.0f * p->direction, blib::util::Profiler::getAppTime()*180, glm::vec2(0.5f, 0.5f)), cursorSprite->center, p->participant->color * glm::vec4(1,1,1,p->shootTime > 0 ? 0.1f : 1.0f));
+				spriteBatch->draw(healthBar, blib::math::easyMatrix(p->position + glm::vec2(0,-20), 0, glm::vec2(0.5f, 10)), healthBar->center, blib::math::Rectangle(glm::vec2(0,0), glm::vec2(p->health/100, 1)));
+			}
+		
+		
+		
+		for (auto b : bullets)
+		{
+			spriteBatch->draw(rocketSprite, blib::math::easyMatrix(b.first, glm::degrees(atan2(b.second.y, b.second.x))), rocketSprite->center);
+		}
 		spriteBatch->end();
 
 
 
 
-	/*	lineBatch->begin();
+		lineBatch->begin();
 		for (const blib::math::Polygon& p : objects)
 			lineBatch->draw(p);
 
-		for (const blib::math::Polygon& p : collisionObjects)
-			lineBatch->draw(p, blib::Color::green);
-		lineBatch->end();*/
+	//	for (const blib::math::Polygon& p : collisionObjects)
+	//		lineBatch->draw(p, blib::Color::green);
+		lineBatch->end();
 
 		
 
