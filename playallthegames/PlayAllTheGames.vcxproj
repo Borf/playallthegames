@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\games\Asteroids\Asteroid.cpp" />
     <ClCompile Include="..\games\Asteroids\Asteroids.cpp" />
     <ClCompile Include="..\games\Asteroids\AsteroidsPlayer.cpp" />
     <ClCompile Include="..\games\BackAttack\BackAttack.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="UserDb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\games\Asteroids\Asteroid.h" />
     <ClInclude Include="..\games\Asteroids\Asteroids.h" />
     <ClInclude Include="..\games\Asteroids\AsteroidsPlayer.h" />
     <ClInclude Include="..\games\BackAttack\BackAttack.h" />

@@ -615,6 +615,9 @@
     <ClCompile Include="..\games\Shooter\Shooter.cpp">
       <Filter>games\Shooter</Filter>
     </ClCompile>
+    <ClCompile Include="..\games\Asteroids\Asteroid.cpp">
+      <Filter>games\Asteroids</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayAllTheGames.h">
@@ -1102,6 +1105,9 @@
     </ClInclude>
     <ClInclude Include="..\games\Shooter\ShooterPlayer.h">
       <Filter>games\Shooter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Asteroids\Asteroid.h">
+      <Filter>games\Asteroids</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

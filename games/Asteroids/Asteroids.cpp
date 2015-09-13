@@ -1,4 +1,5 @@
 #include "Asteroids.h"
+#include "Asteroid.h"
 
 #include "../../playallthegames/Participant.h"
 
@@ -24,13 +25,21 @@ namespace asteroids
 	{
 		backgroundTexture = resourceManager->getResource<blib::Texture>("assets/games/Asteroids/back.png");
 		playerTexture = resourceManager->getResource<blib::Texture>("assets/games/Asteroids/player.png");
+		for (int i = 0; i < 3; i++)
+			asteroidTexture[i] = resourceManager->getResource<blib::Texture>("assets/games/Asteroids/asteroid" + std::to_string(i) + ".png");
 	}
 
 
 	void Asteroids::start(Difficulty difficulty)
 	{
 		for (auto p : players)
+		{
 			p->position = glm::vec2(1920 / 2, 1080 / 2) + 400.0f * blib::math::fromAngle(glm::radians(360.0f / players.size() * p->index));
+			p->rotation = 360.0f / players.size() * p->index + 180;
+		}
+
+		for (int i = 0; i < 25; i++)
+			asteroids.push_back(Asteroid()); //add an asteroid
 
 	}
 	
@@ -58,7 +67,20 @@ namespace asteroids
 				p->position.y += 1080;
 		}
 
-		
+		for (Asteroid &a : asteroids)
+		{
+			a.angle += a.angleIncrement;
+			a.position += a.movement * elapsedTime;
+
+			while (a.position.x > 1920) // wrap around right side of the screen
+				a.position.x -= 1920;
+			while (a.position.x < 0) //wrap around left side of the screen
+				a.position.x += 1920;
+			while (a.position.y > 1080) // wrap around bottom
+				a.position.y -= 1080;
+			while (a.position.y < 0) //wrap around top
+				a.position.y += 1080;
+		}
 
 	}
 
@@ -70,8 +92,9 @@ namespace asteroids
 
 		for(auto p : players)
 			spriteBatch->draw(playerTexture, blib::math::easyMatrix(p->position, p->rotation), playerTexture->center, p->participant->color);
-
-
+		
+		for (const Asteroid &asteroid : asteroids)
+			spriteBatch->draw(asteroidTexture[asteroid.size], blib::math::easyMatrix(asteroid.position, asteroid.angle), asteroidTexture[asteroid.size]->center);
 		spriteBatch->end();
 
 	}
