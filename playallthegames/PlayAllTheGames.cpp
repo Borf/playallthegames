@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "Asteroids"
+#define DEBUGGAME "HillClimb"
 
 #ifdef _DEBUG
 #define PREGAMETIME 0
@@ -568,6 +568,17 @@ void PlayAllTheGames::draw()
 
 			spriteBatch->end();
 		}
+		spriteBatch->begin();
+		switch (session->difficulty)
+		{
+		case Difficulty::Easy:			spriteBatch->draw(font, "Easy", glm::mat4()); break;
+		case Difficulty::Normal:		spriteBatch->draw(font, "Normal", glm::mat4()); break;
+		case Difficulty::Hard:			spriteBatch->draw(font, "Hard", glm::mat4()); break;
+		case Difficulty::Cruel:			spriteBatch->draw(font, "Cruel", glm::mat4()); break;
+		case Difficulty::Wtf:			spriteBatch->draw(font, "Wtf", glm::mat4()); break;
+		}
+		spriteBatch->end();
+
 
 	}
 

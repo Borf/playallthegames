@@ -7,7 +7,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>blib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\..\blib\externals\glew\lib;$(SolutionDir)\..\blib\externals\openal\libs</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

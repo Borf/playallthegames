@@ -15,6 +15,7 @@
 #include "../games/FallDown/FallDown.h"
 #include "../games/FlyFar/FlyFar.h"
 #include "../games/Herding/Herding.h"
+#include "../games/HillClimber/HillClimbGame.h"
 #include "../games/JumpMan/JumpMan.h"
 #include "../games/MacroMachines/MacroMachines.h"
 #include "../games/MicroRace/MicroRace.h"
@@ -54,6 +55,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new FallDown());
 	games.push_back(new FlyFar());
 	games.push_back(new Herding());
+	games.push_back(new hillclimb::HillClimb());
 	games.push_back(new jumpman::JumpMan());
 	games.push_back(new MicroRace());
 	games.push_back(new MacroMachines());

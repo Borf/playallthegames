@@ -144,6 +144,8 @@
     <ClCompile Include="..\games\Herding\Herding.cpp" />
     <ClCompile Include="..\games\Herding\HerdingPlayer.cpp" />
     <ClCompile Include="..\games\Herding\Sheep.cpp" />
+    <ClCompile Include="..\games\HillClimber\HillClimbGame.cpp" />
+    <ClCompile Include="..\games\HillClimber\HillClimbPlayer.cpp" />
     <ClCompile Include="..\games\JumpMan\BasicEnemy.cpp" />
     <ClCompile Include="..\games\JumpMan\Enemy.cpp" />
     <ClCompile Include="..\games\JumpMan\JumpEnemy.cpp" />
@@ -302,6 +304,8 @@
     <ClInclude Include="..\games\Herding\Herding.h" />
     <ClInclude Include="..\games\Herding\HerdingPlayer.h" />
     <ClInclude Include="..\games\Herding\Sheep.h" />
+    <ClInclude Include="..\games\HillClimber\HillClimbGame.h" />
+    <ClInclude Include="..\games\HillClimber\HillClimbPlayer.h" />
     <ClInclude Include="..\games\JumpMan\BasicEnemy.h" />
     <ClInclude Include="..\games\JumpMan\Enemy.h" />
     <ClInclude Include="..\games\JumpMan\JumpEnemy.h" />
