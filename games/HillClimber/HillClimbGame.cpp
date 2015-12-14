@@ -5,6 +5,7 @@
 #include <blib/LineBatch.h>
 #include <blib/SpriteBatch.h>
 #include <blib/Color.h>
+#include <blib/Font.h>
 #include <blib/util/stb_perlin.h>
 #include <blib/Box2DDebug.h>
 #include <blib/util/Log.h>
@@ -53,6 +54,7 @@ namespace hillclimb
 		carSprite = resourceManager->getResource<blib::Texture>("assets/games/HillClimb/car.png");
 		carOverlaySprite = resourceManager->getResource<blib::Texture>("assets/games/HillClimb/carOverlay.png");
 		shadowSprite = resourceManager->getResource<blib::Texture>("assets/games/HillClimb/shadow.png");
+		font = resourceManager->getResource<blib::Font>("tahoma");
 		backgroundColor = blib::Color::black;
 	}
 
@@ -94,7 +96,7 @@ namespace hillclimb
 			b2BodyDef bodyDef;
 			bodyDef.type = b2_dynamicBody;
 			bodyDef.position = b2Vec2(0, -4.4f);
-			bodyDef.angularDamping = 2.9f;
+			bodyDef.angularDamping = 5.9f;
 			bodyDef.linearDamping = 0.1f;
 			b2Body* carBase = world->CreateBody(&bodyDef);
 
@@ -102,7 +104,7 @@ namespace hillclimb
 			baseShape.SetAsBox(1.3f, 0.4f);
 			b2FixtureDef baseFixture;
 			baseFixture.shape = &baseShape;
-			baseFixture.density = 1.0f;
+			baseFixture.density = 5.0f;
 			baseFixture.filter.categoryBits = 2;
 			baseFixture.filter.maskBits = 1;
 			carBase->CreateFixture(&baseFixture);
@@ -116,8 +118,8 @@ namespace hillclimb
 			wheelShape.m_radius = 0.5f;
 			b2FixtureDef wheelFixture;
 			wheelFixture.shape = &wheelShape;
-			wheelFixture.friction = 0.75f;
-			wheelFixture.density = 1.0f;
+			wheelFixture.friction = 0.5f;
+			wheelFixture.density = 5.0f;
 			wheelFixture.restitution = 0.35f;
 			wheelFixture.filter.categoryBits = 2;
 			wheelFixture.filter.maskBits = 1;
@@ -191,8 +193,8 @@ namespace hillclimb
 					p->frontEngine->SetMotorSpeed(p->frontWheel->GetAngularVelocity());
 					p->backEngine->SetMotorSpeed(p->backWheel->GetAngularVelocity());
 				}
-				p->frontEngine->SetMotorSpeed(glm::min(p->frontEngine->GetMotorSpeed() + elapsedTime * 30, 50.0f));
-				p->backEngine->SetMotorSpeed(glm::min(p->frontEngine->GetMotorSpeed() + elapsedTime * 30, 50.0f));
+				p->frontEngine->SetMotorSpeed(glm::min(p->frontEngine->GetMotorSpeed() + elapsedTime * 30, p->maxSpeed));
+				p->backEngine->SetMotorSpeed(glm::min(p->frontEngine->GetMotorSpeed() + elapsedTime * 30, p->maxSpeed));
 			}
 			else if (p->joystick.b != 0)
 			{
@@ -205,16 +207,46 @@ namespace hillclimb
 					p->frontEngine->SetMotorSpeed(p->frontWheel->GetAngularVelocity());
 					p->backEngine->SetMotorSpeed(p->backWheel->GetAngularVelocity());
 				}
-				p->frontEngine->SetMotorSpeed(glm::max(p->frontEngine->GetMotorSpeed() - elapsedTime * 30, -50.0f));
-				p->backEngine->SetMotorSpeed(glm::max(p->frontEngine->GetMotorSpeed() - elapsedTime * 30, -50.0f));
+				p->frontEngine->SetMotorSpeed(glm::max(p->frontEngine->GetMotorSpeed() - elapsedTime * 30, -p->maxSpeed));
+				p->backEngine->SetMotorSpeed(glm::max(p->frontEngine->GetMotorSpeed() - elapsedTime * 30, -p->maxSpeed));
 			}
 			else
 			{
 				p->frontEngine->EnableMotor(false);
 				p->backEngine->EnableMotor(false);
-				p->frontWheel->SetAngularDamping(10.0f);
-				p->backWheel->SetAngularDamping(10.0f);
+				p->frontWheel->SetAngularDamping(0.5f);
+				p->backWheel->SetAngularDamping(0.5f);
 			}
+
+			if (p->joystick.x == 1 && p->prevJoystick.x != 1)
+			{
+				p->car->ApplyLinearImpulse(blib::math::fromAngle(p->car->GetAngle()) * 100.0f * (float) p->loops, p->car->GetWorldCenter());
+				p->loops = 0;
+			}
+
+			if (!p->frontWheel->GetContactList() && !p->backWheel->GetContactList())
+			{
+				float diff = p->lastAngle - p->car->GetAngle();
+				if (diff < -blib::math::pif)
+					diff += 2 * blib::math::pif;
+				if (diff > blib::math::pif)
+					diff -= 2 * blib::math::pif;
+
+				p->lastAngle = p->car->GetAngle();
+				p->rotations += diff;
+			}
+			else
+			{
+				p->lastAngle = p->car->GetAngle();
+				if (fabs(p->rotations) > 0.1f)
+				{
+					p->loops += glm::round(glm::abs(p->rotations) / blib::math::pif);
+				}
+				p->rotations = 0;
+			}
+
+			p->car->ApplyTorque(200 * (p->joystick.rightTrigger - p->joystick.leftTrigger));
+
 		}
 
 	}
@@ -231,7 +263,7 @@ namespace hillclimb
 		glm::mat4 transform;
 		transform = glm::translate(transform, glm::vec3(1920/2, 1080/2, 0.0f));
 		transform = glm::scale(transform, glm::vec3(50, 50, 1.0f));
-		transform = glm::translate(transform, glm::vec3(-center, -0, 0.0f));
+		transform = glm::translate(transform, glm::vec3(-center, 2, 0.0f));
 
 
 
@@ -317,6 +349,12 @@ namespace hillclimb
 			spriteBatch->draw(tireSprite, blib::math::easyMatrix(p->backWheel->GetPosition() + glm::vec2(0, playerHeight), glm::degrees(p->frontWheel->GetAngle()), 0.0075f), tireSprite->center);
 		}
 
+
+		for (auto p : players)
+		{
+			float playerHeight = -(0.5 + (5 / players.size()) * p->index);
+			spriteBatch->draw(font, std::to_string(p->loops), blib::math::easyMatrix(p->car->GetPosition() + glm::vec2(-0.1f, playerHeight - 0.15f), 0, 0.03f));
+		}
 
 		spriteBatch->end();
 

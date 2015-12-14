@@ -5,7 +5,7 @@
 #include "HillClimbPlayer.h"
 #include <Box2D/Box2D.h>
 
-namespace blib { class Texture; };
+namespace blib { class Texture; class Font;  };
 
 namespace hillclimb
 {
@@ -27,6 +27,8 @@ namespace hillclimb
 		blib::Texture* carSprite;
 		blib::Texture* carOverlaySprite;
 		blib::Texture* shadowSprite;
+
+		blib::Font* font;
 
 	public:
 

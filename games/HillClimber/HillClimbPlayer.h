@@ -21,12 +21,18 @@ namespace hillclimb
 		float lastX;
 		float lastTime;
 
+		float rotations;
+		float lastAngle;
+		float maxSpeed;
+
+		int loops;
+
 
 		HillClimbPlayer(int index) : AlivePlayer(index)
 		{
 			lastX = -100;
-
-
+			maxSpeed = 50;
+			loops = 0;
 		}
 	};
 
