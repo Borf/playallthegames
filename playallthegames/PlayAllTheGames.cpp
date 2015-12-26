@@ -146,6 +146,14 @@ void PlayAllTheGames::init()
 
 	audioManager = blib::AudioManager::getInstance();
 	audioManager->init();
+	audio.gameOver = audioManager->loadSample("assets/audio/sfx/gameover.wav");
+	audio.go = audioManager->loadSample("assets/audio/sfx/go.wav");
+	audio.tick = audioManager->loadSample("assets/audio/sfx/tick.wav");
+	audio.activeMusic = -1;
+	std::vector<std::string> songs = blib::util::FileSystem::getFileList("assets/audio/music");
+	for (const std::string &s : songs)
+		if (s[0] != '.' && s.size() > 4 && s.substr(s.size() - 4) == ".ogg")
+			audio.music.push_back(audioManager->loadSample("assets/audio/music/" + s));
 
 
 	Log::out << "Loading transition shaders" << Log::newline;
@@ -316,7 +324,7 @@ void PlayAllTheGames::update( double elapsedTime )
 			blib::linq::foreach(activeGame->getPlayers(), [] (Player* p) { p->participant->totalGames++; });
 			blib::linq::foreach(winners, [this] (Player* p) { p->participant->totalWins++; });
 			switchState(PostGame);
-			audioManager->playSound("assets/audio/sfx/gameover.wav");
+			audio.gameOver->play();
 		}
 		else
 			if (activeGame)
@@ -330,9 +338,9 @@ void PlayAllTheGames::update( double elapsedTime )
 		if(pregameTickTime - (PREGAMETIME - stateTime) > 1)
 		{
 			if(pregameTickTime > 1)
-				audioManager->playSound("assets/audio/sfx/tick.wav");
+				audio.tick->play();
 			else
-				audioManager->playSound("assets/audio/sfx/go.wav");
+				audio.go->play();
 			pregameTickTime--;
 		}
 		
@@ -590,8 +598,16 @@ void PlayAllTheGames::switchState( State newState )
 	Log::out<<"Switch to state "<<newState<<Log::newline;
 	activeState = newState;
 	stateTime = 0;
-	if(newState == PreGame)
+	if (newState == PreGame)
+	{
 		pregameTickTime = PREGAMETIME;
+		if (audio.activeMusic == -1)
+		{
+			audio.activeMusic = rand() % audio.music.size();
+			audio.music[audio.activeMusic]->play(false);
+		}
+	}
+
 }
 
 void PlayAllTheGames::quit()

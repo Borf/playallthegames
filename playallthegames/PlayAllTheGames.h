@@ -6,7 +6,7 @@
 #include <blib/App.h>
 #include <blib/KeyListener.h>
 
-namespace blib { class Texture; class FBO; class Font; struct KeyState; enum class Key; class AudioManager; class Shader; }
+namespace blib { class Texture; class FBO; class Font; struct KeyState; enum class Key; class AudioManager; class Shader; class AudioSample; }
 
 class Settings;
 class GameBase;
@@ -39,6 +39,17 @@ public:
 	blib::Texture* introTexture;
 	blib::Texture* cursorTexture;
 	blib::Font* font;
+
+
+	struct Audio
+	{
+		blib::AudioSample* gameOver;
+		blib::AudioSample* tick;
+		blib::AudioSample* go;
+		std::vector<blib::AudioSample*> music;
+		int activeMusic;
+	} audio;
+
 
 
 	int transin = 6;
