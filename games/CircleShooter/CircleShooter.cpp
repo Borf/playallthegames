@@ -9,6 +9,12 @@
 #include <blib/Math.h>
 #include <blib/Util.h>
 
+
+CircleShooter::CircleShooter()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string CircleShooter::getName()
 {
 	return "CircleShooter";

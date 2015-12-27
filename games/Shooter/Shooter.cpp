@@ -20,7 +20,12 @@ using blib::util::Log;
 
 namespace shooter
 {
-
+	Shooter::Shooter()
+	{
+		controls[ControllerButton::ButtonA] = "Shoot";
+		controls[ControllerButton::ThumbstickLeft] = "Move";
+		controls[ControllerButton::ThumbstickRight] = "Aim";
+	}
 
 
 	std::string Shooter::getName()

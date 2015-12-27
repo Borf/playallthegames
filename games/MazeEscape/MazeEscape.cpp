@@ -18,6 +18,11 @@
 namespace mazeescape
 {
 
+	MazeEscape::MazeEscape()
+	{
+		controls[ControllerButton::ThumbstickLeft] = "Move";
+	}
+
 	std::string MazeEscape::getName()
 	{
 		return "MazeEscape";

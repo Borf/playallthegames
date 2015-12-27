@@ -19,6 +19,11 @@
 
 namespace jumpman
 {
+	JumpMan::JumpMan()
+	{
+		controls[ControllerButton::ButtonA] = "Jump";
+	}
+
 	std::string JumpMan::getName()
 	{
 		return "JumpMan";

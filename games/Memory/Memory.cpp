@@ -15,6 +15,12 @@
 #include "Tile.h"
 #include "RotatingCard.h"
 
+Memory::Memory()
+{
+	controls[ControllerButton::ButtonA] = "Pick card";
+	controls[ControllerButton::ThumbstickLeft] = "Move cursor";
+}
+
 std::string Memory::getName()
 {
 	return "Memory";

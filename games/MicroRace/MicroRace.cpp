@@ -14,6 +14,11 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/Settings.h"
 
+MicroRace::MicroRace()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string MicroRace::getName()
 {
 	return "MicroRace";

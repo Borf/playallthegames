@@ -25,6 +25,12 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+ZombieSurvival::ZombieSurvival()
+{
+	controls[ControllerButton::ButtonA] = "Shoot";
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string ZombieSurvival::getName()
 {
 	return "ZombieSurvival";

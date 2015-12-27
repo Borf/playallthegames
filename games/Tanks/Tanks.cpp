@@ -20,6 +20,11 @@
 Tanks::Tanks()
 {
 	world = NULL;
+	controls[ControllerButton::ButtonA] = "Shoot";
+	controls[ControllerButton::TriggersLeft] = "Rotate turret";
+	controls[ControllerButton::TriggersRight] = "Rotate turret";
+	controls[ControllerButton::ThumbstickLeft] = "Move left track";
+	controls[ControllerButton::ThumbstickRight] = "Move right track";
 }
 
 std::string Tanks::getName()

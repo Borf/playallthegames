@@ -7,6 +7,7 @@
 class Osmos : public Game<OsmosPlayer>
 {
 public:
+	Osmos();
 	blib::Texture* background;
 	blib::Texture* ballTexture;
 	std::vector<Sphere*> spheres;

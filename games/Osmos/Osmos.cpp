@@ -14,6 +14,11 @@
 #include <math.h>
 
 
+Osmos::Osmos()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string Osmos::getName()
 {
 	return "Osmos";

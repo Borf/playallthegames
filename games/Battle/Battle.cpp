@@ -16,6 +16,13 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+
+Battle::Battle()
+{
+	controls[ControllerButton::ButtonA] = "Jump";
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string Battle::getName()
 {
 	return "Battle";

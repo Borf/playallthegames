@@ -14,6 +14,12 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+ShowDown::ShowDown()
+{
+	controls[ControllerButton::ButtonA] = "charge/shoot";
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string ShowDown::getName()
 {
 	return "ShowDown";

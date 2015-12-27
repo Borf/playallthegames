@@ -33,6 +33,12 @@ std::string TowerTopple::getInstructions()
 	return "Topple the tower";
 }
 
+TowerTopple::TowerTopple()
+{
+	controls[ControllerButton::ButtonA] = "Shoot";
+	controls[ControllerButton::ThumbstickLeft] = "Aim";
+}
+
 void TowerTopple::loadResources()
 {
 	renderState = spriteBatch->renderState;

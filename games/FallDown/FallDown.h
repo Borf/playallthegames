@@ -28,7 +28,7 @@ class FallDown : public AliveGame<FallDownPlayer>
 	bool hasCollision(const blib::math::Rectangle &r);
 
 public:
-
+	FallDown();
 
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();

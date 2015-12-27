@@ -25,7 +25,8 @@ BomberMan::BomberMan()
 {
 	levelHeight = 13;
 	levelWidth = 19;
-
+	controls[ControllerButton::ButtonA] = "Walk";
+	controls[ControllerButton::ThumbstickLeft] = "Place Bomb";
 }
 
 

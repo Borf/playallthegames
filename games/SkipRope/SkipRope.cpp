@@ -14,6 +14,11 @@
 #include <math.h>
 
 
+SkipRope::SkipRope()
+{
+	controls[ControllerButton::ButtonA] = "Jump";
+}
+
 std::string SkipRope::getName()
 {
 	return "SkipRope";

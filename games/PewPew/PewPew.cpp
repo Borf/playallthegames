@@ -26,6 +26,7 @@
 PewPew::PewPew()
 {
 	world = NULL;
+	controls[ControllerButton::ThumbstickLeft] = "Move";
 }
 
 std::string PewPew::getName()

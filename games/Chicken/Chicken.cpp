@@ -12,7 +12,7 @@
 
 Chicken::Chicken()
 {
-
+	controls[ControllerButton::ButtonA] = "Stop";
 }
 
 std::string Chicken::getName()

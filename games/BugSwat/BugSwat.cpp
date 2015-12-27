@@ -21,6 +21,16 @@
 
 namespace bugswat
 {
+	BugSwat::BugSwat()
+	{
+		controls[ControllerButton::ButtonA] = "Smash";
+		controls[ControllerButton::ButtonR] = "Smash";
+		controls[ControllerButton::ThumbstickLeft] = "Move";
+		controls[ControllerButton::ThumbstickRight] = "Move";
+		this->maxPlayerScore = 20;
+	}
+
+
 	std::string BugSwat::getName()
 	{
 		return "BugSwat";

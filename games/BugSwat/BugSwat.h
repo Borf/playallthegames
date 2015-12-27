@@ -23,7 +23,7 @@ namespace bugswat
 		std::vector<Splat*> splats;
 
 	public:
-		BugSwat() { this->maxPlayerScore = 20; };
+		BugSwat();
 		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 		virtual std::string getName();
 		virtual std::string getInstructions();

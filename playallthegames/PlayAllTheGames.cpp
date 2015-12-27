@@ -104,6 +104,20 @@ void PlayAllTheGames::init()
 	MenuScreen::loadResources(resourceManager);
 	introTexture = resourceManager->getResource<blib::Texture>("assets/logo.png");
 	cursorTexture = resourceManager->getResource<blib::Texture>("assets/cursor.png");
+
+	controllerMap.controller = resourceManager->getResource<blib::Texture>("assets/controller/controller.png");
+	controllerMap.a = resourceManager->getResource<blib::Texture>("assets/controller/buttons.a.png");
+	controllerMap.b = resourceManager->getResource<blib::Texture>("assets/controller/buttons.b.png");
+	controllerMap.x = resourceManager->getResource<blib::Texture>("assets/controller/buttons.x.png");
+	controllerMap.y = resourceManager->getResource<blib::Texture>("assets/controller/buttons.y.png");
+	controllerMap.l = resourceManager->getResource<blib::Texture>("assets/controller/buttons.l.png");
+	controllerMap.r = resourceManager->getResource<blib::Texture>("assets/controller/buttons.r.png");
+	controllerMap.dpad = resourceManager->getResource<blib::Texture>("assets/controller/dpad.png");
+	controllerMap.leftstick = resourceManager->getResource<blib::Texture>("assets/controller/thumbsticks.left.png");
+	controllerMap.rightstick = resourceManager->getResource<blib::Texture>("assets/controller/thumbsticks.right.png");
+	controllerMap.lefttrigger = resourceManager->getResource<blib::Texture>("assets/controller/triggers.l.png");
+	controllerMap.righttrigger = resourceManager->getResource<blib::Texture>("assets/controller/triggers.r.png");
+
 	activeGame = NULL;
 	activeState = IntroScreen;
 	activeMenu = NULL;
@@ -149,6 +163,8 @@ void PlayAllTheGames::init()
 	audio.gameOver = audioManager->loadSample("assets/audio/sfx/gameover.wav");
 	audio.go = audioManager->loadSample("assets/audio/sfx/go.wav");
 	audio.tick = audioManager->loadSample("assets/audio/sfx/tick.wav");
+	audio.menu = audioManager->loadSample("assets/audio/music/.menu.ogg");
+	audio.menu->play(true);
 	audio.activeMusic = -1;
 	std::vector<std::string> songs = blib::util::FileSystem::getFileList("assets/audio/music");
 	for (const std::string &s : songs)
@@ -169,7 +185,6 @@ void PlayAllTheGames::init()
 		transitionShaders.push_back(shader);
 	}
 
-
 }
 
 void PlayAllTheGames::update( double elapsedTime )
@@ -187,6 +202,17 @@ void PlayAllTheGames::update( double elapsedTime )
 
 	if(activeMenu)
 		typingMode = activeMenu->canType();
+
+
+	if (audio.activeMusic != -1)
+	{
+		if (!audio.music[audio.activeMusic]->isPlaying())
+		{
+			audio.activeMusic = rand() % audio.music.size();
+			audio.music[audio.activeMusic]->play();
+		}
+	}
+
 
 	if(blib::linq::any(keysVec, [this] (blib::Key i) { return keyState.isPressed(i) || lastKeyState.isPressed(i); }))
 	{
@@ -574,6 +600,38 @@ void PlayAllTheGames::draw()
 			mat = glm::translate(mat, glm::vec3(-40, -20,0));
 			spriteBatch->draw(font, buf, mat, blib::Color::white);
 
+
+			float y = 0;
+			if (PREGAMETIME - stateTime > 0.5f && PREGAMETIME - stateTime < 1)
+				y = 1500 * (0.5f - (PREGAMETIME - stateTime - 0.5f));
+			if (stateTime < 1.0)
+				y = 1500 * (1 - stateTime);
+
+			if (PREGAMETIME - stateTime > 0.5f && !activeGame->controls.empty())
+			{
+				spriteBatch->draw(controllerMap.controller, blib::math::easyMatrix(settings->center + glm::vec2(50, 400 + y), 0, 0.75f * settings->scale), controllerMap.controller->center);
+
+				auto d = [this, y](GameBase::ControllerButton button, blib::Texture* texture, const glm::vec2 &offset) {
+					if (activeGame->controls.find(button) != activeGame->controls.end())
+					{
+						spriteBatch->draw(texture, blib::math::easyMatrix(settings->center + glm::vec2(50, 400 + y), 0, 0.75f * settings->scale), controllerMap.controller->center);
+						spriteBatch->draw(font, activeGame->controls[button], blib::math::easyMatrix(settings->center + offset + glm::vec2(0, y)), blib::Color::black);
+					}
+				};
+				
+				d(GameBase::ControllerButton::ButtonA, controllerMap.a, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ButtonB, controllerMap.b, glm::vec2(420, 275));
+				d(GameBase::ControllerButton::ButtonX, controllerMap.x, glm::vec2(420, 205));
+				d(GameBase::ControllerButton::ButtonY, controllerMap.y, glm::vec2(420, 145));
+				d(GameBase::ControllerButton::ButtonL, controllerMap.l, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ButtonR, controllerMap.r, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::Dpad, controllerMap.dpad, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ThumbstickLeft, controllerMap.leftstick, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ThumbstickRight, controllerMap.rightstick, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::TriggersLeft, controllerMap.lefttrigger, glm::vec2(-425, -32));
+				d(GameBase::ControllerButton::TriggersRight, controllerMap.righttrigger, glm::vec2(175, -32));
+			}
+
 			spriteBatch->end();
 		}
 		spriteBatch->begin();
@@ -603,8 +661,18 @@ void PlayAllTheGames::switchState( State newState )
 		pregameTickTime = PREGAMETIME;
 		if (audio.activeMusic == -1)
 		{
+			audio.menu->stop();
 			audio.activeMusic = rand() % audio.music.size();
 			audio.music[audio.activeMusic]->play(false);
+		}
+	}
+	if (newState == InMenu)
+	{
+		if (audio.activeMusic != -1)
+		{
+			audio.music[audio.activeMusic]->stop();
+			audio.activeMusic = -1;
+			audio.menu->play(true);
 		}
 	}
 

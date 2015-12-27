@@ -19,6 +19,7 @@ class MicroRace : public AliveGame<MicroRacePlayer>
 	float spawnFactor;
 	float gameTime;
 public:
+	MicroRace();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 8); }
 	virtual std::string getName();
 	virtual std::string getInstructions();

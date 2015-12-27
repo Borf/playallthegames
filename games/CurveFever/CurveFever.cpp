@@ -21,7 +21,7 @@
 
 CurveFever::CurveFever()
 {
-
+	controls[ControllerButton::ThumbstickLeft] = "Move left/right";
 }
 
 std::string CurveFever::getName()

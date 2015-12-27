@@ -13,6 +13,11 @@
 #include "BreakOutBall.h"
 
 
+BreakOut::BreakOut()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string BreakOut::getName()
 {
 	return "BreakOut";

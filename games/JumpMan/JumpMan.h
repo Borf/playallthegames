@@ -23,7 +23,7 @@ namespace jumpman
 		float speed;
 	public:
 
-
+		JumpMan();
 		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 		virtual std::string getName();
 		virtual std::string getInstructions();

@@ -25,6 +25,7 @@ namespace pacman
 	PacMan::PacMan()
 	{
 		backgroundColor = glm::vec4(0, 0, 0, 1);
+		controls[ControllerButton::ThumbstickLeft] = "Move";
 	}
 
 	std::string PacMan::getName()

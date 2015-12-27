@@ -19,6 +19,7 @@ class VacuumSucker : public ScoreGame<VacuumSuckerPlayer>
 	std::vector<glm::vec2> trash;
 
 public:
+	VacuumSucker();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();
 	virtual std::string getInstructions();

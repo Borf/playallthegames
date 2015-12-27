@@ -29,6 +29,7 @@ std::string PushOut::getInstructions()
 PushOut::PushOut()
 {
 	world = NULL;
+	controls[ControllerButton::ThumbstickLeft] = "Move";
 }
 
 

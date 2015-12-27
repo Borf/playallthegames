@@ -37,6 +37,9 @@ using blib::util::Log;
 MacroMachines::MacroMachines()
 {
 	world = NULL;
+	controls[ControllerButton::ButtonA] = "Accelerate";
+	controls[ControllerButton::ButtonR] = "Break/reverse";
+	controls[ControllerButton::ThumbstickLeft] = "Steer";
 }
 
 std::string MacroMachines::getName()

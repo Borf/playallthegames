@@ -5,6 +5,7 @@
 
 #include <blib/App.h>
 #include <blib/KeyListener.h>
+#include <blib/TextureMap.h>
 
 namespace blib { class Texture; class FBO; class Font; struct KeyState; enum class Key; class AudioManager; class Shader; class AudioSample; }
 
@@ -46,9 +47,27 @@ public:
 		blib::AudioSample* gameOver;
 		blib::AudioSample* tick;
 		blib::AudioSample* go;
+		blib::AudioSample* menu;
 		std::vector<blib::AudioSample*> music;
 		int activeMusic;
 	} audio;
+
+
+	struct ControllerMap
+	{
+		blib::Texture* controller;
+		blib::Texture* a;
+		blib::Texture* b;
+		blib::Texture* x;
+		blib::Texture* y;
+		blib::Texture* l;
+		blib::Texture* r;
+		blib::Texture* dpad;
+		blib::Texture* leftstick;
+		blib::Texture* rightstick;
+		blib::Texture* lefttrigger;
+		blib::Texture* righttrigger;
+	} controllerMap;
 
 
 

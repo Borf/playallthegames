@@ -13,6 +13,10 @@
 PokerSteps::PokerSteps()
 {
 	maxPlayerScore = 15;
+
+	controls[ControllerButton::ButtonX] = "Vote 1";
+	controls[ControllerButton::ButtonY] = "Vote 3";
+	controls[ControllerButton::ButtonB] = "Vote 5";
 }
 
 

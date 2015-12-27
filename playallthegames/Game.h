@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <map>
 
 #include <blib/util/FileSystem.h>
 #include <glm/glm.hpp>
@@ -33,13 +34,25 @@ protected:
 	blib::Renderer* renderer;
 	blib::ResourceManager* resourceManager;
 	Settings* settings;
+
 public:
 	float gameTime;
 	glm::vec4 backgroundColor;
-	enum ControllerButton
+	enum class ControllerButton
 	{
-
+		ButtonA,
+		ButtonB,
+		ButtonX,
+		ButtonY,
+		ButtonL,
+		ButtonR,
+		Dpad,
+		ThumbstickLeft,
+		ThumbstickRight,
+		TriggersLeft,
+		TriggersRight,
 	};
+	std::map<ControllerButton, std::string> controls;
 
 
 	GameBase();

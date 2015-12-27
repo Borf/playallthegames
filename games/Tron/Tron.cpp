@@ -16,7 +16,7 @@
 
 Tron::Tron()
 {
-
+	controls[ControllerButton::ThumbstickLeft] = "Move";
 }
 
 std::string Tron::getName()

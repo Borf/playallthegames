@@ -25,6 +25,7 @@ using blib::util::Log;
 FlyFar::FlyFar()
 {
 	backgroundColor = glm::vec4(73.0f/255, 96.0f/255, 172.0f/255,1);
+	controls[ControllerButton::ThumbstickLeft] = "Move left/right";
 }
 
 std::string FlyFar::getName()

@@ -20,6 +20,7 @@ class Herding : public ScoreGame<HerdingPlayer>
 	bool checkCollision2(Sheep* sheep);
 
 public:
+	Herding();
 	std::vector<Sheep*> sheep;
 
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 4); }

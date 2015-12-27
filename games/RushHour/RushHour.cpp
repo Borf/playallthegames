@@ -17,6 +17,9 @@
 
 RushHour::RushHour()
 {
+	controls[ControllerButton::ButtonA] = "Accelerate";
+	controls[ControllerButton::ButtonB] = "Stop";
+	controls[ControllerButton::ThumbstickLeft] = "Move cursor";
 }
 
 

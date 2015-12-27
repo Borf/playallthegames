@@ -49,6 +49,12 @@ Soccer::Soccer()
 {
 	world = NULL;
 	backgroundColor = glm::vec4(0, 0, 0,1);
+	controls[ControllerButton::ButtonA] = "Shoot";
+	controls[ControllerButton::ButtonB] = "Pass";
+	controls[ControllerButton::ButtonL] = "Shoot";
+	controls[ControllerButton::ButtonR] = "Pass";
+	controls[ControllerButton::ThumbstickLeft] = "Move p1";
+	controls[ControllerButton::ThumbstickRight] = "Move p2";
 }
 
 void Soccer::start(Difficulty difficulty)

@@ -19,7 +19,9 @@
 
 BulletHell::BulletHell( )
 {
-
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+	controls[ControllerButton::TriggersLeft] = "Rotate";
+	controls[ControllerButton::TriggersRight] = "Rotate";
 }
 
 

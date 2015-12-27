@@ -23,7 +23,7 @@ class BreakOut : public Game<BreakOutPlayer>
 	std::vector<BreakOutBall*> balls;
 	float speed;
 public:
-
+	BreakOut();
 
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();

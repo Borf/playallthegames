@@ -15,6 +15,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+Herding::Herding()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string Herding::getName()
 {
 	return "Herding";

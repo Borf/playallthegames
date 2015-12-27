@@ -33,7 +33,7 @@ namespace shooter
 
 		void buildTriangles();
 		void addHole(const glm::vec2& position);
-
+		Shooter();
 		virtual std::string getName() override;
 		virtual std::string getInstructions() override;
 		virtual std::pair<int, int> getPlayerCount() override;

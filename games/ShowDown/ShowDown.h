@@ -20,6 +20,7 @@ class ShowDown : public AliveGame<ShowDownPlayer>
 	std::vector<std::pair<glm::vec3, glm::vec4> > gunshots;
 
 public:
+	ShowDown();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();
 	virtual std::string getInstructions();

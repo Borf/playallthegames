@@ -13,6 +13,11 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+VacuumSucker::VacuumSucker()
+{
+	controls[ControllerButton::ButtonA] = "Go forward";
+}
+
 std::string VacuumSucker::getName()
 {
 	return "VacuumSucker";

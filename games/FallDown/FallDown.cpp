@@ -11,6 +11,13 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+
+FallDown::FallDown()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+	controls[ControllerButton::ThumbstickRight] = "Move";
+}
+
 std::string FallDown::getName()
 {
 	return "FallDown";

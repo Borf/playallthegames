@@ -17,6 +17,7 @@ class SkipRope : public AliveGame<SkipRopePlayer>
 	float frame;
 	float speed;
 public:
+	SkipRope();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	virtual std::string getName();
 	virtual std::string getInstructions();

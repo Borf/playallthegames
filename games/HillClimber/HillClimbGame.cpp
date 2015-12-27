@@ -21,6 +21,11 @@ namespace hillclimb
 	HillClimb::HillClimb()
 	{
 		world = NULL;
+		controls[ControllerButton::ButtonA] = "Forward";
+		controls[ControllerButton::ButtonB] = "Backward";
+		controls[ControllerButton::ButtonX] = "Boost";
+		controls[ControllerButton::TriggersLeft] = "Flip CCW";
+		controls[ControllerButton::TriggersRight] = "Flip CW";
 	}
 	HillClimb::~HillClimb()
 	{
@@ -83,6 +88,7 @@ namespace hillclimb
 		world->SetDebugDraw(blib::Box2DDebug::getInstance());
 		blib::Box2DDebug::getInstance()->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_centerOfMassBit | b2Draw::e_pairBit);
 
+		level = rand();
 		floorCounter = -1;
 
 		floorBody[0] = NULL;
@@ -255,9 +261,12 @@ namespace hillclimb
 	void HillClimb::draw()
 	{
 		int firstPlayer = blib::linq::max<float, int>(players, [](HillClimbPlayer* p) { return p->car->GetPosition().x; }, [](HillClimbPlayer* p) { return p->index; });
-		int lastPlayer = blib::linq::min<float, int>(blib::linq::where(players, [](HillClimbPlayer* p) { return p->alive; }), [](HillClimbPlayer* p) { return p->car->GetPosition().x; }, [](HillClimbPlayer* p) { return p->index; });
-
-		float center = (players[firstPlayer]->car->GetPosition().x + players[lastPlayer]->car->GetPosition().x) / 2.0f;
+		float center = players[firstPlayer]->car->GetPosition().x;
+		if (!hasWinner())
+		{
+			int lastPlayer = blib::linq::min<float, int>(blib::linq::where(players, [](HillClimbPlayer* p) { return p->alive; }), [](HillClimbPlayer* p) { return p->car->GetPosition().x; }, [](HillClimbPlayer* p) { return p->index; });
+			center = (players[firstPlayer]->car->GetPosition().x + players[lastPlayer]->car->GetPosition().x) / 2.0f;
+		}
 
 
 		glm::mat4 transform;

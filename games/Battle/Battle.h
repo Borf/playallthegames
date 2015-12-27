@@ -17,7 +17,7 @@ class Battle : public ScoreGame<BattlePlayer>
 	BattleLevel* level;
 	std::vector<BattleEnemy*> enemies;
 public:
-
+	Battle();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 8); }
 	virtual std::string getName();
 	virtual std::string getInstructions();

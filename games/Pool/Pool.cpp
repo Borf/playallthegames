@@ -23,6 +23,8 @@ Pool::Pool()
 {
 	this->totalScore = 15;
 	world = NULL;
+	controls[ControllerButton::ButtonA] = "Poke ball";
+	controls[ControllerButton::ThumbstickLeft] = "Rotate cue";
 }
 
 std::string Pool::getName()

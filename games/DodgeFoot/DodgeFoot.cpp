@@ -9,6 +9,12 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/Settings.h"
 
+
+DodgeFoot::DodgeFoot()
+{
+	controls[ControllerButton::ThumbstickLeft] = "Move";
+}
+
 std::string DodgeFoot::getName()
 {
 	return "DodgeFoot";

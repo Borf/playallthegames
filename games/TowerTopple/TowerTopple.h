@@ -60,6 +60,7 @@ public:
 	btDiscreteDynamicsWorld*                world;
 	DebugDraw* debugDraw;
 
+	TowerTopple();
 	blib::StaticModel* ballModel;
 
 	blib::RenderState renderState;
