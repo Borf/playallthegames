@@ -35,21 +35,22 @@ namespace backattack
 
 
 		int data[] = { 
-			2, 6, 
-			2, 8,
-			0, 3,
-			0, 6,
-		
-			1, 4,
-			1, 7,
+			2, 6, 0,
+			2, 3, 0,
+			1, 4, 0,
+			0, 4, 0,
+	
+			1, 2, 3,
+			1, 6, 3
 		};
 
 
 
-		for (int i = 0; i < sizeof(data) / sizeof(int) / 2; i++)
+		for (int i = 0; i < sizeof(data) / sizeof(int) / 3; i++)
 		{
-			int side = data[i*2];// i % 4;// rand() % 4;
-			int pos = data[i*2+1];// 2 + (rand() % (width / 2 - 2)) * 2;
+			int side = data[i*3];// i % 4;// rand() % 4;
+			int pos = data[i * 3 + 1];// 2 + (rand() % (width / 2 - 2)) * 2;
+			int offset = data[i * 3 + 2];// 2 + (rand() % (width / 2 - 2)) * 2;
 
 			int dx = side >= 2 ? 0 : -(2*side-1);
 			int dy = side < 2 ? 0 : -(2*(side-2)-1);
@@ -72,22 +73,25 @@ namespace backattack
 			for (int i = 0; i < 30; i++)
 			{
 				bool doBreak = false;
-				blib::StaticModel* model = models.straight;
-				float rotation = dx != 0 ? 90.0f : 0.0f;
-				if (tiles[x][y] != NULL)
+				if (i >= offset)
 				{
-					if (i != 0)
-						doBreak = true;
-					if (tiles[x][y]->model == models.junction)
-						model = models.cross;
-					else
-						model = models.junction;
-					float rots[] = { 90, -90, 0, 180 };
-					rotation = rots[side];
-					if (i != 0)
-						rotation += 180;
+					blib::StaticModel* model = models.straight;
+					float rotation = dx != 0 ? 90.0f : 0.0f;
+					if (tiles[x][y] != NULL)
+					{
+						if (i != offset)
+							doBreak = true;
+						if (tiles[x][y]->model == models.junction)
+							model = models.cross;
+						else
+							model = models.junction;
+						float rots[] = { 90, -90, 0, 180 };
+						rotation = rots[side];
+						if (i != offset)
+							rotation += 180;
+					}
+					tiles[x][y] = new Tile(model, rotation);
 				}
-				tiles[x][y] = new Tile(model, rotation);
 				x += dx;
 				y += dy;
 				if (doBreak)

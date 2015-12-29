@@ -18,8 +18,10 @@ namespace backattack
 		glm::vec2 position;
 		glm::vec2 direction;
 		bool alive;
-		Bullet(const glm::vec2& position, const glm::vec2& direction)
+		Player* player;
+		Bullet(const glm::vec2& position, const glm::vec2& direction, Player* player)
 		{
+			this->player = player;
 			this->position = position;
 			this->direction = direction;
 			alive = true;
@@ -42,8 +44,11 @@ namespace backattack
 		blib::StaticModel* cart;
 		blib::StaticModel* cube;
 		blib::StaticModel* bullet;
+		blib::StaticModel* powerup;
 
 		std::vector<Bullet> bullets;
+
+		int nextSpawn;
 
 
 		Level* level;

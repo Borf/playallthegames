@@ -1181,6 +1181,9 @@
     <None Include="..\assets\shaders\gl\BackAttack.frag">
       <Filter>games\BackAttack</Filter>
     </None>
+    <None Include="..\assets\games\BackAttack\powerup.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\assets\games\TowerTopple\ball.3ds">

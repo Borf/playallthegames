@@ -5,12 +5,15 @@
 #include <blib/SpriteBatch.h>
 #include <blib/StaticModel.h>
 #include <blib/Math.h>
+#include <blib/util/Log.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
+
+using blib::util::Log;
 
 namespace backattack
 {
@@ -58,6 +61,7 @@ namespace backattack
 		cart = new blib::StaticModel("assets/games/BackAttack/mine_cart.fbx.json", resourceManager, renderer);
 		cube = new blib::StaticModel("assets/games/BackAttack/cube.fbx.json", resourceManager, renderer);
 		bullet = new blib::StaticModel("assets/games/BackAttack/bullet.fbx.json", resourceManager, renderer);
+		powerup = new blib::StaticModel("assets/games/BackAttack/powerup.fbx.json", resourceManager, renderer);
 	}
 
 	void BackAttack::start(Difficulty difficulty)
@@ -76,14 +80,28 @@ namespace backattack
 
 		for (auto p : players)
 			p->angle = -90.0f * p->index;
+
+		nextSpawn = 10;
 	}
 
 	float cameraHeight = 0;
 
-	float playerSpeed = 32.0f;
-
 	void BackAttack::update(float elapsedTime)
 	{
+		if (gameTime > nextSpawn && gameTime - elapsedTime < nextSpawn)
+		{
+			int x = rand() % level->width;
+			int y = rand() % level->height;
+			while (!level->tiles[x][y]->isTrack)
+			{
+				x = rand() % level->width;
+				y = rand() % level->height;
+			}
+			level->powerups.push_back(glm::vec2(x, y));
+			nextSpawn += ((nextSpawn-1)%10);
+		}
+
+
 		for (auto p : players)
 		{
 			if (!p->alive)
@@ -94,9 +112,26 @@ namespace backattack
 				glm::vec2 dir = glm::normalize(p->joystick.leftStick);
 				p->wishDirection = glm::round(glm::degrees(atan2(-dir.y, dir.x) / 90.0f))*90;
 			}
+			if (p->speed > 32)
+			{
+				p->speed -= elapsedTime*2;
+				if (p->speed < 32)
+					p->speed = 32;
+			}
+
+			for (size_t i = 0; i < level->powerups.size(); i++)
+			{
+				if (glm::distance(level->powerups[i]*8.0f, p->position) < 3)
+				{
+					p->speed = 48;
+					level->powerups.erase(level->powerups.begin() + i);
+					break;
+				}
+			}
 
 
-			glm::vec2 newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * playerSpeed;
+
+			glm::vec2 newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * p->speed;
 			bool collided = false;
 			glm::ivec2 tile(round(p->position.x / 8), round(p->position.y / 8));
 
@@ -131,7 +166,7 @@ namespace backattack
 				}
 
 			}
-			newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * playerSpeed;
+			newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * p->speed;
 			p->position = newPosition;
 
 			for (auto pp : players)
@@ -154,34 +189,27 @@ namespace backattack
 
 			if (p->joystick.a == 1 && p->prevJoystick.a == 0)
 			{
-				bullets.push_back(Bullet(p->position + 2.0f * blib::math::fromAngle(glm::radians(p->angle)), blib::math::fromAngle(glm::radians(p->angle))));
+				bullets.push_back(Bullet(p->position, blib::math::fromAngle(glm::radians(p->angle)), p));
 			}
-
-/*			float oldDist = glm::distance(p->position, 8.0f * glm::vec2(oldTile) + glm::vec2(4, 4));
-			float newDist = glm::distance(newPosition, 8.0f * glm::vec2(oldTile) + glm::vec2(4, 4));
-			if (newDist > oldDist)
-			{
-				if (newTile.x < 0 || newTile.y < 0 || newTile.x >= level->width || newTile.y >= level->height || !level->tiles[newTile.x][newTile.y]->isTrack)
-				{
-					p->angle += 90.0f;
-					collided = true;
-				}
-			}
-			if (!collided)
-				p->position = newPosition;
-				*/
 
 		}
 
 		for (Bullet& b : bullets)
 		{
-			b.position += b.direction * elapsedTime * (playerSpeed * 2.0f);
+			b.position += b.direction * elapsedTime * (32 * 3.0f);
 			for (auto p : players)
 			{
-				if (glm::distance(b.position, p->position) < 1)
+				if (p->alive && glm::distance(b.position, p->position) < 3 && b.player != p)
 				{
 					b.alive = false;
-					if (b.direction == blib::math::fromAngle(glm::radians(p->angle)))
+					float diff = atan2(b.direction.y, b.direction.x) - glm::radians(p->angle);
+					while (diff <= -2 * blib::math::pif+0.1f)
+						diff += 2 * blib::math::pif;
+					while (diff >= 2 * blib::math::pif)
+						diff -= 2 * blib::math::pif-0.1f;
+
+					Log::out << diff << Log::newline;
+					if (fabs(diff) < 0.1f)
 					{
 						p->alive = false;
 					}
@@ -196,7 +224,7 @@ namespace backattack
 	void BackAttack::draw()
 	{
 		glm::mat4 projectionMatrix = glm::perspective(70.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
-		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -60, level->height * 4-20), glm::vec3(level->width * 4 - 4, -16.5, level->height * 4-10.5), glm::vec3(0, -1, 0));
+		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -60, level->height * 4-20), glm::vec3(level->width * 4 - 4, -14, level->height * 4-10.5), glm::vec3(0, -1, 0));
 		renderState.activeShader->setUniform(Uniforms::color, glm::vec4(1, 1, 1, 1));
 
 
@@ -215,7 +243,8 @@ namespace backattack
 
 			glm::mat4 mat;
 			mat = glm::translate(mat, glm::vec3(p->position.x, -1.5, p->position.y));
-			mat = glm::rotate(mat, 180.0f-p->angle, glm::vec3(0, 1, 0));
+			mat = glm::rotate(mat, 180.0f - p->angle, glm::vec3(0, 1, 0));
+			mat = glm::scale(mat, glm::vec3(1.5f, 1.5f, 1.5f));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
 
 			renderState.activeShader->setUniform(Uniforms::color, p->participant->color);
@@ -237,34 +266,26 @@ namespace backattack
 			glm::ivec2 tile(round(p->position.x / 8), round(p->position.y / 8));
 			glm::ivec2 nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
 
-
-
-
-
-/*			mat = glm::mat4();
-			mat = glm::translate(mat, glm::vec3(tile.x*8, -1, tile.y*8));
-			mat = glm::scale(mat, glm::vec3(8,1,8));
-			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
-			renderState.activeShader->setUniform(Uniforms::color, glm::vec4(1,0,0,-.25));
-			cube->draw(renderState, renderer, [this](const blib::Material& material)
-			{
-				renderState.activeTexture[0] = material.texture;
-			});
-			mat = glm::mat4();
-			mat = glm::translate(mat, glm::vec3(nextTile.x * 8, -1, nextTile.y * 8));
-			mat = glm::scale(mat, glm::vec3(8, 1, 8));
-			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
-			renderState.activeShader->setUniform(Uniforms::color, glm::vec4(0, 1, 0, -.25));
-			cube->draw(renderState, renderer, [this](const blib::Material& material)
-			{
-				renderState.activeTexture[0] = material.texture;
-			});
-*/
-
 			renderState.activeShader->setUniform(Uniforms::color, glm::vec4(0, 0, 0, 0));
 
 
 		}
+
+
+		for (glm::vec2& pos : level->powerups)
+		{
+			float s = 0.025f + 0.01 * glm::sin(gameTime * 10);
+			glm::mat4 mat;
+			mat = glm::translate(mat, glm::vec3(8*pos.x, -2 + glm::sin(gameTime * 10), 8*pos.y));
+			mat = glm::rotate(mat, 15 * gameTime, glm::vec3(1, sin(gameTime), cos(gameTime)));
+			mat = glm::scale(mat, glm::vec3(s, s, s));
+			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
+			powerup->draw(renderState, renderer, [this](const blib::Material& material)
+			{
+				renderState.activeTexture[0] = material.texture;
+			});
+		}
+
 
 		for (Bullet& b : bullets)
 		{

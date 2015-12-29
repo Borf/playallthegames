@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <glm/glm.hpp>
 
 namespace blib {
 	class SpriteBatch;
@@ -15,8 +16,8 @@ namespace backattack
 	class Level
 	{
 	public:
-		const int width = 16;
-		const int height = 11;
+		const int width = 10;
+		const int height = 9;
 
 
 		class Tile
@@ -46,6 +47,8 @@ namespace backattack
 
 
 		std::vector<std::vector<Tile*>> tiles;
+
+		std::vector<glm::vec2> powerups;
 
 		Level();
 		void draw(blib::RenderState& renderState, blib::Renderer* renderer);
