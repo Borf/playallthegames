@@ -165,6 +165,8 @@
     <ClCompile Include="..\games\MicroRace\Foot.cpp" />
     <ClCompile Include="..\games\MicroRace\MicroRace.cpp" />
     <ClCompile Include="..\games\MicroRace\MicroRacePlayer.cpp" />
+    <ClCompile Include="..\games\NippleRub\NippleRub.cpp" />
+    <ClCompile Include="..\games\NippleRub\Player.cpp" />
     <ClCompile Include="..\games\Osmos\Osmos.cpp" />
     <ClCompile Include="..\games\Osmos\OsmosPlayer.cpp" />
     <ClCompile Include="..\games\Osmos\Sphere.cpp" />
@@ -325,6 +327,8 @@
     <ClInclude Include="..\games\MicroRace\Foot.h" />
     <ClInclude Include="..\games\MicroRace\MicroRace.h" />
     <ClInclude Include="..\games\MicroRace\MicroRacePlayer.h" />
+    <ClInclude Include="..\games\NippleRub\NippleRub.h" />
+    <ClInclude Include="..\games\NippleRub\Player.h" />
     <ClInclude Include="..\games\Osmos\Osmos.h" />
     <ClInclude Include="..\games\Osmos\OsmosPlayer.h" />
     <ClInclude Include="..\games\Osmos\Sphere.h" />

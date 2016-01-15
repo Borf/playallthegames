@@ -36,7 +36,7 @@ public:
 	Session();
 	void start();
 	void nextGame( PlayAllTheGames* playallthegames );
-	void setDebug(PlayAllTheGames* playallthegames, GameBase* game);
+	void setDebug(PlayAllTheGames* playallthegames, GameBase* game, int playerCount);
 	void setInitialPlayers();
 	void setPlayerColors();
 

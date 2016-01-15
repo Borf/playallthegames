@@ -151,6 +151,9 @@
     <Filter Include="games\HillClimb">
       <UniqueIdentifier>{3b751eba-1bc7-4c08-8871-839723882ff8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\NippleRub">
+      <UniqueIdentifier>{4faa2a76-e617-4d9a-a629-74857aabe931}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -626,6 +629,12 @@
     </ClCompile>
     <ClCompile Include="..\games\HillClimber\HillClimbGame.cpp">
       <Filter>games\HillClimb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\NippleRub\Player.cpp">
+      <Filter>games\NippleRub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\NippleRub\NippleRub.cpp">
+      <Filter>games\NippleRub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1124,6 +1133,12 @@
     <ClInclude Include="..\games\HillClimber\HillClimbGame.h">
       <Filter>games\HillClimb</Filter>
     </ClInclude>
+    <ClInclude Include="..\games\NippleRub\NippleRub.h">
+      <Filter>games\NippleRub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\NippleRub\Player.h">
+      <Filter>games\NippleRub</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -1180,9 +1195,6 @@
     </None>
     <None Include="..\assets\shaders\gl\BackAttack.frag">
       <Filter>games\BackAttack</Filter>
-    </None>
-    <None Include="..\assets\games\BackAttack\powerup.fbx">
-      <Filter>games\BackAttack\assets</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1249,5 +1261,6 @@
     <CustomBuild Include="..\assets\games\BackAttack\bullet.fbx">
       <Filter>games\BackAttack\assets</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\assets\games\BackAttack\powerup.fbx" />
   </ItemGroup>
 </Project>

@@ -41,7 +41,8 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "BackAttack"
+#define DEBUGGAME "NippleRub"
+#define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG
 #define PREGAMETIME 0
@@ -260,7 +261,7 @@ void PlayAllTheGames::update( double elapsedTime )
 			if(session == NULL)
 			{
 				session = new Session();
-				session->setDebug(this, getGame(DEBUGGAME));
+				session->setDebug(this, getGame(DEBUGGAME), DEBUGPLAYERCOUNT);
 			}
 			session->nextGame(this);
 			switchState(PreGame);
@@ -626,8 +627,8 @@ void PlayAllTheGames::draw()
 				d(GameBase::ControllerButton::ButtonL, controllerMap.l, glm::vec2(420, 335));
 				d(GameBase::ControllerButton::ButtonR, controllerMap.r, glm::vec2(420, 335));
 				d(GameBase::ControllerButton::Dpad, controllerMap.dpad, glm::vec2(420, 335));
-				d(GameBase::ControllerButton::ThumbstickLeft, controllerMap.leftstick, glm::vec2(420, 335));
-				d(GameBase::ControllerButton::ThumbstickRight, controllerMap.rightstick, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ThumbstickLeft, controllerMap.leftstick, glm::vec2(-520, 355));
+				d(GameBase::ControllerButton::ThumbstickRight, controllerMap.rightstick, glm::vec2(220, 435));
 				d(GameBase::ControllerButton::TriggersLeft, controllerMap.lefttrigger, glm::vec2(-425, -32));
 				d(GameBase::ControllerButton::TriggersRight, controllerMap.righttrigger, glm::vec2(175, -32));
 			}
