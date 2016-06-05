@@ -189,8 +189,8 @@ void Soccer::update(float elapsedTime)
 
 	for (auto p : players)
 	{
-		p->players[0]->ApplyForceToCenter(4000.0f * p->joystick.leftStick * (float)elapsedTime);
-		p->players[1]->ApplyForceToCenter(4000.0f * p->joystick.rightStick * (float)elapsedTime);
+		p->players[0]->ApplyForceToCenter(4000.0f * p->joystick.leftStick * (float)elapsedTime, true);
+		p->players[1]->ApplyForceToCenter(4000.0f * p->joystick.rightStick * (float)elapsedTime, true);
 
 		if (glm::length(p->joystick.leftStick) > 0.25f)
 			p->players[0]->SetTransform(p->players[0]->GetPosition(), atan2(p->joystick.leftStick.y, p->joystick.leftStick.x));
@@ -204,14 +204,14 @@ void Soccer::update(float elapsedTime)
 				world->DestroyJoint(possessionJoint);
 				possessionJoint = NULL;
 				possessionPlayer = NULL;
-				ball->ApplyForceToCenter(50 * blib::util::fromAngle(p->players[0]->GetAngle()));
+				ball->ApplyForceToCenter(50 * blib::util::fromAngle(p->players[0]->GetAngle()), true);
 			}
 			else if (possessionJoint->GetBodyA() == p->players[1])
 			{
 				world->DestroyJoint(possessionJoint);
 				possessionJoint = NULL;
 				possessionPlayer = NULL;
-				ball->ApplyForceToCenter(50 * blib::util::fromAngle(p->players[1]->GetAngle()));
+				ball->ApplyForceToCenter(50 * blib::util::fromAngle(p->players[1]->GetAngle()), true);
 			}
 		}
 		if (((p->joystick.b == 1 && p->prevJoystick.b != 1) || (p->joystick.r == 1 && p->prevJoystick.r != 1)) && possessionJoint)
@@ -222,7 +222,7 @@ void Soccer::update(float elapsedTime)
 				possessionJoint = NULL;
 				possessionPlayer = NULL;
 				glm::vec2 diff = p->players[1]->GetPosition() - p->players[0]->GetPosition();
-				ball->ApplyForceToCenter(50.0f * glm::normalize(diff));
+				ball->ApplyForceToCenter(50.0f * glm::normalize(diff), true);
 			}
 			else if (possessionJoint->GetBodyA() == p->players[1])
 			{
@@ -230,7 +230,7 @@ void Soccer::update(float elapsedTime)
 				possessionJoint = NULL;
 				possessionPlayer = NULL;
 				glm::vec2 diff = p->players[0]->GetPosition() - p->players[1]->GetPosition();
-				ball->ApplyForceToCenter(50.0f * glm::normalize(diff));
+				ball->ApplyForceToCenter(50.0f * glm::normalize(diff), true);
 			}
 		}
 
@@ -322,7 +322,7 @@ void Soccer::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
 						possessionPlayer = p->players[i];
 
 				if (other == p->bottle)
-					p->bottle->ApplyAngularImpulse(100);
+					p->bottle->ApplyAngularImpulse(100, true);
 
 			}
 

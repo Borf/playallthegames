@@ -159,7 +159,7 @@ void Pool::update(float elapsedTime)
 			players[i]->direction = glm::degrees(atan2(players[i]->joystick.leftStick.y, players[i]->joystick.leftStick.x));
 
 		if (players[i]->joystick.a && !players[i]->prevJoystick.a && players[i]->ball->GetLinearVelocity().Length() < 0.1)
-			players[i]->ball->ApplyLinearImpulse(100.0f * blib::util::fromAngle(glm::radians(players[i]->direction)), players[i]->ball->GetWorldCenter());
+			players[i]->ball->ApplyLinearImpulse(100.0f * blib::util::fromAngle(glm::radians(players[i]->direction)), players[i]->ball->GetWorldCenter(), true);
 	}
 
 

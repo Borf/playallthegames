@@ -118,7 +118,7 @@ void PewPew::update(float elapsedTime)
 	
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		players[i]->body->ApplyLinearImpulse(elapsedTime * 10 * players[i]->joystick.leftStick, players[i]->body->GetPosition());
+		players[i]->body->ApplyLinearImpulse(elapsedTime * 10 * players[i]->joystick.leftStick, players[i]->body->GetPosition(), true);
 
 		if (glm::length(players[i]->joystick.leftStick) > 0.1f)
 		{

@@ -154,6 +154,9 @@
     <Filter Include="games\NippleRub">
       <UniqueIdentifier>{4faa2a76-e617-4d9a-a629-74857aabe931}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\TallyTulip">
+      <UniqueIdentifier>{9947da05-121f-4e3a-af68-8df5eea9af26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -635,6 +638,12 @@
     </ClCompile>
     <ClCompile Include="..\games\NippleRub\NippleRub.cpp">
       <Filter>games\NippleRub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\TallyTulip\TallyTulipPlayer.cpp">
+      <Filter>games\TallyTulip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\TallyTulip\TallyTulip.cpp">
+      <Filter>games\TallyTulip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1138,6 +1147,12 @@
     </ClInclude>
     <ClInclude Include="..\games\NippleRub\Player.h">
       <Filter>games\NippleRub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\TallyTulip\TallyTulipPlayer.h">
+      <Filter>games\TallyTulip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\TallyTulip\TallyTulip.h">
+      <Filter>games\TallyTulip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

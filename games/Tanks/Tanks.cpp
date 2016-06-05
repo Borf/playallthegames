@@ -169,8 +169,8 @@ void Tanks::update( float elapsedTime )
 		glm::vec2 forward = blib::util::fromAngle(angle);
 		glm::vec2 side(-forward.y, forward.x);
 
-		p->body->ApplyForce(500.0f*p->joystick.leftStick.y * forward, p->body->GetWorldCenter() + side);
-		p->body->ApplyForce(500.0f*p->joystick.rightStick.y * forward, p->body->GetWorldCenter() -side);
+		p->body->ApplyForce(500.0f*p->joystick.leftStick.y * forward, p->body->GetWorldCenter() + side, true);
+		p->body->ApplyForce(500.0f*p->joystick.rightStick.y * forward, p->body->GetWorldCenter() -side, true);
 
 		p->targetAngle = blib::util::wrapAngleRad(p->targetAngle + (p->joystick.leftTrigger - p->joystick.rightTrigger) * elapsedTime);
 

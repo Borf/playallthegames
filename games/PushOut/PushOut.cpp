@@ -108,7 +108,7 @@ void PushOut::update( float elapsedTime )
 
 	for(size_t i = 0; i < players.size(); i++)
 	{
-		players[i]->body->ApplyForceToCenter(elapsedTime * 4000 * players[i]->joystick.leftStick);
+		players[i]->body->ApplyForceToCenter(elapsedTime * 4000 * players[i]->joystick.leftStick, true);
 
 		if(players[i]->body->GetWorldCenter().Length() > 5)
 			players[i]->alive = false;

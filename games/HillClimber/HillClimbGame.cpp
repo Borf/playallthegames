@@ -226,7 +226,7 @@ namespace hillclimb
 
 			if (p->joystick.x == 1 && p->prevJoystick.x != 1)
 			{
-				p->car->ApplyLinearImpulse(blib::math::fromAngle(p->car->GetAngle()) * 100.0f * (float) p->loops, p->car->GetWorldCenter());
+				p->car->ApplyLinearImpulse(blib::math::fromAngle(p->car->GetAngle()) * 100.0f * (float) p->loops, p->car->GetWorldCenter(), true);
 				p->loops = 0;
 			}
 
@@ -251,7 +251,7 @@ namespace hillclimb
 				p->rotations = 0;
 			}
 
-			p->car->ApplyTorque(200 * (p->joystick.rightTrigger - p->joystick.leftTrigger));
+			p->car->ApplyTorque(200 * (p->joystick.rightTrigger - p->joystick.leftTrigger), true);
 
 		}
 

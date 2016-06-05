@@ -82,7 +82,7 @@ void MacroMachinesPlayer::update(float elapsedTime)
 			{
 				glm::vec2 position = w->body->GetWorldCenter();
 				glm::vec2 force = w->body->GetWorldVector(glm::vec2(0, -power));
-				w->body->ApplyForce(force, position);
+				w->body->ApplyForce(force, position, true);
 			}
 		}
 		if (!braking)
@@ -100,7 +100,7 @@ void MacroMachinesPlayer::update(float elapsedTime)
 			for(auto w : wheels)
 			{
 				if (!forward)
-					w->body->ApplyForceToCenter(w->body->GetWorldVector(glm::vec2(0, 1.3f * power)));
+					w->body->ApplyForceToCenter(w->body->GetWorldVector(glm::vec2(0, 1.3f * power)), true);
 				w->setDensity(w->revolvePower == 0 ? 1.7f : 0.4f);
 			}
 		}
@@ -111,7 +111,7 @@ void MacroMachinesPlayer::update(float elapsedTime)
 				for(auto w : wheels)
 				{
 					if (w->powered)
-						w->body->ApplyForceToCenter(w->body->GetWorldVector(glm::vec2(0, 0.25f * power)));
+						w->body->ApplyForceToCenter(w->body->GetWorldVector(glm::vec2(0, 0.25f * power)), true);
 				}
 			}
 		}

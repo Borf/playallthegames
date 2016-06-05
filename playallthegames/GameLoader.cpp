@@ -33,6 +33,7 @@
 #include "../games/ShowDown/ShowDown.h"
 #include "../games/SkipRope/SkipRope.h"
 #include "../games/Soccer/Soccer.h"
+#include "../games/TallyTulip/TallyTulip.h"
 #include "../games/Tanks/Tanks.h"
 #include "../games/TowerTopple/TowerTopple.h"
 #include "../games/Tron/Tron.h"
@@ -74,6 +75,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new ShowDown());
 	games.push_back(new SkipRope());
 	games.push_back(new Soccer());
+	games.push_back(new tallytulip::TallyTulip());
 	games.push_back(new Tanks());
 	games.push_back(new TowerTopple());
 	games.push_back(new Tron());

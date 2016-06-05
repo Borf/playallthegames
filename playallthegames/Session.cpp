@@ -32,7 +32,7 @@ Session::Session()
 	gameSelectorType = NULL;
 	playerCount = 4;
 	playerSelectorType = 0;
-	gameSelectorType = 0;
+	gameSelectorType = 1;
 	difficulty = Difficulty::Normal;
 	stats = NULL;
 

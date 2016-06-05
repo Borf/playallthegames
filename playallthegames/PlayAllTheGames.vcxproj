@@ -204,6 +204,8 @@
     <ClCompile Include="..\games\SkipRope\SkipRopePlayer.cpp" />
     <ClCompile Include="..\games\Soccer\Soccer.cpp" />
     <ClCompile Include="..\games\Soccer\SoccerPlayer.cpp" />
+    <ClCompile Include="..\games\TallyTulip\TallyTulip.cpp" />
+    <ClCompile Include="..\games\TallyTulip\TallyTulipPlayer.cpp" />
     <ClCompile Include="..\games\Tanks\Tanks.cpp" />
     <ClCompile Include="..\games\Tanks\TanksPlayer.cpp" />
     <ClCompile Include="..\games\TowerTopple\TowerTopple.cpp" />
@@ -368,6 +370,8 @@
     <ClInclude Include="..\games\SkipRope\SkipRopePlayer.h" />
     <ClInclude Include="..\games\Soccer\Soccer.h" />
     <ClInclude Include="..\games\Soccer\SoccerPlayer.h" />
+    <ClInclude Include="..\games\TallyTulip\TallyTulip.h" />
+    <ClInclude Include="..\games\TallyTulip\TallyTulipPlayer.h" />
     <ClInclude Include="..\games\Tanks\Tanks.h" />
     <ClInclude Include="..\games\Tanks\TanksPlayer.h" />
     <ClInclude Include="..\games\TowerTopple\TowerTopple.h" />
