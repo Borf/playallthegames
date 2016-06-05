@@ -2,8 +2,8 @@
 
 set START=%time%
 echo %time%
-call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\vcvars32.bat"
-msbuild /t:rebuild /maxcpucount:8 /nologo /m vs2013\playallthegames.sln /p:Configuration=Release
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\vcvars32.bat"
+msbuild /t:rebuild /maxcpucount:8 /nologo /m vs2015\playallthegames.sln /p:Configuration=Release
 taskkill /f /im msbuild.exe
 echo %START% - %time%
 
@@ -24,7 +24,7 @@ REM echo :END >> copygame.bat
 
 rmdir /q /s patg
 mkdir patg
-xcopy /s /y vs2013\release\PlayAllTheGames.exe patg\
+xcopy /s /y vs2015\release\PlayAllTheGames.exe patg\
 REM xcopy /y %SystemRoot%\System32\vccorlib110.dll patg\
 REM xcopy /y %SystemRoot%\System32\msvcp110.dll patg\
 REM xcopy /y %SystemRoot%\System32\msvcr110.dll patg\
