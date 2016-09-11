@@ -9,6 +9,7 @@
 	"collision" : false, 
 	"particle" :
 	{
+		"rotationspeed" :  [0, 0],
 		"direction" : [ 0, 360 ],			/* initial direction */ 
 		"speed" : [ 0, 10.0 ],				/* initial speed */
 		"rotation" : [ -10, 10 ],			/* initial rotation speed */

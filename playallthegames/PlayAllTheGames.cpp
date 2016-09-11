@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "TallyTulip"
+#define DEBUGGAME "Tanks"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG

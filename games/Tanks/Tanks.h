@@ -5,7 +5,7 @@
 
 
 namespace blib {
-	class Texture; 	class ParticleSystem;
+	class Texture; 	class ParticleSystem; class SpriteSheet;
 };
 
 class b2World;
@@ -17,10 +17,11 @@ class Tanks : public AliveGame<TanksPlayer>
 	blib::ParticleSystem* particleSystem;
 
 	blib::Texture* back;
-	blib::Texture* tankSprite;
-	blib::Texture* turretSprite;
+	blib::SpriteSheet* tankSprite;
+	blib::SpriteSheet* turretSprite;
 	blib::Texture* bulletSprite;
 	blib::Texture* crateSprite;
+	blib::Texture* wallSprite;
 	b2World* world;
 
 	std::vector<b2Body*> bullets;
