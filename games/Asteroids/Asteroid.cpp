@@ -16,5 +16,6 @@ namespace asteroids
 		angle = rand() % 360;
 		angleIncrement = blib::math::randomFloat(-0.05f, 0.05f);  //movement around itself?
 		size = rand() % 3;
+		fade = 0;
 	}
 }

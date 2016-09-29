@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "Tanks"
+#define DEBUGGAME "Asteroids"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG

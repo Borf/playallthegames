@@ -13,6 +13,8 @@ namespace asteroids
 		float angleIncrement;
 		int size;
 
+		float fade;
+
 		Asteroid();
 	};
 
