@@ -37,7 +37,7 @@ void FallDown::loadResources()
 	backSprite = resourceManager->getResource<blib::Texture>("assets/games/FallDown/back.png");
 }
 
-void FallDown::start(Difficulty difficulty)
+void FallDown::start()
 {
 	speed = 1;
 	levelWidth = 1920/128;

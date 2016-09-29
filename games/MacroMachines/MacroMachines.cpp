@@ -69,7 +69,7 @@ void MacroMachines::loadResources()
 
 
 
-void MacroMachines::start(Difficulty difficulty)
+void MacroMachines::start()
 {
 	zoom = 10 * settings->scale;
 	lastPhysicsTick = 0;

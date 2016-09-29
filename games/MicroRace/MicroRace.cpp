@@ -37,7 +37,7 @@ void MicroRace::loadResources()
 	footSprite = resourceManager->getResource<blib::Texture>("assets/games/MicroRace/foot.png");
 }
 
-void MicroRace::start(Difficulty difficulty)
+void MicroRace::start()
 {
 	spawnFactor = 1;
 	for(auto p : players)

@@ -53,7 +53,7 @@ void Pool::loadResources()
 
 }
 
-void Pool::start(Difficulty difficulty)
+void Pool::start()
 {
 	if (world)
 		delete world;

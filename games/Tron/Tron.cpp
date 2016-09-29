@@ -37,7 +37,7 @@ void Tron::loadResources()
 	whitePixel = resourceManager->getResource<blib::Texture>("assets/games/Tron/white.png");
 }
 
-void Tron::start(Difficulty difficulty)
+void Tron::start()
 {
 	screen = std::vector< std::vector<bool> >(settings->resX, std::vector<bool>(settings->resY, false));
 

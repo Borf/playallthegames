@@ -62,7 +62,7 @@ namespace shooter
 
 	}
 
-	void Shooter::start(Difficulty difficulty)
+	void Shooter::start()
 	{
 		objects.clear();
 		objects.push_back(blib::math::Polygon({ glm::vec2(1545, 1063), glm::vec2(1423, 987), glm::vec2(1407, 1007), glm::vec2(1291, 966), glm::vec2(1235, 927), glm::vec2(1220, 914), glm::vec2(987, 980), glm::vec2(881, 1018), glm::vec2(729, 958), glm::vec2(715, 937), glm::vec2(537, 920), glm::vec2(405, 980), glm::vec2(293, 910), glm::vec2(306, 716), glm::vec2(210, 716), glm::vec2(204, 571), glm::vec2(54, 572), glm::vec2(51, 226), glm::vec2(167, 232), glm::vec2(166, 205), glm::vec2(104, 158), glm::vec2(54, 96), glm::vec2(107, 38), glm::vec2(300, 57), glm::vec2(301, 109), glm::vec2(398, 105), glm::vec2(400, 82), glm::vec2(542, 34), glm::vec2(640, 49), glm::vec2(682, 158), glm::vec2(635, 185), glm::vec2(674, 265), glm::vec2(825, 195), glm::vec2(823, 171), glm::vec2(880, 168), glm::vec2(908, 149), glm::vec2(920, 124), glm::vec2(995, 82), glm::vec2(1063, 120), glm::vec2(1160, 135), glm::vec2(1163, 187), glm::vec2(1361, 261), glm::vec2(1358, 227), glm::vec2(1697, 121), glm::vec2(1697, 195), glm::vec2(1732, 193), glm::vec2(1763, 124), glm::vec2(1866, 139), glm::vec2(1862, 236), glm::vec2(1878, 235), glm::vec2(1889, 406), glm::vec2(1878, 405), glm::vec2(1874, 463), glm::vec2(1852, 475), glm::vec2(1870, 601), glm::vec2(1863, 602), glm::vec2(1878, 623), glm::vec2(1724, 694), glm::vec2(1726, 672), glm::vec2(1698, 695), glm::vec2(1698, 702), glm::vec2(1761, 724), glm::vec2(1699, 762), glm::vec2(1699, 773), glm::vec2(1767, 812), glm::vec2(1699, 843), glm::vec2(1699, 856), glm::vec2(1765, 895), glm::vec2(1699, 922), glm::vec2(1699, 959), glm::vec2(1650, 933), glm::vec2(1622, 1017), glm::vec2(1600, 1007), glm::vec2(1614, 1046), }));

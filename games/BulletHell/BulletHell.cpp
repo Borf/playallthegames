@@ -44,7 +44,7 @@ void BulletHell::loadResources()
 //	backSprite = new DrawableTexture(Graphics.GraphicsDevice, SystemSettings.ResolutionX, SystemSettings.ResolutionY);// gameContent.Load<Texture2D>("bullethell/back");
 }
 
-void BulletHell::start(Difficulty difficulty)
+void BulletHell::start()
 {
 	bulletSpawnDelay = 0.6f;
 	blib::linq::foreach(players, [this] (BulletHellPlayer* p) { p->position = glm::vec2(300, (p->index+1) * (settings->resY / (players.size()+1))); } );

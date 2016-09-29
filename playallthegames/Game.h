@@ -36,7 +36,9 @@ protected:
 	blib::AudioManager* audioManager;
 	Settings* settings;
 
+
 public:
+	Difficulty difficulty;
 	float gameTime;
 	glm::vec4 backgroundColor;
 	enum class ControllerButton
@@ -65,7 +67,7 @@ public:
 
 	bool resourcesLoaded;
 	virtual void loadResources() = 0;
-	virtual void start(Difficulty difficulty) = 0;
+	virtual void start() = 0;
 
 	
 	virtual void update(float elapsedTime) = 0;

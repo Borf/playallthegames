@@ -30,7 +30,7 @@ namespace asteroids
 	}
 
 
-	void Asteroids::start(Difficulty difficulty)
+	void Asteroids::start()
 	{
 		for (auto p : players)
 		{

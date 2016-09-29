@@ -49,7 +49,7 @@ public:
 	virtual std::string getName();
 	virtual std::string getInstructions();
 	virtual void loadResources();
-	virtual void start(Difficulty difficulty);
+	virtual void start();
 
 	void buildLevelCache();
 

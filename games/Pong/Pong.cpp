@@ -32,7 +32,7 @@ void Pong::loadResources()
 
 }
 
-void Pong::start(Difficulty difficulty)
+void Pong::start()
 {
 	trashCount = 1;
 	positive = false;

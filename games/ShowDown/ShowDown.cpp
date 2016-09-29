@@ -41,7 +41,7 @@ void ShowDown::loadResources()
 
 }
 
-void ShowDown::start(Difficulty difficulty)
+void ShowDown::start()
 {
 
 	for(auto p : players)

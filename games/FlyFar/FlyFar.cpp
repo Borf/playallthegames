@@ -47,7 +47,7 @@ void FlyFar::loadResources()
 	balloonSprite = resourceManager->getResource<blib::Texture>("assets/games/FlyFar/balloon.png");
 }
 
-void FlyFar::start(Difficulty difficulty)
+void FlyFar::start()
 {
 	for(size_t i = 0; i < players.size(); i++)
 	{

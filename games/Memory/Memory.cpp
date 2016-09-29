@@ -41,7 +41,7 @@ void Memory::loadResources()
 	tileSheet = resourceManager->getResource<blib::SpriteSheet>("assets/games/Memory/cards1");
 }
 
-void Memory::start(Difficulty difficulty)
+void Memory::start()
 {
 	width = 6;
 	height = 6;

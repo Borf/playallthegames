@@ -57,7 +57,7 @@ Soccer::Soccer()
 	controls[ControllerButton::ThumbstickRight] = "Move p2";
 }
 
-void Soccer::start(Difficulty difficulty)
+void Soccer::start()
 {
 	if (world)
 		delete world;

@@ -46,7 +46,7 @@ namespace nipplerub
 		font = resourceManager->getResource<blib::Font>("lindsey");
 	}
 
-	void NippleRub::start(Difficulty difficulty)
+	void NippleRub::start()
 	{
 	}
 

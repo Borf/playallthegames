@@ -44,7 +44,7 @@ void CurveFever::loadResources()
 	direction =		resourceManager->getResource<blib::Texture>("assets/games/CurveFever/direction.png");
 }
 
-void CurveFever::start(Difficulty difficulty)
+void CurveFever::start()
 {
 	screen = std::vector< std::vector<int> >(settings->resX, std::vector<int>(settings->resY, 0));
 

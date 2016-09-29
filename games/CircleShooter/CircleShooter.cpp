@@ -33,7 +33,7 @@ void CircleShooter::loadResources()
 	bubbleSprite = resourceManager->getResource<blib::Texture>("assets/games/CircleShooter/bubble.png");
 }
 
-void CircleShooter::start(Difficulty difficulty)
+void CircleShooter::start()
 {
 	backgroundColor = glm::vec4(1, 1, 1, 1);
 	shootTimer = 0;

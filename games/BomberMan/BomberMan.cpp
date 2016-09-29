@@ -49,7 +49,7 @@ void BomberMan::loadResources()
 	explosionParticleSprite = resourceManager->getResource<blib::Texture>("assets/games/BomberMan/explosion.png");
 }
 
-void BomberMan::start(Difficulty difficulty)
+void BomberMan::start()
 {
 	blockSize = glm::min(settings->resX/levelWidth, settings->resY/levelHeight);
 

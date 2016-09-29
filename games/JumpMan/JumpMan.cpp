@@ -47,7 +47,7 @@ namespace jumpman
 		grassHeight = (int)(40 * settings->scale);
 	}
 
-	void JumpMan::start(Difficulty difficulty)
+	void JumpMan::start()
 	{
 		enemy = new BasicEnemy();
 		enemy->position = glm::vec2(1920 - 100, 1080 - 320);

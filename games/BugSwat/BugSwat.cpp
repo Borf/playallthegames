@@ -51,7 +51,7 @@ namespace bugswat
 		font = resourceManager->getResource<blib::Font>("menu");
 	}
 
-	void BugSwat::start(Difficulty difficulty)
+	void BugSwat::start()
 	{
 		blib::linq::foreach(players, [this](BugSwatPlayer* p) { p->position = glm::vec2(1920 / 2, 1080 / 2) + 300.0f * blib::util::fromAngle(p->index * ((float)M_PI * 2 / players.size())); });
 		blib::linq::deleteall(enemies);

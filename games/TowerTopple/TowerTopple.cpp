@@ -71,7 +71,7 @@ void TowerTopple::loadResources()
 	ballModel = new blib::StaticModel("assets/games/TowerTopple/ball.3ds.json", resourceManager, renderer);
 }
 
-void TowerTopple::start(Difficulty difficulty)
+void TowerTopple::start()
 {
 	//TODO: delete old stuff
 	broadphase = new btDbvtBroadphase();

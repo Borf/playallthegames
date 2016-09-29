@@ -37,7 +37,7 @@ void SkipRope::loadResources()
 	handSprite =		resourceManager->getResource<blib::Texture>("assets/games/SkipRope/hand.png");
 }
 
-void SkipRope::start(Difficulty difficulty)
+void SkipRope::start()
 {
 	frame = (float)M_PI;
 	speed = 1;

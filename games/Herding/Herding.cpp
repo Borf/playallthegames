@@ -39,7 +39,7 @@ void Herding::loadResources()
 	font = resourceManager->getResource<blib::Font>("lindsey");
 }
 
-void Herding::start(Difficulty difficulty)
+void Herding::start()
 {
 	totalScore = 20;
 

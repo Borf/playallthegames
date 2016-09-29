@@ -36,7 +36,7 @@ void Bouncy::loadResources()
 	objectsSprite = resourceManager->getResource<blib::Texture>("assets/games/Bouncy/shapes.png");
 }
 
-void Bouncy::start(Difficulty difficulty)
+void Bouncy::start()
 {
 
 	objects.clear();

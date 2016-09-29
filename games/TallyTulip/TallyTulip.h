@@ -38,7 +38,7 @@ namespace tallytulip
 		virtual std::string getInstructions() override;
 		virtual std::pair<int, int> getPlayerCount() override;
 		virtual void loadResources() override;
-		virtual void start(Difficulty difficulty) override;
+		virtual void start() override;
 		virtual void update(float elapsedTime) override;
 		virtual void draw() override;
 		virtual blib::Texture* getTitleImage() override;

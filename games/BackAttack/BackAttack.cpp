@@ -64,7 +64,7 @@ namespace backattack
 		powerup = new blib::StaticModel("assets/games/BackAttack/powerup.fbx.json", resourceManager, renderer);
 	}
 
-	void BackAttack::start(Difficulty difficulty)
+	void BackAttack::start()
 	{
 		if (level)
 			delete level;

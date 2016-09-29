@@ -48,7 +48,7 @@ namespace pacman
 		font = resourceManager->getResource<blib::Font>("lindsey");
 	}
 
-	void PacMan::start(Difficulty difficulty)
+	void PacMan::start()
 	{
 		level = new DefaultLevel();
 		level->levelData = level->getLevel();

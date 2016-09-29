@@ -40,7 +40,7 @@ void PushOut::loadResources()
 	blib::Box2DDebug::getInstance()->init(lineBatch, renderer);
 }
 
-void PushOut::start(Difficulty difficulty)
+void PushOut::start()
 {
 	if(world)
 		delete world;

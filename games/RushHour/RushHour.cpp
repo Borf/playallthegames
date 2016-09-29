@@ -49,7 +49,7 @@ static int posY[] = { 210, 260, 310, 360, 720, 770, 820, 870 };
 
 static int posX[] = { 490, 540, 590, 640, 1290, 1340, 1390, 1440};
 
-void RushHour::start(Difficulty difficulty)
+void RushHour::start()
 {
 	lanes.clear();
 	lanes.resize(16);

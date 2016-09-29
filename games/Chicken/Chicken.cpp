@@ -33,7 +33,7 @@ void Chicken::loadResources()
 	carOverlaySprite =	resourceManager->getResource<blib::Texture>("assets/games/Chicken/carOverlay.png");
 }
 
-void Chicken::start(Difficulty difficulty)
+void Chicken::start()
 {
 	scroll = 0;
 	distance = 3000;

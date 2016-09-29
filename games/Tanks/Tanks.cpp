@@ -66,7 +66,7 @@ void Tanks::loadResources()
 }
 
 std::string level;
-void Tanks::start(Difficulty difficulty)
+void Tanks::start()
 {
 	level = "";
 	level += "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -149,6 +149,9 @@ void Tanks::start(Difficulty difficulty)
 		b2FixtureDef fixtureDef2;
 		fixtureDef2.shape = &shape2;
 		fixtureDef2.density = 300;
+		if (difficulty == Difficulty::Wtf)
+			fixtureDef2.density = 900;
+
 
 		players[i]->turret->CreateFixture(&fixtureDef2);
 
@@ -198,7 +201,11 @@ void Tanks::start(Difficulty difficulty)
 	}
 
 
-	for(int i = 0; i < 100; i++)
+
+	int count = 100;
+	if (difficulty == Difficulty::Wtf)
+		count = 500;
+	for(int i = 0; i < count; i++)
 	{
 		glm::vec2 pos;
 		do 
@@ -231,7 +238,7 @@ void Tanks::start(Difficulty difficulty)
 
 	for(int i = 0; i < 100; i++)
 		world->Step(1/60.0f, 3, 3);
-
+	particleSystem->clear();
 }
 
 void Tanks::update( float elapsedTime )
@@ -247,13 +254,28 @@ void Tanks::update( float elapsedTime )
 		glm::vec2 forward = blib::util::fromAngle(angle);
 		glm::vec2 side(-forward.y, forward.x);
 
-		p->body->ApplyForce(500.0f*p->joystick.leftStick.y * forward, p->body->GetWorldCenter() + side, true);
-		p->body->ApplyForce(500.0f*p->joystick.rightStick.y * forward, p->body->GetWorldCenter() -side, true);
+		float force = 500.0f;
+		if (difficulty == Difficulty::Wtf)
+			force = 2000.0f;
+
+		p->body->ApplyForce(force*p->joystick.leftStick.y * forward, p->body->GetWorldCenter() + side, true);
+		p->body->ApplyForce(force*p->joystick.rightStick.y * forward, p->body->GetWorldCenter() -side, true);
+
+		float turnSpeed = 1.0f;
+		if (difficulty == Difficulty::Easy)
+			turnSpeed = 1.5f;
+		if (difficulty == Difficulty::Hard)
+			turnSpeed = 0.5f;
+		if (difficulty == Difficulty::Cruel)
+			turnSpeed = 0.1f;
+		if (difficulty == Difficulty::Wtf)
+			turnSpeed = 25.0f;
+
 
 		p->targetAngle = blib::util::wrapAngleRad(p->targetAngle + (p->joystick.leftTrigger - p->joystick.rightTrigger) * elapsedTime);
 
 
-		p->turretJoint->SetMotorSpeed(p->joystick.rightTrigger - p->joystick.leftTrigger);
+		p->turretJoint->SetMotorSpeed(turnSpeed * (p->joystick.rightTrigger - p->joystick.leftTrigger));
 
 
 		if(p->lastShootTime > 0)
@@ -288,6 +310,14 @@ void Tanks::update( float elapsedTime )
 
 			bullet->CreateFixture(&fixtureDef);
 			p->lastShootTime = 0.5f;
+
+			if (difficulty == Difficulty::Hard)
+				p->lastShootTime = 1;
+			if (difficulty == Difficulty::Cruel)
+				p->lastShootTime = 2;
+
+			if (difficulty == Difficulty::Wtf)
+				p->lastShootTime = 0.05f;
 
 			bullet->SetUserData(p);
 
@@ -372,14 +402,17 @@ void Tanks::update( float elapsedTime )
 
 			if (!skip && !erased)
 			{
-				blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Tanks/particles/miniexplosion.json");
-				emitter->position = emitter->prevPosition = 50.0f * bullets[i]->GetPosition();
-				emitter->life = 0.15;
-				boom->play();
+				if (difficulty != Difficulty::Wtf || rand() % 100 < 10)
+				{
+					blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Tanks/particles/miniexplosion.json");
+					emitter->position = emitter->prevPosition = 50.0f * bullets[i]->GetPosition();
+					emitter->life = 0.15;
+					boom->play();
 
-				world->DestroyBody(bullets[i]);
-				bullets.erase(bullets.begin() + i);
-				erased = true;
+					world->DestroyBody(bullets[i]);
+					bullets.erase(bullets.begin() + i);
+					erased = true;
+				}
 			}
 
 

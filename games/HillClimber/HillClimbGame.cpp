@@ -80,7 +80,7 @@ namespace hillclimb
 	}
 
 
-	void HillClimb::start(Difficulty difficulty)
+	void HillClimb::start()
 	{
 		if (world)
 			delete world;

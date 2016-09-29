@@ -72,7 +72,7 @@ void ZombieSurvival::loadResources()
 
 }
 int level[32][60];
-void ZombieSurvival::start(Difficulty difficulty)
+void ZombieSurvival::start()
 {
 	for (auto p : players)
 	{

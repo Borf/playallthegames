@@ -83,7 +83,8 @@ void Session::nextGame( PlayAllTheGames* playallthegames )
 
 	playallthegames->activeGame->setPlayers(playerSelector->nextPlayers(playerCount));
 	playallthegames->activeGame->gameTime = 0;
-	playallthegames->activeGame->start(difficulty);
+	playallthegames->activeGame->difficulty = difficulty;
+	playallthegames->activeGame->start();
 }
 
 

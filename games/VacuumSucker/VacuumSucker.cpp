@@ -37,7 +37,7 @@ void VacuumSucker::loadResources()
 
 }
 
-void VacuumSucker::start(Difficulty difficulty)
+void VacuumSucker::start()
 {
 	trashCount = 2;
 	turningFactor = 2;

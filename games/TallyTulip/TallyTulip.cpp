@@ -33,7 +33,7 @@ namespace tallytulip
 		font = resourceManager->getResource<blib::Font>("lindsey");
 	}
 
-	void TallyTulip::start(Difficulty difficulty)
+	void TallyTulip::start()
 	{
 		tulips.clear();
 

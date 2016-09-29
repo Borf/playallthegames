@@ -36,7 +36,7 @@ void DodgeFoot::loadResources()
 
 }
 
-void DodgeFoot::start(Difficulty difficulty)
+void DodgeFoot::start()
 {
 	for(auto p : players) { p->position = (p->index+1) * (1920 / (players.size()+1.0f)); }
 	footPosition = glm::vec2(1000, 0);

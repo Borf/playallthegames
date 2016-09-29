@@ -17,7 +17,7 @@ public:
 	virtual std::string getName();
 	virtual std::string getInstructions();
 	virtual void loadResources();
-	virtual void start(Difficulty difficulty);
+	virtual void start();
 	virtual void update( float elapsedTime );
 	virtual void draw();
 	virtual bool hasWinner();

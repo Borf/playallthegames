@@ -28,7 +28,7 @@ namespace bugswat
 		virtual std::string getName();
 		virtual std::string getInstructions();
 		virtual void loadResources();
-		virtual void start(Difficulty difficulty);
+		virtual void start();
 		virtual void update(float elapsedTime);
 		virtual void draw();
 		virtual blib::Texture* getTitleImage();

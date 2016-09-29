@@ -48,7 +48,7 @@ void PewPew::loadResources()
 	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/PewPew/textures/player.png");
 }
 
-void PewPew::start(Difficulty difficulty)
+void PewPew::start()
 {
 	if (world)
 		delete world;

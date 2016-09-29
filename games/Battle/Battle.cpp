@@ -42,7 +42,7 @@ void Battle::loadResources()
 	font = resourceManager->getResource<blib::Font>("lindsey");
 }
 
-void Battle::start(Difficulty difficulty)
+void Battle::start()
 {
 	maxPlayerScore = 20;
 	level = new BasicBattleLevel(levelTexture);

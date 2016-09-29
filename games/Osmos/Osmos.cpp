@@ -35,7 +35,7 @@ void Osmos::loadResources()
 	ballTexture = resourceManager->getResource<blib::Texture>("assets/games/Osmos/ball.png");
 }
 
-void Osmos::start(Difficulty difficulty)
+void Osmos::start()
 {
 	float radius = glm::min(settings->center.x, settings->center.y) - 100;
 	for(size_t i = 0; i < players.size(); i++)

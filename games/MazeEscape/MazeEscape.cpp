@@ -40,7 +40,7 @@ namespace mazeescape
 
 	}
 
-	void MazeEscape::start(Difficulty difficulty)
+	void MazeEscape::start()
 	{
 		for (auto p : players)
 		{

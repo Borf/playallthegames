@@ -38,7 +38,7 @@ void PokerSteps::loadResources()
 	font =			resourceManager->getResource<blib::Font>("lindsey");
 }
 
-void PokerSteps::start(Difficulty difficulty)
+void PokerSteps::start()
 {
 	stateStart = 0;
 	state = VOTING;
