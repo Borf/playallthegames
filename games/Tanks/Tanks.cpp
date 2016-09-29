@@ -10,6 +10,7 @@
 #include <blib/Color.h>
 #include <blib/Math.h>
 #include <blib/ParticleSystem.h>
+#include <blib/audio/AudioManager.h>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -52,6 +53,15 @@ void Tanks::loadResources()
 	particleSystem = new blib::ParticleSystem(renderer, resourceManager, spriteBatch);
 	particleSystem->resizeGl(settings->resX, settings->resY);
 	particleSystem->setTextureFolder("assets/games/Tanks/particles/");
+
+	boom = audioManager->loadSample("assets/games/Tanks/boom.wav");
+	boom->canOnlyPlayOnce = false;
+
+	explode = audioManager->loadSample("assets/games/Tanks/explode.wav");
+	explode->canOnlyPlayOnce = false;
+
+	shot = audioManager->loadSample("assets/games/Tanks/shot.wav");
+	shot->canOnlyPlayOnce = false;
 
 }
 
@@ -282,6 +292,7 @@ void Tanks::update( float elapsedTime )
 			bullet->SetUserData(p);
 
 			bullets.push_back(bullet);
+			shot->play();
 		}
 	}
 
@@ -296,6 +307,7 @@ void Tanks::update( float elapsedTime )
 			continue;
 		}*/
 		bool erased = false;
+		bool skip = false;
 		b2ContactEdge* collision = bullets[i]->GetContactList();
 		while(collision && !erased)
 		{
@@ -316,6 +328,7 @@ void Tanks::update( float elapsedTime )
 			{
 				if(p->body == collision->other || p->turret == collision->other)
 				{
+					skip = true;
 					if(p != bullets[i]->GetUserData())
 					{
 						if (p->alive)
@@ -323,6 +336,7 @@ void Tanks::update( float elapsedTime )
 							blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Tanks/particles/explosion.json");
 							emitter->position = emitter->prevPosition = 50.0f * p->body->GetPosition();
 							emitter->life = 0.5;
+							explode->play();
 						}
 						p->alive = false;
 
@@ -342,6 +356,7 @@ void Tanks::update( float elapsedTime )
 						blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Tanks/particles/miniexplosion.json");
 						emitter->position = emitter->prevPosition = 50.0f * crates[ii]->GetPosition();
 						emitter->life = 0.5;
+						boom->play();
 
 
 						world->DestroyBody(crates[ii]);
@@ -354,6 +369,20 @@ void Tanks::update( float elapsedTime )
 					}
 				}
 			}
+
+			if (!skip && !erased)
+			{
+				blib::Emitter* emitter = particleSystem->addEmitter("assets/games/Tanks/particles/miniexplosion.json");
+				emitter->position = emitter->prevPosition = 50.0f * bullets[i]->GetPosition();
+				emitter->life = 0.15;
+				boom->play();
+
+				world->DestroyBody(bullets[i]);
+				bullets.erase(bullets.begin() + i);
+				erased = true;
+			}
+
+
 			if(!erased)
 				collision = collision->next;
 		}

@@ -17,11 +17,12 @@ GameBase::GameBase()
 	backgroundColor = glm::vec4(0.6f, 0.6f, 0.8f, 1.0f);
 }
 
-void GameBase::setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings)
+void GameBase::setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings, blib::AudioManager* audioManager)
 {
 	this->spriteBatch = spriteBatch;
 	this->lineBatch = lineBatch;
 	this->renderer = renderer;
 	this->resourceManager = resourceManager;
 	this->settings = settings;
+	this->audioManager = audioManager;
 }

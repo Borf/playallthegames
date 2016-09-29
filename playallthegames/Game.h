@@ -12,7 +12,7 @@
 class Player;
 class Participant;
 class Settings;
-namespace blib { class SpriteBatch; class LineBatch; class Renderer; class ResourceManager; class Texture; 
+namespace blib { class SpriteBatch; class LineBatch; class Renderer; class ResourceManager; class Texture; class AudioManager;
 namespace util { class FileSystemHandler;  }
 };
 
@@ -33,6 +33,7 @@ protected:
 	blib::LineBatch* lineBatch;
 	blib::Renderer* renderer;
 	blib::ResourceManager* resourceManager;
+	blib::AudioManager* audioManager;
 	Settings* settings;
 
 public:
@@ -56,7 +57,7 @@ public:
 
 
 	GameBase();
-	virtual void setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings);
+	virtual void setAttributes(blib::SpriteBatch* spriteBatch, blib::LineBatch* lineBatch, blib::Renderer* renderer, blib::ResourceManager* resourceManager, Settings* settings, blib::AudioManager* audioManager);
 
 	virtual std::string getName() = 0;
 	virtual std::string getInstructions() = 0;

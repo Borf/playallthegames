@@ -3,9 +3,8 @@
 #include "TanksPlayer.h"
 #include "../../PlayAllTheGames/AliveGame.h"
 
-
 namespace blib {
-	class Texture; 	class ParticleSystem; class SpriteSheet;
+	class Texture; 	class ParticleSystem; class SpriteSheet;  class AudioSample;
 };
 
 class b2World;
@@ -15,6 +14,10 @@ class b2Body;
 class Tanks : public AliveGame<TanksPlayer>
 {
 	blib::ParticleSystem* particleSystem;
+	
+	blib::AudioSample* boom;
+	blib::AudioSample* shot;
+	blib::AudioSample* explode;
 
 	blib::Texture* back;
 	blib::SpriteSheet* tankSprite;

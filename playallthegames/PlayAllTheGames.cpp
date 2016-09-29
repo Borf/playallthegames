@@ -91,8 +91,11 @@ void PlayAllTheGames::init()
 		getchar();
 		exit(0);
 	}
+	audioManager = blib::AudioManager::getInstance();
+	audioManager->init();
+
 	for (auto g : games)
-		g->setAttributes(spriteBatch, lineBatch, renderer, resourceManager, settings);
+		g->setAttributes(spriteBatch, lineBatch, renderer, resourceManager, settings, audioManager);
 
 
 	session = NULL;
@@ -159,8 +162,6 @@ void PlayAllTheGames::init()
 	addKeyListener(new CharListener(this));
 
 
-	audioManager = blib::AudioManager::getInstance();
-	audioManager->init();
 	audio.gameOver = audioManager->loadSample("assets/audio/sfx/gameover.wav");
 	audio.go = audioManager->loadSample("assets/audio/sfx/go.wav");
 	audio.tick = audioManager->loadSample("assets/audio/sfx/tick.wav");
