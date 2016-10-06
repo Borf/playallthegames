@@ -1,6 +1,8 @@
 #include "BattleEnemy.h"
 #include "BattlePlayer.h"
+#include "Battle.h"
 
+#include <blib/audio/AudioManager.h>
 
 BattleEnemy::BattleEnemy(glm::vec2 position, glm::vec2 stick)
 {
@@ -15,8 +17,9 @@ BattleEnemy::BattleEnemy(glm::vec2 position, glm::vec2 stick)
 }
 
 
-void BattleEnemy::hit( BattleCharacter* otherPlayer )
+void BattleEnemy::hit( BattleCharacter* otherPlayer, Battle* battle)
 {
+	battle->stompSound->play();
 	if (!upsidedown)
 	{
 		taggedPlayer = dynamic_cast<BattlePlayer*>(otherPlayer);

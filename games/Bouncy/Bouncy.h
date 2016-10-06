@@ -3,6 +3,7 @@
 #include "BouncyPlayer.h"
 #include "BouncyObject.h"
 
+namespace blib { class AudioSample; }
 
 class Bouncy : public AliveGame<BouncyPlayer>
 {
@@ -12,6 +13,8 @@ class Bouncy : public AliveGame<BouncyPlayer>
 	std::vector<BouncyObject> objects;
 
 public:
+	blib::AudioSample* bumpSound;
+	blib::AudioSample* dieSound;
 	Bouncy();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 	std::string getName();

@@ -10,6 +10,6 @@ class BattlePlayer : public ScorePlayer, public BattleCharacter
 public:
 	BattlePlayer(int index);
 
-	virtual void hit( BattleCharacter* otherPlayer );
+	virtual void hit( BattleCharacter* otherPlayer, Battle* battle);
 
 };

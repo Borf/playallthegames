@@ -6,6 +6,7 @@
 namespace blib
 {
 	class StaticModel;
+	class AudioSample;
 }
 
 namespace backattack
@@ -45,6 +46,11 @@ namespace backattack
 		blib::StaticModel* cube;
 		blib::StaticModel* bullet;
 		blib::StaticModel* powerup;
+
+		blib::AudioSample* shootSound;
+		blib::AudioSample* bumpSound;
+		blib::AudioSample* pickupSound;
+		blib::AudioSample* explodeSound;
 
 		std::vector<Bullet> bullets;
 

@@ -19,6 +19,7 @@
 #include "blocks/powerups/SpeedPowerUp.h"
 
 #include "Bomb.h"
+#include <blib/audio/AudioManager.h>
 
 
 BomberMan::BomberMan()
@@ -47,6 +48,13 @@ void BomberMan::loadResources()
 	bombSprite =		resourceManager->getResource<blib::Texture>("assets/games/BomberMan/bomb.png");
 	blocksSheet =		resourceManager->getResource<blib::SpriteSheet>("assets/games/BomberMan/tiles");
 	explosionParticleSprite = resourceManager->getResource<blib::Texture>("assets/games/BomberMan/explosion.png");
+
+	dropSound = audioManager->loadSample("assets/games/BomberMan/placebomb.wav");
+	explosionSound = audioManager->loadSample("assets/games/BomberMan/boom.wav");
+	dieSound = audioManager->loadSample("assets/games/BomberMan/die.wav");
+	kickSound = audioManager->loadSample("assets/games/BomberMan/kick.wav");
+	pickupSound = audioManager->loadSample("assets/games/BomberMan/pickup.wav");
+
 }
 
 void BomberMan::start()
@@ -181,6 +189,7 @@ void BomberMan::update( float elapsedTime )
 			{
 				if(glm::length(p->position - b->position) < blockSize && glm::length(oldPos-b->position) >= blockSize)
 				{
+					kickSound->play();
 					glm::vec2 diff = (b->position - p->position);
 					if (glm::abs(diff.x) > glm::abs(diff.y))
 						diff.y = 0;
@@ -206,6 +215,7 @@ void BomberMan::update( float elapsedTime )
 					{
 						delete level[y][x];
 						level[y][x] = new EmptyBlock(glm::vec2(x * blockSize, y * blockSize), blockSize);
+						pickupSound->play();
 					}
 				}
 			}
@@ -214,6 +224,7 @@ void BomberMan::update( float elapsedTime )
 		//bomb placement
 		if(p->joystick.a == 1 && p->prevJoystick.a == 0 && blib::linq::count(bombs, [p] (Bomb* b) { return b->owner == p; }) < p->bombs)
 		{
+			dropSound->play();
 			int tileX = (int) glm::floor((p->position.x+32)/blockSize);
 			int tileY = (int) glm::floor((p->position.y+32)/blockSize);
 			bombs.push_back(new Bomb(glm::vec2(tileX*blockSize, tileY*blockSize), gameTime, p));
@@ -233,7 +244,7 @@ void BomberMan::update( float elapsedTime )
 		if (gameTime - bombs[i]->timePlaced > bombTimer)
 		{
 			glm::vec2 directions[] = { glm::vec2(-1,0), glm::vec2(1,0), glm::vec2(0,-1), glm::vec2(0,1) };
-
+			explosionSound->play();
 			for(auto direction : directions)
 			{
 				int length = bombs[i]->owner->flameLength;
@@ -289,8 +300,12 @@ void BomberMan::update( float elapsedTime )
 
 		if(it->z > 0.3f)
 			for(auto p : players)
-				if(glm::length(p->position - glm::vec2(it->x, it->y)) < 0.75 * blockSize)
+				if (glm::length(p->position - glm::vec2(it->x, it->y)) < 0.75 * blockSize)
+				{
+					if (p->alive)
+						dieSound->play();
 					p->alive = false;
+				}
 		it->z -= 0.025f * elapsedTime * 60;
 	}
 

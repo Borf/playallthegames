@@ -6,6 +6,7 @@
 #include <blib/StaticModel.h>
 #include <blib/Math.h>
 #include <blib/util/Log.h>
+#include <blib/audio/AudioManager.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -62,6 +63,11 @@ namespace backattack
 		cube = new blib::StaticModel("assets/games/BackAttack/cube.fbx.json", resourceManager, renderer);
 		bullet = new blib::StaticModel("assets/games/BackAttack/bullet.fbx.json", resourceManager, renderer);
 		powerup = new blib::StaticModel("assets/games/BackAttack/powerup.fbx.json", resourceManager, renderer);
+
+		shootSound = audioManager->loadSample("assets/games/BackAttack/laser.wav");
+		bumpSound = audioManager->loadSample("assets/games/BackAttack/bump.wav");
+		pickupSound = audioManager->loadSample("assets/games/BackAttack/pickup.wav");
+		explodeSound = audioManager->loadSample("assets/games/BackAttack/boom.wav");
 	}
 
 	void BackAttack::start()
@@ -123,6 +129,7 @@ namespace backattack
 			{
 				if (glm::distance(level->powerups[i]*8.0f, p->position) < 3)
 				{
+					pickupSound->play();
 					p->speed = 48;
 					level->powerups.erase(level->powerups.begin() + i);
 					break;
@@ -184,11 +191,14 @@ namespace backattack
 					p->angle += 180;
 					pp->angle += 180;
 
+					bumpSound->play();
+
 				}
 			}
 
 			if (p->joystick.a == 1 && p->prevJoystick.a == 0)
 			{
+				shootSound->play();
 				bullets.push_back(Bullet(p->position, blib::math::fromAngle(glm::radians(p->angle)), p));
 			}
 
@@ -212,6 +222,7 @@ namespace backattack
 					if (fabs(diff) < 0.1f)
 					{
 						p->alive = false;
+						explodeSound->play();
 					}
 				}
 			}

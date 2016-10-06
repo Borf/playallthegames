@@ -7,6 +7,7 @@
 #include <blib/Util.h>
 #include <blib/Font.h>
 #include <blib/Color.h>
+#include <blib/audio/AudioManager.h>
 
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
@@ -40,6 +41,14 @@ void Battle::loadResources()
 	enemyTexture = resourceManager->getResource<blib::Texture>("assets/games/battle/enemy.png");
 	enemyMaskTexture = resourceManager->getResource<blib::Texture>("assets/games/battle/enemyMask.png");
 	font = resourceManager->getResource<blib::Font>("lindsey");
+	jumpSound = audioManager->loadSample("assets/games/battle/jump.wav");
+	jumpSound->canOnlyPlayOnce = false;
+
+	bumpSound = audioManager->loadSample("assets/games/battle/bump.wav");
+	dieSound = audioManager->loadSample("assets/games/battle/die.wav");
+	kickSound = audioManager->loadSample("assets/games/battle/kick.wav");
+	stompSound = audioManager->loadSample("assets/games/battle/stomp.wav");
+
 }
 
 void Battle::start()
@@ -89,11 +98,11 @@ void Battle::update( float elapsedTime )
 
 		p->directionalStick = p->joystick.leftStick;
 		p->wantsToJump = p->joystick.a == 1;
-		p->updateMovement(level, allCharacters, elapsedTime);
+		p->updateMovement(level, allCharacters, elapsedTime, this);
 	}
 	for (auto e : enemies)
 	{
-		e->updateMovement(level, allCharacters, elapsedTime);
+		e->updateMovement(level, allCharacters, elapsedTime, this);
 	}
 	enemies = blib::linq::where(enemies, [] (BattleEnemy* e) { return e->alive; });
 

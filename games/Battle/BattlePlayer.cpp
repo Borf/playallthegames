@@ -1,7 +1,8 @@
 #include "BattlePlayer.h"
-
 #include "BattleEnemy.h"
+#include "Battle.h"
 
+#include <blib/audio/AudioManager.h>
 
 BattlePlayer::BattlePlayer( int index ) : ScorePlayer(index)
 {
@@ -12,8 +13,9 @@ BattlePlayer::BattlePlayer( int index ) : ScorePlayer(index)
 	alive = true;
 }
 
-void BattlePlayer::hit( BattleCharacter* otherPlayer )
+void BattlePlayer::hit( BattleCharacter* otherPlayer, Battle* battle)
 {
+	battle->dieSound->play();
 	alive = false;
 	respawnTime = 4;
 	score -= 2;

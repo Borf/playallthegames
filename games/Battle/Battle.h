@@ -4,7 +4,7 @@
 
 #include "BattlePlayer.h"
 
-namespace blib { class Texture; class SpriteSheet; class Font; };
+namespace blib { class Texture; class SpriteSheet; class Font; class AudioSample; };
 class BattleEnemy;
 
 class Battle : public ScoreGame<BattlePlayer>
@@ -17,6 +17,13 @@ class Battle : public ScoreGame<BattlePlayer>
 	BattleLevel* level;
 	std::vector<BattleEnemy*> enemies;
 public:
+	blib::AudioSample* jumpSound;
+	blib::AudioSample* stompSound;
+	blib::AudioSample* kickSound;
+	blib::AudioSample* bumpSound;
+	blib::AudioSample* dieSound;
+
+
 	Battle();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 8); }
 	virtual std::string getName();

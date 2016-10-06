@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "Asteroids"
+#define DEBUGGAME "Bouncy"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG
@@ -68,7 +68,7 @@ PlayAllTheGames::PlayAllTheGames()
 		appSetup.window.setHeight((float)res.y);
 
 	//appSetup.border = true;
-	appSetup.vsync = settings->vsync;	
+	appSetup.vsync = true;
 	appSetup.joystickDriver = blib::AppSetup::DirectInput;
 }
 
@@ -211,6 +211,7 @@ void PlayAllTheGames::update( double elapsedTime )
 		if (!audio.music[audio.activeMusic]->isPlaying())
 		{
 			audio.activeMusic = rand() % audio.music.size();
+			audio.music[audio.activeMusic]->setVolume(50);
 			audio.music[audio.activeMusic]->play();
 		}
 	}
@@ -665,6 +666,7 @@ void PlayAllTheGames::switchState( State newState )
 		{
 			audio.menu->stop();
 			audio.activeMusic = rand() % audio.music.size();
+			audio.music[audio.activeMusic]->setVolume(50);
 			audio.music[audio.activeMusic]->play(false);
 		}
 	}

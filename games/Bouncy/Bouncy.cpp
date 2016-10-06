@@ -11,6 +11,7 @@
 #include <blib/Color.h>
 #include <blib/Math.h>
 #include <blib/LineBatch.h>
+#include <blib/audio/AudioManager.h>
 
 
 Bouncy::Bouncy()
@@ -34,6 +35,9 @@ void Bouncy::loadResources()
 {
 	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/Bouncy/player.png");
 	objectsSprite = resourceManager->getResource<blib::Texture>("assets/games/Bouncy/shapes.png");
+	bumpSound = audioManager->loadSample("assets/games/Bouncy/bump.wav");
+	bumpSound->canOnlyPlayOnce = true;
+	dieSound = audioManager->loadSample("assets/games/Bouncy/die.wav");
 }
 
 void Bouncy::start()
@@ -69,7 +73,10 @@ void Bouncy::update( float elapsedTime )
 		p->speed.x = glm::min(8.0f, glm::max(-8.0f, p->speed.x));
 
 		if ((p->position.y < 540 - 300 && p->speed.y < 0) || (p->position.y > 540 + 300 - playerSprite->height && p->speed.y > 0))
+		{
 			p->speed.y = -p->speed.y;
+			bumpSound->play();
+		}
 
 
 		blib::math::Rectangle playerRect(p->position, (float)playerSprite->width, (float)playerSprite->height);
@@ -79,8 +86,11 @@ void Bouncy::update( float elapsedTime )
 		{
 			blib::math::Rectangle objRect(o.pos - glm::vec2(objectsSprite->width/8.0f, objectsSprite->height/2.0f), objectsSprite->width/4.0f, (float)objectsSprite->height);
 			objRect.inflate(-6, -6);
-			if(objRect.intersect(playerRect))
+			if (objRect.intersect(playerRect))
+			{
 				p->alive = false;
+				dieSound->play();
+			}
 		}
 	}
 

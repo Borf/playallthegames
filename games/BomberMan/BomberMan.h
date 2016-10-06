@@ -9,7 +9,7 @@ class Block;
 class Bomb;
 class ExplosionParticle;
 
-namespace blib { class Texture; class SpriteSheet;}
+namespace blib { class Texture; class SpriteSheet; class AudioSample;  }
 
 class BomberMan : public AliveGame<BomberManPlayer>
 {
@@ -32,6 +32,13 @@ class BomberMan : public AliveGame<BomberManPlayer>
 
 	bool hasCollision(glm::vec2 position, glm::vec2 oldPosition);
 public:
+
+	blib::AudioSample* explosionSound;
+	blib::AudioSample* dropSound;
+	blib::AudioSample* kickSound;
+	blib::AudioSample* dieSound;
+	blib::AudioSample* pickupSound;
+
 	BomberMan();
 	virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 8); }
 	virtual std::string getName();

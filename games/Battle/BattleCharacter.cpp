@@ -2,7 +2,9 @@
 #include "BattleLevel.h"
 #include "BattleEnemy.h"
 #include "BattlePlayer.h"
+#include "Battle.h"
 
+#include <blib/audio/AudioManager.h>
 
 bool BattleCharacter::hasCollision( BattleLevel* level )
 {
@@ -48,7 +50,7 @@ bool BattleCharacter::isOnBlock( BattleLevel* level )
 	return false;
 }
 
-void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<BattleCharacter*> &players, float elapsedTime )
+void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<BattleCharacter*> &players, float elapsedTime, Battle* battle )
 {
 	if (!alive)
 		return;
@@ -104,7 +106,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 					BattlePlayer* player = dynamic_cast<BattlePlayer*>(this);
 					BattleEnemy* otherEnemy = dynamic_cast<BattleEnemy*>(pp);
 					pp->speed.y = 14;
-					pp->hit(this);
+					pp->hit(this, battle);
 				}
 				else
 				{
@@ -116,7 +118,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 					BattlePlayer* player = dynamic_cast<BattlePlayer*>(pp);
 					BattleEnemy* otherEnemy = dynamic_cast<BattleEnemy*>(this);
 					speed.y = 14;
-					hit(pp);
+					hit(pp, battle);
 				}
 			}
 			else
@@ -127,6 +129,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 					{
 						if (pp->speed.x == 0)
 						{
+							battle->kickSound->play();
 							pp->speed.x = 10;
 							if (position.x > pp->position.x)
 								pp->speed.x = -10;
@@ -134,7 +137,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 						}
 						else
 						{
-							hit(pp);
+							hit(pp, battle);
 							pp->speed.x = -pp->speed.x;
 							pp->position.x += pp->speed.x*elapsedTime*60;
 						}
@@ -142,7 +145,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 					else
 					{
 						if (dynamic_cast<BattlePlayer*>(this) != NULL)
-							hit(pp);
+							hit(pp, battle);
 						speed.x = -speed.x;
 						directionalStick = glm::vec2(-directionalStick.x, directionalStick.y);
 					}
@@ -160,7 +163,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 						}
 						else
 						{
-							pp->hit(this);
+							pp->hit(this, battle);
 							speed.x = -speed.x;
 							position.x += speed.x*elapsedTime*60;
 						}
@@ -168,7 +171,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 					else
 					{
 						if (dynamic_cast<BattlePlayer*>(pp))
-							pp->hit(this);
+							pp->hit(this, battle);
 						pp->speed.x = -pp->speed.x;
 						pp->directionalStick = glm::vec2(-pp->directionalStick.x, pp->directionalStick.y);
 					}
@@ -183,14 +186,11 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 		}
 	}
 
-	if (wantsToJump)
-	{
-		printf("%f, %f\n", speed.y, upcount);
-		printf("On block: %s\n", isOnBlock(level) ? "yes" : "no");
-	}
 
 	if (wantsToJump && (isOnBlock(level) || (upcount > 0 && upcount < 14)) && !hasCollision(level))
 	{
+		if (upcount == 0 || isOnBlock(level))
+			battle->jumpSound->play();
 		speed.y = -14;
 		upcount+=elapsedTime*60;
 	}
@@ -204,6 +204,7 @@ void BattleCharacter::updateMovement( BattleLevel* level, const std::vector<Batt
 	{
 		position.y -= speed.y*elapsedTime*60;
 		speed.y = 0.5f * -speed.y;
+		battle->bumpSound->play();
 	}
 
 

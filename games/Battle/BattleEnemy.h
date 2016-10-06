@@ -12,5 +12,5 @@ public:
 
 	BattleEnemy(glm::vec2 position, glm::vec2 stick);
 
-	void hit(BattleCharacter* otherPlayer);
+	void hit(BattleCharacter* otherPlayer, Battle* battle);
 };
