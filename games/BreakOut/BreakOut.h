@@ -6,7 +6,7 @@
 
 class BreakOutBall;
 
-namespace blib { class Texture; class Font; };
+namespace blib { class Texture; class Font; class AudioSample;  };
 
 class BreakOut : public Game<BreakOutPlayer>
 {
@@ -22,6 +22,8 @@ class BreakOut : public Game<BreakOutPlayer>
 	glm::vec4 blocks[5][5];
 	std::vector<BreakOutBall*> balls;
 	float speed;
+
+	blib::AudioSample* bounceSound;
 public:
 	BreakOut();
 

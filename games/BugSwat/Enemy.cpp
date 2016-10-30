@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "../../PlayAllTheGames/Settings.h"
 #include <blib/Util.h>
+#include <blib/audio/AudioManager.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 namespace bugswat
@@ -8,6 +9,12 @@ namespace bugswat
 	Enemy::Enemy()
 	{
 		alive = true;
+		flySound = blib::AudioManager::getInstance()->loadSample("assets/games/BugSwat/fly.wav");
+		flySound->play(true);
+	}
+
+	Enemy::~Enemy()
+	{
 	}
 
 	bool Enemy::onScreen(Settings* settings)

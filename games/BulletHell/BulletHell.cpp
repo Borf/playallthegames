@@ -12,6 +12,7 @@
 #include <blib/Color.h>
 #include <blib/Util.h>
 #include <blib/math/Line.h>
+#include <blib/audio/AudioManager.h>
 
 #include "RotatingBulletGenerator.h"
 #include "Bullet.h"
@@ -42,6 +43,8 @@ void BulletHell::loadResources()
 	shipOverlaySprite =		resourceManager->getResource<blib::Texture>("assets/games/BulletHell/shipOverlay.png");
 	bulletSprite =			resourceManager->getResource<blib::Texture>("assets/games/BulletHell/bullet.png");
 //	backSprite = new DrawableTexture(Graphics.GraphicsDevice, SystemSettings.ResolutionX, SystemSettings.ResolutionY);// gameContent.Load<Texture2D>("bullethell/back");
+
+	bulletSound = audioManager->loadSample("assets/games/BulletHell/bullet.wav");
 }
 
 void BulletHell::start()
@@ -59,6 +62,11 @@ void BulletHell::start()
 }
 
 
+void BulletHell::end()
+{
+
+}
+
 void BulletHell::update( float elapsedTime )
 {
 	totalGameTime += elapsedTime;
@@ -72,6 +80,12 @@ void BulletHell::update( float elapsedTime )
 
 		player->position.x = glm::max(0.0f, glm::min((float)settings->resX, player->position.x));
 		player->position.y = glm::max(0.0f, glm::min((float)settings->resY, player->position.y));
+
+		if (player->alive)
+			player->moveSound->setVolume(glm::length(player->joystick.leftStick) * 100);
+		else
+			player->moveSound->stop();
+
 	}
 
 
@@ -81,7 +95,10 @@ void BulletHell::update( float elapsedTime )
 	{
 		Bullet* newBullet = g->getBullet(totalGameTime, speed);
 		if (newBullet != NULL)
+		{
+			bulletSound->play();
 			bullets.push_back(newBullet);
+		}
 	}
 
 

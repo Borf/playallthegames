@@ -44,12 +44,12 @@ Session::Session()
 void Session::setDebug(PlayAllTheGames* playallthegames, GameBase* game, int playerCount)
 {
 	participants.clear();
-	
+	this->playerCount = playerCount;
+
 	participants = blib::linq::select<std::vector<Participant*> >(UserDb::getInstance()->getRandomPlayers(playerCount), [](User* u) { return new Participant(u); });
 	setPlayerColors();
 	playerSelector = new FixedPlayerSelector(participants);
 	gameSelector = new DebugGameSelector(game);
-
 	playerSelector->setInitialPlayers(participants);
 }
 

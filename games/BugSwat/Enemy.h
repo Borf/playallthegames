@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 
+namespace blib { class AudioSample;  }
 class Settings;
 namespace bugswat
 {
@@ -12,8 +13,11 @@ namespace bugswat
 		float rotation;
 		float speed;
 		bool alive;
+		blib::AudioSample* flySound;
+
 
 		Enemy();
+		~Enemy();
 
 
 		virtual void update(float elapsedTime);

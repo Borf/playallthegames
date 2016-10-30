@@ -6,7 +6,7 @@
 #include <blib/Util.h>
 #include <blib/util/Profiler.h>
 #include <blib/Math.h>
-
+#include <blib/audio/AudioManager.h>
 #include "../../PlayAllTheGames/Settings.h"
 #include "../../PlayAllTheGames/Participant.h"
 
@@ -36,6 +36,8 @@ void BreakOut::loadResources()
 	ball =	resourceManager->getResource<blib::Texture>("assets/games/BreakOut/ball.png");
 	bigBack=resourceManager->getResource<blib::Texture>("assets/games/BreakOut/back.png");
 	font =	resourceManager->getResource<blib::Font>("lindsey");
+
+	bounceSound = audioManager->loadSample("assets/games/BreakOut/bounce.wav");
 
 	int i = 1;
 	while(true)
@@ -82,15 +84,22 @@ void BreakOut::update( float elapsedTime )
 	{
 		b->position += (1 + ((speed - 1) / 5.0f)) * 6 * b->direction * elapsedTime * 60.0f;
 		
-		if((b->position.x < 0 && b->direction.x < 0) || (b->position.x > 1980-ball->originalWidth && b->direction.x > 0))
+		if ((b->position.x < 0 && b->direction.x < 0) || (b->position.x > 1980 - ball->originalWidth && b->direction.x > 0))
+		{
 			b->direction.x = -b->direction.x;
-		if(b->position.y < 0 && b->direction.y < 0)
+			bounceSound->play();
+		}
+		if (b->position.y < 0 && b->direction.y < 0)
+		{
 			b->direction.y = -b->direction.y;
+			bounceSound->play();
+		}
 
 		if (b->position.y > 1000 - ball->originalHeight && b->position.y < 1000 - ball->originalHeight + pad->originalHeight && b->direction.y > 0)
 		{
 			if (b->position.x >= players[i]->position - ball->originalWidth && b->position.x <= players[i]->position + pad->originalWidth)
 			{
+				bounceSound->play();
 				b->direction.y = -b->direction.y;
 				float dx = ((b->position.x + ball->originalWidth / 2) - (players[i]->position + pad->originalWidth / 2)) / (pad->originalWidth / 2);
 				b->direction.x = glm::clamp(b->direction.x + dx,-1.0f,1.0f);
@@ -110,6 +119,7 @@ void BreakOut::update( float elapsedTime )
 				{
 					players[i]->score++;
 					blocks[x][y].a = 0;
+					bounceSound->play();
 
 					//balls[i] -= 5 * ballDirs[i];
 					glm::vec2 diff = (r.topleft + r.size()/2.0f) - (r2.topleft + r2.size()/2.0f);

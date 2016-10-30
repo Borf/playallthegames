@@ -4,7 +4,7 @@
 
 #include "BulletHellPlayer.h"
 
-namespace blib { class Texture; class FBO; }
+namespace blib { class Texture; class FBO; class AudioSample; }
 
 class Bullet;
 class BulletGenerator;
@@ -19,6 +19,8 @@ class BulletHell : public AliveGame<BulletHellPlayer>
 	std::vector<Bullet*> bullets;
 	std::vector<BulletGenerator*> bulletGenerators;
 
+	blib::AudioSample* bulletSound;
+
 	float bulletSpawnDelay;
 	float totalGameTime;
 	float speed;
@@ -30,9 +32,9 @@ public:
 	virtual std::string getInstructions();
 	virtual void loadResources();
 	virtual void start();
+	virtual void end();
 	virtual void update( float elapsedTime );
 	virtual void draw();
 	virtual blib::Texture* getTitleImage();
-
 };
 

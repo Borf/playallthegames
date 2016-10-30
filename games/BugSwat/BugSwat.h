@@ -3,7 +3,7 @@
 #include "BugSwatPlayer.h"
 #include "../../PlayAllTheGames/ScoreGame.h"
 
-namespace blib { class Texture; class SpriteSheet; class Font; };
+namespace blib { class Texture; class SpriteSheet; class Font; class AudioSample;  };
 
 namespace bugswat
 {
@@ -21,6 +21,10 @@ namespace bugswat
 
 		std::vector<Enemy*> enemies;
 		std::vector<Splat*> splats;
+
+		blib::AudioSample* swatSound;
+		blib::AudioSample* hitSound;
+		blib::AudioSample* flySound;
 
 	public:
 		BugSwat();

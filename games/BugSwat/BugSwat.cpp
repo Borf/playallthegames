@@ -14,6 +14,7 @@
 #include <blib/util/Profiler.h>
 #include <blib/Math.h>
 #include <blib/Util.h>
+#include <blib/audio/AudioManager.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #define _USE_MATH_DEFINES
@@ -49,6 +50,8 @@ namespace bugswat
 		flySprite = resourceManager->getResource<blib::SpriteSheet>("assets/games/BugSwat/fly");
 		splatSprite = resourceManager->getResource<blib::Texture>("assets/games/BugSwat/splat.png");
 		font = resourceManager->getResource<blib::Font>("menu");
+		swatSound = audioManager->loadSample("assets/games/BugSwat/flyswatter.wav");
+		hitSound = audioManager->loadSample("assets/games/BugSwat/flyswatter2.wav");
 	}
 
 	void BugSwat::start()
@@ -71,6 +74,7 @@ namespace bugswat
 			{
 				p->swatTime = blib::util::Profiler::getAppTime();
 				p->swatting = true;
+				swatSound->play();
 			}
 			else if (p->joystick.a == 0 && p->joystick.r == 0)
 				p->swatting = false;
@@ -84,7 +88,9 @@ namespace bugswat
 				auto hittingPlayers = blib::linq::where(players, [e](BugSwatPlayer* p) { return glm::length(p->position - e->position) < 55 && p->swatting && (int)floor((blib::util::Profiler::getAppTime() - p->swatTime) * 50) == 3; });
 				if (hittingPlayers.size() > 0)
 				{
+					hitSound->play();
 					e->alive = !e->alive;
+					e->flySound->stop();
 					blib::linq::foreach(hittingPlayers, [](BugSwatPlayer* p) { p->score++; });
 					splats.push_back(new Splat(e->position, (float)(blib::math::randomDouble()*M_PI * 2)));
 					//particleEmitters.Add(new FlyBloodEmitter(e.position, elapsedTime));

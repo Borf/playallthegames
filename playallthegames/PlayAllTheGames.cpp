@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "Bouncy"
+#define DEBUGGAME "NippleRub"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG
@@ -212,7 +212,7 @@ void PlayAllTheGames::update( double elapsedTime )
 		{
 			audio.activeMusic = rand() % audio.music.size();
 			audio.music[audio.activeMusic]->setVolume(50);
-			audio.music[audio.activeMusic]->play();
+			//audio.music[audio.activeMusic]->play();
 		}
 	}
 
@@ -667,7 +667,7 @@ void PlayAllTheGames::switchState( State newState )
 			audio.menu->stop();
 			audio.activeMusic = rand() % audio.music.size();
 			audio.music[audio.activeMusic]->setVolume(50);
-			audio.music[audio.activeMusic]->play(false);
+			//audio.music[audio.activeMusic]->play(false);
 		}
 	}
 	if (newState == InMenu)

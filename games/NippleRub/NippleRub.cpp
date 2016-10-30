@@ -133,21 +133,22 @@ namespace nipplerub
 			spriteBatch->begin();
 			spriteBatch->draw(whitePixel, blib::math::easyMatrix(whitePixel, blib::math::Rectangle(glm::vec2(x*w, y*h), w, h)), blib::Color::add(p->participant->color, .25f));
 			spriteBatch->draw(tex, blib::math::easyMatrix(glm::vec2(x*w + (w - tex->originalWidth*scale) / 2, y*h), 0, scale));
-			glm::vec2 nipPos1(x*w + (w - tex->originalWidth) / 2 + 200 * scale, y*h + 290*scale);
-			glm::vec2 nipPos2(x*w + (w - tex->originalWidth) / 2 + 515 * scale, y*h + 210*scale);
+			glm::vec2 nipPos1(x*w + w/2.0 - 160 * scale, y*h + 290*scale);
+			glm::vec2 nipPos2(x*w + w/2.0 + 160 * scale, y*h + 210*scale);
 			spriteBatch->end();
 			spriteBatch->renderState.scissor = true;
+			glm::vec2 scale2 = glm::vec2(tex->originalWidth / 64, tex->originalHeight / 64) * (h / (float)tex->originalHeight);
 
 
 			{
-				std::vector<blib::VertexP2T2C4> verts;
-				std::vector<blib::VertexP2T2C4> points;
+				std::vector<blib::VertexP2T2C4C4> verts;
+				std::vector<blib::VertexP2T2C4C4> points;
 
 				glm::vec2 nip1 = glm::vec2(12, 35) + p->joystick.leftStick * 3.5f;
 				glm::vec2 nip2 = glm::vec2(50, 25) + p->joystick.rightStick * 3.5f;
 
-				glm::vec2 scale = glm::vec2(tex->originalWidth / 64, tex->originalHeight / 64) * (h / (float)tex->originalHeight);
 				glm::vec2 pos(x*w+(w - tex->originalWidth*(h / (float)tex->originalHeight)) / 2, y*h);
+				glm::vec2 scale = glm::vec2(tex->originalWidth / 64, tex->originalHeight / 64) * (h / (float)tex->originalHeight);
 				for (int x = 0; x < 64; x++)
 				{
 					for (int y = 0; y < 64; y++)
@@ -155,13 +156,13 @@ namespace nipplerub
 						if (glm::length(glm::vec2(x, y) - nip1) > 10 &&
 							glm::length(glm::vec2(x, y) - nip2) > 10)
 							continue;
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x, y), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1)));
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x + 1, y), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1)));
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x + 1, y + 1), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x, y), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1,1,1,0)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x + 1, y), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 0)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x + 1, y + 1), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 0)));
 
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x, y), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1)));
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x, y + 1), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1)));
-						verts.push_back(blib::VertexP2T2C4(pos + transform(glm::vec2(x + 1, y + 1), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x, y), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 0)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x, y + 1), nip1, nip2)*scale, glm::vec2((x) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 0)));
+						verts.push_back(blib::VertexP2T2C4C4(pos + transform(glm::vec2(x + 1, y + 1), nip1, nip2)*scale, glm::vec2((x + 1) / 64.0f, (y + 1) / 64.0f), glm::vec4(1, 1, 1, 1), glm::vec4(1, 1, 1, 0)));
 
 					}
 				}

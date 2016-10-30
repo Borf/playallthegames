@@ -68,6 +68,7 @@ public:
 	bool resourcesLoaded;
 	virtual void loadResources() = 0;
 	virtual void start() = 0;
+	virtual void end() {};
 
 	
 	virtual void update(float elapsedTime) = 0;
