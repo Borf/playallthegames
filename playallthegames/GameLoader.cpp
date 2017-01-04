@@ -24,6 +24,7 @@
 #include "../games/Osmos/Osmos.h"
 #include "../games/PacMan/PacMan.h"
 #include "../games/PewPew/PewPew.h"
+#include "../games/PlatformRun/PlatformRun.h"
 #include "../games/PokerSteps/PokerSteps.h"
 #include "../games/Pong/Pong.h"
 #include "../games/Pool/Pool.h"
@@ -66,6 +67,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new Osmos());
 	games.push_back(new pacman::PacMan());
 	games.push_back(new PewPew());
+	games.push_back(new platformrun::PlatformRun());
 	games.push_back(new PokerSteps());
 	games.push_back(new Pong());
 	games.push_back(new Pool());

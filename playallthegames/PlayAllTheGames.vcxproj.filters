@@ -157,6 +157,9 @@
     <Filter Include="games\TallyTulip">
       <UniqueIdentifier>{9947da05-121f-4e3a-af68-8df5eea9af26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\PlatformRun">
+      <UniqueIdentifier>{05e6974a-2f9f-41a6-90f1-00db4776e509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -644,6 +647,15 @@
     </ClCompile>
     <ClCompile Include="..\games\TallyTulip\TallyTulip.cpp">
       <Filter>games\TallyTulip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PlatformRun\PlatformRunPlayer.cpp">
+      <Filter>games\PlatformRun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PlatformRun\PlatformRun.cpp">
+      <Filter>games\PlatformRun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\PlatformRun\Level.cpp">
+      <Filter>games\PlatformRun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1154,6 +1166,15 @@
     <ClInclude Include="..\games\TallyTulip\TallyTulip.h">
       <Filter>games\TallyTulip</Filter>
     </ClInclude>
+    <ClInclude Include="..\games\PlatformRun\PlatformRun.h">
+      <Filter>games\PlatformRun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PlatformRun\PlatformRunPlayer.h">
+      <Filter>games\PlatformRun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\PlatformRun\Level.h">
+      <Filter>games\PlatformRun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -1276,6 +1297,8 @@
     <CustomBuild Include="..\assets\games\BackAttack\bullet.fbx">
       <Filter>games\BackAttack\assets</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\assets\games\BackAttack\powerup.fbx" />
+    <CustomBuild Include="..\assets\games\BackAttack\powerup.fbx">
+      <Filter>games\BackAttack\assets</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

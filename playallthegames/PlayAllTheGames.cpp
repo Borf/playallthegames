@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "NippleRub"
+#define DEBUGGAME "PlatformRun"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG

@@ -186,6 +186,9 @@
     <ClCompile Include="..\games\PewPew\levelobject.cpp" />
     <ClCompile Include="..\games\PewPew\PewPew.cpp" />
     <ClCompile Include="..\games\PewPew\PewPewPlayer.cpp" />
+    <ClCompile Include="..\games\PlatformRun\Level.cpp" />
+    <ClCompile Include="..\games\PlatformRun\PlatformRun.cpp" />
+    <ClCompile Include="..\games\PlatformRun\PlatformRunPlayer.cpp" />
     <ClCompile Include="..\games\PokerSteps\PokerSteps.cpp" />
     <ClCompile Include="..\games\PokerSteps\PokerStepsPlayer.cpp" />
     <ClCompile Include="..\games\Pong\Pong.cpp" />
@@ -352,6 +355,9 @@
     <ClInclude Include="..\games\PewPew\levelobject.h" />
     <ClInclude Include="..\games\PewPew\PewPew.h" />
     <ClInclude Include="..\games\PewPew\PewPewPlayer.h" />
+    <ClInclude Include="..\games\PlatformRun\Level.h" />
+    <ClInclude Include="..\games\PlatformRun\PlatformRun.h" />
+    <ClInclude Include="..\games\PlatformRun\PlatformRunPlayer.h" />
     <ClInclude Include="..\games\PokerSteps\PokerSteps.h" />
     <ClInclude Include="..\games\PokerSteps\PokerStepsPlayer.h" />
     <ClInclude Include="..\games\Pong\Pong.h" />
