@@ -15,6 +15,7 @@ namespace bugswat
 
 	Enemy::~Enemy()
 	{
+		flySound->stop();
 	}
 
 	bool Enemy::onScreen(Settings* settings)

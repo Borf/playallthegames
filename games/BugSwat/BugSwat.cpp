@@ -61,6 +61,11 @@ namespace bugswat
 		blib::linq::deleteall(splats);
 	}
 
+	void BugSwat::end()
+	{
+		blib::linq::foreach(enemies, [](Enemy* e) { e->flySound->stop(); });
+	}
+
 	void BugSwat::update(float elapsedTime)
 	{
 		for (auto p : players)
@@ -97,7 +102,8 @@ namespace bugswat
 				}
 			}
 		}
-		enemies = blib::linq::where(enemies, [this](Enemy* e) { return e->onScreen(settings); });
+
+		blib::linq::deletewhere(enemies, [this](Enemy* e) { return !e->onScreen(settings); });
 
 		// Spawn new enemy
 		if (blib::math::randomDouble() < 0.03 * elapsedTime * 60)

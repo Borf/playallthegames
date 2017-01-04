@@ -59,6 +59,7 @@ void Session::nextGame( PlayAllTheGames* playallthegames )
 {
 	if (playallthegames->activeGame)
 	{
+		playallthegames->activeGame->end();
 		SessionStats::Result* result = new SessionStats::Result();
 		result->finished = playallthegames->activeGame->hasWinner();
 		result->participants = blib::linq::select<std::vector<User*> >(playallthegames->activeGame->getPlayers(), [](Player* player) { return player->participant->user;  });

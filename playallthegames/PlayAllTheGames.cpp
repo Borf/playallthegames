@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "PlatformRun"
+#define DEBUGGAME "BugSwat"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG
@@ -627,7 +627,7 @@ void PlayAllTheGames::draw()
 				d(GameBase::ControllerButton::ButtonX, controllerMap.x, glm::vec2(420, 205));
 				d(GameBase::ControllerButton::ButtonY, controllerMap.y, glm::vec2(420, 145));
 				d(GameBase::ControllerButton::ButtonL, controllerMap.l, glm::vec2(420, 335));
-				d(GameBase::ControllerButton::ButtonR, controllerMap.r, glm::vec2(420, 335));
+				d(GameBase::ControllerButton::ButtonR, controllerMap.r, glm::vec2(175, 38));
 				d(GameBase::ControllerButton::Dpad, controllerMap.dpad, glm::vec2(420, 335));
 				d(GameBase::ControllerButton::ThumbstickLeft, controllerMap.leftstick, glm::vec2(-520, 355));
 				d(GameBase::ControllerButton::ThumbstickRight, controllerMap.rightstick, glm::vec2(220, 435));

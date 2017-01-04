@@ -33,7 +33,7 @@ namespace asteroids
 		bulletTexture = resourceManager->getResource<blib::Texture>("assets/games/Asteroids/bullet.png");
 
 		particleSystem = new blib::ParticleSystem(renderer, resourceManager, spriteBatch);
-		particleSystem->resizeGl(settings->resX, settings->resY);
+		particleSystem->resizeGl(settings->resX, settings->resY, 0, 0);
 		particleSystem->setTextureFolder("assets/games/Asteroids/particles/");
 
 		laser = audioManager->loadSample("assets/games/Asteroids/laser.wav");

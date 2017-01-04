@@ -51,7 +51,7 @@ void Tanks::loadResources()
 	blib::Box2DDebug::getInstance()->init(lineBatch, renderer);
 
 	particleSystem = new blib::ParticleSystem(renderer, resourceManager, spriteBatch);
-	particleSystem->resizeGl(settings->resX, settings->resY);
+	particleSystem->resizeGl(settings->resX, settings->resY,0,0);
 	particleSystem->setTextureFolder("assets/games/Tanks/particles/");
 
 	boom = audioManager->loadSample("assets/games/Tanks/boom.wav");
