@@ -108,7 +108,7 @@ void MacroMachines::start()
 
 	std::vector<b2Vec2> verts;
 	std::vector<b2Vec2> verts2;
-	std::vector<blib::VertexP2T2C4> triangles;
+	std::vector<blib::VertexP2T2C4C4> triangles;
 
 	progressLines.clear();
 
@@ -148,13 +148,13 @@ void MacroMachines::start()
 			verts.push_back(left.getPoint(f));
 			verts2.push_back(right.getPoint(f));
 
-			triangles.push_back(blib::VertexP2T2C4(left.getPointLinear(f),			0.052f * left.getPointLinear(f), blib::Color::white));
-			triangles.push_back(blib::VertexP2T2C4(left.getPointLinear(f + inc),	0.052f * left.getPointLinear(f + inc), blib::Color::white));
-			triangles.push_back(blib::VertexP2T2C4(right.getPointLinear(f),			0.052f * right.getPointLinear(f), blib::Color::white));
+			triangles.push_back(blib::VertexP2T2C4C4(left.getPointLinear(f),			0.052f * left.getPointLinear(f), blib::Color::white, glm::vec4(1,0,0,0)));
+			triangles.push_back(blib::VertexP2T2C4C4(left.getPointLinear(f + inc),	0.052f * left.getPointLinear(f + inc), blib::Color::white, glm::vec4(1, 0, 0, 0)));
+			triangles.push_back(blib::VertexP2T2C4C4(right.getPointLinear(f),			0.052f * right.getPointLinear(f), blib::Color::white, glm::vec4(1, 0, 0, 0)));
 
-			triangles.push_back(blib::VertexP2T2C4(left.getPointLinear(f + inc),	0.052f * left.getPointLinear(f + inc), blib::Color::white));
-			triangles.push_back(blib::VertexP2T2C4(right.getPointLinear(f + inc),	0.052f * right.getPointLinear(f + inc), blib::Color::white));
-			triangles.push_back(blib::VertexP2T2C4(right.getPointLinear(f),			0.052f * right.getPointLinear(f), blib::Color::white));
+			triangles.push_back(blib::VertexP2T2C4C4(left.getPointLinear(f + inc),	0.052f * left.getPointLinear(f + inc), blib::Color::white, glm::vec4(1, 1, 1, 0)));
+			triangles.push_back(blib::VertexP2T2C4C4(right.getPointLinear(f + inc),	0.052f * right.getPointLinear(f + inc), blib::Color::white, glm::vec4(1, 1, 1, 0)));
+			triangles.push_back(blib::VertexP2T2C4C4(right.getPointLinear(f),			0.052f * right.getPointLinear(f), blib::Color::white, glm::vec4(1, 1, 1, 0)));
 		}
 	}
 
@@ -209,6 +209,10 @@ void MacroMachines::start()
 
 
 	trackSprite = resourceManager->getResource<blib::FBO>();
+	trackSprite->depth = false;
+	trackSprite->depthTexture = false;
+	trackSprite->stencil = false;
+	trackSprite->textureCount = 1;
 	trackSprite->setSize(settings->resX, settings->resY);
 
 	glm::mat4 tx;
@@ -220,6 +224,8 @@ void MacroMachines::start()
 	rs.activeTexture[0] = asphaltSprite;
 	rs.activeShader->setUniform(blib::SpriteBatch::ShaderAttributes::Matrix, tx);
 	rs.activeFbo = trackSprite;
+
+	renderer->clear(glm::vec4(1, 0, 0, 0), blib::Renderer::Color, rs);
 
 	renderer->drawTriangles(triangles, rs);
 
