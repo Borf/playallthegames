@@ -439,6 +439,9 @@ void Tanks::draw()
 
 	
 
+//	spriteBatch->draw(tankSprite->getFrame(0, 0), blib::math::easyMatrix(glm::vec2(0, 0)), tankSprite->getFrame(0, 0)->center + glm::vec2(0, 0));// , blib::math::Rectangle(0, 0, 1, 1), glm::vec4(1, 1, 1, 1));
+
+
 	for (auto p : players)
 	{
 		{
@@ -448,7 +451,7 @@ void Tanks::draw()
 
 			int x = frame % 8;
 			int y = frame / 8;
-			spriteBatch->draw(tankSprite->getFrame(x, y), p->getMatrix(settings), tankSprite->getFrame(x, y)->center * glm::vec2(128, 128) + glm::vec2(0,0), blib::math::Rectangle(0, 0, 1, 1), p->alive ? p->participant->color : blib::Color::grey);
+			spriteBatch->draw(tankSprite->getFrame(x, y), p->getMatrix(settings), tankSprite->getFrame(x, y)->center + glm::vec2(0,0), blib::math::Rectangle(0, 0, 1, 1), p->alive ? p->participant->color : blib::Color::grey);
 		}
 		{
 			int frame = ((int)round((glm::degrees(p->turret->GetAngle())) / 360 * 64)-1) % 64;
@@ -458,7 +461,7 @@ void Tanks::draw()
 			int x = frame % 8;
 			int y = frame / 8;
 
-			spriteBatch->draw(turretSprite->getFrame(x, y), p->getMatrix(settings), turretSprite->getFrame(x, y)->center * glm::vec2(128,128) + glm::vec2(0,0), blib::math::Rectangle(0, 0, 1, 1), p->alive ? p->participant->color : blib::Color::grey);
+			spriteBatch->draw(turretSprite->getFrame(x, y), p->getMatrix(settings), turretSprite->getFrame(x, y)->center + glm::vec2(0,0), blib::math::Rectangle(0, 0, 1, 1), p->alive ? p->participant->color : blib::Color::grey);
 
 		}
 	}
@@ -507,7 +510,7 @@ void Tanks::draw()
 	matrix = glm::scale(matrix, glm::vec3(50.0f, 50.0f, 1));
 
 	lineBatch->begin(matrix);
-	//world->DrawDebugData();
+//	world->DrawDebugData();
 	lineBatch->end();
 }
 

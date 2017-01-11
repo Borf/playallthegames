@@ -64,7 +64,7 @@ void BulletHell::start()
 
 void BulletHell::end()
 {
-
+	blib::linq::foreach(players, [](BulletHellPlayer* p) { p->moveSound->stop(); });
 }
 
 void BulletHell::update( float elapsedTime )

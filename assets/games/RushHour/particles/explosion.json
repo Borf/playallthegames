@@ -12,6 +12,7 @@
 		"direction" : [ 0, 360 ],			/* initial direction */ 
 		"speed" : [ 0, 10.0 ],				/* initial speed */
 		"rotation" : [ -10, 10 ],			/* initial rotation speed */
+		"rotationspeed" : [0, 0],
 		"friction" : 0.01,					/* friction */
 		"rotationfriction" : 0,				/* rotational friction */
 		"fadespeed" : [ 1, 2 ],				/* 4 to 5 seconds to fade away */

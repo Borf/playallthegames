@@ -22,7 +22,8 @@ namespace platformrun
 
 	PlatformRun::PlatformRun()
 	{
-		controls[ControllerButton::ButtonA] = "Go forward";
+		controls[ControllerButton::ButtonA] = "Jump";
+		controls[ControllerButton::ThumbstickLeft] = "Move";
 	}
 
 	std::string PlatformRun::getName()

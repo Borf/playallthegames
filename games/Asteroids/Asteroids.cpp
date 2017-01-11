@@ -23,6 +23,13 @@ namespace asteroids
 	{
 		return "Blast asteroids and survive";
 	}
+
+	Asteroids::Asteroids()
+	{
+		controls[ControllerButton::ButtonA] = "Forward";
+		controls[ControllerButton::ButtonB] = "Shoot";
+		controls[ControllerButton::ThumbstickLeft] = "Turn";
+	}
 	
 	void Asteroids::loadResources()
 	{

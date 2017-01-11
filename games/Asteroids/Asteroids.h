@@ -24,6 +24,7 @@ namespace asteroids
 
 		std::vector<std::pair<glm::vec4, asteroids::Player*> > bullets;
 
+		Asteroids();
 		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
 		std::string getName();
 		virtual std::string getInstructions();
