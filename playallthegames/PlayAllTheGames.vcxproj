@@ -129,6 +129,8 @@
     <ClCompile Include="..\games\BulletHell\BulletHell.cpp" />
     <ClCompile Include="..\games\BulletHell\BulletHellPlayer.cpp" />
     <ClCompile Include="..\games\BulletHell\RotatingBulletGenerator.cpp" />
+    <ClCompile Include="..\games\Checkers\Checkers.cpp" />
+    <ClCompile Include="..\games\Checkers\CheckersPlayer.cpp" />
     <ClCompile Include="..\games\Chicken\Chicken.cpp" />
     <ClCompile Include="..\games\Chicken\ChickenPlayer.cpp" />
     <ClCompile Include="..\games\CircleShooter\CircleShooter.cpp" />
@@ -296,6 +298,8 @@
     <ClInclude Include="..\games\BulletHell\BulletHell.h" />
     <ClInclude Include="..\games\BulletHell\BulletHellPlayer.h" />
     <ClInclude Include="..\games\BulletHell\RotatingBulletGenerator.h" />
+    <ClInclude Include="..\games\Checkers\Checkers.h" />
+    <ClInclude Include="..\games\Checkers\CheckersPlayer.h" />
     <ClInclude Include="..\games\Chicken\Chicken.h" />
     <ClInclude Include="..\games\Chicken\ChickenPlayer.h" />
     <ClInclude Include="..\games\CircleShooter\CircleShooter.h" />

@@ -8,6 +8,7 @@
 #include "../games/BreakOut/BreakOut.h"
 #include "../games/BugSwat/BugSwat.h"
 #include "../games/BulletHell/BulletHell.h"
+#include "../games/Checkers/Checkers.h"
 #include "../games/Chicken/Chicken.h"
 #include "../games/CircleShooter/CircleShooter.h"
 #include "../games/CurveFever/CurveFever.h"
@@ -18,6 +19,7 @@
 #include "../games/HillClimber/HillClimbGame.h"
 #include "../games/JumpMan/JumpMan.h"
 #include "../games/MacroMachines/MacroMachines.h"
+#include "../games/Memory/Memory.h"
 #include "../games/MicroRace/MicroRace.h"
 #include "../games/MazeEscape/MazeEscape.h"
 #include "../games/NippleRub/NippleRub.h"
@@ -51,6 +53,7 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new BreakOut());
 	games.push_back(new bugswat::BugSwat());
 	games.push_back(new BulletHell());
+	games.push_back(new checkers::Checkers());
 	games.push_back(new Chicken());
 	games.push_back(new CircleShooter());
 	games.push_back(new CurveFever());
@@ -60,8 +63,9 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new Herding());
 	games.push_back(new hillclimb::HillClimb());
 	games.push_back(new jumpman::JumpMan());
-	games.push_back(new MicroRace());
+	games.push_back(new Memory());
 	games.push_back(new MacroMachines());
+	games.push_back(new MicroRace());
 	games.push_back(new mazeescape::MazeEscape());
 	games.push_back(new nipplerub::NippleRub());
 	games.push_back(new Osmos());

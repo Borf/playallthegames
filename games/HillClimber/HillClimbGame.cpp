@@ -47,7 +47,7 @@ namespace hillclimb
 
 	std::pair<int, int> HillClimb::getPlayerCount()
 	{
-		return std::pair<int, int>(99, 99);
+		return std::pair<int, int>(2, 99);
 	}
 
 	void HillClimb::loadResources()

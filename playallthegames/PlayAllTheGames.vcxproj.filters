@@ -160,6 +160,9 @@
     <Filter Include="games\PlatformRun">
       <UniqueIdentifier>{05e6974a-2f9f-41a6-90f1-00db4776e509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\Checkers">
+      <UniqueIdentifier>{887c081b-5710-4854-86a6-3f337e101a8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -656,6 +659,12 @@
     </ClCompile>
     <ClCompile Include="..\games\PlatformRun\Level.cpp">
       <Filter>games\PlatformRun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Checkers\CheckersPlayer.cpp">
+      <Filter>games\Checkers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Checkers\Checkers.cpp">
+      <Filter>games\Checkers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1174,6 +1183,12 @@
     </ClInclude>
     <ClInclude Include="..\games\PlatformRun\Level.h">
       <Filter>games\PlatformRun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Checkers\Checkers.h">
+      <Filter>games\Checkers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Checkers\CheckersPlayer.h">
+      <Filter>games\Checkers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

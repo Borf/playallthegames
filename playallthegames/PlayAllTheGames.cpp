@@ -41,7 +41,7 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "BugSwat"
+#define DEBUGGAME "HillClimb"
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG

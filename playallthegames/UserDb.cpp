@@ -1,6 +1,7 @@
 #include "UserDb.h"
 
 #include <blib/Util.h>
+#include <blib/Math.h>
 
 UserDb::UserDb()
 {
@@ -28,6 +29,10 @@ std::vector<User*> UserDb::getRandomPlayers(int amount)
 		ret.push_back(new User("Player 7", glm::vec4(1,1,1,1)));
 	if(amount > 7)
 		ret.push_back(new User("Player 8", glm::vec4(0.5,1,0.5,1)));
+
+	for (int i = 8; i < amount; i++)
+		ret.push_back(new User("Player " + blib::util::toString(i+1), glm::vec4(blib::util::hsv2rgb(glm::vec3(blib::math::randomFloat(0,1), 1.0f, 1.0f )),1)));
+
 
 
 	return ret;

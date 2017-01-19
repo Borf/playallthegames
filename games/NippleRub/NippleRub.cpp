@@ -34,7 +34,7 @@ namespace nipplerub
 
 	std::pair<int, int> NippleRub::getPlayerCount()
 	{
-		return std::pair<int,int>(999, 999);
+		return std::pair<int,int>(2, 999);
 	}
 
 	void NippleRub::loadResources()
