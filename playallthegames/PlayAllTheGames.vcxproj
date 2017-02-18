@@ -222,6 +222,8 @@
     <ClCompile Include="..\games\ZombieSurvival\Zombie.cpp" />
     <ClCompile Include="..\games\ZombieSurvival\ZombieSurvival.cpp" />
     <ClCompile Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.cpp" />
+    <ClCompile Include="..\games\Zoo-ro-dah\ZooRoDah.cpp" />
+    <ClCompile Include="..\games\Zoo-ro-dah\ZooRoDahPlayer.cpp" />
     <ClCompile Include="AliveGame.cpp" />
     <ClCompile Include="Db.cpp" />
     <ClCompile Include="DebugGameSelector.cpp" />
@@ -393,6 +395,8 @@
     <ClInclude Include="..\games\ZombieSurvival\Zombie.h" />
     <ClInclude Include="..\games\ZombieSurvival\ZombieSurvival.h" />
     <ClInclude Include="..\games\ZombieSurvival\ZombieSurvivalPlayer.h" />
+    <ClInclude Include="..\games\Zoo-ro-dah\ZooRoDah.h" />
+    <ClInclude Include="..\games\Zoo-ro-dah\ZooRoDahPlayer.h" />
     <ClInclude Include="AliveGame.h" />
     <ClInclude Include="AlivePlayer.h" />
     <ClInclude Include="AutomaticGameSelector.h" />

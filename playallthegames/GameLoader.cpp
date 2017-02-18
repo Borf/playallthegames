@@ -42,6 +42,7 @@
 #include "../games/Tron/Tron.h"
 #include "../games/VacuumSucker/VacuumSucker.h"
 #include "../games/ZombieSurvival/ZombieSurvival.h"
+#include "../games/Zoo-ro-dah/ZooRoDah.h"
 
 void PlayAllTheGames::loadGames()
 {
@@ -87,6 +88,6 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new Tron());
 	games.push_back(new VacuumSucker());
 	games.push_back(new ZombieSurvival());
-
+	games.push_back(new zoorodah::ZooRoDah());
 
 }
