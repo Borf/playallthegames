@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -197,6 +197,9 @@
     <ClCompile Include="..\games\Pong\PongPlayer.cpp" />
     <ClCompile Include="..\games\Pool\Pool.cpp" />
     <ClCompile Include="..\games\Pool\PoolPlayer.cpp" />
+    <ClCompile Include="..\games\Pusher\Pusher.cpp" />
+    <ClCompile Include="..\games\Pusher\PusherEnemy.cpp" />
+    <ClCompile Include="..\games\Pusher\PusherPlayer.cpp" />
     <ClCompile Include="..\games\PushOut\PushOut.cpp" />
     <ClCompile Include="..\games\PushOut\PushOutPlayer.cpp" />
     <ClCompile Include="..\games\RushHour\RushHour.cpp" />
@@ -370,6 +373,9 @@
     <ClInclude Include="..\games\Pong\PongPlayer.h" />
     <ClInclude Include="..\games\Pool\Pool.h" />
     <ClInclude Include="..\games\Pool\PoolPlayer.h" />
+    <ClInclude Include="..\games\Pusher\Pusher.h" />
+    <ClInclude Include="..\games\Pusher\PusherEnemy.h" />
+    <ClInclude Include="..\games\Pusher\PusherPlayer.h" />
     <ClInclude Include="..\games\PushOut\PushOut.h" />
     <ClInclude Include="..\games\PushOut\PushOutPlayer.h" />
     <ClInclude Include="..\games\RushHour\RushHour.h" />

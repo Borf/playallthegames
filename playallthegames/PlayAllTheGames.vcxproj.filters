@@ -166,6 +166,9 @@
     <Filter Include="games\ZooRoDah">
       <UniqueIdentifier>{e79ad03e-272b-415a-be08-c7be84b75140}</UniqueIdentifier>
     </Filter>
+    <Filter Include="games\Pusher">
+      <UniqueIdentifier>{a367cda4-2c69-48d4-a0aa-e1cc0113d80c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -674,6 +677,15 @@
     </ClCompile>
     <ClCompile Include="..\games\Zoo-ro-dah\ZooRoDah.cpp">
       <Filter>games\ZooRoDah</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pusher\Pusher.cpp">
+      <Filter>games\Pusher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pusher\PusherEnemy.cpp">
+      <Filter>games\Pusher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\games\Pusher\PusherPlayer.cpp">
+      <Filter>games\Pusher</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1204,6 +1216,15 @@
     </ClInclude>
     <ClInclude Include="..\games\Zoo-ro-dah\ZooRoDahPlayer.h">
       <Filter>games\ZooRoDah</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pusher\Pusher.h">
+      <Filter>games\Pusher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pusher\PusherEnemy.h">
+      <Filter>games\Pusher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\games\Pusher\PusherPlayer.h">
+      <Filter>games\Pusher</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

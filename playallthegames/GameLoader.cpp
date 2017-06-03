@@ -43,6 +43,7 @@
 #include "../games/VacuumSucker/VacuumSucker.h"
 #include "../games/ZombieSurvival/ZombieSurvival.h"
 #include "../games/Zoo-ro-dah/ZooRoDah.h"
+#include "../games/Pusher/Pusher.h"
 
 void PlayAllTheGames::loadGames()
 {
@@ -89,5 +90,6 @@ void PlayAllTheGames::loadGames()
 	games.push_back(new VacuumSucker());
 	games.push_back(new ZombieSurvival());
 	games.push_back(new zoorodah::ZooRoDah());
+	games.push_back(new Pusher());
 
 }
