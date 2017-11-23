@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <string>
-namespace Json { class Value; }
 
 template<class T, class V>
 class Db : public blib::util::Singleton<V>

@@ -1,7 +1,7 @@
 #include "Db.h"
 
 #include <blib/util/FileSystem.h>
-#include <blib/json.h>
+#include <blib/json.hpp>
 
 
 template<class T, class V>
@@ -12,8 +12,8 @@ void Db<T,V>::loadFromFile( std::string fileName )
 	this->fileName = fileName;
 	assert(fileName != "");
 	assert(data.empty());
-	blib::json::Value v = blib::util::FileSystem::getJson(fileName);
-	if (!v.isNull())
+	json v = blib::util::FileSystem::getJson(fileName);
+	if (!v.is_null())
 		for(size_t i = 0; i < v.size(); i++)
 			data.push_back(new T(v[i]));
 }
@@ -29,7 +29,7 @@ void Db<T, V>::saveToFile( std::string fileName )
 	this->fileName = fileName;
 	assert(fileName != "");
 
-	blib::json::Value v(blib::json::Type::arrayValue);
+	json v = json::array();
 	for(size_t i = 0; i < data.size(); i++)
 		v.push_back(data[i]->asJson());
 	

@@ -24,7 +24,7 @@ void ColorCycleMenuItem::draw(blib::SpriteBatch* spriteBatch, glm::vec2 pos, glm
 {
 	glm::vec3 color = blib::util::hsv2rgb(glm::vec3(hue, 1, 1));
 	if (selected >= 0)
-		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos, 0)), blib::math::Rectangle(0, 0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, glm::clamp((1 + 0.2f * (float)glm::cos(selected * 10)) * glm::vec4(color, 1), 0, 1));
+		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos, 0)), blib::math::Rectangle(0, 0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, glm::clamp((1 + 0.2f * (float)glm::cos(selected * 10)) * glm::vec4(color, 1), 0.0f, 1.0f));
 	else
 		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos, 0)), blib::math::Rectangle(0, 0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, glm::vec4(color, 1));
 

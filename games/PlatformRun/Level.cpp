@@ -51,7 +51,7 @@ namespace platformrun
 		std::vector<int> heights;
 		for (int i = offset; i < offset+64; i++)
 		{
-			int h = (int)(2 + noiseHeight * abs(glm::noise1(i / noiseFreq)));
+			int h = (int)(2 + noiseHeight * abs(glm::perlin(glm::vec2(0, i / noiseFreq))));
 			heights.push_back(h);
 			buildHeight(i, h, tileset);
 		}

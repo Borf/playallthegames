@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <fstream>
 
-#include <blib/json.h>
+#include <blib/json.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <blib/util/FileSystem.h>
@@ -12,8 +12,8 @@
 
 Settings::Settings() : screenRect(0,0,1920,1080)
 {
-	blib::json::Value config = blib::util::FileSystem::getJson(blib::util::getDataDir() + "/playallthegames/config.json");
-	if(config.isNull())
+	json config = blib::util::FileSystem::getJson(blib::util::getDataDir() + "/playallthegames/config.json");
+	if(config.is_null())
 	{
 		resX = 1920;
 		resY = 1080;
@@ -25,11 +25,11 @@ Settings::Settings() : screenRect(0,0,1920,1080)
 	}
 
 
-	resX = config["res"][0u].asInt();
-	resY = config["res"][1u].asInt();
-	vsync = config["vsync"].asBool();
-	fullscreen = config["fullscreen"].asBool();
-	showInstructions = config["showinstructions"].asBool();
+	resX = config["res"][0u].get<int>();
+	resY = config["res"][1u].get<int>();
+	vsync = config["vsync"];
+	fullscreen = config["fullscreen"];
+	showInstructions = config["showinstructions"];
 
 
 	setSizes();
@@ -39,7 +39,7 @@ Settings::Settings() : screenRect(0,0,1920,1080)
 
 void Settings::save()
 {
-	blib::json::Value config;
+	json config;
 	config["res"].push_back(resX);
 	config["res"].push_back(resY);
 	config["vsync"] = vsync;

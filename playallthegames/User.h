@@ -1,17 +1,15 @@
 #pragma once
 
 #include <string>
-
+#include <blib/json.hpp>
 #include <glm/glm.hpp>
-
-namespace blib { namespace json { class Value; } }
 
 class User
 {
 public:
-	User(const blib::json::Value &v);
+	User(const json &v);
 	User(std::string name, glm::vec4 color);
-	blib::json::Value asJson() const;
+	json asJson() const;
 
 
 	std::string name;

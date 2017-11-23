@@ -1,3 +1,4 @@
+#include <blib/json.hpp>
 #include "MacroMachines.h"
 #include "Wheel.h"
 
@@ -5,7 +6,6 @@
 #include "../../PlayAllTheGames/Participant.h"
 #include "../../PlayAllTheGames/User.h"
 
-#include <blib/json.h>
 
 #include <blib/SpriteBatch.h>
 #include <blib/Texture.h>
@@ -98,9 +98,9 @@ void MacroMachines::start()
 			continue;
 		}
 	}
-	blib::json::Value track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/"+difficultyStr+"/" + tracks[rand() % tracks.size()]);
+	json track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/"+difficultyStr+"/" + tracks[rand() % tracks.size()]);
 
-	if (track.isNull())
+	if (track.is_null())
 		track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/default.json");
 	if (blib::util::FileSystem::exists("assets/games/MacroMachines/tracks/override.json"))
 		track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/override.json");
@@ -116,15 +116,15 @@ void MacroMachines::start()
 	for (size_t i = 0; i < track["nodes"].size(); i++)
 	{
 		int ii = (i + 1) % track["nodes"].size();
-		glm::vec2 n1 = blib::util::fromAngle(glm::radians(track["nodes"][i]["angle"].asFloat()));
-		glm::vec2 n2 = blib::util::fromAngle(glm::radians(track["nodes"][ii]["angle"].asFloat()));
-		glm::vec2 p1(track["nodes"][i]["pos"][0u].asFloat(), track["nodes"][i]["pos"][1u].asFloat());
-		glm::vec2 p2(track["nodes"][ii]["pos"][0u].asFloat(), track["nodes"][ii]["pos"][1u].asFloat());
+		glm::vec2 n1 = blib::util::fromAngle(glm::radians(track["nodes"][i]["angle"].get<float>()));
+		glm::vec2 n2 = blib::util::fromAngle(glm::radians(track["nodes"][ii]["angle"].get<float>()));
+		glm::vec2 p1(track["nodes"][i]["pos"][0u].get<float>(), track["nodes"][i]["pos"][1u].get<float>());
+		glm::vec2 p2(track["nodes"][ii]["pos"][0u].get<float>(), track["nodes"][ii]["pos"][1u].get<float>());
 
 		blib::math::BiArc left(p1, n1, p2, -n2);
-		left.setOffset(track["width"].asFloat() / 2);
+		left.setOffset(track["width"].get<float>() / 2);
 		blib::math::BiArc right(p1, n1, p2, -n2);
-		right.setOffset(track["width"].asFloat() / -2);
+		right.setOffset(track["width"].get<float>() / -2);
 
 		float len = glm::max(left.length(), right.length());
 
@@ -161,10 +161,10 @@ void MacroMachines::start()
 
 
 	int last = track["nodes"].size() - 1;
-	glm::vec2 n1 = blib::util::fromAngle(glm::radians(track["nodes"][0]["angle"].asFloat()));
-	glm::vec2 n2 = blib::util::fromAngle(glm::radians(track["nodes"][last]["angle"].asFloat()));
-	glm::vec2 p1(track["nodes"][0]["pos"][0u].asFloat(), track["nodes"][0]["pos"][1u].asFloat());
-	glm::vec2 p2(track["nodes"][last]["pos"][0u].asFloat(), track["nodes"][last]["pos"][1u].asFloat());
+	glm::vec2 n1 = blib::util::fromAngle(glm::radians(track["nodes"][0]["angle"].get<float>()));
+	glm::vec2 n2 = blib::util::fromAngle(glm::radians(track["nodes"][last]["angle"].get<float>()));
+	glm::vec2 p1(track["nodes"][0]["pos"][0u].get<float>(), track["nodes"][0]["pos"][1u].get<float>());
+	glm::vec2 p2(track["nodes"][last]["pos"][0u].get<float>(), track["nodes"][last]["pos"][1u].get<float>());
 	road = blib::math::BiArc(p1, -n1, p2, n2);
 
 	float f = 0.1f;

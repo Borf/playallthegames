@@ -1,5 +1,5 @@
 #include "SessionStats.h"
-#include <blib/json.h>
+#include <blib/json.hpp>
 
 #include "UserDb.h"
 #include "User.h"
@@ -9,20 +9,20 @@ SessionStats::SessionStats()
 
 }
 
-SessionStats::SessionStats(const blib::json::Value& config)
+SessionStats::SessionStats(const json& config)
 {
 	for (size_t i = 0; i < config["users"].size(); i++)
-		users.push_back(UserDb::getInstance()->getUserFromName(config["users"][i].asString()));
+		users.push_back(UserDb::getInstance()->getUserFromName(config["users"][i].get<std::string>()));
 	for (size_t i = 0; i < config["results"].size(); i++)
 		results.push_back(new Result(config["results"][i]));
 }
 
-blib::json::Value SessionStats::asJson()
+json SessionStats::asJson()
 {
-	blib::json::Value ret;
+	json ret;
 
-	ret["results"] = blib::json::Value(blib::json::Type::arrayValue);
-	ret["users"] = blib::json::Value(blib::json::Type::arrayValue);
+	ret["results"] = json::array();
+	ret["users"] = json::array();
 
 	for (size_t i = 0; i < this->users.size(); i++)
 		ret["users"].push_back(this->users[i]->name);
@@ -34,13 +34,13 @@ blib::json::Value SessionStats::asJson()
 }
 
 
-blib::json::Value SessionStats::Result::asJson()
+json SessionStats::Result::asJson()
 {
-	blib::json::Value ret;
+	json ret;
 
 	ret["name"] = gameName;
-	ret["participants"] = blib::json::Value(blib::json::Type::arrayValue);
-	ret["winners"] = blib::json::Value(blib::json::Type::arrayValue);
+	ret["participants"] = json::array();
+	ret["winners"] = json::array();
 	ret["finished"] = finished;
 	ret["timetaken"] = timeTaken;
 
@@ -51,14 +51,14 @@ blib::json::Value SessionStats::Result::asJson()
 	return ret;
 }
 
-SessionStats::Result::Result(const blib::json::Value& config)
+SessionStats::Result::Result(const json& config)
 {
 	gameName = config["name"];
 	finished = config["finished"];
-	timeTaken = config["timetaken"].asInt();
+	timeTaken = config["timetaken"].get<int>();
 
 	for (size_t i = 0; i < config["participants"].size(); i++)
-		participants.push_back(UserDb::getInstance()->getUserFromName(config["participants"][i].asString()));
+		participants.push_back(UserDb::getInstance()->getUserFromName(config["participants"][i].get<std::string>()));
 	for (size_t i = 0; i < config["winners"].size(); i++)
-		winners.push_back(UserDb::getInstance()->getUserFromName(config["winners"][i].asString()));
+		winners.push_back(UserDb::getInstance()->getUserFromName(config["winners"][i].get<std::string>()));
 }

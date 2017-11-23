@@ -19,7 +19,7 @@ MenuItem::MenuItem( std::string title, std::function<void(PlayAllTheGames*)> act
 void MenuItem::draw( blib::SpriteBatch* spriteBatch, glm::vec2 pos, glm::vec2 size, float selected )
 {
 	if (selected >= 0)
-		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos, 0)), blib::math::Rectangle(0, 0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, glm::clamp((1 + 0.2f * (float)glm::cos(selected *10)) * color, 0, 1));
+		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos, 0)), blib::math::Rectangle(0, 0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, glm::clamp((1 + 0.2f * (float)glm::cos(selected *10)) * color, glm::vec4(0,0,0,0), glm::vec4(1,1,1,1)));
 	else
 		spriteBatch->drawStretchyRect(MenuScreen::texture, glm::translate(glm::mat4(), glm::vec3(pos,0)), blib::math::Rectangle(0,0, 100, 100), blib::math::Rectangle(32, 32, 36, 36), size, color);
 

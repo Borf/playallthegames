@@ -1,10 +1,8 @@
 #pragma once
 
 #include <vector>
-
+#include <blib/json.hpp>
 class User;
-
-namespace blib { namespace json { class Value; } }
 
 class SessionStats
 {
@@ -13,7 +11,7 @@ public:
 	{
 	public:
 		Result() { };
-		Result(const blib::json::Value& config);
+		Result(const json& config);
 
 		std::string gameName;
 		std::vector<User*> participants;
@@ -21,13 +19,13 @@ public:
 		bool finished;
 		long timeTaken;
 
-		blib::json::Value asJson();
+		json asJson();
 	};
 
 
 	SessionStats();
-	SessionStats(const blib::json::Value& config);
-	blib::json::Value asJson();
+	SessionStats(const json& config);
+	json asJson();
 
 	long starttime;
 	std::vector<User*> users;

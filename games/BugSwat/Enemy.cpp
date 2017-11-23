@@ -39,7 +39,7 @@ namespace bugswat
 	{
 		glm::mat4 matrix;
 		matrix = glm::translate(matrix, glm::vec3(position, 0));
-		matrix = glm::rotate(matrix, glm::degrees(rotation), glm::vec3(0, 0, 1));
+		matrix = glm::rotate(matrix, rotation, glm::vec3(0, 0, 1));
 		return matrix;
 	}
 

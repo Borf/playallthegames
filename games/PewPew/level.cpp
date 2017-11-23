@@ -250,7 +250,7 @@ void Level::draw(blib::SpriteBatch* spriteBatch)
 				}
 
 				matrix = glm::translate(matrix, glm::vec3(o->size * glm::vec2(0.5f, 0.5f), 0));
-				matrix = glm::rotate(matrix, (float)o->rotation, glm::vec3(0, 0, 1));
+				matrix = glm::rotate(matrix, glm::radians((float)o->rotation), glm::vec3(0, 0, 1));
 				matrix = glm::translate(matrix, glm::vec3(o->size * glm::vec2(-0.5f, -0.5f), 0));
 				spriteBatch->draw(o->texInfo, matrix);
 
@@ -301,7 +301,7 @@ void Level::drawOverlay(blib::SpriteBatch* spriteBatch)
 				}
 
 				matrix = glm::translate(matrix, glm::vec3(o->size * glm::vec2(0.5f, 0.5f), 0));
-				matrix = glm::rotate(matrix, (float)o->rotation, glm::vec3(0, 0, 1));
+				matrix = glm::rotate(matrix, glm::radians((float)o->rotation), glm::vec3(0, 0, 1));
 				matrix = glm::translate(matrix, glm::vec3(o->size * glm::vec2(-0.5f, -0.5f), 0));
 				spriteBatch->draw(o->texInfo, matrix);
 

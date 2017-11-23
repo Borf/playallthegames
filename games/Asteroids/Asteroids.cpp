@@ -234,15 +234,15 @@ namespace asteroids
 
 		for(auto p : players)
 			if(p->alive)
-				spriteBatch->draw(playerTexture, blib::math::easyMatrix(p->position, p->rotation), playerTexture->center, p->participant->color);
+				spriteBatch->draw(playerTexture, blib::math::easyMatrix(p->position, glm::radians(p->rotation)), playerTexture->center, p->participant->color);
 		
 		for (const Asteroid &asteroid : asteroids)
-			spriteBatch->draw(asteroidTexture[asteroid.size], blib::math::easyMatrix(asteroid.position, asteroid.angle), asteroidTexture[asteroid.size]->center, glm::vec4(1,1,1,asteroid.fade));
+			spriteBatch->draw(asteroidTexture[asteroid.size], blib::math::easyMatrix(asteroid.position, glm::radians(asteroid.angle)), asteroidTexture[asteroid.size]->center, glm::vec4(1,1,1,asteroid.fade));
 
 
 		for (const auto & b : bullets)
 		{
-			spriteBatch->draw(bulletTexture, blib::math::easyMatrix(glm::vec2(b.first.x, b.first.y), glm::degrees(atan2(b.first.a, b.first.z))), bulletTexture->center, b.second->participant->color);
+			spriteBatch->draw(bulletTexture, blib::math::easyMatrix(glm::vec2(b.first.x, b.first.y), atan2(b.first.a, b.first.z)), bulletTexture->center, b.second->participant->color);
 		}
 
 
