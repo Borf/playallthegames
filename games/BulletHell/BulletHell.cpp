@@ -97,6 +97,7 @@ void BulletHell::update( float elapsedTime )
 		if (newBullet != NULL)
 		{
 			bulletSound->play();
+			bulletSound->setVolume(60);
 			bullets.push_back(newBullet);
 		}
 	}
@@ -106,8 +107,8 @@ void BulletHell::update( float elapsedTime )
 	{
 		if (!player->alive)
 			continue;
-		glm::vec2 p1 = player->position + 70.0f * blib::util::fromAngle(player->rotation);
-		glm::vec2 p2 = player->position - 70.0f * blib::util::fromAngle(player->rotation);
+		glm::vec2 p1 = player->position + 70.0f * blib::util::fromAngle(glm::radians(player->rotation));
+		glm::vec2 p2 = player->position - 70.0f * blib::util::fromAngle(glm::radians(player->rotation));
 		blib::math::Line playerLine(p1, p2);
 
 		for(auto b : bullets)

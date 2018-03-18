@@ -169,7 +169,7 @@ void FlyFar::draw()
 	spriteBatch->draw(rampSprite, glm::translate(glm::mat4(), glm::vec3(0, 1080 - rampSprite->height,0)));
 
 	for(auto player : players)
-		spriteBatch->draw(flyerSprite, glm::rotate(glm::translate(glm::mat4(), glm::vec3(player->position,0)), glm::degrees(player->rotation), glm::vec3(0,0,1)), flyerSprite->center, blib::math::Rectangle(0,0,1,1), player->participant->color);
+		spriteBatch->draw(flyerSprite, glm::rotate(glm::translate(glm::mat4(), glm::vec3(player->position,0)), player->rotation, glm::vec3(0,0,1)), flyerSprite->center, blib::math::Rectangle(0,0,1,1), player->participant->color);
 
 	for(auto g : gusts)
 		spriteBatch->draw(gustSprite, glm::translate(glm::mat4(), glm::vec3(g,0)));

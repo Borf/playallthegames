@@ -129,7 +129,7 @@ namespace backattack
 
 				glm::mat4 mat;
 				mat = glm::translate(mat, glm::vec3(8 * x, 0, 8 * y));
-				mat = glm::rotate(mat, tile->rotation, glm::vec3(0, 1, 0));
+				mat = glm::rotate(mat, glm::radians(tile->rotation), glm::vec3(0, 1, 0));
 				renderState.activeShader->setUniform(BackAttack::Uniforms::ModelMatrix, mat);
 				tile->model->draw(renderState, renderer, [&renderState](const blib::Material& material)
 				{

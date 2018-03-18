@@ -249,10 +249,10 @@ void TowerTopple::update( float elapsedTime )
 
 			glm::mat4 projectionMatrix = glm::perspective(75.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
 			glm::mat4 cameraMatrix;
-			cameraMatrix = glm::rotate(cameraMatrix, -10.0f, glm::vec3(1, 0, 0));
+			cameraMatrix = glm::rotate(cameraMatrix, glm::radians(-10.0f), glm::vec3(1, 0, 0));
 			cameraMatrix = glm::translate(cameraMatrix, glm::vec3(0, 0, -camDist));
-			cameraMatrix = glm::rotate(cameraMatrix, camAngle, glm::vec3(1, 0, 0));
-			cameraMatrix = glm::rotate(cameraMatrix, camRot, glm::vec3(0, 1, 0));
+			cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camAngle), glm::vec3(1, 0, 0));
+			cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camRot), glm::vec3(0, 1, 0));
 			renderer->unproject(cursor, NULL, &p->shootRay, cameraMatrix, projectionMatrix);
 			p->bla = true;
 		}
@@ -392,10 +392,10 @@ void TowerTopple::draw()
 
 
 	glm::mat4 cameraMatrix;
-	cameraMatrix = glm::rotate(cameraMatrix, -10.0f, glm::vec3(1, 0, 0));
+	cameraMatrix = glm::rotate(cameraMatrix, glm::radians(-10.0f), glm::vec3(1, 0, 0));
 	cameraMatrix = glm::translate(cameraMatrix, glm::vec3(0, 0, -camDist));
-	cameraMatrix = glm::rotate(cameraMatrix, camAngle, glm::vec3(1, 0, 0));
-	cameraMatrix = glm::rotate(cameraMatrix, camRot, glm::vec3(0, 1, 0));
+	cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camAngle), glm::vec3(1, 0, 0));
+	cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camRot), glm::vec3(0, 1, 0));
 
 
 	float h = 0;

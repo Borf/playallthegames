@@ -235,7 +235,7 @@ namespace backattack
 	void BackAttack::draw()
 	{
 		glm::mat4 projectionMatrix = glm::perspective(70.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
-		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -60, level->height * 4-20), glm::vec3(level->width * 4 - 4, -14, level->height * 4-10.5), glm::vec3(0, -1, 0));
+		glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(level->width * 4 - 4, -75, level->height * 4-20), glm::vec3(level->width * 4 - 4, -14, level->height * 4-8.5), glm::vec3(0, -1, 0));
 		renderState.activeShader->setUniform(Uniforms::color, glm::vec4(1, 1, 1, 1));
 
 
@@ -254,7 +254,7 @@ namespace backattack
 
 			glm::mat4 mat;
 			mat = glm::translate(mat, glm::vec3(p->position.x, -1.5, p->position.y));
-			mat = glm::rotate(mat, 180.0f - p->angle, glm::vec3(0, 1, 0));
+			mat = glm::rotate(mat, glm::radians(180.0f - p->angle), glm::vec3(0, 1, 0));
 			mat = glm::scale(mat, glm::vec3(1.5f, 1.5f, 1.5f));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
 
@@ -288,7 +288,7 @@ namespace backattack
 			float s = 0.025f + 0.01 * glm::sin(gameTime * 10);
 			glm::mat4 mat;
 			mat = glm::translate(mat, glm::vec3(8*pos.x, -2 + glm::sin(gameTime * 10), 8*pos.y));
-			mat = glm::rotate(mat, 15 * gameTime, glm::vec3(1, sin(gameTime), cos(gameTime)));
+			mat = glm::rotate(mat, glm::radians(15 * gameTime), glm::vec3(1, sin(gameTime), cos(gameTime)));
 			mat = glm::scale(mat, glm::vec3(s, s, s));
 			renderState.activeShader->setUniform(Uniforms::ModelMatrix, mat);
 			powerup->draw(renderState, renderer, [this](const blib::Material& material)
