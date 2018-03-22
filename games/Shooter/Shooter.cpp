@@ -23,6 +23,8 @@ namespace shooter
 	Shooter::Shooter()
 	{
 		controls[ControllerButton::ButtonA] = "Shoot";
+		controls[ControllerButton::ButtonL] = "Shoot";
+		controls[ControllerButton::ButtonR] = "Shoot";
 		controls[ControllerButton::ThumbstickLeft] = "Move";
 		controls[ControllerButton::ThumbstickRight] = "Aim";
 	}
@@ -46,7 +48,7 @@ namespace shooter
 	void Shooter::loadResources()
 	{
 		backgroundVbo = resourceManager->getResource<blib::VBO>();
-		backgroundVbo->setVertexFormat<blib::VertexP2T2C4>();
+		backgroundVbo->setVertexFormat<blib::VertexP2T2C4C4>();
 
 		backSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/back.png");
 		stoneSprite = resourceManager->getResource<blib::Texture>("assets/games/Shooter/stone.png");
@@ -59,6 +61,13 @@ namespace shooter
 
 		particleSystem = new blib::ParticleSystem(renderer, resourceManager, spriteBatch);
 		particleSystem->setTextureFolder("assets/games/Shooter/particles/");
+
+		sfx.die = audioManager->loadSample("assets/games/Shooter/die.wav");
+		sfx.die->canOnlyPlayOnce = false;
+		sfx.explode = audioManager->loadSample("assets/games/Shooter/boom.wav");
+		sfx.explode->canOnlyPlayOnce = false;
+		sfx.shoot = audioManager->loadSample("assets/games/Shooter/shot.wav");
+		sfx.shoot->canOnlyPlayOnce = false;
 
 	}
 
@@ -124,7 +133,7 @@ namespace shooter
 
 	void Shooter::buildTriangles()
 	{
-		std::vector<blib::VertexP2T2C4> verts;
+		std::vector<blib::VertexP2T2C4C4> verts;
 		{
 			std::vector<p2t::Point*> outline;
 			outline.push_back(new p2t::Point(-100, -100));
@@ -141,7 +150,7 @@ namespace shooter
 			for (auto t : triangles)
 			{
 				for (int i = 0; i < 3; i++)
-					verts.push_back(blib::VertexP2T2C4(glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y), glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y) / 100.0f, blib::Color::white));
+					verts.push_back(blib::VertexP2T2C4C4(glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y), glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y) / 100.0f, blib::Color::white, glm::vec4(0,0,0,0)));
 			}
 		}
 		for (const blib::math::Polygon& p : objects)
@@ -156,7 +165,7 @@ namespace shooter
 			for (auto t : triangles)
 			{
 				for (int i = 0; i < 3; i++)
-					verts.push_back(blib::VertexP2T2C4(glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y), glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y) / 100.0f, blib::Color::white));
+					verts.push_back(blib::VertexP2T2C4C4(glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y), glm::vec2(t->GetPoint(i)->x, t->GetPoint(i)->y) / 100.0f, blib::Color::white, glm::vec4(0,0,0,0)));
 			}
 
 		}
@@ -238,8 +247,9 @@ namespace shooter
 			if(glm::length(p->joystick.rightStick) > 0.75f)
 				p->direction = glm::normalize(p->joystick.rightStick);
 
-			if (p->joystick.a == 1 && p->shootTime < 0)
+			if ((p->joystick.a == 1 || p->joystick.l == 1 || p->joystick.r == 1) && p->shootTime < 0)
 			{
+				sfx.shoot->play();
 				bullets.push_back(std::pair<glm::vec2, glm::vec2>(p->position + 16.0f * p->direction, p->direction + 0.5f * p->joystick.leftStick));
 				p->shootTime = 1.5f;
 			}
@@ -286,6 +296,7 @@ namespace shooter
 				emitter->position = emitter->prevPosition = bullets[i].first;
 				emitter->life = 0.25;
 
+				sfx.explode->play();
 
 				for (auto p : players)
 				{
@@ -295,7 +306,10 @@ namespace shooter
 					if (dmg > 0)
 						p->health -= dmg;
 					if (p->health < 0)
+					{
 						p->alive = false;
+						sfx.die->play();
+					}
 				}
 				addHole(bullets[i].first);
 				bullets.erase(bullets.begin() + i);
@@ -314,13 +328,12 @@ namespace shooter
 	{
 		spriteBatch->begin();
 		spriteBatch->draw(backSprite, glm::mat4());
-		
 		spriteBatch->end();
+
 		blib::RenderState rs = spriteBatch->renderState;
 		rs.activeVbo = backgroundVbo;
 		rs.activeTexture[0] = stoneSprite;
-		renderer->drawTriangles<blib::VertexP2T2C4>(backgroundVbo->getLength(), rs);
-
+		renderer->drawTriangles<blib::VertexP2T2C4C4>(backgroundVbo->getLength(), rs);
 		spriteBatch->begin();
 
 		for (auto p : players)
@@ -337,6 +350,7 @@ namespace shooter
 		{
 			spriteBatch->draw(rocketSprite, blib::math::easyMatrix(b.first, glm::degrees(atan2(b.second.y, b.second.x))), rocketSprite->center);
 		}
+		particleSystem->renderState.activeFbo = spriteBatch->renderState.activeFbo;
 		particleSystem->draw(glm::mat4());
 		spriteBatch->end();
 

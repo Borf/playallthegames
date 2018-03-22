@@ -40,5 +40,5 @@ public:
     virtual void draw();
     virtual void loadResources();
     blib::Texture* Pusher::getTitleImage();
-    virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 8); }
+    virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 1); }
 };

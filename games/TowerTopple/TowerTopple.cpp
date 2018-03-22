@@ -247,7 +247,7 @@ void TowerTopple::update( float elapsedTime )
 			cursor *= 1.25f;
 			cursor += settings->center;
 
-			glm::mat4 projectionMatrix = glm::perspective(75.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
+			glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)settings->resX / settings->resY, 0.1f, 500.0f);
 			glm::mat4 cameraMatrix;
 			cameraMatrix = glm::rotate(cameraMatrix, glm::radians(-10.0f), glm::vec3(1, 0, 0));
 			cameraMatrix = glm::translate(cameraMatrix, glm::vec3(0, 0, -camDist));
@@ -343,7 +343,7 @@ void TowerTopple::update( float elapsedTime )
 
 void TowerTopple::draw()
 {
-	glm::mat4 projectionMatrix = glm::perspective(90.0f, (float)settings->resX / settings->resY, 0.1f, 500.0f);
+	glm::mat4 projectionMatrix = glm::perspective(glm::radians(90.0f), (float)settings->resX / settings->resY, 0.1f, 500.0f);
 //	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(0, -5, -5), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	renderState.activeShader->setUniform(Uniforms::color, glm::vec4(1, 1, 1, 1));
 

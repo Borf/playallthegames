@@ -86,7 +86,7 @@ namespace asteroids
 
 			if (p->joystick.b == 1 && p->prevJoystick.b != 1)
 			{
-				bullets.push_back(std::pair<glm::vec4, asteroids::Player*>(glm::vec4(p->position.x, p->position.y, p->movement.x + 300 * cos(glm::radians(p->rotation+180)), p->movement.y + 300 * sin(glm::radians(p->rotation+180))), p));
+				bullets.push_back(std::pair<glm::vec4, asteroids::Player*>(glm::vec4(p->position.x, p->position.y, p->movement.x + 300 * cos(glm::radians(p->rotation+180.0f)), p->movement.y + 300 * sin(glm::radians(p->rotation+180.0f))), p));
 				laser->play();
 			}
 		}
@@ -234,7 +234,7 @@ namespace asteroids
 
 		for(auto p : players)
 			if(p->alive)
-				spriteBatch->draw(playerTexture, blib::math::easyMatrix(p->position, glm::radians(p->rotation)), playerTexture->center, p->participant->color);
+				spriteBatch->draw(playerTexture, blib::math::easyMatrix(p->position, p->rotation), playerTexture->center, p->participant->color);
 		
 		for (const Asteroid &asteroid : asteroids)
 			spriteBatch->draw(asteroidTexture[asteroid.size], blib::math::easyMatrix(asteroid.position, glm::radians(asteroid.angle)), asteroidTexture[asteroid.size]->center, glm::vec4(1,1,1,asteroid.fade));
@@ -242,7 +242,7 @@ namespace asteroids
 
 		for (const auto & b : bullets)
 		{
-			spriteBatch->draw(bulletTexture, blib::math::easyMatrix(glm::vec2(b.first.x, b.first.y), atan2(b.first.a, b.first.z)), bulletTexture->center, b.second->participant->color);
+			spriteBatch->draw(bulletTexture, blib::math::easyMatrix(glm::vec2(b.first.x, b.first.y), glm::degrees(atan2(b.first.a, b.first.z))), bulletTexture->center, b.second->participant->color);
 		}
 
 

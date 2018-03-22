@@ -257,7 +257,7 @@ void MacroMachines::update(float elapsedTime)
 			car->forward = car->joystick.a != 0;
 			car->braking = car->joystick.b != 0;
 
-			car->steering = 0.5f * car->joystick.leftStick.x;
+			car->steering = 0.25f * car->joystick.leftStick.x;
 			for (auto w : car->wheels)
 			{
 				float slipFactor = (w->getKillVelocityVector() - w->body->GetLinearVelocity()).Length();

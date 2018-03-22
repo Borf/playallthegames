@@ -142,8 +142,8 @@ namespace tallytulip
 	std::list<Player*> TallyTulip::getWinners()
 	{
 		int count = blib::linq::count(tulips, [](const Tulip& t) { return t.color == 1; });
-		int minDist = blib::linq::min<int>(players, [count](TallyTulipPlayer* p) { return p->count - count; });
-		return blib::linq::where<std::list<Player*>>(players, [count, minDist](TallyTulipPlayer* p) { return (p->count - count) == minDist; });
+		int minDist = blib::linq::min<int>(players, [count](TallyTulipPlayer* p) { return abs(p->count - count); });
+		return blib::linq::where<std::list<Player*>>(players, [count, minDist](TallyTulipPlayer* p) { return abs(p->count - count) == minDist; });
 	}
 
 }

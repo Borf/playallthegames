@@ -36,7 +36,7 @@ void Bouncy::loadResources()
 	playerSprite = resourceManager->getResource<blib::Texture>("assets/games/Bouncy/player.png");
 	objectsSprite = resourceManager->getResource<blib::Texture>("assets/games/Bouncy/shapes.png");
 	bumpSound = audioManager->loadSample("assets/games/Bouncy/bump.wav");
-	bumpSound->canOnlyPlayOnce = true;
+	bumpSound->canOnlyPlayOnce = false;
 	dieSound = audioManager->loadSample("assets/games/Bouncy/die.wav");
 }
 
@@ -61,6 +61,7 @@ void Bouncy::update( float elapsedTime )
 		objects.push_back(o);
 	}
 
+	bool firstSound = false;
 	for (auto p : players)
 	{
 		if(!p->alive)
@@ -75,7 +76,11 @@ void Bouncy::update( float elapsedTime )
 		if ((p->position.y < 540 - 300 && p->speed.y < 0) || (p->position.y > 540 + 300 - playerSprite->height && p->speed.y > 0))
 		{
 			p->speed.y = -p->speed.y;
-			bumpSound->play();
+			if (!firstSound)
+			{
+				bumpSound->play();
+				firstSound = true;
+			}
 		}
 
 

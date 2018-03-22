@@ -205,14 +205,14 @@ void RushHour::draw()
 	}
 
 
-	particleSystem->draw(glm::mat4());
-
 	for (auto p : players)
 		if (p->alive)
 			spriteBatch->draw(cursorSprite, blib::math::easyMatrix(p->cursor, (float)blib::util::Profiler::getAppTime()*100), cursorSprite->center, p->participant->color);
 
 
 	spriteBatch->end();
+	particleSystem->renderState.activeFbo = spriteBatch->renderState.activeFbo;
+	particleSystem->draw(glm::mat4());
 
 	lineBatch->end();
 

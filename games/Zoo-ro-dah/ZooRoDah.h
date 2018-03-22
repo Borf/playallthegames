@@ -24,7 +24,7 @@ namespace zoorodah
 		std::vector<glm::vec2> spawns;
 	public:
 		ZooRoDah();
-		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 100); }
+		virtual std::pair<int, int> getPlayerCount() { return std::pair<int, int>(1, 1); }
 		virtual std::string getName();
 		virtual std::string getInstructions();
 		virtual void loadResources();

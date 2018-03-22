@@ -285,11 +285,11 @@ void Tanks::update( float elapsedTime )
 				p->lastShootTime = 0;
 
 
-		if(p->joystick.a && p->lastShootTime == 0)
+		if((p->joystick.a || p->joystick.l || p->joystick.r) && p->lastShootTime == 0)
 		{
 			b2BodyDef bulletDef;
 			bulletDef.type = b2_dynamicBody;
-			bulletDef.position = p->turret->GetWorldCenter() + 0.475f * blib::util::fromAngle(p->turret->GetAngle() + (float)M_PI);
+			bulletDef.position = p->turret->GetWorldCenter() + 0.5f * blib::util::fromAngle(p->turret->GetAngle() + (float)M_PI);
 			bulletDef.linearVelocity = 7.0f * blib::util::fromAngle(p->turret->GetAngle() + (float)M_PI);
 			bulletDef.angle = p->turret->GetAngle();
 			bulletDef.angularDamping = 1;
