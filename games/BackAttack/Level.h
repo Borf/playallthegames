@@ -11,13 +11,15 @@ namespace blib {
 	class RenderState;
 }
 
+enum class Difficulty;
+
 namespace backattack
 {
 	class Level
 	{
 	public:
-		const int width = 10;
-		const int height = 9;
+		int width = 10;
+		int height = 9;
 
 
 		class Tile
@@ -46,11 +48,17 @@ namespace backattack
 		} models;
 
 
+		inline bool inLevel(const glm::ivec2 &pos) const
+		{
+			return pos.x >= 0 && pos.x < width &&
+				pos.y >= 0 && pos.y < height;
+		}
+
 		std::vector<std::vector<Tile*>> tiles;
 
 		std::vector<glm::vec2> powerups;
 
-		Level();
+		Level(Difficulty difficulty);
 		void draw(blib::RenderState& renderState, blib::Renderer* renderer);
 		static void loadResources(blib::ResourceManager* resourceManager, blib::Renderer* renderer);
 	};

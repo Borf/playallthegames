@@ -45,9 +45,7 @@ GameCreateMenu::GameCreateMenu(Session* session)
 	victoryConditions.push_back("Rounds");
 
 	std::vector<std::string> difficulties;
-	difficulties.push_back("Easy");
 	difficulties.push_back("Normal");
-	difficulties.push_back("Hard");
 	difficulties.push_back("Cruel");
 	difficulties.push_back("WTF");
 
@@ -58,7 +56,7 @@ GameCreateMenu::GameCreateMenu(Session* session)
 	items.push_back(new MenuItem("Games", std::bind(&GameCreateMenu::games, this, std::placeholders::_1)));
 	items.push_back(gameSelector = new OptionMenuItem("Game Selection", gameSelectors, session->gameSelectorType));
 	items.push_back(victoryCondition = new OptionMenuItem("Victory Condition", victoryConditions));
-	items.push_back(difficulty = new OptionMenuItem("Difficulty", difficulties, 1));
+	items.push_back(difficulty = new OptionMenuItem("Difficulty", difficulties, 0));
 
 	items.push_back(new MenuItem("Start", std::bind(&GameCreateMenu::start, this, std::placeholders::_1)));
 	items.push_back(new MenuItem("Back", std::bind(&GameCreateMenu::back, this, std::placeholders::_1)));

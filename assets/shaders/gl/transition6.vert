@@ -8,5 +8,5 @@ uniform float transition;
 void main()
 {
 	texCoord = a_texture;
-	gl_Position = vec4(a_position - vec2(0, 2*(1-transition)),0.0,1.0);
+	gl_Position = vec4(a_position - vec2(0, 2.0*(1.0-transition)),0.0,1.0);
 }

@@ -156,20 +156,16 @@ namespace asteroids
 				if (asteroids[ii].size > 0)
 				{
 					int spawnCount = 6;
-					if (difficulty == Difficulty::Easy)
-						spawnCount = 4;
-					else if (difficulty == Difficulty::Hard)
-						spawnCount = 7;
-					else if (difficulty == Difficulty::Cruel)
+					if (difficulty == Difficulty::Cruel)
 						spawnCount = 10;
 					else if (difficulty == Difficulty::Wtf)
 						spawnCount = 50;
 
-					for (int iii = 0; iii < 6; iii++)
+					for (int iii = 0; iii < spawnCount; iii++)
 					{
 
 						float speed = 4;
-						if (difficulty == Difficulty::Hard || difficulty == Difficulty::Cruel)
+						if (difficulty == Difficulty::Cruel)
 							speed = 3;
 
 
@@ -202,21 +198,19 @@ namespace asteroids
 
 
 		int asteroidCount = 25;
-		if (difficulty == Difficulty::Easy)
-			asteroidCount = 15;
-		else if (difficulty == Difficulty::Hard)
-			asteroidCount = 40;
-		else if (difficulty == Difficulty::Cruel)
+		if (difficulty == Difficulty::Cruel)
 			asteroidCount = 100;
 		else if (difficulty == Difficulty::Wtf)
-			asteroidCount = 500;
+			asteroidCount = 5;
 
 
 		if (asteroids.size() < asteroidCount)
 		{
 			Asteroid a;
 			bool blocks = blib::linq::any(players, [&a](asteroids::Player* p) { return glm::distance(a.position, p->position) < 128; });
-			
+			if (difficulty == Difficulty::Wtf)
+				a.size = 2;
+				
 			if(!blocks)
 				asteroids.push_back(a); //add an asteroid
 		}

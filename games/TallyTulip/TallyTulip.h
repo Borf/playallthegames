@@ -29,6 +29,7 @@ namespace tallytulip
 		std::vector<Tulip> tulips;
 
 		float speed;
+		int timeLimit;
 
 	public:
 		float time;

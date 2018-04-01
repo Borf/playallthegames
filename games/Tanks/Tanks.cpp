@@ -262,10 +262,6 @@ void Tanks::update( float elapsedTime )
 		p->body->ApplyForce(force*p->joystick.rightStick.y * forward, p->body->GetWorldCenter() -side, true);
 
 		float turnSpeed = 1.0f;
-		if (difficulty == Difficulty::Easy)
-			turnSpeed = 1.5f;
-		if (difficulty == Difficulty::Hard)
-			turnSpeed = 0.5f;
 		if (difficulty == Difficulty::Cruel)
 			turnSpeed = 0.1f;
 		if (difficulty == Difficulty::Wtf)
@@ -311,8 +307,6 @@ void Tanks::update( float elapsedTime )
 			bullet->CreateFixture(&fixtureDef);
 			p->lastShootTime = 0.5f;
 
-			if (difficulty == Difficulty::Hard)
-				p->lastShootTime = 1;
 			if (difficulty == Difficulty::Cruel)
 				p->lastShootTime = 2;
 

@@ -41,7 +41,30 @@ void Herding::loadResources()
 
 void Herding::start()
 {
-	totalScore = 20;
+	glm::vec2 spawnRange;
+	if (difficulty == Difficulty::Normal)
+	{
+		totalScore = 20;
+		spawnRange = glm::vec2(400, 400);
+	}
+	else if (difficulty == Difficulty::Cruel)
+	{
+		totalScore = players.size()+1;
+		spawnRange = glm::vec2(150, 150);
+	}
+	else if (difficulty == Difficulty::Wtf)
+	{
+		if (blib::math::randomFloat() < 0.25)
+		{
+			totalScore = 1;
+			spawnRange = glm::vec2(1, 1);
+		}
+		else
+		{
+			totalScore = 250;
+			spawnRange = glm::vec2(1800, 1000);
+		}
+	}
 
 	glm::vec2 positions[] = { glm::vec2(560, 260), glm::vec2(1270, 260), glm::vec2(560, 830), glm::vec2(1270, 830) }; //TODO: this should be done in in another way?
 	for(size_t i = 0; i < players.size(); i++)
@@ -54,9 +77,10 @@ void Herding::start()
 	std::for_each(sheep.begin(), sheep.end(), [] (Sheep* sheep) { delete sheep; });
 	sheep.clear();
 
-	while(sheep.size() < 20)
+	while(sheep.size() < totalScore)
 	{
-		glm::vec2 newPos = glm::vec2(700 + (float)blib::math::randomDouble() * 400, 400 + (float)blib::math::randomDouble() * 400);
+		glm::vec2 newPos = glm::vec2(1920/2 - spawnRange.x/2 + (float)blib::math::randomDouble() * spawnRange.x, 
+									 1080/2 - spawnRange.y/2 + (float)blib::math::randomDouble() * spawnRange.y);
 		bool hasCollision = false;
 		for (size_t ii = 0; ii < sheep.size(); ii++)
 			if(glm::length(sheep[ii]->position - newPos) < (sheepSprite->height/16) * 0.5)

@@ -19,9 +19,7 @@ namespace util { class FileSystemHandler;  }
 
 enum class Difficulty
 {
-	Easy,
 	Normal,
-	Hard,
 	Cruel,
 	Wtf
 };

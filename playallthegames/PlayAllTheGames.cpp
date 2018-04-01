@@ -41,7 +41,8 @@
 using blib::util::Log;
 
 
-#define DEBUGGAME "Pusher"
+#define DEBUGGAME "Macro Machines"
+#define DEBUGDIFFICULTY Difficulty::Cruel
 #define DEBUGPLAYERCOUNT 4
 
 #ifdef _DEBUG
@@ -258,12 +259,14 @@ void PlayAllTheGames::update( double elapsedTime )
 
 	if(!typingMode)
 	{
-		if (keyState.isPressed(blib::Key::SPACE) && !lastKeyState.isPressed(blib::Key::SPACE))
+		if ((keyState.isPressed(blib::Key::SPACE) && !lastKeyState.isPressed(blib::Key::SPACE)) ||
+			(joyStates[0].start == 1 && lastJoyState.start == 0))
 		{
 			if(session == NULL)
 			{
 				session = new Session();
 				session->setDebug(this, getGame(DEBUGGAME), DEBUGPLAYERCOUNT);
+				//session->difficulty = DEBUGDIFFICULTY;
 			}
 			session->nextGame(this);
 			switchState(PreGame);
@@ -368,15 +371,18 @@ void PlayAllTheGames::update( double elapsedTime )
 		{
 			if(pregameTickTime > 1)
 				audio.tick->play();
-			else
+			else if(pregameTickTime > -1)
 				audio.go->play();
 			pregameTickTime--;
 		}
 		
 		if(stateTime > PREGAMETIME)
 		{
-			switchState(InGame);
-			transout = rand() % 8;
+			if (joyStates[0].select == 1 && lastJoyState.select == 0)
+			{
+				switchState(InGame);
+				transout = rand() % 8;
+			}
 		}
 	}
 	else if(activeState == PostGame)
@@ -640,9 +646,7 @@ void PlayAllTheGames::draw()
 		spriteBatch->begin();
 		switch (session->difficulty)
 		{
-		case Difficulty::Easy:			spriteBatch->draw(font, "Easy", glm::mat4()); break;
 		case Difficulty::Normal:		spriteBatch->draw(font, "Normal", glm::mat4()); break;
-		case Difficulty::Hard:			spriteBatch->draw(font, "Hard", glm::mat4()); break;
 		case Difficulty::Cruel:			spriteBatch->draw(font, "Cruel", glm::mat4()); break;
 		case Difficulty::Wtf:			spriteBatch->draw(font, "Wtf", glm::mat4()); break;
 		}

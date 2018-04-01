@@ -24,7 +24,7 @@ namespace hillclimb
 		float rotations;
 		float lastAngle;
 		float maxSpeed;
-
+		float rotationSpeed;
 		int loops;
 
 
@@ -33,6 +33,9 @@ namespace hillclimb
 			lastX = -100;
 			maxSpeed = 50;
 			loops = 0;
+			rotations = 0;
+			lastAngle = 0;
+			rotationSpeed = 200;
 		}
 	};
 

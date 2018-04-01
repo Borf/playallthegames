@@ -11,42 +11,89 @@ namespace backattack
 
 	Level::Models Level::models;
 
-	Level::Level()
+	Level::Level(Difficulty difficulty)
 	{
-		tiles.clear();
+		if (difficulty == Difficulty::Cruel)
+			width--;
+		tiles.clear(); //TODO: memory leak
 		tiles.resize(width, std::vector<Tile*>(height, NULL));
+
+		int sizex = tiles.size() - 1;
+		int sizey = tiles[0].size() - 1;
 
 		for (int i = 1; i < width; i++)
 		{
 			tiles[i][0] = new Tile(models.straight, 90);
-			tiles[i][tiles[i].size() - 1] = new Tile(models.straight, 90);
+			tiles[i][sizey] = new Tile(models.straight, 90);
 		}
 
 		for (int i = 1; i < height; i++)
 		{
 			tiles[0][i] = new Tile(models.straight, 0);
-			tiles[tiles.size()-1][i] = new Tile(models.straight, 0);
+			tiles[sizex][i] = new Tile(models.straight, 0);
 		}
 
 		tiles[0][0] = new Tile(models.turn, 0);
-		tiles[tiles.size() - 1][0] = new Tile(models.turn, -90);
-		tiles[0][tiles[0].size() - 1] = new Tile(models.turn, 90);
-		tiles[tiles.size() - 1][tiles[0].size() - 1] = new Tile(models.turn, 180);
+		tiles[sizex][0] = new Tile(models.turn, -90);
+		tiles[0][sizey] = new Tile(models.turn, 90);
+		tiles[sizex][sizey] = new Tile(models.turn, 180);
 
+		//sides: 0: left 1: right, 2: ???, 3: ???
+		std::vector<int> data;
+		if(difficulty == Difficulty::Normal)
+			data.insert(data.end(), { //side, pos, offset
+				2, 6, 0,
+				2, 3, 0,
+				1, 4, 0,
+				0, 4, 0,
 
-		int data[] = { 
-			2, 6, 0,
-			2, 3, 0,
-			1, 4, 0,
-			0, 4, 0,
-	
-			1, 2, 3,
-			1, 6, 3
-		};
+				1, 2, 3,
+				1, 6, 3 });
+		else if (difficulty == Difficulty::Wtf)
+		{
+			data.insert(data.end(), { //side, pos, offset
+				2, 1, 0,
+				2, 2, 0,
+				2, 3, 0,
+				2, 4, 0,
+				2, 5, 0,
+				2, 6, 0,
+				2, 7, 0,
+				2, 8, 0,
 
+				1, 1, 0,
+				1, 2, 0,
+				1, 3, 0,
+				1, 4, 0,
+				1, 5, 0,
+				1, 6, 0,
+				1, 7, 0,
+				1, 8, 0,
+				});
 
+			for (int i = 7; i >= 0; i--)
+			{
+				data.insert(data.end(), { //side, pos, offset
+					0, 1, i,
+					0, 2, i,
+					0, 3, i,
+					0, 4, i,
+					0, 5, i,
+					0, 6, i,
+					0, 7, i,
+					0, 8, i });
+			}			
+		}
+		else if (difficulty == Difficulty::Cruel)
+		{		//sides: 0: left 1: right, 2: ???, 3: ???
+			data.insert(data.end(), { //side, pos, offset
+					2, 4, 0,
+					0, 4, 0,
+					1, 4, 0
+				});
+		}
 
-		for (int i = 0; i < sizeof(data) / sizeof(int) / 3; i++)
+		for (int i = 0; i < data.size() / 3; i++)
 		{
 			int side = data[i*3];// i % 4;// rand() % 4;
 			int pos = data[i * 3 + 1];// 2 + (rand() % (width / 2 - 2)) * 2;
@@ -64,7 +111,7 @@ namespace backattack
 				continue;
 			}
 
-			if (tiles[x][y]->model != models.straight)
+			if (!tiles[x][y] || !tiles[x][y]->model || tiles[x][y]->model != models.straight)
 			{
 			//	i--;
 				continue;
@@ -113,6 +160,7 @@ namespace backattack
 				tiles[x][y] = new Tile(models.houses[rand() % 8], (rand() % 4) * 90.0f);
 			}
 		}
+
 
 	}
 

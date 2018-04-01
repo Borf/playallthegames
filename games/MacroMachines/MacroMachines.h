@@ -33,6 +33,7 @@ class MacroMachines : public ScoreGame<MacroMachinesPlayer>, public b2ContactLis
 	blib::Texture* slipSprite;
 	blib::Texture* finishSprite;
 	blib::Font* font;
+	blib::Font* bigFont;
 	b2World* world;
 
 	blib::FBO* trackSprite;
@@ -40,7 +41,7 @@ class MacroMachines : public ScoreGame<MacroMachinesPlayer>, public b2ContactLis
 	float lastPhysicsTick;
 
 	blib::math::BiArc road;
-
+	glm::vec2 lapPosition;
 	float zoom;
 public:
 	std::vector<b2Body*> progressLines;

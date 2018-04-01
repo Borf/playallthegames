@@ -1,5 +1,6 @@
 #include "MacroMachinesPlayer.h"
 #include "Wheel.h"
+#include "../../playallthegames/Game.h"
 
 #include <blib/linq.h>
 #include <blib/util/Log.h>
@@ -12,7 +13,7 @@ MacroMachinesPlayer::MacroMachinesPlayer(int index) : ScorePlayer(index)
 
 }
 
-void MacroMachinesPlayer::spawn(b2World* world, glm::vec2 position, Drive drive, float rotation)
+void MacroMachinesPlayer::spawn(b2World* world, glm::vec2 position, Drive drive, float rotation, Difficulty difficulty)
 {
 	levelIndex = 0;
 	score = 0;
@@ -41,6 +42,13 @@ void MacroMachinesPlayer::spawn(b2World* world, glm::vec2 position, Drive drive,
 	wheels.push_back(new Wheel(world, this, glm::vec2(0.95f, -1.15f), drive == Drive::FWD || drive == Drive::AWD, 1));
 	wheels.push_back(new Wheel(world, this, glm::vec2(-0.95f, 1.15f), drive == Drive::RWD || drive == Drive::AWD, 0));
 	wheels.push_back(new Wheel(world, this, glm::vec2(0.95f, 1.15f), drive == Drive::RWD || drive == Drive::AWD, 0));
+
+	if (difficulty == Difficulty::Cruel)
+	{
+		max_speed = 50;
+		power = 100;
+	}
+
 }
 
 float MacroMachinesPlayer::getSpeed()

@@ -114,7 +114,7 @@ namespace nipplerub
 		int playerCount = players.size();
 
 		int xCount = (int)ceil(sqrt(playerCount));
-		int yCount = ceil(playerCount / (float)xCount);
+		int yCount = (int)ceil(playerCount / (float)xCount);
 
 		int w = 1920 / xCount;
 		int h = 1080 / yCount;

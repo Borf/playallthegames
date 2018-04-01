@@ -1,39 +1,40 @@
 {
-	"name" : "Blaaaat",
-	"width" : 15,
-	"nodes" :
-	[
+	"name": "Normal",
+	"width": 15,
+	"laps": 5,
+	"lappos": [ 700, 810 ],
+	"nodes": [
 		{
-			"pos" : [10, -45],
-			"angle" : 180
+			"pos": [ 10, -45 ],
+			"angle": 180
 		},
 		{
-			"pos" : [0, -45],
-			"angle" : 180
+			"pos": [ 0, -45 ],
+			"angle": 180
 		},
 		{
-			"pos" : [-40, -35],
-			"angle" : 180
+			"pos": [ -40, -35 ],
+			"angle": 180
 		},
 		{
-			"pos" : [-60, -25],
-			"angle" : 90
+			"pos": [ -60, -25 ],
+			"angle": 90
 		},
 		{
-			"pos" : [-70, -5],
-			"angle" : 90
+			"pos": [ -70, -5 ],
+			"angle": 90
 		},
 		{
-			"pos" : [-20, -5],
-			"angle" : 270
+			"pos": [ -20, -5 ],
+			"angle": 270
 		},
 		{
-			"pos" : [50, 40],
-			"angle" : -45
+			"pos": [ 50, 40 ],
+			"angle": -45
 		},
 		{
-			"pos" : [50, -45],
-			"angle" : 180
+			"pos": [ 50, -45 ],
+			"angle": 180
 		}
 	]
 }

@@ -30,6 +30,8 @@ namespace hillclimb
 
 		blib::Font* font;
 
+		float noiseFunc(float f);
+
 	public:
 
 		HillClimb();

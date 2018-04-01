@@ -38,8 +38,27 @@ namespace tallytulip
 		tulips.clear();
 
 		float fac = blib::math::randomFloat(0.05, 0.075);
+		int tulipCount = 500;
+		speed = 5;
+		timeLimit = 5120;
 
-		for (int i = 0; i < 1000; i++)
+		if (difficulty == Difficulty::Cruel)
+		{
+			tulipCount = 750;
+			fac = blib::math::randomFloat(0.1, 0.125);
+			speed = 4;
+		}
+		if (difficulty == Difficulty::Wtf)
+		{
+			tulipCount = 750;
+			fac = blib::math::randomFloat(0.01, 0.0175);
+			speed = 25;
+			timeLimit = 7000;
+		}
+
+
+
+		for (int i = 0; i < tulipCount; i++)
 		{
 			Tulip t;
 			t.pos = glm::vec2(blib::math::randomFloat(0, 5120), blib::math::randomFloat(100, 1080-150));
@@ -55,7 +74,6 @@ namespace tallytulip
 		std::sort(tulips.begin(), tulips.end(), [](const Tulip &a, const Tulip &b) { return a.pos.y < b.pos.y;  });
 		time = -1920;
 
-		speed = 5;
 	}
 
 	void TallyTulip::update(float elapsedTime)
@@ -69,12 +87,12 @@ namespace tallytulip
 
 		for (auto p : players)
 		{
-			if (p->joystick.a != 0 && p->prevJoystick.a == 0 && time < 5120)
+			if (p->joystick.a != 0 && p->prevJoystick.a == 0 && time < timeLimit)
 			{
 				p->jump = 20;
 				p->count++;
 			}
-			if (p->joystick.b != 0 && p->prevJoystick.b == 0 && time < 5120)
+			if (p->joystick.b != 0 && p->prevJoystick.b == 0 && time < timeLimit)
 			{
 				p->jump = 20;
 				p->count--;
@@ -114,7 +132,7 @@ namespace tallytulip
 			spriteBatch->draw(playerSprite, blib::math::easyMatrix(glm::vec2(100 + 100 * p->index, 1000 - p->jump)), p->participant->color);
 		}
 
-		if(time > 5120)
+		if(time > timeLimit)
 		{ 
 			int count = blib::linq::count(tulips, [](const Tulip& t) { return t.color == 1; });
 
@@ -136,7 +154,10 @@ namespace tallytulip
 
 	bool TallyTulip::hasWinner()
 	{
-		return time > 5500;
+		if (difficulty == Difficulty::Wtf)
+			return time > 10000;
+		else
+			return time > 5500;
 	}
 
 	std::list<Player*> TallyTulip::getWinners()

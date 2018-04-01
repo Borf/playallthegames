@@ -74,27 +74,37 @@ namespace backattack
 	{
 		if (level)
 			delete level;
-		level = new Level();
+		level = new Level(difficulty);
 
-		players[0]->position = glm::vec2(0, 0);
-		if(players.size() > 2)
-			players[2]->position = glm::vec2(0, (level->height-1)*8);
+		players[0]->position = glm::vec2(0, 0); //bottomleft
+		players[0]->angle = players[0]->wishDirection = 90;
 		if (players.size() > 1)
-			players[1]->position = glm::vec2((level->width - 1) * 8, (level->height - 1) * 8);
+		{
+			players[1]->position = glm::vec2((level->width - 1) * 8, (level->height - 1) * 8);	//topright
+			players[1]->angle = players[1]->wishDirection = -90;
+		}
+		if (players.size() > 2)
+		{
+			players[2]->position = glm::vec2(0, (level->height - 1) * 8); //topleft
+			players[2]->angle = players[2]->wishDirection = 0;
+		}
 		if (players.size() > 3)
-			players[3]->position = glm::vec2((level->width - 1) * 8, 0);
-
-		for (auto p : players)
-			p->angle = -90.0f * p->index;
-
+		{
+			players[3]->position = glm::vec2((level->width - 1) * 8, 0); //bottomright
+			players[3]->angle = players[3]->wishDirection = 180;
+		}
 		nextSpawn = 10;
+		if (difficulty == Difficulty::Wtf)
+			nextSpawn = 0;
+		bullets.clear();
 	}
 
 	float cameraHeight = 0;
 
 	void BackAttack::update(float elapsedTime)
 	{
-		if (gameTime > nextSpawn && gameTime - elapsedTime < nextSpawn)
+		//spawn pickups
+		if (gameTime > nextSpawn)
 		{
 			int x = rand() % level->width;
 			int y = rand() % level->height;
@@ -104,7 +114,10 @@ namespace backattack
 				y = rand() % level->height;
 			}
 			level->powerups.push_back(glm::vec2(x, y));
-			nextSpawn += ((nextSpawn-1)%10);
+			if (difficulty == Difficulty::Wtf)
+				nextSpawn += 1.5f;
+			else
+				nextSpawn += ((nextSpawn-1)%10);
 		}
 
 
@@ -118,13 +131,14 @@ namespace backattack
 				glm::vec2 dir = glm::normalize(p->joystick.leftStick);
 				p->wishDirection = glm::round(glm::degrees(atan2(-dir.y, dir.x) / 90.0f))*90;
 			}
-			if (p->speed > 32)
+			if (p->speed > 32) //reduce speed after speed boost
 			{
 				p->speed -= elapsedTime*2;
 				if (p->speed < 32)
 					p->speed = 32;
 			}
 
+			//pickup pickup
 			for (size_t i = 0; i < level->powerups.size(); i++)
 			{
 				if (glm::distance(level->powerups[i]*8.0f, p->position) < 3)
@@ -137,7 +151,7 @@ namespace backattack
 			}
 
 
-
+			//movement
 			glm::vec2 newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * p->speed;
 			bool collided = false;
 			glm::ivec2 tile(round(p->position.x / 8), round(p->position.y / 8));
@@ -154,33 +168,37 @@ namespace backattack
 				if(glm::length(v1 + v2) > 0.1)
 					p->angle = p->wishDirection;
 				glm::ivec2 nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
-				if (nextTile.x < 0 || nextTile.y < 0 || nextTile.x >= level->width || nextTile.y >= level->height || !level->tiles[nextTile.x][nextTile.y]->isTrack)
+				if (!level->inLevel(nextTile) || !level->tiles[nextTile.x][nextTile.y]->isTrack)
 				{
 					p->angle = oldAngle;
 					nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
-					if (nextTile.x < 0 || nextTile.y < 0 || nextTile.x >= level->width || nextTile.y >= level->height || !level->tiles[nextTile.x][nextTile.y]->isTrack)
+					if (!level->inLevel(nextTile) || !level->tiles[nextTile.x][nextTile.y]->isTrack)
 					{
 						p->angle = oldAngle + 90.0f;
+						p->wishDirection = p->angle;
 						nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
-						if (nextTile.x < 0 || nextTile.y < 0 || nextTile.x >= level->width || nextTile.y >= level->height || !level->tiles[nextTile.x][nextTile.y]->isTrack)
+						if (!level->inLevel(nextTile) || !level->tiles[nextTile.x][nextTile.y]->isTrack)
 						{
 							p->angle = oldAngle - 90.0f;
 							nextTile = tile + glm::ivec2(blib::math::fromAngle(glm::radians(p->angle)));
-							if (nextTile.x < 0 || nextTile.y < 0 || nextTile.x >= level->width || nextTile.y >= level->height || !level->tiles[nextTile.x][nextTile.y]->isTrack)
+							if (!level->inLevel(nextTile) || !level->tiles[nextTile.x][nextTile.y]->isTrack)
+							{
 								p->angle -= 90.0f;
+								p->wishDirection = p->angle;
+							}
 						}
 					}
 				}
 
 			}
-			newPosition = p->position + blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * p->speed;
-			p->position = newPosition;
+			glm::vec2 oldPosition = p->position;
+			p->position += blib::math::fromAngle(glm::radians(p->angle)) * elapsedTime * p->speed;
 
 			for (auto pp : players)
 			{
 				if (pp == p || !pp->alive)
 					continue;
-				if (glm::distance(pp->position, p->position) < 1)
+				if (glm::distance(pp->position, p->position) < 2)
 				{
 					float diff = p->angle - pp->angle;
 					while(diff < -blib::math::pif)
@@ -192,7 +210,7 @@ namespace backattack
 					pp->angle += 180;
 
 					bumpSound->play();
-
+					p->position = oldPosition;
 				}
 			}
 
@@ -213,13 +231,13 @@ namespace backattack
 				{
 					b.alive = false;
 					float diff = atan2(b.direction.y, b.direction.x) - glm::radians(p->angle);
-					while (diff <= -2 * blib::math::pif+0.1f)
+					while (diff <= -blib::math::pif)
 						diff += 2 * blib::math::pif;
-					while (diff >= 2 * blib::math::pif)
-						diff -= 2 * blib::math::pif-0.1f;
+					while (diff >= blib::math::pif)
+						diff -= 2 * blib::math::pif;
 
 					Log::out << diff << Log::newline;
-					if (fabs(diff) < 0.1f)
+					if (fabs(diff) < 0.2f)
 					{
 						p->alive = false;
 						explodeSound->play();
@@ -285,7 +303,7 @@ namespace backattack
 
 		for (glm::vec2& pos : level->powerups)
 		{
-			float s = 0.025f + 0.01 * glm::sin(gameTime * 10);
+			float s = 0.025f + 0.01f * glm::sin(gameTime * 10);
 			glm::mat4 mat;
 			mat = glm::translate(mat, glm::vec3(8*pos.x, -2 + glm::sin(gameTime * 10), 8*pos.y));
 			mat = glm::rotate(mat, glm::radians(15 * gameTime), glm::vec3(1, sin(gameTime), cos(gameTime)));

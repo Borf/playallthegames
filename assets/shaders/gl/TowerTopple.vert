@@ -1,10 +1,10 @@
 #version 150
-attribute vec3 a_position;
-attribute vec2 a_texcoord;
-attribute vec3 a_normal;
+in vec3 a_position;
+in vec2 a_texcoord;
+in vec3 a_normal;
 
-varying vec3 normal;
-varying vec2 texCoord;
+out vec3 normal;
+out vec2 texCoord;
 
 
 uniform mat4 modelMatrix;

@@ -60,6 +60,7 @@ void MacroMachines::loadResources()
 	slipSprite = resourceManager->getResource<blib::Texture>("assets/games/MacroMachines/slip.png");
 	finishSprite = resourceManager->getResource<blib::Texture>("assets/games/MacroMachines/finish.png");
 	font = resourceManager->getResource<blib::Font>("tahoma");
+	bigFont = resourceManager->getResource<blib::Font>("lindsey");
 
 	asphaltSprite->setTextureRepeat(true);
 
@@ -71,6 +72,7 @@ void MacroMachines::loadResources()
 
 void MacroMachines::start()
 {
+	lapPosition = glm::vec2(700, 10);
 	zoom = 10 * settings->scale;
 	lastPhysicsTick = 0;
 	this->maxPlayerScore = 5;
@@ -82,9 +84,7 @@ void MacroMachines::start()
 	std::string difficultyStr = "normal";
 	switch (difficulty)
 	{
-	case Difficulty::Easy:		difficultyStr = "easy";		break;
 	case Difficulty::Normal:	difficultyStr = "normal";	break;
-	case Difficulty::Hard:		difficultyStr = "hard";		break;
 	case Difficulty::Cruel:		difficultyStr = "cruel";	break;
 	case Difficulty::Wtf:		difficultyStr = "wtf";		break;
 	}
@@ -104,6 +104,13 @@ void MacroMachines::start()
 		track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/default.json");
 	if (blib::util::FileSystem::exists("assets/games/MacroMachines/tracks/override.json"))
 		track = blib::util::FileSystem::getJson("assets/games/MacroMachines/tracks/override.json");
+
+
+	if(track.find("laps") != track.end())
+		this->maxPlayerScore = track["laps"];
+	if (track.find("lappos") != track.end())
+		this->lapPosition = glm::vec2(track["lappos"][0], track["lappos"][1]);
+
 
 
 	std::vector<b2Vec2> verts;
@@ -167,18 +174,18 @@ void MacroMachines::start()
 	glm::vec2 p2(track["nodes"][last]["pos"][0u].get<float>(), track["nodes"][last]["pos"][1u].get<float>());
 	road = blib::math::BiArc(p1, -n1, p2, n2);
 
-	float f = 0.1f;
+	float f = -0.2f;
 	for (auto p : players)
 	{
-		road.setOffset(p->index%2 == 0 ? -2.0f : 2.0f);
+		if (p->index % 4 == 0)
+			f += 0.2f;
+		road.setOffset(-4.0 + 2 * p->index);
 		glm::vec2 prevPos = road.getPointLinear(f-0.01f);
 		glm::vec2 pos = road.getPointLinear(f);
-		if (p->index%2 == 1)
-			f += 0.15f;
 
 		float angle = atan2(pos.y-prevPos.y, pos.x-prevPos.x);
 
-		p->spawn(world, pos, MacroMachinesPlayer::Drive::FWD, angle-blib::math::pif/2);
+		p->spawn(world, pos, MacroMachinesPlayer::Drive::FWD, angle-blib::math::pif/2, difficulty);
 	}
 
 
@@ -257,7 +264,10 @@ void MacroMachines::update(float elapsedTime)
 			car->forward = car->joystick.a != 0;
 			car->braking = car->joystick.b != 0;
 
-			car->steering = 0.25f * car->joystick.leftStick.x;
+			if(difficulty == Difficulty::Cruel)
+				car->steering = (0.5f + 2 * (car->max_speed - car->getSpeed()) / car->max_speed) * 0.25f * car->joystick.leftStick.x;
+			else
+				car->steering = 0.25f * car->joystick.leftStick.x;
 			for (auto w : car->wheels)
 			{
 				float slipFactor = (w->getKillVelocityVector() - w->body->GetLinearVelocity()).Length();
@@ -302,6 +312,7 @@ void MacroMachines::draw()
 	spriteBatch->draw(backgroundSprite, glm::mat4());
 	spriteBatch->draw(trackSprite, glm::mat4());
 
+	spriteBatch->draw(bigFont, "Total laps: " + std::to_string(this->maxPlayerScore), blib::math::easyMatrix(lapPosition));
 
 	spriteBatch->end();
 
@@ -315,8 +326,6 @@ void MacroMachines::draw()
 
 
 	spriteBatch->draw(finishSprite, blib::math::easyMatrix(center, glm::degrees(angle), len / glm::vec2(finishSprite->originalWidth, finishSprite->originalWidth)), finishSprite->center);
-
-
 	for (auto car : players)
 	{
 		spriteBatch->draw(carSprite, blib::math::easyMatrix(car->body->GetPosition(), glm::degrees(car->body->GetAngle()), glm::vec2(2.0f / carSprite->originalWidth, 4.0f / carSprite->originalHeight)), carSprite->center, car->participant->color);
@@ -326,15 +335,11 @@ void MacroMachines::draw()
 		spriteBatch->draw(font, blib::util::toString(car->score), blib::math::easyMatrix(car->body->GetPosition() + glm::vec2(0.15f, -0.15f), 0, glm::vec2(0.25f, 0.25f)), blib::Color::black);
 		spriteBatch->draw(font, blib::util::toString(car->score), blib::math::easyMatrix(car->body->GetPosition(), 0, glm::vec2(0.25f, 0.25f)));
 	}
-
-
 	spriteBatch->end();
 
 
 #if 0
 	lineBatch->begin(tx);
-
-
 /*	for (size_t i = 0; i < track.size(); i++)
 	{
 		int ii = (i + 1) % track.size();

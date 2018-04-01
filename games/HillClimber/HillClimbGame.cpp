@@ -69,14 +69,29 @@ namespace hillclimb
 	float level = 0;
 
 
-	float noiseFunc(float f)
+	float HillClimb::noiseFunc(float f)
 	{
-		return
-			10 * cos(f / 3000) * stb_perlin_noise3(f / (300.0f / (f / 3000000.0f)), 0, level) +
-			0.1f * stb_perlin_noise3(f / 300.0f, 0.5f, 0.5f + level) +
-
-
-			0;
+		if (difficulty == Difficulty::Normal)
+		{
+			return
+				10 * cos(f / 3000) * stb_perlin_noise3(f / (300.0f / (f / 3000000.0f)), 0, level) +
+				0.1f * stb_perlin_noise3(f / 300.0f, 0.5f, 0.5f + level) +
+				0;
+		}
+		else if (difficulty == Difficulty::Cruel)
+		{
+			return
+				10 * cos(f / 600) * stb_perlin_noise3(f / (300.0f / (f / 500000.0f)), 0, level) +
+				0.15f * stb_perlin_noise3(f / 300.0f, 0.5f, 0.5f + level) +
+				0;
+		}
+		else if (difficulty == Difficulty::Wtf)
+		{
+			return
+				15 * cos(f / 600) * stb_perlin_noise3(f / (300.0f / (f / 500000.0f)), 0, level) +
+				0.25f * stb_perlin_noise3(f / 300.0f, 0.5f, 0.5f + level) +
+				0;
+		}
 	}
 
 
@@ -88,7 +103,7 @@ namespace hillclimb
 		world->SetDebugDraw(blib::Box2DDebug::getInstance());
 		blib::Box2DDebug::getInstance()->SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_centerOfMassBit | b2Draw::e_pairBit);
 
-		level = rand();
+		level = blib::math::randomFloat();
 		floorCounter = -1;
 
 		floorBody[0] = NULL;
@@ -113,6 +128,8 @@ namespace hillclimb
 			baseFixture.density = 5.0f;
 			baseFixture.filter.categoryBits = 2;
 			baseFixture.filter.maskBits = 1;
+			if (difficulty == Difficulty::Wtf)
+				baseFixture.restitution = 0.95f;
 			carBase->CreateFixture(&baseFixture);
 			carBase->SetSleepingAllowed(false);
 
@@ -127,6 +144,8 @@ namespace hillclimb
 			wheelFixture.friction = 0.5f;
 			wheelFixture.density = 5.0f;
 			wheelFixture.restitution = 0.35f;
+			if(difficulty == Difficulty::Wtf)
+				wheelFixture.restitution = 0.95f;
 			wheelFixture.filter.categoryBits = 2;
 			wheelFixture.filter.maskBits = 1;
 
@@ -158,6 +177,16 @@ namespace hillclimb
 
 			p->car = carBase;
 
+
+			if (difficulty == Difficulty::Cruel)
+			{
+				p->rotationSpeed = 100;
+			}
+			if (difficulty == Difficulty::Wtf)
+			{
+				p->maxSpeed = 70;
+				p->rotationSpeed = 500;
+			}
 		}
 
 
@@ -246,12 +275,12 @@ namespace hillclimb
 				p->lastAngle = p->car->GetAngle();
 				if (fabs(p->rotations) > 0.1f)
 				{
-					p->loops += glm::round(glm::abs(p->rotations) / blib::math::pif);
+					p->loops += (int)glm::round(glm::abs(p->rotations) / blib::math::pif);
 				}
 				p->rotations = 0;
 			}
 
-			p->car->ApplyTorque(200 * (p->joystick.rightTrigger - p->joystick.leftTrigger), true);
+			p->car->ApplyTorque(p->rotationSpeed * (p->joystick.rightTrigger - p->joystick.leftTrigger), true);
 
 		}
 
@@ -292,10 +321,10 @@ namespace hillclimb
 		for (int i = pos - 40; i < pos + 40; i++)
 		{
 			float x1 = i / 2.0f;
-			float h1 = noiseFunc(i * 100);
+			float h1 = noiseFunc(i * 100.0f);
 
 			float x2 = (i+1) / 2.0f;
-			float h2 = noiseFunc((i+1) * 100);
+			float h2 = noiseFunc((i+1) * 100.0f);
 
 			verts.push_back(std::make_tuple<glm::vec2, glm::vec2, glm::vec4>(glm::vec2(x1, h1), glm::vec2(), glm::vec4(0.608, 0.478, 0.004, 1)));
 			verts.push_back(std::make_tuple<glm::vec2, glm::vec2, glm::vec4>(glm::vec2(x2, h2), glm::vec2(), glm::vec4(0.608, 0.478, 0.004, 1)));
@@ -341,7 +370,7 @@ namespace hillclimb
 
 		for (auto p : sorted)
 		{
-			float playerHeight = -(0.5 + (5 / players.size()) * p->index);
+			float playerHeight = -(0.5f + (5 / players.size()) * p->index);
 
 			float floorHeight = noiseFunc(p->car->GetPosition().x * 100 * 2);
 			float floorHeight2 = noiseFunc((p->car->GetPosition().x + 1) * 100 * 2);
@@ -361,7 +390,7 @@ namespace hillclimb
 
 		for (auto p : players)
 		{
-			float playerHeight = -(0.5 + (5 / players.size()) * p->index);
+			float playerHeight = -(0.5f + (5 / players.size()) * p->index);
 			spriteBatch->draw(font, std::to_string(p->loops), blib::math::easyMatrix(p->car->GetPosition() + glm::vec2(-0.1f, playerHeight - 0.15f), 0, 0.03f));
 		}
 

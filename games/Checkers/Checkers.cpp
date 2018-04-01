@@ -94,8 +94,8 @@ namespace checkers
 
 					row.push_back(Tile(y >= 2 && (x+y)%2==0 ? players[i] : nullptr, blib::math::Polygon({
 						lines[index].mix(off), 
-						lines[index].mix(off + 0.5), 
-						lines[index + 2].mix(off + 0.5),
+						lines[index].mix(off + 0.5f), 
+						lines[index + 2].mix(off + 0.5f),
 						lines[index + 2].mix(off) })));
 				}
 				board.push_back(row);
